@@ -2,5 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-Color mainColor = Color.fromARGB(0, 43, 180, 93);
-Color backgroundColor = Color.fromARGB(0, 200, 12, 12);
+class AppColor {
+  AppColor();
+  static const mainColor = Color.fromARGB(255, 16, 152, 170);
+  static const medicineColor = Color.fromARGB(255, 213, 213, 213);
+}

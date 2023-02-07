@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pfa_application_1/constants/colors.dart';
 
 class AddMedicine extends StatefulWidget {
   const AddMedicine({super.key});
@@ -31,13 +32,16 @@ class _AddMedicineState extends State<AddMedicine> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade200,
-      body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      body: ListView(children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(15, 40.0, 0, 40),
+          padding: const EdgeInsets.fromLTRB(15, 18.0, 0, 40),
           child: Row(
             children: [
-              IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back_ios)),
+              IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: Icon(Icons.arrow_back_ios)),
               Padding(
                 padding: const EdgeInsets.only(left: 108.0),
                 child: Center(
@@ -56,7 +60,7 @@ class _AddMedicineState extends State<AddMedicine> {
           child: TextFormField(
             style: TextStyle(color: Colors.black),
             controller: med_nameController,
-            cursorColor: Colors.green,
+            cursorColor: AppColor.mainColor,
             keyboardType: TextInputType.text,
           ),
         ),
@@ -75,14 +79,21 @@ class _AddMedicineState extends State<AddMedicine> {
         ),
         Titles(title: "Starting Time"),
         Padding(
-          padding: const EdgeInsets.only(top: 15.0),
-          child: TextButton(
-              onPressed: () {}, child: Center(child: Text("Select Time"))),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 15.0),
-          child: TextButton(
-              onPressed: () {}, child: Center(child: Text("Confirm"))),
+          padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
+          child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(25),
+                color: AppColor.mainColor),
+            child: TextButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed("reminder");
+                },
+                child: Center(
+                    child: Text(
+                  "Confirm",
+                  style: TextStyle(color: Colors.white),
+                ))),
+          ),
         ),
       ]),
     );
@@ -114,6 +125,16 @@ class MedicineType extends StatefulWidget {
 }
 
 class _MedicineTypeState extends State<MedicineType> {
+  int selectedIndex = 0;
+  Color medicineCouleur = Colors.grey;
+  void changeColor() {
+    if (selectedIndex == 1) {
+      setState(() {
+        medicineCouleur = AppColor.mainColor;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -124,17 +145,32 @@ class _MedicineTypeState extends State<MedicineType> {
           Column(
             children: [
               IconButton(
-                  iconSize: 70,
-                  onPressed: () {},
-                  icon: Icon(FontAwesomeIcons.bottleDroplet)),
+                icon: Icon(
+                  FontAwesomeIcons.bottleDroplet,
+                  color: AppColor.medicineColor,
+                ),
+                iconSize: 70,
+                onPressed: () {
+                  setState(() {
+                    selectedIndex = 1;
+                    medicineCouleur = AppColor.mainColor;
+                  });
+                },
+              ),
               Text("Bottle")
             ],
           ),
           Column(
             children: [
               IconButton(
-                onPressed: () {},
-                icon: Icon(FontAwesomeIcons.pills),
+                onPressed: () {
+                  setState(() {
+                    selectedIndex = 1;
+                    changeColor();
+                  });
+                },
+                icon:
+                    Icon(FontAwesomeIcons.pills, color: AppColor.medicineColor),
                 iconSize: 70,
               ),
               Text("Pills")
@@ -143,21 +179,17 @@ class _MedicineTypeState extends State<MedicineType> {
           Column(
             children: [
               IconButton(
-                onPressed: () {},
-                icon: Icon(FontAwesomeIcons.syringe),
+                onPressed: () {
+                  setState(() {
+                    selectedIndex = 1;
+                    changeColor();
+                  });
+                },
+                icon: Icon(FontAwesomeIcons.syringe,
+                    color: AppColor.medicineColor),
                 iconSize: 70,
               ),
               Text("Syringe")
-            ],
-          ),
-          Column(
-            children: [
-              IconButton(
-                onPressed: () {},
-                icon: Icon(FontAwesomeIcons.tablets),
-                iconSize: 70,
-              ),
-              Text("Tablet")
             ],
           ),
         ],

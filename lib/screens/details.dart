@@ -13,8 +13,7 @@ class _DetailsState extends State<Details> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Scaffold(
-          body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Padding(
           padding: const EdgeInsets.fromLTRB(15, 40.0, 0, 40),
           child: Row(
@@ -61,7 +60,7 @@ class _DetailsState extends State<Details> {
                 ))),
           ),
         ),
-      ])),
+      ])
     );
   }
 }

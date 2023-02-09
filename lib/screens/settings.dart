@@ -1,5 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unnecessary_this
-
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unnecessary_this, avoid_unnecessary_containers
 import 'package:flutter/material.dart';
 import 'package:pfa_application_1/constants/colors.dart';
 
@@ -14,118 +13,91 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 40,
-          ),
-          IconButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed("/");
-              },
-              icon: Icon(Icons.arrow_back_ios)),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 10, 10, 0),
-                child: CircleAvatar(
-                  backgroundImage: AssetImage("IMAGE/dhia.jpg"),
-                  radius: 30,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
+        body: Column(children: [
+      Padding(
+        padding: const EdgeInsets.fromLTRB(15, 40, 0, 40),
+        child: Row(
+          children: [
+            IconButton(
+                onPressed: () {
+                  //     Navigator.of(context).pushNamed("/");
+                },
+                icon: Icon(Icons.arrow_back_ios)),
+            Padding(
+              padding: const EdgeInsets.only(left: 115.0),
+              child: Center(
                 child: Text(
-                  'Welcome  ,',
-                  style: TextStyle(
-                      color: AppColor.mainColor,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w800),
+                  "Profile",
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
-                child: Text(
-                  'Skander',
-                  style: TextStyle(
-                    fontSize: 24,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 100, 0, 0),
-            child: Text(
-              'FirstName',
-              style: TextStyle(
-                  color: AppColor.mainColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500),
             ),
-          ),
-          Fields(),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
-            child: Text(
-              'LastName',
-              style: TextStyle(
-                  color: AppColor.mainColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500),
-            ),
-          ),
-          Fields(),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
-            child: Text(
-              'Email',
-              style: TextStyle(
-                  color: AppColor.mainColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500),
-            ),
-          ),
-          Fields(),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
-            child: Text(
-              'Password',
-              style: TextStyle(
-                  color: AppColor.mainColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500),
-            ),
-          ),
-          Fields(),
-        ],
+          ],
+        ),
       ),
-    );
+      Center(
+          child: CircleAvatar(
+        backgroundImage: AssetImage(
+          "IMAGE/me2.jpg",
+        ),
+        radius: 40,
+      )),
+      SettingFormField(fieldData: "Firstname", title: "Skander"),
+      SettingFormField(fieldData: "Lastname", title: "Ben Said"),
+      SettingFormField(fieldData: "Email", title: "bensaid303@gmail.com"),
+      SettingFormField(fieldData: "Phone Number", title: "99 549 510 "),
+    ]));
   }
 }
 
-class Fields extends StatefulWidget {
-  const Fields({Key? key}) : super(key: key);
-
-  @override
-  State<Fields> createState() => _FieldsState();
-}
-
-class _FieldsState extends State<Fields> {
+class SettingFormField extends StatelessWidget {
+  const SettingFormField(
+      {super.key, required this.fieldData, required this.title});
+  final String fieldData;
+  final String title;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Text('..................................'),
-        IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.edit,
-              color: Color.fromARGB(255, 9, 32, 51),
-            ))
-      ],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Padding(
+        padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+        child: Text(
+          fieldData,
+          style: TextStyle(
+              color: AppColor.mainColor,
+              fontWeight: FontWeight.w800,
+              fontSize: 14),
+        ),
+      ),
+      Container(
+          margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+          height: 70,
+          width: 350,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(40),
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 6,
+                  spreadRadius: 1,
+                  color: Color.fromARGB(255, 207, 207, 207),
+                )
+              ]),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(15, 5, 0, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(title),
+                IconButton(
+                  onPressed: () {
+                    //     Navigator.of(context).pushNamed("/");
+                  },
+                  icon: Icon(Icons.edit),
+                  color: AppColor.mainColor,
+                ),
+              ],
+            ),
+          )),
+    ]);
   }
 }

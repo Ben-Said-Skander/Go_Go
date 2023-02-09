@@ -37,26 +37,16 @@ class _RemindersState extends State<Reminders> {
         ),
         Container(
           height: 800,
+          padding: EdgeInsets.only(top: 50),
           child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2),
               itemCount: 4,
               itemBuilder: ((context, index) {
-                return // Container();
-                    Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 80, 15, 0),
-                  child: Container(
-                      height: 600,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).pushNamed("details");
-                        },
-                        child: MedCard(
-                            med_name: "Doliprane",
-                            med_pic: "IMAGE/piills.jpg",
-                            med_interval: "Every 8 hours"),
-                      )),
-                );
+                return MedCard(
+                    med_name: "Doliprane",
+                    med_pic: "IMAGE/sirop.jpg",
+                    med_interval: "Every 8 hours");
               })),
         ),
       ]),
@@ -64,52 +54,70 @@ class _RemindersState extends State<Reminders> {
   }
 }
 
-class MedCard extends StatefulWidget {
+class MedCard extends StatelessWidget {
   const MedCard(
-      {super.key,
+      {Key? key,
       required this.med_name,
       required this.med_pic,
-      required this.med_interval});
+      required this.med_interval})
+      : super(key: key);
   final String med_name;
   final String med_pic;
   final String med_interval;
   @override
-  State<MedCard> createState() => _MedCardState();
-}
-
-class _MedCardState extends State<MedCard> {
-  @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 900,
-      decoration: BoxDecoration(
-          color: Color.fromARGB(255, 246, 243, 243),
-          borderRadius: BorderRadius.circular(25)),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-            child: Image.asset(
-              "IMAGE/piills.jpg",
-              width: 80,
-            ),
+    return GestureDetector(
+        onTap: () {
+          Navigator.of(context).pushNamed("details");
+        },
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(40),
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 6,
+                  spreadRadius: 1,
+                  color: Color.fromARGB(255, 207, 207, 207),
+                )
+              ]),
+          width: 200,
+          height: 600,
+          margin: EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                  child: Image.asset(
+                med_pic,
+                width: 100,
+                height: 100,
+              )),
+              SizedBox(
+                height: 5,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 13),
+                child: Text(
+                  med_name,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 13),
+                child: Text(
+                  med_interval,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700),
+                ),
+              ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: Text(
-              "Doliprane",
-              style: TextStyle(fontSize: 12),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 6.0),
-            child: Text(
-              "Every 5 hours",
-              style: TextStyle(fontSize: 12),
-            ),
-          ),
-        ],
-      ),
-    );
+        ));
   }
 }

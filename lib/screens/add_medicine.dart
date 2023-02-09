@@ -14,11 +14,24 @@ class AddMedicine extends StatefulWidget {
 class _AddMedicineState extends State<AddMedicine> {
   late TextEditingController med_nameController;
   late TextEditingController med_dosageController;
+  late TextEditingController starting_timeController;
+  String dropdownvalue = "Every 2 hours";
+  var intervals = [
+    "Every 1 hour",
+    "Every 2 hours",
+    "Every 4 hours",
+    "Every 6 hours",
+    "Every 8 hours",
+    "Every 12 hours",
+    "Every 24 hours",
+  ];
+  int selectedIndex = 0;
 
   @override
   void dispose() {
     med_nameController.dispose();
     med_dosageController.dispose();
+    starting_timeController.dispose();
     super.dispose();
   }
 
@@ -26,6 +39,7 @@ class _AddMedicineState extends State<AddMedicine> {
   void initState() {
     med_nameController = TextEditingController();
     med_dosageController = TextEditingController();
+    starting_timeController = TextEditingController();
     super.initState();
   }
 
@@ -54,8 +68,11 @@ class _AddMedicineState extends State<AddMedicine> {
             ],
           ),
         ),
-        Titles(title: "Medicine Name"),
-        Padding(
+        Titles(
+          title: "Medicine Name",
+        ),
+        Container(
+          width: 200,
           padding: const EdgeInsets.only(top: 10),
           child: TextFormField(
             style: TextStyle(color: Colors.black),
@@ -68,18 +85,58 @@ class _AddMedicineState extends State<AddMedicine> {
         TextFormField(),
         Padding(
             padding: EdgeInsets.fromLTRB(10, 50, 0, 0),
-            child: Text("Medicine Type")),
+            child: Text("Medicine Type",
+                style: TextStyle(color: AppColor.mainColor))),
         MedicineType(),
-        Titles(title: "Interval Selection"),
+        Padding(
+          padding: EdgeInsets.fromLTRB(10, 30, 20, 0),
+          child: Row(
+            children: [
+              Text("Remind me every",
+                  style: TextStyle(color: AppColor.mainColor)),
+              SizedBox(
+                width: 20,
+              ),
+              DropdownButton(
+                  iconEnabledColor: AppColor.mainColor,
+                  dropdownColor: AppColor.medicineColor,
+                  hint: Text("Select Interval"),
+                  elevation: 4,
+                  value: dropdownvalue, // initial value
+                  items: intervals.map((String items) {
+                    return DropdownMenuItem(value: items, child: Text(items));
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownvalue = newValue!;
+                    });
+                  })
+            ],
+          ),
+        ),
         Padding(
           padding: EdgeInsets.fromLTRB(10, 30, 0, 0),
           child: Row(
-            children: [Text("Remind me every")],
+            children: [
+              Text(
+                "Starting Time",
+                style: TextStyle(color: AppColor.mainColor),
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                width: 200,
+                child: TextFormField(
+                  controller: starting_timeController,
+                  keyboardType: TextInputType.datetime,
+                  decoration: InputDecoration(hintText: "16:05:00"),
+                  cursorColor: Color.fromARGB(255, 16, 152, 170),
+                ),
+              ),
+            ],
           ),
         ),
-        Titles(title: "Starting Time"),
         Padding(
-          padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
+          padding: const EdgeInsets.fromLTRB(20, 60, 20, 0),
           child: Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
@@ -110,7 +167,7 @@ class Titles extends StatelessWidget {
       child: Container(
         child: Text(
           title,
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: AppColor.mainColor),
         ),
       ),
     );

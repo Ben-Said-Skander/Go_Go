@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names, avoid_unnecessary_containers
+// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -48,7 +48,7 @@ class _AddMedicineState extends State<AddMedicine> {
     return Scaffold(
       body: ListView(children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(15, 18.0, 0, 40),
+          padding: const EdgeInsets.fromLTRB(15, 18.0, 0, 28),
           child: Row(
             children: [
               IconButton(
@@ -68,28 +68,44 @@ class _AddMedicineState extends State<AddMedicine> {
             ],
           ),
         ),
-        Titles(
-          title: "Medicine Name",
+        Padding(
+          padding: EdgeInsets.fromLTRB(20, 25, 20, 0),
+          child: Titles(title: "Medicine name"),
         ),
         Container(
-          width: 200,
-          padding: const EdgeInsets.only(top: 10),
+          padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
+          width: 350,
           child: TextFormField(
-            style: TextStyle(color: Colors.black),
-            controller: med_nameController,
-            cursorColor: AppColor.mainColor,
             keyboardType: TextInputType.text,
+            decoration: InputDecoration(
+                hintText: "Medicine name",
+                prefixIcon: Icon(FontAwesomeIcons.pills)),
+            controller: med_nameController,
+            cursorColor: Color.fromARGB(255, 16, 152, 170),
           ),
         ),
-        Titles(title: "Dosage in mg"),
-        TextFormField(),
         Padding(
-            padding: EdgeInsets.fromLTRB(10, 50, 0, 0),
+          padding: EdgeInsets.fromLTRB(20, 25, 20, 0),
+          child: Titles(title: "Dosage in mg"),
+        ),
+        Container(
+          padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
+          width: 350,
+          child: TextFormField(
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+                hintText: "Dosage", prefixIcon: Icon(FontAwesomeIcons.pills)),
+            controller: med_dosageController,
+            cursorColor: Color.fromARGB(255, 16, 152, 170),
+          ),
+        ),
+        Padding(
+            padding: EdgeInsets.fromLTRB(30, 50, 20, 0),
             child: Text("Medicine Type",
                 style: TextStyle(color: AppColor.mainColor))),
         MedicineType(),
         Padding(
-          padding: EdgeInsets.fromLTRB(10, 30, 20, 0),
+          padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
           child: Row(
             children: [
               Text("Remind me every",
@@ -115,7 +131,7 @@ class _AddMedicineState extends State<AddMedicine> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.fromLTRB(10, 30, 0, 0),
+          padding: EdgeInsets.fromLTRB(25, 30, 0, 0),
           child: Row(
             children: [
               Text(
@@ -143,7 +159,7 @@ class _AddMedicineState extends State<AddMedicine> {
                 color: AppColor.mainColor),
             child: TextButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed("reminder");
+                  Navigator.of(context).pop();
                 },
                 child: Center(
                     child: Text(
@@ -182,16 +198,13 @@ class MedicineType extends StatefulWidget {
 }
 
 class _MedicineTypeState extends State<MedicineType> {
-  int selectedIndex = 0;
-  Color medicineCouleur = Colors.grey;
-  void changeColor() {
-    if (selectedIndex == 1) {
-      setState(() {
-        medicineCouleur = AppColor.mainColor;
-      });
-    }
-  }
+  int bottleIndex = 0;
+  int pillsIndex = 0;
+  int syringeIndex = 0;
 
+  Color bottleColor = Colors.grey;
+  Color pillsColor = Colors.grey;
+  Color syringeColor = Colors.grey;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -204,15 +217,21 @@ class _MedicineTypeState extends State<MedicineType> {
               IconButton(
                 icon: Icon(
                   FontAwesomeIcons.bottleDroplet,
-                  color: AppColor.medicineColor,
                 ),
                 iconSize: 70,
                 onPressed: () {
                   setState(() {
-                    selectedIndex = 1;
-                    medicineCouleur = AppColor.mainColor;
+                    bottleIndex = 1;
+                    pillsIndex = 0;
+                    syringeIndex = 0;
                   });
+                  if (bottleIndex == 1) {
+                    bottleColor = AppColor.mainColor;
+                    pillsColor = Colors.grey;
+                    syringeColor = Colors.grey;
+                  }
                 },
+                color: bottleColor,
               ),
               Text("Bottle")
             ],
@@ -222,12 +241,17 @@ class _MedicineTypeState extends State<MedicineType> {
               IconButton(
                 onPressed: () {
                   setState(() {
-                    selectedIndex = 1;
-                    changeColor();
+                    pillsIndex = 1;
+                    bottleIndex = 0;
+                    syringeIndex = 0;
                   });
+                  if (pillsIndex == 1) {
+                    pillsColor = AppColor.mainColor;
+                    syringeColor = Colors.grey;
+                    bottleColor = Colors.grey;
+                  }
                 },
-                icon:
-                    Icon(FontAwesomeIcons.pills, color: AppColor.medicineColor),
+                icon: Icon(FontAwesomeIcons.pills, color: pillsColor),
                 iconSize: 70,
               ),
               Text("Pills")
@@ -238,12 +262,17 @@ class _MedicineTypeState extends State<MedicineType> {
               IconButton(
                 onPressed: () {
                   setState(() {
-                    selectedIndex = 1;
-                    changeColor();
+                    syringeIndex = 1;
+                    pillsIndex = 0;
+                    bottleIndex = 0;
                   });
+                  if (syringeIndex == 1) {
+                    syringeColor = AppColor.mainColor;
+                    bottleColor = Colors.grey;
+                    pillsColor = Colors.grey;
+                  }
                 },
-                icon: Icon(FontAwesomeIcons.syringe,
-                    color: AppColor.medicineColor),
+                icon: Icon(FontAwesomeIcons.syringe, color: syringeColor),
                 iconSize: 70,
               ),
               Text("Syringe")

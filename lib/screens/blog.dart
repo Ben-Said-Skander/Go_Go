@@ -15,7 +15,9 @@ class _BlogState extends State<Blog> {
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushNamed("blog/addBlog");
+          },
           backgroundColor: AppColor.mainColor,
           child: Icon(
             Icons.add,

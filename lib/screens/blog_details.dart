@@ -27,7 +27,7 @@ class _BlogDetailsState extends State<BlogDetails> {
             ),
             IconButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed("blog");
+                  Navigator.of(context).pop();
                 },
                 icon: Icon(Icons.arrow_back_ios)),
           ],

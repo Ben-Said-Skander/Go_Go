@@ -13,55 +13,54 @@ class _DetailsState extends State<Details> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(15, 40.0, 0, 40),
-          child: Row(
-            children: [
-              IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  icon: Icon(Icons.arrow_back_ios)),
-              Padding(
-                padding: const EdgeInsets.only(left: 108.0),
-                child: Center(
-                  child: Text(
-                    "Details",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
+        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Padding(
+        padding: const EdgeInsets.fromLTRB(15, 40.0, 0, 40),
+        child: Row(
+          children: [
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: Icon(Icons.arrow_back_ios)),
+            Padding(
+              padding: const EdgeInsets.only(left: 108.0),
+              child: Center(
+                child: Text(
+                  "Details",
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-        MedicineInfo(
-            med_name: "Doliprane",
-            med_dosage: "500mg",
-            med_pic: "IMAGE/piills.jpgh"),
-        MidSectionInfo(
-            med_type: "Pill",
-            dosage_interval: "Every 6 hours",
-            start_time: "14h"),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(20, 130, 20, 0),
-          child: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                color: AppColor.mainColor),
-            child: TextButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed("reminder");
-                },
-                child: Center(
-                    child: Text(
-                  "Delete",
-                  style: TextStyle(color: Colors.white),
-                ))),
-          ),
+      ),
+      MedicineInfo(
+          med_name: "Doliprane",
+          med_dosage: "500mg",
+          med_pic: "IMAGE/piills.jpgh"),
+      MidSectionInfo(
+          med_type: "Pill",
+          dosage_interval: "Every 6 hours",
+          start_time: "14h"),
+      Padding(
+        padding: const EdgeInsets.fromLTRB(20, 130, 20, 0),
+        child: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25),
+              color: AppColor.mainColor),
+          child: TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Center(
+                  child: Text(
+                "Delete",
+                style: TextStyle(color: Colors.white),
+              ))),
         ),
-      ])
-    );
+      ),
+    ]));
   }
 }
 

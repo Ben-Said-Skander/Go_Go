@@ -133,7 +133,7 @@ class _SignInState extends State<SignIn> {
                         size: 40,
                       ),
                       onPressed: () {
-                        Navigator.of(context).pushNamed("reminder");
+                        Navigator.of(context).popAndPushNamed("home");
                       },
                     ))),
           ]),

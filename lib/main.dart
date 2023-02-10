@@ -1,10 +1,13 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:pfa_application_1/screens/add_medicine.dart';
+import 'package:pfa_application_1/screens/add_new_blog.dart';
+import 'package:pfa_application_1/screens/add_new_medicine.dart';
+//import 'package:pfa_application_1/screens/add_medicine.dart';
 import 'package:pfa_application_1/screens/blog.dart';
 import 'package:pfa_application_1/screens/blog_details.dart';
-import 'package:pfa_application_1/screens/details.dart';
+import 'package:pfa_application_1/screens/medicine_details.dart';
+import 'package:pfa_application_1/screens/home.dart';
 import 'package:pfa_application_1/screens/reminder.dart';
 import 'package:pfa_application_1/screens/settings.dart';
 import 'package:pfa_application_1/screens/signIn.dart';
@@ -21,9 +24,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Reminders(),
+      home: SignIn(),
       routes: {
-        // "/": ((context) => Home()),
+        "home": ((context) => Home()),
         "details": ((context) => Details()),
         "addMedicine": ((context) => AddMedicine()),
         "reminder": ((context) => Reminders()),
@@ -32,6 +35,7 @@ class MyApp extends StatelessWidget {
         "settings": ((context) => Settings()),
         "blog": ((context) => Blog()),
         "blog/details": ((context) => BlogDetails()),
+        "blog/addBlog": ((context) => AddBlog()),
       },
     );
   }

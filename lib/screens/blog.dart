@@ -24,9 +24,9 @@ class _BlogState extends State<Blog> {
             color: Colors.white,
           ),
         ),
-        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        body: ListView(children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(65, 50, 0, 40),
+            padding: const EdgeInsets.fromLTRB(65, 25, 0, 40),
             child: Row(
               children: [
                 Padding(
@@ -35,7 +35,7 @@ class _BlogState extends State<Blog> {
                     child: Text(
                       "Blog",
                       style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                     ),
                   ),
                 ),
@@ -49,7 +49,7 @@ class _BlogState extends State<Blog> {
               style: TextStyle(
                   color: AppColor.mainColor,
                   fontWeight: FontWeight.bold,
-                  fontSize: 20),
+                  fontSize: 18),
             ),
           ),
           Container(
@@ -73,13 +73,13 @@ class _BlogState extends State<Blog> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(15, 40, 0, 15),
+            padding: const EdgeInsets.fromLTRB(15, 80, 0, 15),
             child: Text(
               "In need of a missing Drug",
               style: TextStyle(
                   color: AppColor.mainColor,
                   fontWeight: FontWeight.bold,
-                  fontSize: 20),
+                  fontSize: 18),
             ),
           ),
           Container(
@@ -138,15 +138,16 @@ class BlogCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-                child: Hero(
-                  tag: "tag1",
-                  child: Image.asset(
-                    blogPicture,
-                    width: 150,
-                    height: 100,
+                child: Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: Image.asset(
+                      blogPicture,
+                      width: 150,
+                      height: 100,
+                    ),
                   ),
                 ),
-              ),
+              
               SizedBox(
                 height: 25,
               ),

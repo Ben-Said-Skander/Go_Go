@@ -16,47 +16,43 @@ class _BlogDetailsState extends State<BlogDetails> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 235, 235, 235),
       body: ListView(children: [
-        SizedBox(
-          height: 8,
-        ),
-        Row(
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              width: 15,
-              height: 15,
+            Padding(
+              padding: const EdgeInsets.only(left: 18.0),
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: Icon(Icons.arrow_back_ios)),
             ),
-            IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                icon: Icon(Icons.arrow_back_ios)),
+            Container(
+              height: 430,
+              width: 430,
+              margin: EdgeInsets.all(19),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(40),
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 6,
+                      spreadRadius: 1,
+                      color: Color.fromARGB(255, 207, 207, 207),
+                    )
+                  ]),
+
+              child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  child: Image.asset(
+                    "IMAGE/piills.jpg",
+                    width: 150,
+                    height: 150,
+                  ),
+                ),
+             
+            )
           ],
-        ),
-        Container(
-          height: 430,
-          margin: EdgeInsets.all(19),
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(40),
-              boxShadow: [
-                BoxShadow(
-                  blurRadius: 6,
-                  spreadRadius: 1,
-                  color: Color.fromARGB(255, 207, 207, 207),
-                )
-              ]),
-          //child: Text("el aaasba"),
-          child: Hero(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: Image.asset(
-                "IMAGE/piills.jpg",
-                width: 150,
-                height: 150,
-              ),
-            ),
-            tag: "tag1",
-          ),
         ),
         SizedBox(
           height: 12,

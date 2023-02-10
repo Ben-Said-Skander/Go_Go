@@ -12,7 +12,6 @@ class _RemindersState extends State<Reminders> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).pushNamed("addMedicine");
@@ -37,7 +36,7 @@ class _RemindersState extends State<Reminders> {
         ),
         Container(
           height: 800,
-          padding: EdgeInsets.only(top: 50),
+          padding: EdgeInsets.only(top: 80),
           child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2),

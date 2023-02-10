@@ -40,7 +40,7 @@ class _AddBlogState extends State<AddBlog> {
                   },
                   icon: Icon(Icons.arrow_back_ios)),
               Padding(
-                padding: const EdgeInsets.only(left: 108.0),
+                padding: const EdgeInsets.only(left: 100.0),
                 child: Center(
                   child: Text(
                     "Add New Blog",
@@ -69,9 +69,10 @@ class _AddBlogState extends State<AddBlog> {
               ),
             ),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 50, 0),
+                  padding: const EdgeInsets.fromLTRB(25, 0, 50, 0),
                   child: Text(
                     "Title",
                     style: TextStyle(

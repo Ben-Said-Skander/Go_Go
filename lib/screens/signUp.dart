@@ -54,7 +54,7 @@ class _SignUpState extends State<SignUp> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 30, 0, 0),
+                      padding: const EdgeInsets.fromLTRB(15, 50, 0, 0),
                       child: IconButton(
                           onPressed: () {
                             Navigator.of(context).popAndPushNamed("signIn");
@@ -65,7 +65,7 @@ class _SignUpState extends State<SignUp> {
                           )),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 40, 0, 0),
+                      padding: const EdgeInsets.fromLTRB(10, 60, 0, 0),
                       child: Text(
                         "Hey , get on board",
                         style: TextStyle(
@@ -77,7 +77,7 @@ class _SignUpState extends State<SignUp> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(73, 8, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(73, 3, 0, 0),
                   child: Text(
                     "Sign Up to continue",
                     style: TextStyle(

@@ -22,7 +22,7 @@ class _RemindersState extends State<Reminders> {
           color: Color.fromARGB(255, 251, 251, 251),
         ),
       ),
-      body: ListView(children: [
+      body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Container(
           height: 150,
           decoration: BoxDecoration(
@@ -34,9 +34,17 @@ class _RemindersState extends State<Reminders> {
               child: Text("Reminders",
                   style: TextStyle(color: Colors.white, fontSize: 20))),
         ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
+          child: Text(
+            " Worry less , Live healthier ",
+            style: TextStyle(
+                color: Colors.black, fontWeight: FontWeight.w700, fontSize: 20),
+          ),
+        ),
         Container(
-          height: 800,
-          padding: EdgeInsets.only(top: 80),
+          height: 560,
+          padding: EdgeInsets.only(top: 10),
           child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2),

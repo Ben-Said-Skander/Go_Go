@@ -23,7 +23,7 @@ class Medicine {
   int get getInterval => interval!;
   String get getStartingTime => startingTime!;
 
-  // Transform attributs to Json Format
+  // Transform attributs to JSON Map format (we send data with JSON format)
 
   Map<String, dynamic> toJson() {
     return {
@@ -36,6 +36,7 @@ class Medicine {
     };
   }
 
+  // Transform JSON Map to normal Model
   factory Medicine.fromJson(Map<String, dynamic> parsedJson) {
     return Medicine(
       notificationID: parsedJson["ids"],

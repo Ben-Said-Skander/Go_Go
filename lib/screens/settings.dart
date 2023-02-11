@@ -42,8 +42,7 @@ class _SettingsState extends State<Settings> {
         ),
         radius: 40,
       )),
-      SettingFormField(fieldData: "Firstname", title: "Skander"),
-      SettingFormField(fieldData: "Lastname", title: "Ben Said"),
+      SettingFormField(fieldData: "Fullname", title: "Skander Ben Said"),
       SettingFormField(fieldData: "Email", title: "bensaid303@gmail.com"),
       SettingFormField(fieldData: "Phone Number", title: "99 549 510 "),
     ]));
@@ -83,7 +82,7 @@ class SettingFormField extends StatelessWidget {
                 )
               ]),
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(15, 5, 0, 0),
+            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

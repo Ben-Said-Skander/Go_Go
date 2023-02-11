@@ -12,16 +12,25 @@ class AddBlog extends StatefulWidget {
 
 class _AddBlogState extends State<AddBlog> {
   late TextEditingController titleController;
+  late TextEditingController bodyController;
+  String dropdownvalue = "Drug Experience";
+  var categories = [
+    "Drug Experience",
+    "In need of a missing drug",
+    "Questions about a drug",
+  ];
 
   @override
   void initState() {
     titleController = TextEditingController();
+    bodyController = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
     titleController.dispose();
+    bodyController.dispose();
     super.dispose();
   }
 
@@ -52,19 +61,23 @@ class _AddBlogState extends State<AddBlog> {
           ),
         ),
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            GestureDetector(
-              onTap: () {
-                //image picker
-              },
-              child: Container(
-                color: Color.fromARGB(255, 215, 215, 215),
-                width: 150,
-                height: 150,
-                child: Icon(
-                  Icons.add_a_photo,
-                  color: AppColor.mainColor,
+            Padding(
+              padding: const EdgeInsets.only(top: 30.0),
+              child: GestureDetector(
+                onTap: () {
+                  //image picker
+                },
+                child: Container(
+                  color: Color.fromARGB(255, 215, 215, 215),
+                  width: 150,
+                  height: 150,
+                  child: Icon(
+                    Icons.add_a_photo,
+                    color: AppColor.mainColor,
+                  ),
                 ),
               ),
             ),
@@ -72,7 +85,34 @@ class _AddBlogState extends State<AddBlog> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(25, 0, 50, 0),
+                  padding: const EdgeInsets.fromLTRB(25, 20, 50, 0),
+                  child: Text(
+                    "Categorie",
+                    style: TextStyle(
+                        color: AppColor.mainColor,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700),
+                  ),
+                ),
+                Container(
+                    padding: EdgeInsets.fromLTRB(18, 15, 0, 0),
+                    child: DropdownButton(
+                        iconEnabledColor: AppColor.mainColor,
+                        dropdownColor: Color.fromARGB(255, 255, 255, 255),
+                        hint: Text("Select a Category"),
+                        elevation: 4,
+                        value: dropdownvalue, // initial value
+                        items: categories.map((String items) {
+                          return DropdownMenuItem(
+                              value: items, child: Text(items));
+                        }).toList(),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            dropdownvalue = newValue!;
+                          });
+                        })),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(25, 20, 50, 0),
                   child: Text(
                     "Title",
                     style: TextStyle(
@@ -98,24 +138,34 @@ class _AddBlogState extends State<AddBlog> {
           ],
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(20, 60, 20, 0),
-          height: 500,
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(40),
-              boxShadow: [
-                BoxShadow(
-                  blurRadius: 6,
-                  spreadRadius: 1,
-                  color: Color.fromARGB(255, 207, 207, 207),
-                  // offset: Offset(2, 1),
-                )
-              ]),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(18, 18, 0, 0),
-            child: Text("Write down here"),
-          ),
-        ),
+            margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+            height: 500,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(40),
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 6,
+                    spreadRadius: 1,
+                    color: Color.fromARGB(255, 207, 207, 207),
+                    // offset: Offset(2, 1),
+                  )
+                ]),
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(20, 15, 20, 0),
+              child: TextFormField(
+                minLines: null,
+                maxLines: 20,
+                keyboardType: TextInputType.multiline,
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white)),
+                  hintText: "Write something here...",
+                ),
+              ),
+            )),
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 60, 20, 60),
           child: Container(

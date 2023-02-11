@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:pfa_application_1/screens/add_new_blog.dart';
 import 'package:pfa_application_1/screens/add_new_medicine.dart';
-//import 'package:pfa_application_1/screens/add_medicine.dart';
 import 'package:pfa_application_1/screens/blog.dart';
 import 'package:pfa_application_1/screens/blog_details.dart';
 import 'package:pfa_application_1/screens/medicine_details.dart';

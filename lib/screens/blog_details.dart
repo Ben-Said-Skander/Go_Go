@@ -14,26 +14,32 @@ class _BlogDetailsState extends State<BlogDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 235, 235, 235),
+      backgroundColor: Color.fromARGB(255, 191, 207, 209),
       body: ListView(children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            /*
             Padding(
               padding: const EdgeInsets.only(left: 18.0),
               child: IconButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  icon: Icon(Icons.arrow_back_ios)),
-            ),
+                  icon: Icon(Icons.arrow_back_ios)),*/
+
             Container(
-              height: 430,
-              width: 430,
-              margin: EdgeInsets.all(19),
+              width: double.infinity,
+              height: 400,
               decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(40),
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(
+                        40,
+                      ),
+                      bottomRight: Radius.circular(
+                        40,
+                      )),
                   boxShadow: [
                     BoxShadow(
                       blurRadius: 6,
@@ -41,36 +47,40 @@ class _BlogDetailsState extends State<BlogDetails> {
                       color: Color.fromARGB(255, 207, 207, 207),
                     )
                   ]),
-
               child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                  child: Image.asset(
-                    "IMAGE/piills.jpg",
-                    width: 150,
-                    height: 150,
-                  ),
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child: Image.asset(
+                  "IMAGE/piills.jpg",
+                  width: 150,
+                  height: 150,
                 ),
-             
+              ),
             )
           ],
         ),
-        SizedBox(
-          height: 12,
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(22, 10, 0, 10),
-          child: Text("Blog Title",
-              style: TextStyle(
-                  color: AppColor.mainColor,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold)),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 20),
-          child: Text("Blog body is here",
-              style: TextStyle(
-                fontSize: 16,
-              )),
+        Container(
+          height: 400,
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            SizedBox(
+              height: 12,
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(22, 10, 0, 10),
+              child: Text("Blog Title",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold)),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Text("Blog body is here",
+                  style: TextStyle(
+                    fontSize: 16,
+                  )),
+            )
+          ]),
         )
       ]),
     );

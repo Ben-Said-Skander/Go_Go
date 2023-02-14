@@ -8,6 +8,7 @@ import 'package:pfa_application_1/screens/blog/blog.dart';
 
 import 'package:pfa_application_1/screens/blog/help_blog.dart';
 import 'package:pfa_application_1/screens/blog/missing_drug_blog.dart';
+import 'package:pfa_application_1/screens/blog/see_all.dart';
 import 'package:pfa_application_1/screens/blog_details.dart';
 import 'package:pfa_application_1/screens/medicine_details.dart';
 import 'package:pfa_application_1/screens/home.dart';
@@ -59,6 +60,7 @@ class _MyAppState extends State<MyApp> {
               "missingBlog": ((context) => MissingBlog()),
               "blog/details": ((context) => BlogDetails()),
               "blog/addBlog": ((context) => AddBlog()),
+              "seeAll": ((context) => SeeAll()),
             },
           );
         }));

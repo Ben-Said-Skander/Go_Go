@@ -26,22 +26,42 @@ class _BlogState extends State<Blog> {
       ),
       body: ListView(
         children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(65, 25, 0, 40),
+          Container(
+            height: 120,
+            width: 500,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(80)),
+              color: Color.fromARGB(255, 16, 152, 170),
+            ),
             child: Row(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 115.0),
-                  child: Center(
-                    child: Text(
-                      "Blog",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                    ),
-                  ),
+                Center(
+                  child: Padding(
+                      padding: const EdgeInsets.only(left: 40),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushNamed("settings");
+                        },
+                        child: CircleAvatar(
+                          backgroundImage: AssetImage(
+                            "IMAGE/me2.jpg",
+                          ),
+                          radius: 28,
+                        ),
+                      )),
+                ),
+                SizedBox(
+                  width: 22,
+                ),
+                Text(
+                  "Ben Said Skander",
+                  style: TextStyle(color: Colors.white, fontSize: 17),
                 ),
               ],
             ),
+          ),
+          SizedBox(
+            height: 40,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -66,7 +86,7 @@ class _BlogState extends State<Blog> {
                   ),
                   TextButton(
                       onPressed: () {
-                        Navigator.of(context).pushNamed("experienceBlog");
+                        Navigator.of(context).pushNamed("seeAll");
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(right: 15),
@@ -236,7 +256,7 @@ class PopularCard extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 13),
+                padding: const EdgeInsets.only(left: 8),
                 child: Text(
                   blogTitle,
                   style: TextStyle(

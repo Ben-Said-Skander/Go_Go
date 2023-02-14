@@ -160,7 +160,7 @@ class _AddMedicineState extends State<AddMedicine> {
                 color: AppColor.mainColor),
             child: TextButton(
                 onPressed: () {
-                //  Navigator.of(context).pop();
+                  Navigator.of(context).pop();
                 /*
                 Medicine newEntryMedicine = Medicine(
                   notificationID: notificationIDs,

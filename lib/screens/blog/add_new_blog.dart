@@ -40,7 +40,7 @@ class _AddBlogState extends State<AddBlog> {
         body: ListView(
       children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(15, 18.0, 0, 40),
+          padding: const EdgeInsets.fromLTRB(15, 10.0, 0, 40),
           child: Row(
             children: [
               IconButton(
@@ -49,10 +49,10 @@ class _AddBlogState extends State<AddBlog> {
                   },
                   icon: Icon(Icons.arrow_back_ios)),
               Padding(
-                padding: const EdgeInsets.only(left: 100.0),
+                padding: const EdgeInsets.only(left: 95.0),
                 child: Center(
                   child: Text(
-                    "Add New Blog",
+                    "Add New Article",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -65,29 +65,41 @@ class _AddBlogState extends State<AddBlog> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 30.0),
-              child: GestureDetector(
-                onTap: () {
-                  //image picker
-                },
-                child: Container(
-                  color: Color.fromARGB(255, 215, 215, 215),
-                  width: 150,
-                  height: 150,
-                  child: Icon(
-                    Icons.add_a_photo,
-                    color: AppColor.mainColor,
-                  ),
-                ),
-              ),
-            ),
+                padding: const EdgeInsets.only(top: 12.0, left: 15),
+                child: Column(
+                  children: [
+                    Container(
+                      color: Color.fromARGB(255, 215, 215, 215),
+                      width: 150,
+                      height: 150,
+                      child: Icon(
+                        Icons.add_a_photo,
+                        color: AppColor.mainColor,
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 15),
+                      decoration: BoxDecoration(
+                          color: AppColor.mainColor,
+                          borderRadius: BorderRadius.circular(30)),
+                      child: TextButton(
+                          onPressed: () {
+                            //image picker
+                          },
+                          child: Text(
+                            "Add a photo",
+                            style: TextStyle(color: Colors.white),
+                          )),
+                    )
+                  ],
+                )),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(25, 20, 50, 0),
                   child: Text(
-                    "Categorie",
+                    "Category",
                     style: TextStyle(
                         color: AppColor.mainColor,
                         fontSize: 17,
@@ -138,7 +150,7 @@ class _AddBlogState extends State<AddBlog> {
           ],
         ),
         Container(
-            margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+            margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
             height: 500,
             decoration: BoxDecoration(
                 color: Colors.white,

@@ -7,7 +7,6 @@ import 'package:pfa_application_1/screens/blog/blog.dart';
 import 'package:pfa_application_1/screens/reminder.dart';
 import 'package:pfa_application_1/screens/search_page.dart';
 
-
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -27,8 +26,8 @@ class _HomeState extends State<Home> {
           buttonBackgroundColor: Color(0x46A569),
           items: [
             Icon(Icons.notifications_active_outlined),
-            Icon(Icons.home_rounded),
-            Icon(Icons.book),
+            Icon(Icons.search),
+            Icon(Icons.book_sharp),
           ],
           index: selectedIndex,
           backgroundColor: AppColor.mainColor,

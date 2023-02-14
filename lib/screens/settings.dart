@@ -20,7 +20,7 @@ class _SettingsState extends State<Settings> {
           children: [
             IconButton(
                 onPressed: () {
-                  //     Navigator.of(context).pushNamed("/");
+                      Navigator.of(context).pop();
                 },
                 icon: Icon(Icons.arrow_back_ios)),
             Padding(

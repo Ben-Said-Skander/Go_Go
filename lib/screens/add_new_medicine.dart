@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pfa_application_1/constants/colors.dart';
+import 'package:pfa_application_1/models/medicine.dart';
 
 class AddMedicine extends StatefulWidget {
   const AddMedicine({super.key});
@@ -159,7 +160,16 @@ class _AddMedicineState extends State<AddMedicine> {
                 color: AppColor.mainColor),
             child: TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                //  Navigator.of(context).pop();
+                /*
+                Medicine newEntryMedicine = Medicine(
+                  notificationID: notificationIDs,
+                  medicineName: medicineName ,
+                  dosage: dosage,
+                  medicineType: medicineType,
+                  startingTime: startingTime
+                ),*/
+                
                 },
                 child: Center(
                     child: Text(

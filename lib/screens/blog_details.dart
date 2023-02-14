@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, sort_child_properties_last, prefer_const_constructors, avoid_unnecessary_containers
+// ignore_for_file: prefer_const_literals_to_create_immutables, sort_child_properties_last, prefer_const_constructors, avoid_unnecessary_containers, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 import 'package:pfa_application_1/constants/colors.dart';
@@ -14,12 +14,9 @@ class _BlogDetailsState extends State<BlogDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 191, 207, 209),
+      //   backgroundColor: Colors.white,
       body: ListView(children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            /*
+        /*
             Padding(
               padding: const EdgeInsets.only(left: 18.0),
               child: IconButton(
@@ -28,38 +25,39 @@ class _BlogDetailsState extends State<BlogDetails> {
                   },
                   icon: Icon(Icons.arrow_back_ios)),*/
 
-            Container(
-              width: double.infinity,
-              height: 400,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(
-                        40,
-                      ),
-                      bottomRight: Radius.circular(
-                        40,
-                      )),
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 6,
-                      spreadRadius: 1,
-                      color: Color.fromARGB(255, 207, 207, 207),
-                    )
-                  ]),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                child: Image.asset(
-                  "IMAGE/piills.jpg",
-                  width: 150,
-                  height: 150,
+        ClipRRect(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(40),
+              bottomRight: Radius.circular(40),
+            ),
+            child: Stack(
+              children: [
+                Image.asset(
+                  "IMAGE/doliprane.jpg",
+                  //     height: 400,
                 ),
-              ),
-            )
-          ],
-        ),
+                Positioned(
+                    child: Padding(
+                        padding: const EdgeInsets.only(left: 5),
+                        child: IconButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            icon: Icon(Icons.arrow_back_ios))))
+              ],
+            )),
         Container(
-          height: 400,
+          height: 800,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(40),
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 6,
+                  spreadRadius: 1,
+                  color: Color.fromARGB(255, 207, 207, 207),
+                )
+              ]),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             SizedBox(
@@ -69,7 +67,7 @@ class _BlogDetailsState extends State<BlogDetails> {
               padding: const EdgeInsets.fromLTRB(22, 10, 0, 10),
               child: Text("Blog Title",
                   style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 20,
                       fontWeight: FontWeight.bold)),
             ),
@@ -81,7 +79,7 @@ class _BlogDetailsState extends State<BlogDetails> {
                   )),
             )
           ]),
-        )
+        ),
       ]),
     );
   }

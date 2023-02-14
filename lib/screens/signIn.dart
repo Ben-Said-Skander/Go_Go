@@ -83,7 +83,7 @@ class _SignInState extends State<SignIn> {
               child: Text(
                 'Sign In',
                 style: TextStyle(
-                    color: Color.fromARGB(255, 16, 152, 170),
+                    color: AppColor.mainColor,
                     fontWeight: FontWeight.bold,
                     fontSize: 23),
               ),

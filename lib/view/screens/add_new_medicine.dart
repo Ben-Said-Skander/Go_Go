@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/models/medicine.dart';
 
@@ -54,7 +55,7 @@ class _AddMedicineState extends State<AddMedicine> {
             children: [
               IconButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Get.back();
                   },
                   icon: Icon(Icons.arrow_back_ios)),
               Padding(
@@ -160,8 +161,9 @@ class _AddMedicineState extends State<AddMedicine> {
                 color: AppColor.mainColor),
             child: TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
-                /*
+                  Get.back();
+
+                  /*
                 Medicine newEntryMedicine = Medicine(
                   notificationID: notificationIDs,
                   medicineName: medicineName ,
@@ -169,7 +171,6 @@ class _AddMedicineState extends State<AddMedicine> {
                   medicineType: medicineType,
                   startingTime: startingTime
                 ),*/
-                
                 },
                 child: Center(
                     child: Text(

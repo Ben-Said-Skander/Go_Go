@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
+import 'package:pfa_application_1/core/constants/routes.dart';
 
 class HelpBlog extends StatefulWidget {
   const HelpBlog({super.key});
@@ -16,7 +18,7 @@ class _HelpBlogState extends State<HelpBlog> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushNamed("blog/addBlog");
+          Get.toNamed(AppRoute.addBlog);
         },
         backgroundColor: AppColor.mainColor,
         child: Icon(
@@ -40,7 +42,7 @@ class _HelpBlogState extends State<HelpBlog> {
                       padding: const EdgeInsets.only(left: 40),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.of(context).pushNamed("settings");
+                          Get.toNamed(AppRoute.settings);
                         },
                         child: CircleAvatar(
                           backgroundImage: AssetImage(
@@ -66,10 +68,10 @@ class _HelpBlogState extends State<HelpBlog> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              textButton(
-                  context, "Drug Experience", "blog", Colors.grey),
+              textButton(context, "Drug Experience", "blog", Colors.grey),
               textButton(context, "Missing Drug", "missingBlog", Colors.grey),
-              textButton(context, "Seeking Help", "helpBlog", AppColor.mainColor),
+              textButton(
+                  context, "Seeking Help", "helpBlog", AppColor.mainColor),
             ],
           ),
           Padding(
@@ -86,7 +88,7 @@ class _HelpBlogState extends State<HelpBlog> {
                   ),
                   TextButton(
                       onPressed: () {
-                        Navigator.of(context).pushNamed("seeAll");
+                        Get.toNamed(AppRoute.seeAll);
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(right: 15),
@@ -126,17 +128,17 @@ class _HelpBlogState extends State<HelpBlog> {
           PopularCard(
             blogTitle: "My experience with Doliprane",
             blogPicture: "assets/image/sirop.jpg",
-            route: "blog/details",
+            route: "/blog/details",
           ),
           PopularCard(
             blogTitle: "My experience with Doliprane",
             blogPicture: "assets/image/doliprane.jpg",
-            route: "blog/details",
+            route: "/blog/details",
           ),
           PopularCard(
             blogTitle: "My experience with Doliprane",
             blogPicture: "assets/image/doliprane.jpg",
-            route: "blog/details",
+            route: "/blog/details",
           ),
         ],
       ),
@@ -149,7 +151,7 @@ textButton(BuildContext context, String title, String route, Color couleur) {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
       child: TextButton(
         onPressed: () {
-          Navigator.of(context).popAndPushNamed(route);
+          Get.offAndToNamed(route);
         },
         child: Text(title, style: TextStyle(fontSize: 14, color: couleur)),
       ));
@@ -164,7 +166,7 @@ class BlogCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          Navigator.of(context).pushNamed("blog/details");
+          Get.toNamed(AppRoute.blogdetails);
         },
         child: Container(
           decoration: BoxDecoration(
@@ -226,7 +228,7 @@ class PopularCard extends StatelessWidget {
     return Column(children: [
       GestureDetector(
         onTap: () {
-          Navigator.of(context).pushNamed(route);
+          Get.toNamed(route);
         },
         child: Container(
           decoration: BoxDecoration(
@@ -272,7 +274,7 @@ class PopularCard extends StatelessWidget {
     ]);
     /*  GestureDetector(
         onTap: () {
-          Navigator.of(context).pushNamed("blog/details");
+          Navigator.of(context).pushNamed("/blog/details");
         },*/
   }
 }

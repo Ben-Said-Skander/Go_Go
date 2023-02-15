@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, sort_child_properties_last
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 
 class AddBlog extends StatefulWidget {
@@ -45,7 +46,8 @@ class _AddBlogState extends State<AddBlog> {
             children: [
               IconButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                         Get.back() ;
+                    
                   },
                   icon: Icon(Icons.arrow_back_ios)),
               Padding(
@@ -186,7 +188,8 @@ class _AddBlogState extends State<AddBlog> {
                 color: AppColor.mainColor),
             child: TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                       Get.back() ;
+           
                 },
                 child: Center(
                     child: Text(

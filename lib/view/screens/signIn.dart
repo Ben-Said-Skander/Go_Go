@@ -1,7 +1,9 @@
 // ignore_for_file: file_names, prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
+import 'package:pfa_application_1/core/constants/routes.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -147,7 +149,8 @@ class _SignInState extends State<SignIn> {
                         style: TextStyle(color: Colors.white),
                       ),
                       onPressed: () {
-                        Navigator.of(context).popAndPushNamed("home");
+                          Get.offAndToNamed(AppRoute.home);
+              
                       },
                     ))),
             Padding(
@@ -162,7 +165,8 @@ class _SignInState extends State<SignIn> {
                       child: Text("Sign Up",
                           style: TextStyle(color: AppColor.mainColor)),
                       onPressed: () {
-                        Navigator.of(context).pushNamed("signUp");
+                        Get.toNamed(AppRoute.signup);
+                
                       }),
                 ],
               ),

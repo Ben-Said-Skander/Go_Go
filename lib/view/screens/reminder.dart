@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, non_constant_identifier_names, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, recursive_getters, sized_box_for_whitespace
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pfa_application_1/core/constants/routes.dart';
 
 class Reminders extends StatefulWidget {
   const Reminders({super.key});
@@ -14,7 +16,7 @@ class _RemindersState extends State<Reminders> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushNamed("addMedicine");
+          Get.toNamed(AppRoute.addMedicine);
         },
         backgroundColor: Color.fromARGB(255, 16, 152, 170),
         child: Icon(
@@ -78,7 +80,7 @@ class MedCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          Navigator.of(context).pushNamed("details");
+          Get.toNamed(AppRoute.details);
         },
         child: Container(
           decoration: BoxDecoration(

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, sort_child_properties_last, prefer_const_constructors, avoid_unnecessary_containers, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 
 class BlogDetails extends StatefulWidget {
@@ -41,7 +42,8 @@ class _BlogDetailsState extends State<BlogDetails> {
                         padding: const EdgeInsets.only(left: 5),
                         child: IconButton(
                             onPressed: () {
-                              Navigator.of(context).pop();
+                                   Get.back() ;
+                            
                             },
                             icon: Icon(Icons.arrow_back_ios))))
               ],

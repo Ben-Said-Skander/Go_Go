@@ -1,7 +1,9 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
+import 'package:pfa_application_1/core/constants/routes.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -57,7 +59,7 @@ class _SignUpState extends State<SignUp> {
                       padding: const EdgeInsets.fromLTRB(15, 50, 0, 0),
                       child: IconButton(
                           onPressed: () {
-                            Navigator.of(context).popAndPushNamed("signIn");
+                            Get.back();
                           },
                           icon: Icon(
                             Icons.arrow_back_ios,
@@ -193,7 +195,7 @@ class _SignUpState extends State<SignUp> {
                 ),
                 child: TextButton(
                     onPressed: () {
-                      Navigator.of(context).pushNamed("signIn");
+                      Get.toNamed(AppRoute.signIn);
                     },
                     child: Center(
                         child: Text(
@@ -214,7 +216,7 @@ class _SignUpState extends State<SignUp> {
                       child: Text("Sign In",
                           style: TextStyle(color: AppColor.mainColor)),
                       onPressed: () {
-                        Navigator.of(context).popAndPushNamed("signIn");
+                        Get.offAndToNamed(AppRoute.signIn);
                       }),
                 ],
               ),

@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, non_constant_identifier_names, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, recursive_getters, sized_box_for_whitespace
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pfa_application_1/core/constants/routes.dart';
 
 class SeeAll extends StatefulWidget {
   const SeeAll({super.key});
@@ -24,7 +26,7 @@ class _SeeAllState extends State<SeeAll> {
                       padding: const EdgeInsets.only(left: 15, top: 20),
                       child: IconButton(
                         onPressed: () {
-                          Navigator.of(context).pop();
+                          Get.back();
                         },
                         icon: Icon(
                           Icons.arrow_back_ios,
@@ -83,7 +85,7 @@ class MedCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          Navigator.of(context).pushNamed("details");
+          Get.toNamed(AppRoute.blogdetails);
         },
         child: Container(
           decoration: BoxDecoration(

@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable, non_constant_identifier_names, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 
 class Details extends StatefulWidget {
@@ -20,7 +21,7 @@ class _DetailsState extends State<Details> {
           children: [
             IconButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Get.back();
                 },
                 icon: Icon(Icons.arrow_back_ios)),
             Padding(
@@ -51,7 +52,7 @@ class _DetailsState extends State<Details> {
               color: AppColor.mainColor),
           child: TextButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                Get.back();
               },
               child: Center(
                   child: Text(

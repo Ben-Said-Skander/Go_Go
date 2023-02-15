@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pfa_application_1/core/constants/routes.dart';
+import 'package:pfa_application_1/routes.dart';
 
 import 'view/screens/add_new_medicine.dart';
 import 'view/screens/blog/add_new_blog.dart';
@@ -33,8 +35,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SignIn(),
-      routes: {
+      getPages: routes,
+      initialRoute: AppRoute.signIn,
+      /* routes: {
         "home": ((context) => Home()),
         "details": ((context) => Details()),
         "addMedicine": ((context) => AddMedicine()),
@@ -48,13 +51,14 @@ class _MyAppState extends State<MyApp> {
         "blog/details": ((context) => BlogDetails()),
         "blog/addBlog": ((context) => AddBlog()),
         "seeAll": ((context) => SeeAll()),
-      },
+      },*/
     );
   }
 }
 
 
-
+//Get.offandtonamed = pop and push named
+//get.toNamed
 //Get.toNamed(AppRoute.myfavroite);
 //getPages: routes,
 //rest ful api : returns JSON

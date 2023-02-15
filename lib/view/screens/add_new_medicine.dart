@@ -71,7 +71,7 @@ class _AddMedicineState extends State<AddMedicine> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.fromLTRB(20, 25, 20, 0),
+          padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
           child: Titles(title: "Medicine name"),
         ),
         Container(
@@ -133,7 +133,7 @@ class _AddMedicineState extends State<AddMedicine> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.fromLTRB(25, 30, 0, 0),
+          padding: EdgeInsets.fromLTRB(25, 13, 0, 0),
           child: Row(
             children: [
               Text(

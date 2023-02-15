@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pfa_application_1/core/constants/colors.dart';
+
 
 class BlogDetails extends StatefulWidget {
   const BlogDetails({super.key});

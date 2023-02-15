@@ -46,8 +46,7 @@ class _AddBlogState extends State<AddBlog> {
             children: [
               IconButton(
                   onPressed: () {
-                         Get.back() ;
-                    
+                    Get.back();
                   },
                   icon: Icon(Icons.arrow_back_ios)),
               Padding(
@@ -79,20 +78,6 @@ class _AddBlogState extends State<AddBlog> {
                         color: AppColor.mainColor,
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(top: 15),
-                      decoration: BoxDecoration(
-                          color: AppColor.mainColor,
-                          borderRadius: BorderRadius.circular(30)),
-                      child: TextButton(
-                          onPressed: () {
-                            //image picker
-                          },
-                          child: Text(
-                            "Add a photo",
-                            style: TextStyle(color: Colors.white),
-                          )),
-                    )
                   ],
                 )),
             Column(
@@ -125,34 +110,58 @@ class _AddBlogState extends State<AddBlog> {
                             dropdownvalue = newValue!;
                           });
                         })),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(25, 20, 50, 0),
-                  child: Text(
-                    "Title",
-                    style: TextStyle(
-                        color: AppColor.mainColor,
-                        fontSize: 17,
-                        fontWeight: FontWeight.w700),
-                  ),
-                ),
                 Container(
-                  padding: EdgeInsets.fromLTRB(20, 15, 20, 0),
-                  width: 200,
-                  height: 120,
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                        hintText: "Title", prefixIcon: Icon(Icons.mail)),
-                    controller: titleController,
-                    cursorColor: Color.fromARGB(255, 16, 152, 170),
-                  ),
-                ),
+                  margin: EdgeInsets.only(top: 15, left: 65),
+                  decoration: BoxDecoration(
+                      color: AppColor.mainColor,
+                      borderRadius: BorderRadius.circular(30)),
+                  child: TextButton(
+                      onPressed: () {
+                        //image picker
+                      },
+                      child: Text(
+                        "Add a photo",
+                        style: TextStyle(color: Colors.white),
+                      )),
+                )
               ],
             )
           ],
         ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(25, 50, 50, 0),
+          child: Text(
+            "Title",
+            style: TextStyle(
+                color: AppColor.mainColor,
+                fontSize: 19,
+                fontWeight: FontWeight.w700),
+          ),
+        ),
         Container(
-            margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
+          padding: EdgeInsets.fromLTRB(20, 15, 20, 0),
+          width: 200,
+          height: 120,
+          child: TextFormField(
+            keyboardType: TextInputType.text,
+            decoration: InputDecoration(
+                hintText: "Title", prefixIcon: Icon(Icons.mail)),
+            controller: titleController,
+            cursorColor: Color.fromARGB(255, 16, 152, 170),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(25, 0, 50, 25),
+          child: Text(
+            "Body",
+            style: TextStyle(
+                color: AppColor.mainColor,
+                fontSize: 19,
+                fontWeight: FontWeight.w700),
+          ),
+        ),
+        Container(
+            margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
             height: 500,
             decoration: BoxDecoration(
                 color: Colors.white,
@@ -188,8 +197,7 @@ class _AddBlogState extends State<AddBlog> {
                 color: AppColor.mainColor),
             child: TextButton(
                 onPressed: () {
-                       Get.back() ;
-           
+                  Get.back();
                 },
                 child: Center(
                     child: Text(

@@ -21,7 +21,7 @@ class _SettingsState extends State<Settings> {
           children: [
             IconButton(
                 onPressed: () {
-                   Get.back() ;
+                  Get.back();
                 },
                 icon: Icon(Icons.arrow_back_ios)),
             Padding(
@@ -36,13 +36,24 @@ class _SettingsState extends State<Settings> {
           ],
         ),
       ),
-      Center(
-          child: CircleAvatar(
-        backgroundImage: AssetImage(
-          "assets/image/me2.jpg",
-        ),
-        radius: 40,
-      )),
+      Column(
+        children: [
+          Center(
+              child: CircleAvatar(
+            backgroundImage: AssetImage(
+              "assets/image/me2.jpg",
+            ),
+            radius: 40,
+          )),
+          SizedBox(
+            height: 15,
+          ),
+          Text(
+            "Ben Said Skander",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
       SettingFormField(fieldData: "Fullname", title: "Skander Ben Said"),
       SettingFormField(fieldData: "Email", title: "bensaid303@gmail.com"),
       SettingFormField(fieldData: "Phone Number", title: "99 549 510 "),

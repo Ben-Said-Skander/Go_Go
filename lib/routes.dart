@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
+import 'package:pfa_application_1/view/screens/onboarding_page.dart';
+import 'package:pfa_application_1/view/screens/search_page.dart';
 import 'view/screens/home.dart';
 
 import 'view/screens/add_new_medicine.dart';
@@ -29,4 +31,6 @@ List<GetPage<dynamic>>? routes = [
   GetPage(name: AppRoute.blogdetails, page: () => const BlogDetails()),
   GetPage(name: AppRoute.addBlog, page: () => const AddBlog()),
   GetPage(name: AppRoute.seeAll, page: () => const SeeAll()),
+  GetPage(name: AppRoute.searchPage, page: () => const SearchPage()),
+  GetPage(name: AppRoute.onBoarding, page: () => const OnBoarding()),
 ];

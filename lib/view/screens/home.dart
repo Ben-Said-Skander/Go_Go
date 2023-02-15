@@ -2,6 +2,7 @@
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/view/screens/blog/blog.dart';
 import 'package:pfa_application_1/view/screens/reminder.dart';
@@ -26,8 +27,8 @@ class _HomeState extends State<Home> {
           buttonBackgroundColor: Color(0x46A569),
           items: [
             Icon(Icons.notifications_active_outlined),
-            Icon(Icons.search),
-            Icon(Icons.book_sharp),
+            Icon(FontAwesomeIcons.compass),
+            Icon(FontAwesomeIcons.blogger),
           ],
           index: selectedIndex,
           backgroundColor: AppColor.mainColor,

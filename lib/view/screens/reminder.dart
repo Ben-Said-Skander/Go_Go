@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, non_constant_identifier_names, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, recursive_getters, sized_box_for_whitespace
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:pfa_application_1/core/constants/routes.dart';
 
 class Reminders extends StatefulWidget {
@@ -40,16 +41,15 @@ class _RemindersState extends State<Reminders> {
           )),
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(20, 50, 0, 0),
-          child: Text(
-            " Worry less , Live healthier ",
-            style: TextStyle(
-                color: Colors.black, fontWeight: FontWeight.w700, fontSize: 20),
-          ),
-        ),
+            padding: const EdgeInsets.fromLTRB(20, 35, 0, 0),
+            child: Text(" Worry less , Live healthier ",
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w700))),
         Container(
-          height: 560,
-          padding: EdgeInsets.only(top: 15),
+          height: 500,
+          //padding: EdgeInsets.only(top: 15),
           child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2),
@@ -85,7 +85,7 @@ class MedCard extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(40),
+              borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
                   blurRadius: 6,
@@ -106,7 +106,7 @@ class MedCard extends StatelessWidget {
                 height: 100,
               )),
               SizedBox(
-                height: 5,
+                height: 15,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 13),

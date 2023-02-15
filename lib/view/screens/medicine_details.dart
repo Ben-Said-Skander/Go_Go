@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable, non_constant_identifier_names, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
-import 'package:pfa_application_1/constants/colors.dart';
+import 'package:pfa_application_1/core/constants/colors.dart';
 
 class Details extends StatefulWidget {
   const Details({super.key});
@@ -38,7 +38,7 @@ class _DetailsState extends State<Details> {
       MedicineInfo(
           med_name: "Doliprane",
           med_dosage: "500mg",
-          med_pic: "IMAGE/piills.jpgh"),
+          med_pic: "assets/piills.jpgh"),
       MidSectionInfo(
           med_type: "Pill",
           dosage_interval: "Every 6 hours",
@@ -159,7 +159,7 @@ class MedicineInfo extends StatelessWidget {
             height: 250,
             margin: EdgeInsets.all(16),
             child: Image.asset(
-              "IMAGE/piills.jpg",
+              "assets/image/piills.jpg",
               width: 100,
               height: 100,
             ),

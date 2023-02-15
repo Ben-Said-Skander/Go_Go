@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
-import 'package:pfa_application_1/constants/colors.dart';
+import 'package:pfa_application_1/core/constants/colors.dart';
 
 class Blog extends StatefulWidget {
   const Blog({super.key});
@@ -44,7 +44,7 @@ class _BlogState extends State<Blog> {
                         },
                         child: CircleAvatar(
                           backgroundImage: AssetImage(
-                            "IMAGE/me2.jpg",
+                            "assets/image/me2.jpg",
                           ),
                           radius: 28,
                         ),
@@ -104,13 +104,13 @@ class _BlogState extends State<Blog> {
                 children: [
                   BlogCard(
                       blogTitle: "My experience with Doliprane",
-                      blogPicture: "IMAGE/piills.jpg"),
+                      blogPicture: "assets/image/piills.jpg"),
                   BlogCard(
                       blogTitle: "My experience with Doliprane",
-                      blogPicture: "IMAGE/piills.jpg"),
+                      blogPicture: "assets/image/piills.jpg"),
                   BlogCard(
                       blogTitle: "My experience with Doliprane",
-                      blogPicture: "IMAGE/piills.jpg"),
+                      blogPicture: "assets/image/piills.jpg"),
                 ],
               )),
           Padding(
@@ -125,17 +125,17 @@ class _BlogState extends State<Blog> {
           ),
           PopularCard(
             blogTitle: "My experience with Doliprane",
-            blogPicture: "IMAGE/sirop.jpg",
+            blogPicture: "assets/image/sirop.jpg",
             route: "blog/details",
           ),
           PopularCard(
             blogTitle: "My experience with Doliprane",
-            blogPicture: "IMAGE/doliprane.jpg",
+            blogPicture: "assets/image/doliprane.jpg",
             route: "blog/details",
           ),
           PopularCard(
             blogTitle: "My experience with Doliprane",
-            blogPicture: "IMAGE/doliprane.jpg",
+            blogPicture: "assets/image/doliprane.jpg",
             route: "blog/details",
           ),
         ],

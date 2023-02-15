@@ -2,7 +2,7 @@
 
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:pfa_application_1/constants/colors.dart';
+import 'package:pfa_application_1/core/constants/colors.dart';
 
 /*
 Future<bool> alertExit() {

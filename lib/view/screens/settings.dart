@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unnecessary_this, avoid_unnecessary_containers
 import 'package:flutter/material.dart';
-import 'package:pfa_application_1/constants/colors.dart';
+import 'package:pfa_application_1/core/constants/colors.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -38,7 +38,7 @@ class _SettingsState extends State<Settings> {
       Center(
           child: CircleAvatar(
         backgroundImage: AssetImage(
-          "IMAGE/me2.jpg",
+          "assets/image/me2.jpg",
         ),
         radius: 40,
       )),

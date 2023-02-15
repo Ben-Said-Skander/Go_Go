@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, sort_child_properties_last, prefer_const_constructors, avoid_unnecessary_containers, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
-import 'package:pfa_application_1/constants/colors.dart';
+import 'package:pfa_application_1/core/constants/colors.dart';
 
 class BlogDetails extends StatefulWidget {
   const BlogDetails({super.key});
@@ -33,7 +33,7 @@ class _BlogDetailsState extends State<BlogDetails> {
             child: Stack(
               children: [
                 Image.asset(
-                  "IMAGE/doliprane.jpg",
+                  "assets/image/doliprane.jpg",
                   //     height: 400,
                 ),
                 Positioned(

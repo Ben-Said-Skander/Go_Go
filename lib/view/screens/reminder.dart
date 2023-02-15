@@ -1,58 +1,53 @@
 // ignore_for_file: prefer_const_constructors, non_constant_identifier_names, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, recursive_getters, sized_box_for_whitespace
 import 'package:flutter/material.dart';
 
-class SeeAll extends StatefulWidget {
-  const SeeAll({super.key});
+class Reminders extends StatefulWidget {
+  const Reminders({super.key});
 
   @override
-  State<SeeAll> createState() => _SeeAllState();
+  State<Reminders> createState() => _RemindersState();
 }
 
-class _SeeAllState extends State<SeeAll> {
+class _RemindersState extends State<Reminders> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).pushNamed("addMedicine");
+        },
+        backgroundColor: Color.fromARGB(255, 16, 152, 170),
+        child: Icon(
+          Icons.add,
+          color: Color.fromARGB(255, 251, 251, 251),
+        ),
+      ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Container(
-            height: 150,
-            decoration: BoxDecoration(color: Color.fromARGB(255, 16, 152, 170)),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15, top: 20),
-                      child: IconButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        icon: Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.white,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                Center(
-                    child: Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: Text("See All",
-                      style: TextStyle(color: Colors.white, fontSize: 20)),
-                )),
-              ],
-            )),
+          height: 150,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(80.0),
+                  bottomRight: Radius.circular(80)),
+              color: Color.fromARGB(255, 16, 152, 170)),
+          child: Center(
+              child: Padding(
+            padding: const EdgeInsets.only(top: 28.0),
+            child: Text("Reminder",
+                style: TextStyle(color: Colors.white, fontSize: 20)),
+          )),
+        ),
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 50, 0, 0),
           child: Text(
-            " Drug Experience ",
+            " Worry less , Live healthier ",
             style: TextStyle(
                 color: Colors.black, fontWeight: FontWeight.w700, fontSize: 20),
           ),
         ),
         Container(
           height: 560,
-          padding: EdgeInsets.only(top: 10),
+          padding: EdgeInsets.only(top: 15),
           child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2),
@@ -60,7 +55,7 @@ class _SeeAllState extends State<SeeAll> {
               itemBuilder: ((context, index) {
                 return MedCard(
                     med_name: "Doliprane",
-                    med_pic: "IMAGE/sirop.jpg",
+                    med_pic: "assets/image/sirop.jpg",
                     med_interval: "Every 8 hours");
               })),
         ),

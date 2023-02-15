@@ -2,10 +2,10 @@
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:pfa_application_1/constants/colors.dart';
-import 'package:pfa_application_1/screens/blog/blog.dart';
-import 'package:pfa_application_1/screens/reminder.dart';
-import 'package:pfa_application_1/screens/search_page.dart';
+import 'package:pfa_application_1/core/constants/colors.dart';
+import 'package:pfa_application_1/view/screens/blog/blog.dart';
+import 'package:pfa_application_1/view/screens/reminder.dart';
+import 'package:pfa_application_1/view/screens/search_page.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});

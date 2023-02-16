@@ -15,35 +15,43 @@ class _SeeAllState extends State<SeeAll> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Container(
-            height: 150,
-            decoration: BoxDecoration(color: Color.fromARGB(255, 16, 152, 170)),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15, top: 20),
-                      child: IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        icon: Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.white,
+        SafeArea(
+          child: Container(
+              height: 120,
+              decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 16, 152, 170),
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(80),
+                      bottomRight: Radius.circular(80))),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15, top: 25),
+                        child: IconButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          icon: Icon(
+                            Icons.arrow_back_ios,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    )
-                  ],
-                ),
-                Center(
-                    child: Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: Text("See All",
-                      style: TextStyle(color: Colors.white, fontSize: 20)),
-                )),
-              ],
-            )),
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 110.0, top: 40),
+                          child: Text("See All",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20)),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              )),
+        ),
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 50, 0, 0),
           child: Text(

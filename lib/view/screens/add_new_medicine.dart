@@ -45,6 +45,7 @@ class _AddMedicineState extends State<AddMedicine> {
     super.initState();
   }
 
+  FocusNode myFocusNode = new FocusNode();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,6 +81,8 @@ class _AddMedicineState extends State<AddMedicine> {
           child: TextFormField(
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
+                focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: AppColor.secondryColor)),
                 hintText: "Medicine name",
                 prefixIcon: Icon(FontAwesomeIcons.pills)),
             controller: med_nameController,
@@ -96,7 +99,10 @@ class _AddMedicineState extends State<AddMedicine> {
           child: TextFormField(
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
-                hintText: "Dosage", prefixIcon: Icon(FontAwesomeIcons.pills)),
+                focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: AppColor.secondryColor)),
+                hintText: "Dosage",
+                prefixIcon: Icon(FontAwesomeIcons.pills)),
             controller: med_dosageController,
             cursorColor: Color.fromARGB(255, 16, 152, 170),
           ),
@@ -117,7 +123,6 @@ class _AddMedicineState extends State<AddMedicine> {
               ),
               DropdownButton(
                   iconEnabledColor: AppColor.mainColor,
-                  dropdownColor: AppColor.medicineColor,
                   hint: Text("Select Interval"),
                   elevation: 4,
                   value: dropdownvalue, // initial value
@@ -146,7 +151,11 @@ class _AddMedicineState extends State<AddMedicine> {
                 child: TextFormField(
                   controller: starting_timeController,
                   keyboardType: TextInputType.datetime,
-                  decoration: InputDecoration(hintText: "16:05:00"),
+                  decoration: InputDecoration(
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(color: AppColor.secondryColor)),
+                      hintText: "16:05:00"),
                   cursorColor: Color.fromARGB(255, 16, 152, 170),
                 ),
               ),
@@ -237,7 +246,7 @@ class _MedicineTypeState extends State<MedicineType> {
                     syringeIndex = 0;
                   });
                   if (bottleIndex == 1) {
-                    bottleColor = AppColor.mainColor;
+                    bottleColor = AppColor.secondryColor;
                     pillsColor = Colors.grey;
                     syringeColor = Colors.grey;
                   }
@@ -257,7 +266,7 @@ class _MedicineTypeState extends State<MedicineType> {
                     syringeIndex = 0;
                   });
                   if (pillsIndex == 1) {
-                    pillsColor = AppColor.mainColor;
+                    pillsColor = AppColor.secondryColor;
                     syringeColor = Colors.grey;
                     bottleColor = Colors.grey;
                   }
@@ -278,7 +287,7 @@ class _MedicineTypeState extends State<MedicineType> {
                     bottleIndex = 0;
                   });
                   if (syringeIndex == 1) {
-                    syringeColor = AppColor.mainColor;
+                    syringeColor = AppColor.secondryColor;
                     bottleColor = Colors.grey;
                     pillsColor = Colors.grey;
                   }

@@ -20,9 +20,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      getPages: routes,
-      initialRoute: AppRoute.onBoarding,
-    );
+        debugShowCheckedModeBanner: false,
+        getPages: routes,
+        initialRoute: AppRoute.onBoarding);
   }
 }

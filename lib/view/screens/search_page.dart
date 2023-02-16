@@ -34,27 +34,28 @@ class _SearchPageState extends State<SearchPage> {
         body: Column(children: [
       SafeArea(
         child: Container(
-          height: 150,
+          height: 140,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(40.0),
-                  bottomRight: Radius.circular(40)),
+                  bottomLeft: Radius.circular(30.0),
+                  bottomRight: Radius.circular(30)),
               color: Color.fromARGB(255, 16, 152, 170)),
           child: Center(
               child: Container(
+            padding: EdgeInsets.only(top: 40),
             width: 350,
             child: TextFormField(
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 hintText: "Search for your medical drug",
-                hintStyle: TextStyle(color: Colors.white),
+                hintStyle: TextStyle(color: Colors.black),
                 prefixIcon:
-                    Icon(FontAwesomeIcons.searchengin, color: Colors.white),
+                    Icon(FontAwesomeIcons.searchengin, color: Colors.black),
                 enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: BorderSide(color: Colors.black),
                     borderRadius: BorderRadius.circular(30)),
                 focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: BorderSide(color: Colors.black),
                     borderRadius: BorderRadius.circular(30)),
               ),
               controller: searchController,
@@ -63,11 +64,17 @@ class _SearchPageState extends State<SearchPage> {
           )),
         ),
       ),
-      Image.asset(
-        "assets/image/maps.jpg",
-        height: 606,
-        width: double.infinity,
-      )
+      SizedBox(
+        height: 200,
+      ),
+      Center(
+          child: Text(
+        "MAP HERE !!!",
+        style: TextStyle(
+          fontSize: 30,
+          fontWeight: FontWeight.w700,
+        ),
+      ))
     ]));
   }
 }

@@ -41,188 +41,150 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(children: [
+      backgroundColor: AppColor.mainColor,
+      body: ListView(children: [
+        SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 43.0),
+            child: Center(
+                child: Text(
+              "Sign Up",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 23,
+                  fontWeight: FontWeight.w700),
+            )),
+          ),
+        ),
         Container(
+            margin: EdgeInsets.only(top: 50),
+            height: 700,
             decoration: BoxDecoration(
-                color: AppColor.mainColor,
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30))),
-            height: 150,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 50, 0, 0),
-                      child: IconButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          icon: Icon(
-                            Icons.arrow_back_ios,
-                            color: Colors.white,
-                          )),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 60, 0, 0),
-                      child: Text(
-                        "Hey , get on board",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                        ),
-                      ),
-                    ),
-                  ],
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(80),
+                topRight: Radius.circular(80),
+              ),
+            ),
+            child: Container(
+              height: 650,
+              child: ListView(children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(35, 30, 0, 0),
+                  child: Text("Create an account",
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 16, 152, 170),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600)),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(73, 3, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
+                  child: Text("Full Name",
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 16, 152, 170),
+                      )),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  width: 350,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        hintText: "Full Name", prefixIcon: Icon(Icons.person)),
+                    controller: nameController,
+                    cursorColor: Color.fromARGB(255, 16, 152, 170),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
+                  child: Text("Email",
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 16, 152, 170),
+                      )),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  width: 350,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        hintText: "Email", prefixIcon: Icon(Icons.mail)),
+                    controller: emailController,
+                    cursorColor: Color.fromARGB(255, 16, 152, 170),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
                   child: Text(
-                    "Sign Up to continue",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
+                    "Phone Number",
+                    style: TextStyle(color: Color.fromARGB(255, 16, 152, 170)),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  width: 350,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        hintText: "Phone Number",
+                        prefixIcon: Icon(Icons.phone)),
+                    controller: phoneController,
+                    keyboardType: TextInputType.phone,
+                    cursorColor: Color.fromARGB(255, 16, 152, 170),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
+                  child: Text("Password",
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 16, 152, 170),
+                      )),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  width: 350,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        hintText: "Password", prefixIcon: Icon(Icons.password)),
+                    controller: passwordController,
+                    cursorColor: Color.fromARGB(255, 16, 152, 170),
+                    obscureText: true,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 55, 20, 0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      color: Color.fromARGB(255, 16, 152, 170),
                     ),
+                    child: TextButton(
+                        onPressed: () {
+                          Get.toNamed(AppRoute.signIn);
+                        },
+                        child: Center(
+                            child: Text(
+                          "Sign Up",
+                          style: TextStyle(color: Colors.white),
+                        ))),
                   ),
                 ),
-              ],
-            )),
-        Container(
-          height: 650,
-          child: ListView(children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 60, 0, 0),
-              child: Text("Full Name",
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 16, 152, 170),
-                  )),
-            ),
-            Container(
-              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-              width: 350,
-              child: TextFormField(
-                decoration: InputDecoration(
-                    hintText: "Full Name", prefixIcon: Icon(Icons.person)),
-                controller: nameController,
-                cursorColor: Color.fromARGB(255, 16, 152, 170),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
-              child: Text("Email",
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 16, 152, 170),
-                  )),
-            ),
-            Container(
-              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-              width: 350,
-              child: TextFormField(
-                decoration: InputDecoration(
-                    hintText: "Email", prefixIcon: Icon(Icons.mail)),
-                controller: emailController,
-                cursorColor: Color.fromARGB(255, 16, 152, 170),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
-              child: Text(
-                "Phone Number",
-                style: TextStyle(color: Color.fromARGB(255, 16, 152, 170)),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-              width: 350,
-              child: TextFormField(
-                decoration: InputDecoration(
-                    hintText: "Phone Number", prefixIcon: Icon(Icons.phone)),
-                controller: phoneController,
-                keyboardType: TextInputType.phone,
-                cursorColor: Color.fromARGB(255, 16, 152, 170),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
-              child: Text("Password",
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 16, 152, 170),
-                  )),
-            ),
-            Container(
-              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-              width: 350,
-              child: TextFormField(
-                decoration: InputDecoration(
-                    hintText: "Password", prefixIcon: Icon(Icons.password)),
-                controller: passwordController,
-                cursorColor: Color.fromARGB(255, 16, 152, 170),
-                obscureText: true,
-              ),
-            ),
-            /*
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
-              child: Text(
-                "Confirm password",
-                style: TextStyle(
-                  color: Color.fromARGB(255, 16, 152, 170),
-                ),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-              width: 350,
-              child: TextFormField(
-                decoration: InputDecoration(
-                    hintText: "Confirm password",
-                    prefixIcon: Icon(Icons.password)),
-                controller: confirmPasswordController,
-                cursorColor: Color.fromARGB(255, 16, 152, 170),
-                obscureText: true,
-              ),
-            ),
-            */
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 35, 20, 0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  color: Color.fromARGB(255, 16, 152, 170),
-                ),
-                child: TextButton(
-                    onPressed: () {
-                      Get.toNamed(AppRoute.signIn);
-                    },
-                    child: Center(
-                        child: Text(
-                      "Sign Up",
-                      style: TextStyle(color: Colors.white),
-                    ))),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 80),
-              child: Row(
-                children: [
-                  Text(
-                    "Already have an account ?",
-                    style: TextStyle(color: Colors.grey),
+                Padding(
+                  padding: EdgeInsets.only(left: 80),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Already have an account ?",
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                      TextButton(
+                          child: Text("Sign In",
+                              style: TextStyle(color: AppColor.mainColor)),
+                          onPressed: () {
+                            Get.offAndToNamed(AppRoute.signIn);
+                          }),
+                    ],
                   ),
-                  TextButton(
-                      child: Text("Sign In",
-                          style: TextStyle(color: AppColor.mainColor)),
-                      onPressed: () {
-                        Get.offAndToNamed(AppRoute.signIn);
-                      }),
-                ],
-              ),
-            )
-          ]),
-        )
+                )
+              ]),
+            ))
       ]),
     );
   }

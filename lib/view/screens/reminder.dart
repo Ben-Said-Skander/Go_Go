@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors, non_constant_identifier_names, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, recursive_getters, sized_box_for_whitespace
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pfa_application_1/core/constants/colors.dart';
 
 import 'package:pfa_application_1/core/constants/routes.dart';
+import 'package:pfa_application_1/view/widgets/CurveClipper.dart';
 
 class Reminders extends StatefulWidget {
   const Reminders({super.key});
@@ -27,18 +29,24 @@ class _RemindersState extends State<Reminders> {
       ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Container(
-          height: 150,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(80.0),
-                  bottomRight: Radius.circular(80)),
-              color: Color.fromARGB(255, 16, 152, 170)),
-          child: Center(
-              child: Padding(
-            padding: const EdgeInsets.only(top: 28.0),
-            child: Text("Reminder",
-                style: TextStyle(color: Colors.white, fontSize: 20)),
-          )),
+          height: 170,
+          child: ClipPath(
+              clipper: CurveClipper(),
+              child: Container(
+                color: AppColor.mainColor,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 28.0),
+                    child: Text(
+                      "Reminder",
+                      style: TextStyle(
+                        fontSize: 22,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              )),
         ),
         Padding(
             padding: const EdgeInsets.fromLTRB(20, 35, 0, 0),
@@ -99,6 +107,9 @@ class MedCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(
+                height: 10,
+              ),
               Center(
                   child: Image.asset(
                 med_pic,
@@ -106,7 +117,7 @@ class MedCard extends StatelessWidget {
                 height: 100,
               )),
               SizedBox(
-                height: 15,
+                height: 16,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 13),

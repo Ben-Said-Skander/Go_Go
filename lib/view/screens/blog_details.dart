@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class BlogDetails extends StatefulWidget {
   const BlogDetails({super.key});
 
@@ -42,8 +41,7 @@ class _BlogDetailsState extends State<BlogDetails> {
                         padding: const EdgeInsets.only(left: 5),
                         child: IconButton(
                             onPressed: () {
-                                   Get.back() ;
-                            
+                              Get.back();
                             },
                             icon: Icon(Icons.arrow_back_ios))))
               ],

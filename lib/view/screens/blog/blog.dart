@@ -28,38 +28,41 @@ class _BlogState extends State<Blog> {
       ),
       body: ListView(
         children: [
-          Container(
-            height: 120,
-            width: 500,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(80)),
-              color: Color.fromARGB(255, 16, 152, 170),
-            ),
-            child: Row(
-              children: [
-                Center(
-                  child: Padding(
-                      padding: const EdgeInsets.only(left: 40),
-                      child: GestureDetector(
-                        onTap: () {
-                          Get.toNamed(AppRoute.settings);
-                        },
-                        child: CircleAvatar(
-                          backgroundImage: AssetImage(
-                            "assets/image/me2.jpg",
+          SafeArea(
+            child: Container(
+              height: 120,
+              width: 500,
+              decoration: BoxDecoration(
+                borderRadius:
+                    BorderRadius.only(bottomLeft: Radius.circular(80)),
+                color: Color.fromARGB(255, 16, 152, 170),
+              ),
+              child: Row(
+                children: [
+                  Center(
+                    child: Padding(
+                        padding: const EdgeInsets.only(left: 40),
+                        child: GestureDetector(
+                          onTap: () {
+                            Get.toNamed(AppRoute.settings);
+                          },
+                          child: CircleAvatar(
+                            backgroundImage: AssetImage(
+                              "assets/image/me2.jpg",
+                            ),
+                            radius: 28,
                           ),
-                          radius: 28,
-                        ),
-                      )),
-                ),
-                SizedBox(
-                  width: 22,
-                ),
-                Text(
-                  "Ben Said Skander",
-                  style: TextStyle(color: Colors.white, fontSize: 17),
-                ),
-              ],
+                        )),
+                  ),
+                  SizedBox(
+                    width: 22,
+                  ),
+                  Text(
+                    "Ben Said Skander",
+                    style: TextStyle(color: Colors.white, fontSize: 17),
+                  ),
+                ],
+              ),
             ),
           ),
           SizedBox(
@@ -151,7 +154,7 @@ textButton(BuildContext context, String title, String route, Color couleur) {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
       child: TextButton(
         onPressed: () {
-          Navigator.of(context).popAndPushNamed(route);
+          Get.toNamed(route);
         },
         child: Text(title, style: TextStyle(fontSize: 14, color: couleur)),
       ));
@@ -166,7 +169,7 @@ class BlogCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          Get.toNamed(AppRoute.blogdetails);
+          Get.offNamed(AppRoute.blogdetails);
         },
         child: Container(
           decoration: BoxDecoration(
@@ -196,7 +199,7 @@ class BlogCard extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 30,
+                height: 40,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 18),
@@ -258,7 +261,7 @@ class PopularCard extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 8),
+                padding: const EdgeInsets.only(left: 6),
                 child: Text(
                   blogTitle,
                   style: TextStyle(

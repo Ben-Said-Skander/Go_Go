@@ -80,7 +80,7 @@ class _MissingBlogState extends State<MissingBlog> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Drug Experience",
+                    "Missing Drug",
                     style: TextStyle(
                         color: AppColor.mainColor,
                         fontWeight: FontWeight.bold,
@@ -151,7 +151,7 @@ textButton(BuildContext context, String title, String route, Color couleur) {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
       child: TextButton(
         onPressed: () {
-          Get.offAndToNamed(route);
+          Get.offNamed(route);
         },
         child: Text(title, style: TextStyle(fontSize: 14, color: couleur)),
       ));

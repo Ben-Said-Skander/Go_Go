@@ -1,18 +1,20 @@
-// ignore_for_file: file_names, prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_unnecessary_containers
+// ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, camel_case_types
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
+import 'package:pfa_application_1/view/widgets/CurveClipper.dart';
 import 'package:pfa_application_1/view/widgets/WaveClipper.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+class test extends StatefulWidget {
+  const test({super.key});
+
   @override
-  State<SignIn> createState() => _SignInState();
+  State<test> createState() => _testState();
 }
 
-class _SignInState extends State<SignIn> {
+class _testState extends State<test> {
   late TextEditingController emailController;
   late TextEditingController passwordController;
 

@@ -15,154 +15,208 @@ class test extends StatefulWidget {
 }
 
 class _testState extends State<test> {
-  late TextEditingController emailController;
-  late TextEditingController passwordController;
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
+  late PageController pageController;
 
   @override
   void initState() {
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
+    pageController = new PageController(initialPage: 0, viewportFraction: 1);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(children: [
-      Container(
-        width: 450,
-        height: 250,
-        child: ClipPath(
-          clipper: WaveClipper(),
-          child: Container(
-            color: AppColor.mainColor,
-            height: 200,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 80, 0, 0),
-              child: Text("Welcome back ",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 23,
-                      fontWeight: FontWeight.w500)),
+      backgroundColor: AppColor.mainColor,
+      body: ListView(children: [
+        Container(
+          height: 250,
+          decoration: BoxDecoration(
+              color: Color.fromARGB(255, 16, 152, 170),
+              borderRadius: BorderRadius.only(
+       
+                  )),
+          child: Center(
+            child: Text(
+              "Picture Here !!!!",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
             ),
           ),
         ),
-      ),
-      Container(
-        margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
-        height: 500,
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(40),
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 6,
-                spreadRadius: 1,
-                color: Color.fromARGB(255, 207, 207, 207),
-                // offset: Offset(2, 1),
-              )
-            ]),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          SizedBox(
-            height: 14,
-          ),
-          Center(
-            child: Text(
-              'Sign In',
-              style: TextStyle(
-                  color: AppColor.mainColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 23),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 50, 0, 0),
-            child: Text("Email"),
-          ),
-          Container(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-            width: 350,
-            child: TextFormField(
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                  hintText: "Email", prefixIcon: Icon(Icons.mail)),
-              controller: emailController,
-              cursorColor: Color.fromARGB(255, 16, 152, 170),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
-            child: Text("Password"),
-          ),
-          Container(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-            width: 350,
-            child: TextFormField(
-              decoration: InputDecoration(
-                  hintText: "Password", prefixIcon: Icon(Icons.password)),
-              controller: passwordController,
-              cursorColor: Color.fromARGB(255, 16, 152, 170),
-              obscureText: true,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(120, 15, 0, 0),
-            child: Center(
-              child: InkWell(
-                child: Text('Forgot your Password ?',
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 16, 152, 170),
-                        fontSize: 14)),
-                onTap: () {
-                  // to the forgot password pages
-                },
-              ),
-            ),
-          ),
-          Padding(
-              padding: const EdgeInsets.fromLTRB(120, 60, 20, 0),
-              child: Container(
-                  height: 50,
-                  width: 120,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: Color.fromARGB(255, 16, 152, 170),
-                  ),
-                  child: MaterialButton(
-                    child: Text(
-                      "Log In",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () {
-                      Get.offAndToNamed(AppRoute.home);
-                    },
-                  ))),
-          Padding(
-            padding: EdgeInsets.only(left: 110),
-            child: Row(
+        Container(
+            height: 590,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(250),
+                )),
+            child: Column(
               children: [
-                Text(
-                  "New user ?",
-                  style: TextStyle(color: Colors.grey),
+                Container(
+                  height: 590,
+                  child: PageView(
+                    controller: pageController,
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      Container(
+                        height: 700,
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 180,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 23, right: 15),
+                              child: Text(
+                                "Locate the drug you need ! ",
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 60, right: 15),
+                              child: Text(
+                                "No longer need to search , Locate the nearest pharmacy that has the drug you look for",
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w300,
+                                    color: Color.fromARGB(255, 130, 130, 130)),
+                              ),
+                            ),
+                            //dots
+                            SizedBox(
+                              height: 120,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: AppColor.mainColor),
+                              child: MaterialButton(
+                                onPressed: () {
+                                  Get.toNamed(AppRoute.signup);
+                                },
+                                child: Text("Get Started",
+                                    style: TextStyle(color: Colors.white)),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: 600,
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 180,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 70, right: 15),
+                              child: Text(
+                                "You dont have to worry about remembering your medicines ",
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 50, right: 15),
+                              child: Text(
+                                "A pill remminder system to make sure you never skip taking your medicines",
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w300,
+                                    color: Color.fromARGB(255, 130, 130, 130)),
+                              ),
+                            ),
+                            //dots
+                            SizedBox(
+                              height: 120,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: AppColor.mainColor),
+                              child: MaterialButton(
+                                onPressed: () {
+                                  Get.toNamed(AppRoute.signup);
+                                },
+                                child: Text("Get Started",
+                                    style: TextStyle(color: Colors.white)),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: 600,
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 180,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 23, right: 15),
+                              child: Text(
+                                "A community to help you when in need",
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 40, right: 15),
+                              child: Text(
+                                "A place where you can discuss your health issue and where you can find help",
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w300,
+                                    color: Color.fromARGB(255, 130, 130, 130)),
+                              ),
+                            ),
+                            //dots
+                            SizedBox(
+                              height: 120,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: AppColor.mainColor),
+                              child: MaterialButton(
+                                onPressed: () {
+                                  Get.toNamed(AppRoute.signup);
+                                },
+                                child: Text("Get Started",
+                                    style: TextStyle(color: Colors.white)),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                TextButton(
-                    child: Text("Sign Up",
-                        style: TextStyle(color: AppColor.mainColor)),
-                    onPressed: () {
-                      Get.toNamed(AppRoute.signup);
-                    }),
               ],
-            ),
+            )),
+        /*  Container(
+          height: 150,
+          width: 150,
+          padding: EdgeInsets.only(bottom: 50),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(40), color: Colors.white),
+          child: MaterialButton(
+            onPressed: () {
+              Get.toNamed(AppRoute.signup);
+            },
+            child: Text("Get Started", style: TextStyle(color: Colors.white)),
           ),
-        ]),
-      ),
-    ]));
+        )*/
+      ]),
+    );
   }
 }

@@ -34,35 +34,47 @@ class _SearchPageState extends State<SearchPage> {
         body: Column(children: [
       SafeArea(
         child: Container(
-          height: 140,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(30.0),
-                  bottomRight: Radius.circular(30)),
-              color: Color.fromARGB(255, 16, 152, 170)),
-          child: Center(
-              child: Container(
-            padding: EdgeInsets.only(top: 40),
-            width: 350,
-            child: TextFormField(
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                hintText: "Search for your medical drug",
-                hintStyle: TextStyle(color: Colors.black),
-                prefixIcon:
-                    Icon(FontAwesomeIcons.searchengin, color: Colors.black),
-                enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
-                    borderRadius: BorderRadius.circular(30)),
-                focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
-                    borderRadius: BorderRadius.circular(30)),
-              ),
-              controller: searchController,
-              cursorColor: Color.fromARGB(255, 16, 152, 170),
-            ),
-          )),
-        ),
+            height: 180,
+            width: 450,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(40.0),
+                    bottomRight: Radius.circular(40)),
+                color: Color.fromARGB(255, 16, 152, 170)),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 32, left: 30),
+                  child: Text("Search for your medicines",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 19,
+                          fontWeight: FontWeight.w500)),
+                ),
+                Container(
+                  padding: EdgeInsets.only(top: 40, left: 55),
+                  width: 370,
+                  child: TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      hintText: "Search for your medical drug",
+                      hintStyle: TextStyle(color: Colors.black),
+                      prefixIcon:
+                          Icon(FontAwesomeIcons.search, color: Colors.black),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(30)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(30)),
+                    ),
+                    controller: searchController,
+                    cursorColor: Color.fromARGB(255, 16, 152, 170),
+                  ),
+                ),
+              ],
+            )),
       ),
       SizedBox(
         height: 200,

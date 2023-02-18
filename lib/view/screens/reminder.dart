@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 
 import 'package:pfa_application_1/core/constants/routes.dart';
-import 'package:pfa_application_1/view/widgets/CurveClipper.dart';
+import 'package:pfa_application_1/view/widgets/curve_clipper.dart';
 
 class Reminders extends StatefulWidget {
   const Reminders({super.key});

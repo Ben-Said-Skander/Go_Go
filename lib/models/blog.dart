@@ -1,38 +1,38 @@
 class Blog {
-  final String? blogTitle;
+  final String? title;
   final String? category;
-  final String? blogBody;
+  final String? body;
   final String? picture;
 
 //Constructeur
   Blog({
-    this.blogTitle,
+    this.title,
     this.category,
-    this.blogBody,
+    this.body,
     this.picture,
   });
 //geters
-  String get getBlogTitle => blogTitle!;
+  String get getTitle => title!;
   String get getCategory => category!;
-  String get getBlogBody => blogBody!;
+  String get getBody => body!;
   String get getPicture => picture!;
 
   // Transform attributs to Json Format
 
   Map<String, dynamic> toJson() {
     return {
-      "blogTitle": blogTitle,
+      "title": title,
       "category": category,
-      "blogBody": blogBody,
+      "body": body,
       "picture": picture,
     };
   }
 
   factory Blog.fromJson(Map<String, dynamic> parsedJson) {
     return Blog(
-      blogTitle: parsedJson["title"],
+      title: parsedJson["title"],
       category: parsedJson["category"],
-      blogBody: parsedJson["body"],
+      body: parsedJson["body"],
       picture: parsedJson["picture"],
     );
   }

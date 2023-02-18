@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
-import 'package:pfa_application_1/view/widgets/CurveClipper.dart';
-import 'package:pfa_application_1/view/widgets/WaveClipper.dart';
+import 'package:pfa_application_1/view/widgets/curve_clipper.dart';
+import 'package:pfa_application_1/view/widgets/wave_clipper.dart';
 
 class test extends StatefulWidget {
   const test({super.key});

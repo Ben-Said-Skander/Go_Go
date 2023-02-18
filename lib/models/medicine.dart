@@ -1,36 +1,30 @@
 // ignore_for_file: empty_constructor_bodies
 
 class Medicine {
-  final List<dynamic>? notificationID;
-  final String? medicineName;
+  // final List<dynamic>? notificationID;
+  final String? name;
   final String? dosage;
-  final String? medicineType;
+  final String? type;
   final int? interval;
   final String? startingTime;
 //Constructeur
-  Medicine(
-      {this.medicineName,
-      this.dosage,
-      this.medicineType,
-      this.interval,
-      this.startingTime,
-      this.notificationID});
-//geters
-  String get getName => medicineName!;
-  String get getDosage => dosage!;
-  List get getNotificationID => notificationID!;
-  String get getMedicineType => medicineType!;
-  int get getInterval => interval!;
-  String get getStartingTime => startingTime!;
+  Medicine({
+    this.name,
+    this.dosage,
+    this.type,
+    this.interval,
+    this.startingTime,
+    // this.notificationID
+  });
 
   // Transform attributs to JSON Map format (we send data with JSON format)
 
   Map<String, dynamic> toJson() {
     return {
-      "ids": notificationID,
-      "medicineName": medicineName,
+      //   "ids": notificationID,
+      "name": name,
       "dosage": dosage,
-      "medicineType": medicineType,
+      "type": type,
       "interval": interval,
       "startingTime": startingTime
     };
@@ -39,10 +33,10 @@ class Medicine {
   // Transform JSON Map to normal Model
   factory Medicine.fromJson(Map<String, dynamic> parsedJson) {
     return Medicine(
-      notificationID: parsedJson["ids"],
-      medicineName: parsedJson["name"],
+      // notificationID: parsedJson["ids"],
+      name: parsedJson["name"],
       dosage: parsedJson["dosage"],
-      medicineType: parsedJson["type"],
+      type: parsedJson["type"],
       interval: parsedJson["interval"],
       startingTime: parsedJson["start"],
     );

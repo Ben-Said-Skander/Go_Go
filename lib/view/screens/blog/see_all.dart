@@ -43,8 +43,11 @@ class _SeeAllState extends State<SeeAll> {
                         child: Padding(
                           padding: const EdgeInsets.only(left: 110.0, top: 40),
                           child: Text("See All",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20)),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontFamily: "Poppins",
+                              )),
                         ),
                       )
                     ],
@@ -57,7 +60,11 @@ class _SeeAllState extends State<SeeAll> {
           child: Text(
             " Drug Experience ",
             style: TextStyle(
-                color: Colors.black, fontWeight: FontWeight.w700, fontSize: 20),
+              color: Colors.black,
+              fontWeight: FontWeight.w700,
+              fontSize: 20,
+              fontFamily: "Poppins",
+            ),
           ),
         ),
         Container(

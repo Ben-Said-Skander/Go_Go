@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
+import 'package:pfa_application_1/view/screens/blog/user_articles.dart';
 import 'package:pfa_application_1/view/screens/onboarding_page.dart';
 import 'package:pfa_application_1/view/screens/search_page.dart';
 import 'package:pfa_application_1/view/screens/test.dart';
@@ -11,7 +12,7 @@ import 'view/screens/blog/blog.dart';
 import 'view/screens/blog/help_blog.dart';
 import 'view/screens/blog/missing_drug_blog.dart';
 import 'view/screens/blog/see_all.dart';
-import 'view/screens/blog_details.dart';
+import 'view/screens/blog/blog_details.dart';
 import 'view/screens/medicine_details.dart';
 import 'view/screens/reminder.dart';
 import 'view/screens/settings.dart';
@@ -35,4 +36,5 @@ List<GetPage<dynamic>>? routes = [
   GetPage(name: AppRoute.searchPage, page: () => const SearchPage()),
   GetPage(name: AppRoute.onBoarding, page: () => const OnBoarding()),
   GetPage(name: AppRoute.test, page: () => const test()),
+  GetPage(name: AppRoute.userArticle, page: () => const UserArticle()),
 ];

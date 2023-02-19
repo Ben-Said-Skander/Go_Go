@@ -29,7 +29,10 @@ class _DetailsState extends State<Details> {
               child: Center(
                 child: Text(
                   "Details",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Poppins",
+                  ),
                 ),
               ),
             ),
@@ -57,7 +60,10 @@ class _DetailsState extends State<Details> {
               child: Center(
                   child: Text(
                 "Delete",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "Poppins",
+                ),
               ))),
         ),
       ),
@@ -81,10 +87,14 @@ class MidSectionInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(15, 50, 15, 0),
+            padding: const EdgeInsets.fromLTRB(15, 30, 15, 0),
             child: Text(
               "Medicine Type",
-              style: TextStyle(color: AppColor.mainColor, fontSize: 18),
+              style: TextStyle(
+                color: AppColor.mainColor,
+                fontSize: 18,
+                fontFamily: "Poppins",
+              ),
             ),
           ),
           Padding(
@@ -98,7 +108,11 @@ class MidSectionInfo extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
             child: Text(
               "Dosage Interval",
-              style: TextStyle(color: AppColor.mainColor, fontSize: 18),
+              style: TextStyle(
+                color: AppColor.mainColor,
+                fontSize: 18,
+                fontFamily: "Poppins",
+              ),
             ),
           ),
           Padding(
@@ -112,7 +126,11 @@ class MidSectionInfo extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
             child: Text(
               "Start Time",
-              style: TextStyle(color: AppColor.mainColor, fontSize: 18),
+              style: TextStyle(
+                color: AppColor.mainColor,
+                fontSize: 18,
+                fontFamily: "Poppins",
+              ),
             ),
           ),
           Padding(
@@ -172,7 +190,11 @@ class MedicineInfo extends StatelessWidget {
               padding: const EdgeInsets.only(top: 8.0),
               child: Text(
                 "Medicine Name",
-                style: TextStyle(color: AppColor.mainColor, fontSize: 15),
+                style: TextStyle(
+                  color: AppColor.mainColor,
+                  fontSize: 15,
+                  fontFamily: "Poppins",
+                ),
               ),
             ),
             Padding(
@@ -183,10 +205,14 @@ class MedicineInfo extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.only(top: 30.0),
               child: Text(
                 "Dosage",
-                style: TextStyle(color: AppColor.mainColor, fontSize: 15),
+                style: TextStyle(
+                  color: AppColor.mainColor,
+                  fontSize: 15,
+                  fontFamily: "Poppins",
+                ),
               ),
             ),
             Padding(

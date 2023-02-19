@@ -29,7 +29,8 @@ class _SettingsState extends State<Settings> {
               child: Center(
                 child: Text(
                   "Profile",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, fontFamily: "Poppins"),
                 ),
               ),
             ),
@@ -50,7 +51,8 @@ class _SettingsState extends State<Settings> {
           ),
           Text(
             "Ben Said Skander",
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style:
+                TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins"),
           ),
         ],
       ),
@@ -76,6 +78,7 @@ class SettingFormField extends StatelessWidget {
           style: TextStyle(
               color: AppColor.mainColor,
               fontWeight: FontWeight.w800,
+              fontFamily: "Poppins",
               fontSize: 14),
         ),
       ),

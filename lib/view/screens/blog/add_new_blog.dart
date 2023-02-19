@@ -50,11 +50,14 @@ class _AddBlogState extends State<AddBlog> {
                   },
                   icon: Icon(Icons.arrow_back_ios)),
               Padding(
-                padding: const EdgeInsets.only(left: 95.0),
+                padding: const EdgeInsets.only(left: 85.0),
                 child: Center(
                   child: Text(
                     "Add New Article",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Poppins",
+                    ),
                   ),
                 ),
               ),
@@ -90,7 +93,8 @@ class _AddBlogState extends State<AddBlog> {
                     style: TextStyle(
                         color: AppColor.mainColor,
                         fontSize: 17,
-                        fontWeight: FontWeight.w700),
+                        fontFamily: "Poppins",
+                        fontWeight: FontWeight.w600),
                   ),
                 ),
                 Container(
@@ -121,7 +125,10 @@ class _AddBlogState extends State<AddBlog> {
                       },
                       child: Text(
                         "Add a photo",
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.w600),
                       )),
                 )
               ],
@@ -135,7 +142,8 @@ class _AddBlogState extends State<AddBlog> {
             style: TextStyle(
                 color: AppColor.mainColor,
                 fontSize: 19,
-                fontWeight: FontWeight.w700),
+                fontFamily: "Poppins",
+                fontWeight: FontWeight.w600),
           ),
         ),
         Container(
@@ -157,7 +165,8 @@ class _AddBlogState extends State<AddBlog> {
             style: TextStyle(
                 color: AppColor.mainColor,
                 fontSize: 19,
-                fontWeight: FontWeight.w700),
+                fontFamily: "Poppins",
+                fontWeight: FontWeight.w600),
           ),
         ),
         Container(
@@ -190,7 +199,7 @@ class _AddBlogState extends State<AddBlog> {
               ),
             )),
         Padding(
-          padding: const EdgeInsets.fromLTRB(20, 60, 20, 60),
+          padding: const EdgeInsets.fromLTRB(20, 60, 20, 30),
           child: Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
@@ -202,7 +211,10 @@ class _AddBlogState extends State<AddBlog> {
                 child: Center(
                     child: Text(
                   "Add",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.w600),
                 ))),
           ),
         ),

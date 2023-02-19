@@ -28,50 +28,57 @@ class _HelpBlogState extends State<HelpBlog> {
       ),
       body: ListView(
         children: [
-          Container(
-            height: 120,
-            width: 500,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(80)),
-              color: Color.fromARGB(255, 16, 152, 170),
-            ),
-            child: Row(
-              children: [
-                Center(
-                  child: Padding(
-                      padding: const EdgeInsets.only(left: 40),
-                      child: GestureDetector(
-                        onTap: () {
-                          Get.toNamed(AppRoute.settings);
-                        },
-                        child: CircleAvatar(
-                          backgroundImage: AssetImage(
-                            "assets/image/me2.jpg",
+          SafeArea(
+            child: Container(
+              height: 120,
+              width: 500,
+              decoration: BoxDecoration(
+                borderRadius:
+                    BorderRadius.only(bottomLeft: Radius.circular(80)),
+                color: Color.fromARGB(255, 16, 152, 170),
+              ),
+              child: Row(
+                children: [
+                  Center(
+                    child: Padding(
+                        padding: const EdgeInsets.only(left: 40),
+                        child: GestureDetector(
+                          onTap: () {
+                            Get.toNamed(AppRoute.settings);
+                          },
+                          child: CircleAvatar(
+                            backgroundImage: AssetImage(
+                              "assets/image/me2.jpg",
+                            ),
+                            radius: 28,
                           ),
-                          radius: 28,
-                        ),
-                      )),
-                ),
-                SizedBox(
-                  width: 22,
-                ),
-                Text(
-                  "Ben Said Skander",
-                  style: TextStyle(color: Colors.white, fontSize: 17),
-                ),
-              ],
+                        )),
+                  ),
+                  SizedBox(
+                    width: 22,
+                  ),
+                  Text(
+                    "Ben Said Skander",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 19,
+                        fontFamily: "Poppins"),
+                  ),
+                ],
+              ),
             ),
           ),
           SizedBox(
             height: 40,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              textButton(context, "Drug Experience", "blog", Colors.grey),
-              textButton(context, "Missing Drug", "missingBlog", Colors.grey),
               textButton(
-                  context, "Seeking Help", "helpBlog", AppColor.mainColor),
+                  context, "Drug Experience", "blog", Colors.grey),
+              textButton(context, "Missing Drug", "missingBlog", Colors.grey),
+              textButton(context, "Seeking Help", "helpBlog", AppColor.mainColor),
+              textButton(context, "Your Articles", "userArticle", Colors.grey),
             ],
           ),
           Padding(
@@ -84,6 +91,7 @@ class _HelpBlogState extends State<HelpBlog> {
                     style: TextStyle(
                         color: AppColor.mainColor,
                         fontWeight: FontWeight.bold,
+                        fontFamily: "Poppins",
                         fontSize: 18),
                   ),
                   TextButton(
@@ -122,6 +130,7 @@ class _HelpBlogState extends State<HelpBlog> {
               style: TextStyle(
                   color: AppColor.mainColor,
                   fontWeight: FontWeight.bold,
+                  fontFamily: "Poppins",
                   fontSize: 18),
             ),
           ),
@@ -151,9 +160,9 @@ textButton(BuildContext context, String title, String route, Color couleur) {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
       child: TextButton(
         onPressed: () {
-        Get.offNamed(route);
+          Get.toNamed(route);
         },
-        child: Text(title, style: TextStyle(fontSize: 14, color: couleur)),
+        child: Text(title, style: TextStyle(fontSize: 12, color: couleur)),
       ));
 }
 
@@ -166,7 +175,7 @@ class BlogCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          Get.toNamed(AppRoute.blogdetails);
+          Get.offNamed(AppRoute.blogdetails);
         },
         child: Container(
           decoration: BoxDecoration(
@@ -196,7 +205,7 @@ class BlogCard extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 30,
+                height: 40,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 18),
@@ -258,7 +267,7 @@ class PopularCard extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 8),
+                padding: const EdgeInsets.only(left: 6),
                 child: Text(
                   blogTitle,
                   style: TextStyle(

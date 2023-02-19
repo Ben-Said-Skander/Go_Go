@@ -52,7 +52,8 @@ class _SignUpState extends State<SignUp> {
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 23,
-                  fontWeight: FontWeight.w700),
+                  fontWeight: FontWeight.w700,
+                  fontFamily: "Poppins"),
             )),
           ),
         ),
@@ -75,14 +76,15 @@ class _SignUpState extends State<SignUp> {
                       style: TextStyle(
                           color: Color.fromARGB(255, 16, 152, 170),
                           fontSize: 20,
-                          fontWeight: FontWeight.w600)),
+                          fontWeight: FontWeight.w600,
+                          fontFamily: "Poppins")),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(20, 45, 0, 0),
                   child: Text("Full Name",
                       style: TextStyle(
-                        color: Color.fromARGB(255, 16, 152, 170),
-                      )),
+                          color: Color.fromARGB(255, 16, 152, 170),
+                          fontFamily: "Poppins")),
                 ),
                 Container(
                   padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -98,8 +100,8 @@ class _SignUpState extends State<SignUp> {
                   padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
                   child: Text("Email",
                       style: TextStyle(
-                        color: Color.fromARGB(255, 16, 152, 170),
-                      )),
+                          color: Color.fromARGB(255, 16, 152, 170),
+                          fontFamily: "Poppins")),
                 ),
                 Container(
                   padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -113,10 +115,10 @@ class _SignUpState extends State<SignUp> {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
-                  child: Text(
-                    "Phone Number",
-                    style: TextStyle(color: Color.fromARGB(255, 16, 152, 170)),
-                  ),
+                  child: Text("Phone Number",
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 16, 152, 170),
+                          fontFamily: "Poppins")),
                 ),
                 Container(
                   padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -134,8 +136,8 @@ class _SignUpState extends State<SignUp> {
                   padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
                   child: Text("Password",
                       style: TextStyle(
-                        color: Color.fromARGB(255, 16, 152, 170),
-                      )),
+                          color: Color.fromARGB(255, 16, 152, 170),
+                          fontFamily: "Poppins")),
                 ),
                 Container(
                   padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -162,7 +164,8 @@ class _SignUpState extends State<SignUp> {
                         child: Center(
                             child: Text(
                           "Sign Up",
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                              color: Colors.white, fontFamily: "Poppins"),
                         ))),
                   ),
                 ),

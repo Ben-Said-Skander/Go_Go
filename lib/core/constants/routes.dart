@@ -14,7 +14,8 @@ class AppRoute {
   static const String blogdetails = "/blog/details";
   static const String addBlog = "/blog/addBlog";
   static const String seeAll = "/seeAll";
-    static const String searchPage = "/searchPage";
-        static const String onBoarding = "/onBoarding";
-          static const String test = "/test";
+  static const String searchPage = "/searchPage";
+  static const String onBoarding = "/onBoarding";
+  static const String test = "/test";
+  static const String userArticle = "/userArticle";
 }

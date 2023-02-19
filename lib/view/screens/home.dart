@@ -21,22 +21,30 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey.shade200,
-        bottomNavigationBar: CurvedNavigationBar(
-          height: 55,
-          buttonBackgroundColor: Color(0x46A569),
-          items: [
-            Icon(Icons.notifications_active_outlined),
-            Icon(FontAwesomeIcons.compass),
-            Icon(FontAwesomeIcons.blogger),
-          ],
-          index: selectedIndex,
-          backgroundColor: AppColor.mainColor,
-          onTap: (index) {
-            setState(() {
-              selectedIndex = index;
-            });
-          },
+        // backgroundColor: AppColor.medicineColor,
+        bottomNavigationBar: Container(
+          padding: EdgeInsets.all(14),
+          //   color: AppColor.medicineColor,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(50),
+            child: CurvedNavigationBar(
+              height: 55,
+              buttonBackgroundColor: Color(0x46A569),
+              items: [
+                Icon(Icons.notifications_active_outlined),
+                Icon(FontAwesomeIcons.compass),
+                Icon(FontAwesomeIcons.blogger),
+              ],
+              index: selectedIndex,
+              color: Color.fromARGB(255, 223, 223, 223),
+              backgroundColor: AppColor.mainColor,
+              onTap: (index) {
+                setState(() {
+                  selectedIndex = index;
+                });
+              },
+            ),
+          ),
         ),
         body: IndexedStack(index: selectedIndex, children: [
           Reminders(),

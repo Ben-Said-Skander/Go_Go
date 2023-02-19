@@ -1,18 +1,18 @@
-// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
+// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
 
-class Blog extends StatefulWidget {
-  const Blog({super.key});
+class UserArticle extends StatefulWidget {
+  const UserArticle({super.key});
 
   @override
-  State<Blog> createState() => _BlogState();
+  State<UserArticle> createState() => _UserArticleState();
 }
 
-class _BlogState extends State<Blog> {
+class _UserArticleState extends State<UserArticle> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,11 +74,10 @@ class _BlogState extends State<Blog> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              textButton(
-                  context, "Drug Experience", "blog", AppColor.mainColor),
+              textButton(context, "Drug Experience", "blog", Colors.grey),
               textButton(context, "Missing Drug", "missingBlog", Colors.grey),
               textButton(context, "Seeking Help", "helpBlog", Colors.grey),
-              textButton(context, "Your Articles", "userArticle", Colors.grey),
+              textButton(context, "Your Articles", "userArticle", AppColor.mainColor),
             ],
           ),
           Padding(
@@ -87,7 +86,7 @@ class _BlogState extends State<Blog> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Drug Experience",
+                    "Your Articles",
                     style: TextStyle(
                         color: AppColor.mainColor,
                         fontWeight: FontWeight.bold,

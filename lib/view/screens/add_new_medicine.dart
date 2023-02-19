@@ -60,11 +60,14 @@ class _AddMedicineState extends State<AddMedicine> {
                   },
                   icon: Icon(Icons.arrow_back_ios)),
               Padding(
-                padding: const EdgeInsets.only(left: 108.0),
+                padding: const EdgeInsets.only(left: 80.0),
                 child: Center(
                   child: Text(
-                    "Add New",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    "Add New Medicine",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Poppins",
+                    ),
                   ),
                 ),
               ),
@@ -110,14 +113,20 @@ class _AddMedicineState extends State<AddMedicine> {
         Padding(
             padding: EdgeInsets.fromLTRB(30, 50, 20, 0),
             child: Text("Medicine Type",
-                style: TextStyle(color: AppColor.mainColor))),
+                style: TextStyle(
+                    color: AppColor.mainColor,
+                    fontFamily: "Poppins",
+                    fontWeight: FontWeight.w600))),
         MedicineType(),
         Padding(
           padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
           child: Row(
             children: [
               Text("Remind me every",
-                  style: TextStyle(color: AppColor.mainColor)),
+                  style: TextStyle(
+                      color: AppColor.mainColor,
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.w600)),
               SizedBox(
                 width: 20,
               ),
@@ -143,7 +152,10 @@ class _AddMedicineState extends State<AddMedicine> {
             children: [
               Text(
                 "Starting Time",
-                style: TextStyle(color: AppColor.mainColor),
+                style: TextStyle(
+                    color: AppColor.mainColor,
+                    fontFamily: "Poppins",
+                    fontWeight: FontWeight.w600),
               ),
               Container(
                 padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -184,7 +196,10 @@ class _AddMedicineState extends State<AddMedicine> {
                 child: Center(
                     child: Text(
                   "Confirm",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.w600),
                 ))),
           ),
         ),
@@ -203,7 +218,10 @@ class Titles extends StatelessWidget {
       child: Container(
         child: Text(
           title,
-          style: TextStyle(color: AppColor.mainColor),
+          style: TextStyle(
+              color: AppColor.mainColor,
+              fontFamily: "Poppins",
+              fontWeight: FontWeight.w600),
         ),
       ),
     );
@@ -246,7 +264,7 @@ class _MedicineTypeState extends State<MedicineType> {
                     syringeIndex = 0;
                   });
                   if (bottleIndex == 1) {
-                    bottleColor = AppColor.secondryColor;
+                    bottleColor = AppColor.mainColor;
                     pillsColor = Colors.grey;
                     syringeColor = Colors.grey;
                   }
@@ -266,7 +284,7 @@ class _MedicineTypeState extends State<MedicineType> {
                     syringeIndex = 0;
                   });
                   if (pillsIndex == 1) {
-                    pillsColor = AppColor.secondryColor;
+                    pillsColor = AppColor.mainColor;
                     syringeColor = Colors.grey;
                     bottleColor = Colors.grey;
                   }
@@ -287,7 +305,7 @@ class _MedicineTypeState extends State<MedicineType> {
                     bottleIndex = 0;
                   });
                   if (syringeIndex == 1) {
-                    syringeColor = AppColor.secondryColor;
+                    syringeColor = AppColor.mainColor;
                     bottleColor = Colors.grey;
                     pillsColor = Colors.grey;
                   }

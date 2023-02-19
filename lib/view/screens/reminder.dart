@@ -40,9 +40,9 @@ class _RemindersState extends State<Reminders> {
                     child: Text(
                       "Reminder",
                       style: TextStyle(
-                        fontSize: 22,
-                        color: Colors.white,
-                      ),
+                          fontSize: 22,
+                          color: Colors.white,
+                          fontFamily: "Poppins"),
                     ),
                   ),
                 ),
@@ -54,7 +54,8 @@ class _RemindersState extends State<Reminders> {
                 style: TextStyle(
                     fontSize: 20,
                     color: Colors.black,
-                    fontWeight: FontWeight.w700))),
+                    fontWeight: FontWeight.w700,
+                    fontFamily: "Poppins"))),
         Container(
           height: 500,
           //padding: EdgeInsets.only(top: 15),

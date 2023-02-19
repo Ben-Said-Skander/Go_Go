@@ -2,20 +2,20 @@ class Blog {
   final String? title;
   final String? category;
   final String? body;
-  final String? picture;
+  final String? pictureurl;
 
 //Constructeur
   Blog({
     this.title,
     this.category,
     this.body,
-    this.picture,
+    this.pictureurl,
   });
 //geters
   String get getTitle => title!;
   String get getCategory => category!;
   String get getBody => body!;
-  String get getPicture => picture!;
+  String get getPicture => pictureurl!;
 
   // Transform attributs to Json Format
 
@@ -24,7 +24,7 @@ class Blog {
       "title": title,
       "category": category,
       "body": body,
-      "picture": picture,
+      "pictureurl": pictureurl,
     };
   }
 
@@ -33,7 +33,7 @@ class Blog {
       title: parsedJson["title"],
       category: parsedJson["category"],
       body: parsedJson["body"],
-      picture: parsedJson["picture"],
+      pictureurl: parsedJson["pictureurl"],
     );
   }
 }

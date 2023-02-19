@@ -1,39 +1,17 @@
-// ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, camel_case_types, avoid_unnecessary_containers
+// ignore_for_file: prefer_const_literals_to_create_immutables, sort_child_properties_last, prefer_const_constructors, avoid_unnecessary_containers, sized_box_for_whitespace
 
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
-import 'package:pfa_application_1/core/constants/routes.dart';
-import 'package:pfa_application_1/view/widgets/curve_clipper.dart';
-import 'package:pfa_application_1/view/widgets/wave_clipper.dart';
 
-class test extends StatefulWidget {
-  const test({super.key});
+class BlogDetails extends StatefulWidget {
+  const BlogDetails({super.key});
 
   @override
-  State<test> createState() => _testState();
+  State<BlogDetails> createState() => _BlogDetailsState();
 }
 
-class _testState extends State<test> {
-  late TextEditingController searchController;
-
-  @override
-  void dispose() {
-    searchController.dispose();
-
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    searchController = TextEditingController();
-
-    super.initState();
-  }
-
-  int selectedIndex = 0;
+class _BlogDetailsState extends State<BlogDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

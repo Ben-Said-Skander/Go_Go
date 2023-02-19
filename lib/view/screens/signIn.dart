@@ -48,7 +48,8 @@ class _SignInState extends State<SignIn> {
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 23,
-                      fontWeight: FontWeight.w500)),
+                      fontWeight: FontWeight.w500,
+                      fontFamily: "Poppins")),
             ),
           ),
         ),
@@ -77,12 +78,16 @@ class _SignInState extends State<SignIn> {
               style: TextStyle(
                   color: AppColor.mainColor,
                   fontWeight: FontWeight.bold,
-                  fontSize: 23),
+                  fontSize: 23,
+                  fontFamily: "Poppins"),
             ),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 50, 0, 0),
-            child: Text("Email"),
+            child: Text("Email",
+                style: TextStyle(
+                  fontFamily: "Poppins",
+                )),
           ),
           Container(
             padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -96,9 +101,13 @@ class _SignInState extends State<SignIn> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
-            child: Text("Password"),
-          ),
+              padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
+              child: Text(
+                "Password",
+                style: TextStyle(
+                  fontFamily: "Poppins",
+                ),
+              )),
           Container(
             padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
             width: 350,
@@ -116,6 +125,7 @@ class _SignInState extends State<SignIn> {
               child: InkWell(
                 child: Text('Forgot your Password ?',
                     style: TextStyle(
+                        fontWeight: FontWeight.w600,
                         color: Color.fromARGB(255, 16, 152, 170),
                         fontSize: 14)),
                 onTap: () {
@@ -136,7 +146,8 @@ class _SignInState extends State<SignIn> {
                   child: MaterialButton(
                     child: Text(
                       "Log In",
-                      style: TextStyle(color: Colors.white),
+                      style:
+                          TextStyle(color: Colors.white, fontFamily: "Poppins"),
                     ),
                     onPressed: () {
                       Get.offAndToNamed(AppRoute.home);

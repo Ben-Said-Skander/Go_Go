@@ -33,7 +33,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(children: [
+        body: ListView(children: [
       Container(
         width: 450,
         height: 250,
@@ -55,7 +55,7 @@ class _SignInState extends State<SignIn> {
         ),
       ),
       Container(
-        margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
+        margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
         height: 500,
         decoration: BoxDecoration(
             color: Colors.white,
@@ -86,6 +86,7 @@ class _SignInState extends State<SignIn> {
             padding: const EdgeInsets.fromLTRB(20, 50, 0, 0),
             child: Text("Email",
                 style: TextStyle(
+                  color: AppColor.mainColor,
                   fontFamily: "Poppins",
                 )),
           ),
@@ -105,6 +106,7 @@ class _SignInState extends State<SignIn> {
               child: Text(
                 "Password",
                 style: TextStyle(
+                  color: AppColor.mainColor,
                   fontFamily: "Poppins",
                 ),
               )),

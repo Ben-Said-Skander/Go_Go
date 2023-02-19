@@ -264,7 +264,7 @@ class _MedicineTypeState extends State<MedicineType> {
                     syringeIndex = 0;
                   });
                   if (bottleIndex == 1) {
-                    bottleColor = AppColor.mainColor;
+                    bottleColor = Color.fromARGB(255, 4, 107, 120);
                     pillsColor = Colors.grey;
                     syringeColor = Colors.grey;
                   }
@@ -284,7 +284,7 @@ class _MedicineTypeState extends State<MedicineType> {
                     syringeIndex = 0;
                   });
                   if (pillsIndex == 1) {
-                    pillsColor = AppColor.mainColor;
+                    pillsColor = Color.fromARGB(255, 4, 107, 120);
                     syringeColor = Colors.grey;
                     bottleColor = Colors.grey;
                   }
@@ -305,7 +305,7 @@ class _MedicineTypeState extends State<MedicineType> {
                     bottleIndex = 0;
                   });
                   if (syringeIndex == 1) {
-                    syringeColor = AppColor.mainColor;
+                    syringeColor = Color.fromARGB(255, 4, 107, 120);
                     bottleColor = Colors.grey;
                     pillsColor = Colors.grey;
                   }

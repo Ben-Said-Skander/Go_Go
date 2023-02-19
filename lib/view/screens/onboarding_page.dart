@@ -1,7 +1,5 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, sized_box_for_whitespace, unnecessary_new
 
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
@@ -32,15 +30,13 @@ class _OnBoardingState extends State<OnBoarding> {
           height: 250,
           decoration: BoxDecoration(
               color: Color.fromARGB(255, 16, 152, 170),
-              borderRadius: BorderRadius.only(
-       
-                  )),
+              borderRadius: BorderRadius.only()),
           child: Center(
-            child: Text(
-              "Picture Here !!!!",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-            ),
-          ),
+              child: Image.asset(
+            "assets/image/logo.jpg",
+            width: 150,
+            height: 150,
+          )),
         ),
         Container(
             height: 590,
@@ -69,7 +65,9 @@ class _OnBoardingState extends State<OnBoarding> {
                               child: Text(
                                 "Locate the drug you need ! ",
                                 style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w700),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: "Poppins"),
                               ),
                             ),
                             SizedBox(
@@ -82,12 +80,17 @@ class _OnBoardingState extends State<OnBoarding> {
                                 style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w300,
-                                    color: Color.fromARGB(255, 130, 130, 130)),
+                                    color: Color.fromARGB(255, 130, 130, 130),
+                                    fontFamily: "Poppins"),
                               ),
                             ),
-                            //dots
+                            Image.asset(
+                              "assets/image/dot1.jpg",
+                              width: 180,
+                              height: 100,
+                            ),
                             SizedBox(
-                              height: 120,
+                              height: 60,
                             ),
                             Container(
                               decoration: BoxDecoration(
@@ -98,7 +101,9 @@ class _OnBoardingState extends State<OnBoarding> {
                                   Get.toNamed(AppRoute.signup);
                                 },
                                 child: Text("Get Started",
-                                    style: TextStyle(color: Colors.white)),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "Poppins")),
                               ),
                             )
                           ],
@@ -112,11 +117,13 @@ class _OnBoardingState extends State<OnBoarding> {
                               height: 180,
                             ),
                             Padding(
-                              padding: EdgeInsets.only(left: 70, right: 15),
+                              padding: EdgeInsets.only(left: 50, right: 15),
                               child: Text(
                                 "You dont have to worry about remembering your medicines ",
                                 style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w700),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: "Poppins"),
                               ),
                             ),
                             SizedBox(
@@ -129,12 +136,17 @@ class _OnBoardingState extends State<OnBoarding> {
                                 style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w300,
+                                    fontFamily: "Poppins",
                                     color: Color.fromARGB(255, 130, 130, 130)),
                               ),
                             ),
-                            //dots
+                            Image.asset(
+                              "assets/image/dot2.jpg",
+                              width: 180,
+                              height: 100,
+                            ),
                             SizedBox(
-                              height: 120,
+                              height: 60,
                             ),
                             Container(
                               decoration: BoxDecoration(
@@ -145,7 +157,9 @@ class _OnBoardingState extends State<OnBoarding> {
                                   Get.toNamed(AppRoute.signup);
                                 },
                                 child: Text("Get Started",
-                                    style: TextStyle(color: Colors.white)),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "Poppins")),
                               ),
                             )
                           ],
@@ -159,11 +173,13 @@ class _OnBoardingState extends State<OnBoarding> {
                               height: 180,
                             ),
                             Padding(
-                              padding: EdgeInsets.only(left: 23, right: 15),
+                              padding: EdgeInsets.only(left: 45, right: 15),
                               child: Text(
                                 "A community to help you when in need",
                                 style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w700),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: "Poppins"),
                               ),
                             ),
                             SizedBox(
@@ -176,12 +192,17 @@ class _OnBoardingState extends State<OnBoarding> {
                                 style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w300,
-                                    color: Color.fromARGB(255, 130, 130, 130)),
+                                    color: Color.fromARGB(255, 130, 130, 130),
+                                    fontFamily: "Poppins"),
                               ),
                             ),
-                            //dots
+                            Image.asset(
+                              "assets/image/dot3.jpg",
+                              width: 100,
+                              height: 100,
+                            ),
                             SizedBox(
-                              height: 120,
+                              height: 60,
                             ),
                             Container(
                               decoration: BoxDecoration(
@@ -192,7 +213,9 @@ class _OnBoardingState extends State<OnBoarding> {
                                   Get.toNamed(AppRoute.signup);
                                 },
                                 child: Text("Get Started",
-                                    style: TextStyle(color: Colors.white)),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "Poppins")),
                               ),
                             )
                           ],
@@ -203,7 +226,6 @@ class _OnBoardingState extends State<OnBoarding> {
                 ),
               ],
             )),
-       
       ]),
     );
   }

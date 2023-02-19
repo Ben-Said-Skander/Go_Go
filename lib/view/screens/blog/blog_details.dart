@@ -40,6 +40,17 @@ class _BlogDetailsState extends State<BlogDetails> {
                               Get.back();
                             },
                             icon: Icon(Icons.arrow_back_ios)))),*/
+
+            Padding(
+                padding: const EdgeInsets.only(left: 12, top: 5),
+                child: IconButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.black,
+                    ))),
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 190, 0, 0),
               child: Container(

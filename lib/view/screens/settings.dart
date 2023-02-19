@@ -25,10 +25,10 @@ class _SettingsState extends State<Settings> {
                 },
                 icon: Icon(Icons.arrow_back_ios)),
             Padding(
-              padding: const EdgeInsets.only(left: 115.0),
+              padding: const EdgeInsets.only(left: 110.0),
               child: Center(
                 child: Text(
-                  "Profile",
+                  "Settings",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, fontFamily: "Poppins"),
                 ),

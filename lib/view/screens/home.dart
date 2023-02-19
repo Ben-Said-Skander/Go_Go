@@ -33,7 +33,7 @@ class _HomeState extends State<Home> {
               items: [
                 Icon(Icons.notifications_active_outlined),
                 Icon(FontAwesomeIcons.compass),
-                Icon(FontAwesomeIcons.blogger),
+                Icon(FontAwesomeIcons.newspaper),
               ],
               index: selectedIndex,
               color: Color.fromARGB(255, 223, 223, 223),

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/view/screens/blog/blog.dart';
+import 'package:pfa_application_1/view/screens/medicine_description.dart';
 import 'package:pfa_application_1/view/screens/reminder.dart';
 import 'package:pfa_application_1/view/screens/search_page.dart';
 
@@ -40,6 +41,10 @@ class _HomeState extends State<Home> {
                   size: 20,
                 ),
                 Icon(
+                  FontAwesomeIcons.search,
+                  size: 20,
+                ),
+                Icon(
                   FontAwesomeIcons.book,
                   size: 20,
                 ),
@@ -58,6 +63,7 @@ class _HomeState extends State<Home> {
         body: IndexedStack(index: selectedIndex, children: [
           Reminders(),
           SearchPage(),
+          MedicineDescription(),
           Blog(),
         ]));
   }

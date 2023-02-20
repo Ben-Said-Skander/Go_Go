@@ -63,7 +63,7 @@ class _OnBoardingState extends State<OnBoarding> {
                             Padding(
                               padding: EdgeInsets.only(left: 23, right: 15),
                               child: Text(
-                                "Locate the drug you need ! ",
+                                "Locate the drug you need  ",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w700,

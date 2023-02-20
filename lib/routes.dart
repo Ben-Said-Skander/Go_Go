@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
 import 'package:pfa_application_1/view/screens/blog/user_articles.dart';
 import 'package:pfa_application_1/view/screens/forget_password.dart';
+import 'package:pfa_application_1/view/screens/medicine_description.dart';
 import 'package:pfa_application_1/view/screens/onboarding_page.dart';
 import 'package:pfa_application_1/view/screens/reset_password.dart';
 import 'package:pfa_application_1/view/screens/search_page.dart';
@@ -41,4 +42,5 @@ List<GetPage<dynamic>>? routes = [
   GetPage(name: AppRoute.userArticle, page: () => const UserArticle()),
   GetPage(name: AppRoute.forgotPassword, page: () => const ForgotPassword()),
   GetPage(name: AppRoute.resetPasswrod, page: () => const ResetPassword()),
+    GetPage(name: AppRoute.medicineDescription, page: () => const MedicineDescription()),
 ];

@@ -1,22 +1,18 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, camel_case_types, avoid_unnecessary_containers
 
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
-import 'package:pfa_application_1/core/constants/routes.dart';
-import 'package:pfa_application_1/view/widgets/curve_clipper.dart';
-import 'package:pfa_application_1/view/widgets/wave_clipper.dart';
 
-class test extends StatefulWidget {
-  const test({super.key});
+class MedicineDescription extends StatefulWidget {
+  const MedicineDescription({super.key});
 
   @override
-  State<test> createState() => _testState();
+  State<MedicineDescription> createState() => _MedicineDescriptionState();
 }
 
-class _testState extends State<test> {
+class _MedicineDescriptionState extends State<MedicineDescription> {
   late TextEditingController searchController;
 
   @override

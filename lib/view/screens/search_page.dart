@@ -49,7 +49,7 @@ class _SearchPageState extends State<SearchPage> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(top: 32, left: 25),
-                        child: Text("Search for your medicines",
+                        child: Text("Locate your medicines",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -64,7 +64,7 @@ class _SearchPageState extends State<SearchPage> {
                           decoration: InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
-                            hintText: "Search for your medicines",
+                            hintText: "Locate your medicines",
                             hintStyle: TextStyle(color: Colors.black),
                             prefixIcon: Icon(FontAwesomeIcons.search,
                                 color: Colors.black),

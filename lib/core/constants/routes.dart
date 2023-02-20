@@ -20,4 +20,5 @@ class AppRoute {
   static const String userArticle = "/userArticle";
   static const String forgotPassword = "/forgotPassword";
   static const String resetPasswrod = "/resetPasswrod";
+    static const String medicineDescription = "/medicineDescription";
 }

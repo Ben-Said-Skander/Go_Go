@@ -86,7 +86,7 @@ class _OnBoardingState extends State<OnBoarding> {
                             ),
                             Image.asset(
                               "assets/image/dot1.jpg",
-                              width: 180,
+                              width: 160,
                               height: 100,
                             ),
                             SizedBox(

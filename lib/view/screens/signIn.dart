@@ -131,7 +131,7 @@ class _SignInState extends State<SignIn> {
                         color: Color.fromARGB(255, 16, 152, 170),
                         fontSize: 14)),
                 onTap: () {
-                  // to the forgot password pages
+                 Get.toNamed(AppRoute.forgotPassword) ;
                 },
               ),
             ),
@@ -156,16 +156,19 @@ class _SignInState extends State<SignIn> {
                     },
                   ))),
           Padding(
-            padding: EdgeInsets.only(left: 110),
+            padding: EdgeInsets.only(left: 108),
             child: Row(
               children: [
                 Text(
                   "New user ?",
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(color: Colors.grey, fontFamily: "Poppins"),
                 ),
                 TextButton(
                     child: Text("Sign Up",
-                        style: TextStyle(color: AppColor.mainColor)),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: AppColor.mainColor,
+                            fontFamily: "Poppins")),
                     onPressed: () {
                       Get.toNamed(AppRoute.signup);
                     }),

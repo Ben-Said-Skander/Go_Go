@@ -31,9 +31,18 @@ class _HomeState extends State<Home> {
               height: 55,
               buttonBackgroundColor: Color(0x46A569),
               items: [
-                Icon(Icons.notifications_active_outlined),
-                Icon(FontAwesomeIcons.compass),
-                Icon(FontAwesomeIcons.newspaper),
+                Icon(
+                  FontAwesomeIcons.bell,
+                  size: 20,
+                ),
+                Icon(
+                  FontAwesomeIcons.locationDot,
+                  size: 20,
+                ),
+                Icon(
+                  FontAwesomeIcons.book,
+                  size: 20,
+                ),
               ],
               index: selectedIndex,
               color: Color.fromARGB(255, 223, 223, 223),

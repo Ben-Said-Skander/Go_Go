@@ -1,7 +1,10 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, sort_child_properties_last
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, sort_child_properties_last, deprecated_member_use, unused_local_variable, unnecessary_null_comparison
+
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 
 class AddBlog extends StatefulWidget {
@@ -12,6 +15,9 @@ class AddBlog extends StatefulWidget {
 }
 
 class _AddBlogState extends State<AddBlog> {
+  late File image = File("");
+  final imagePicker = ImagePicker();
+
   late TextEditingController titleController;
   late TextEditingController bodyController;
   String dropdownvalue = "Drug Experience";
@@ -33,6 +39,17 @@ class _AddBlogState extends State<AddBlog> {
     titleController.dispose();
     bodyController.dispose();
     super.dispose();
+  }
+
+  uploadImage() async {
+    var pickedImage = await imagePicker.getImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      setState(() {
+        image = File(pickedImage.path);
+      });
+    } else {
+      print("No image found");
+    }
   }
 
   @override
@@ -73,14 +90,20 @@ class _AddBlogState extends State<AddBlog> {
                 child: Column(
                   children: [
                     Container(
-                      color: Color.fromARGB(255, 215, 215, 215),
-                      width: 150,
-                      height: 150,
-                      child: Icon(
-                        Icons.add_a_photo,
-                        color: AppColor.mainColor,
-                      ),
-                    ),
+                        color: Color.fromARGB(255, 215, 215, 215),
+                        width: 150,
+                        height: 150,
+                        child: image == null
+                            ? Icon(
+                                Icons.add_a_photo,
+                                color: AppColor.mainColor,
+                              )
+                            : Image.file(
+                                image,
+                                width: double.infinity,
+                              )
+                        /**/
+                        ),
                   ],
                 )),
             Column(
@@ -120,9 +143,7 @@ class _AddBlogState extends State<AddBlog> {
                       color: AppColor.mainColor,
                       borderRadius: BorderRadius.circular(30)),
                   child: TextButton(
-                      onPressed: () {
-                        //image picker
-                      },
+                      onPressed: uploadImage,
                       child: Text(
                         "Add a photo",
                         style: TextStyle(

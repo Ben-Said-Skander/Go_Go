@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, non_constant_identifier_names, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, recursive_getters, sized_box_for_whitespace
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
 
 class SeeAll extends StatefulWidget {
@@ -60,7 +61,7 @@ class _SeeAllState extends State<SeeAll> {
           child: Text(
             " Drug Experience ",
             style: TextStyle(
-              color: Colors.black,
+              color: AppColor.mainColor,
               fontWeight: FontWeight.w700,
               fontSize: 20,
               fontFamily: "Poppins",

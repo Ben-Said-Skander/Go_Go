@@ -136,7 +136,12 @@ class _AddMedicineState extends State<AddMedicine> {
                   elevation: 4,
                   value: dropdownvalue, // initial value
                   items: intervals.map((String items) {
-                    return DropdownMenuItem(value: items, child: Text(items));
+                    return DropdownMenuItem(
+                        value: items,
+                        child: Text(
+                          items,
+                          style: TextStyle(fontFamily: "Poppins"),
+                        ));
                   }).toList(),
                   onChanged: (String? newValue) {
                     setState(() {

@@ -71,15 +71,19 @@ class _BlogState extends State<Blog> {
           SizedBox(
             height: 40,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              textButton(
-                  context, "Drug Experience", "blog", AppColor.mainColor),
-              textButton(context, "Missing Drug", "missingBlog", Colors.grey),
-              textButton(context, "Seeking Help", "helpBlog", Colors.grey),
-              textButton(context, "Your Articles", "userArticle", Colors.grey),
-            ],
+          Container(
+            height: 50,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                textButton(
+                    context, "Drug Experience", "blog", AppColor.mainColor),
+                textButton(context, "Missing Drug", "missingBlog", Colors.grey),
+                textButton(context, "Seeking Help", "helpBlog", Colors.grey),
+                textButton(
+                    context, "Your Articles", "userArticle", Colors.grey),
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(15, 28, 0, 15),
@@ -162,7 +166,7 @@ textButton(BuildContext context, String title, String route, Color couleur) {
         onPressed: () {
           Get.toNamed(route);
         },
-        child: Text(title, style: TextStyle(fontSize: 12, color: couleur)),
+        child: Text(title, style: TextStyle(fontSize: 14, color: couleur)),
       ));
 }
 
@@ -175,21 +179,21 @@ class BlogCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          Get.offNamed(AppRoute.blogdetails);
+          Get.toNamed(AppRoute.blogdetails);
         },
         child: Container(
           decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(40),
+              borderRadius: BorderRadius.circular(30),
               boxShadow: [
                 BoxShadow(
-                  blurRadius: 6,
+                  blurRadius: 4,
                   spreadRadius: 1,
                   color: Color.fromARGB(255, 207, 207, 207),
                 )
               ]),
           width: 200,
-          height: 200,
+          height: 100,
           margin: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -205,7 +209,7 @@ class BlogCard extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 40,
+                height: 30,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 18),
@@ -242,23 +246,23 @@ class PopularCard extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
-                  blurRadius: 6,
+                  blurRadius: 4,
                   spreadRadius: 1,
                   color: Color.fromARGB(255, 207, 207, 207),
                 )
               ]),
           width: 600,
-          height: 150,
+          height: 120,
           margin: EdgeInsets.all(16),
           child: Row(
             //  crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 20, left: 10),
+                  padding: const EdgeInsets.only(top: 8, left: 10),
                   child: Image.asset(
                     blogPicture,
                     width: 150,

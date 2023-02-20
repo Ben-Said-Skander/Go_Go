@@ -82,7 +82,7 @@ class _UserArticleState extends State<UserArticle> {
           child: Text(
             "Your Articles ",
             style: TextStyle(
-              color: Colors.black,
+              color: AppColor.mainColor,
               fontWeight: FontWeight.w700,
               fontSize: 20,
               fontFamily: "Poppins",
@@ -122,12 +122,12 @@ class MedCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          Get.toNamed(AppRoute.blogdetails);
+          Get.toNamed(AppRoute.details);
         },
         child: Container(
           decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(40),
+              borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
                   blurRadius: 6,
@@ -141,6 +141,9 @@ class MedCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(
+                height: 10,
+              ),
               Center(
                   child: Image.asset(
                 med_pic,
@@ -148,7 +151,7 @@ class MedCard extends StatelessWidget {
                 height: 100,
               )),
               SizedBox(
-                height: 5,
+                height: 16,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 13),

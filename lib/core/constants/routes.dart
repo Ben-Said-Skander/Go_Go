@@ -18,4 +18,6 @@ class AppRoute {
   static const String onBoarding = "/onBoarding";
   static const String test = "/test";
   static const String userArticle = "/userArticle";
+  static const String forgotPassword = "/forgotPassword";
+  static const String resetPasswrod = "/resetPasswrod";
 }

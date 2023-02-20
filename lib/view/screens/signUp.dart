@@ -170,16 +170,20 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 80),
+                  padding: EdgeInsets.only(left: 75),
                   child: Row(
                     children: [
                       Text(
                         "Already have an account ?",
-                        style: TextStyle(color: Colors.grey),
+                        style: TextStyle(
+                            color: Colors.grey, fontFamily: "Poppins"),
                       ),
                       TextButton(
                           child: Text("Sign In",
-                              style: TextStyle(color: AppColor.mainColor)),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColor.mainColor,
+                                  fontFamily: "Poppins")),
                           onPressed: () {
                             Get.offAndToNamed(AppRoute.signIn);
                           }),

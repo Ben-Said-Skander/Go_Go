@@ -71,15 +71,19 @@ class _HelpBlogState extends State<HelpBlog> {
           SizedBox(
             height: 40,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              textButton(
-                  context, "Drug Experience", "blog", Colors.grey),
-              textButton(context, "Missing Drug", "missingBlog", Colors.grey),
-              textButton(context, "Seeking Help", "helpBlog", AppColor.mainColor),
-              textButton(context, "Your Articles", "userArticle", Colors.grey),
-            ],
+          Container(
+            height: 50,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                textButton(context, "Drug Experience", "blog", Colors.grey),
+                textButton(context, "Missing Drug", "missingBlog", Colors.grey),
+                textButton(
+                    context, "Seeking Help", "helpBlog", AppColor.mainColor),
+                textButton(
+                    context, "Your Articles", "userArticle", Colors.grey),
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(15, 28, 0, 15),
@@ -162,7 +166,7 @@ textButton(BuildContext context, String title, String route, Color couleur) {
         onPressed: () {
           Get.toNamed(route);
         },
-        child: Text(title, style: TextStyle(fontSize: 12, color: couleur)),
+        child: Text(title, style: TextStyle(fontSize: 14, color: couleur)),
       ));
 }
 
@@ -175,7 +179,7 @@ class BlogCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          Get.offNamed(AppRoute.blogdetails);
+          Get.toNamed(AppRoute.blogdetails);
         },
         child: Container(
           decoration: BoxDecoration(

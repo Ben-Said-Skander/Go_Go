@@ -2,16 +2,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pfa_application_1/controllers/blog_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 
-class BlogDetails extends StatefulWidget {
-  const BlogDetails({super.key});
+class PersonalArticleDetails extends StatefulWidget {
+  const PersonalArticleDetails({super.key});
 
   @override
-  State<BlogDetails> createState() => _BlogDetailsState();
+  State<PersonalArticleDetails> createState() => _PersonalArticleDetailsState();
 }
 
-class _BlogDetailsState extends State<BlogDetails> {
+class _PersonalArticleDetailsState extends State<PersonalArticleDetails> {
+  BlogController blogController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,8 +85,30 @@ class _BlogDetailsState extends State<BlogDetails> {
                               fontSize: 16,
                             )),
                       ),
-                     
-                     
+                      SizedBox(
+                        height: 300,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 90, 20, 0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25),
+                              color: AppColor.mainColor),
+                          child: TextButton(
+                              onPressed: () {
+                                blogController.deleteArticle("id");
+                                Get.back();
+                              },
+                              child: Center(
+                                  child: Text(
+                                "Delete",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "Poppins",
+                                ),
+                              ))),
+                        ),
+                      ),
                     ]),
               ),
             ),

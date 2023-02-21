@@ -22,6 +22,6 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
         getPages: routes,
-        initialRoute: AppRoute.home);
+        initialRoute: AppRoute.onBoarding);
   }
 }

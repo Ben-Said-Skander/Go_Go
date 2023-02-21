@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:pfa_application_1/controllers/blog_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 
 class AddBlog extends StatefulWidget {
@@ -15,6 +16,7 @@ class AddBlog extends StatefulWidget {
 }
 
 class _AddBlogState extends State<AddBlog> {
+  BlogController blogController = Get.find();
   late File image = File("");
   final imagePicker = ImagePicker();
 
@@ -227,6 +229,7 @@ class _AddBlogState extends State<AddBlog> {
                 color: AppColor.mainColor),
             child: TextButton(
                 onPressed: () {
+                  blogController.createArticle("blog333", "neww", "newww");
                   Get.back();
                 },
                 child: Center(

@@ -4,6 +4,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:pfa_application_1/controllers/blog_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
 import 'package:pfa_application_1/view/widgets/curve_clipper.dart';
@@ -18,7 +19,7 @@ class test extends StatefulWidget {
 
 class _testState extends State<test> {
   late TextEditingController searchController;
-
+  BlogController blogController = Get.find();
   @override
   void dispose() {
     searchController.dispose();
@@ -51,75 +52,14 @@ class _testState extends State<test> {
           SizedBox(
             height: 40,
           ),
-          Stack(
-            children: [
-              Container(
-                height: 800,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(100.0),
-                      topRight: Radius.circular(100),
-                    )),
-              ),
-              Container(
-                height: 100,
-                child: ListView(children: [
-                  Container(
-                    padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
-                    width: 100,
-                    child: TextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        fillColor: Colors.white,
-                        filled: true,
-                        hintText: "Search for your medicines",
-                        hintStyle: TextStyle(color: Colors.black),
-                        prefixIcon:
-                            Icon(FontAwesomeIcons.search, color: Colors.black),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 200, 200, 200)),
-                            borderRadius: BorderRadius.circular(30)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 200, 200, 200)),
-                            borderRadius: BorderRadius.circular(30)),
-                      ),
-                      controller: searchController,
-                      cursorColor: Color.fromARGB(255, 16, 152, 170),
-                    ),
-                  ),
-                ]),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 130.0, left: 25),
-                child: Text("Medicine name",
-                    style: TextStyle(
-                        color: AppColor.mainColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: "Poppins")),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 270.0, left: 25),
-                child: Text("Description",
-                    style: TextStyle(
-                        color: AppColor.mainColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: "Poppins")),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 420.0, left: 25),
-                child: Text("How to use it",
-                    style: TextStyle(
-                        color: AppColor.mainColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: "Poppins")),
-              )
-            ],
+          Container( height: 105,
+            color:Colors.white ,
+            child: MaterialButton(
+              onPressed: () {
+                blogController.createArticle("blog333", "neww", "newww");
+              },
+              child: Text("Click here"),
+            ),
           )
         ]));
   }

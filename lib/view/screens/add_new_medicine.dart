@@ -3,8 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:pfa_application_1/controllers/medicine_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
-import 'package:pfa_application_1/models/medicine.dart';
+
 
 class AddMedicine extends StatefulWidget {
   const AddMedicine({super.key});
@@ -14,6 +15,8 @@ class AddMedicine extends StatefulWidget {
 }
 
 class _AddMedicineState extends State<AddMedicine> {
+  MedicineController medicineController = Get.find();
+
   late TextEditingController med_nameController;
   late TextEditingController med_dosageController;
   late TextEditingController starting_timeController;
@@ -187,16 +190,9 @@ class _AddMedicineState extends State<AddMedicine> {
                 color: AppColor.mainColor),
             child: TextButton(
                 onPressed: () {
+                  medicineController.addMedicine(
+                      "ska", 500, "xxx", "startingTime", "6");
                   Get.back();
-
-                  /*
-                Medicine newEntryMedicine = Medicine(
-                  notificationID: notificationIDs,
-                  medicineName: medicineName ,
-                  dosage: dosage,
-                  medicineType: medicineType,
-                  startingTime: startingTime
-                ),*/
                 },
                 child: Center(
                     child: Text(

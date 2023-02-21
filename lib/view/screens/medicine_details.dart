@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable, non_constant_identifier_names, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pfa_application_1/controllers/medicine_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 
 class Details extends StatefulWidget {
@@ -11,6 +12,7 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> {
+  MedicineController medicineController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +57,7 @@ class _DetailsState extends State<Details> {
               color: AppColor.mainColor),
           child: TextButton(
               onPressed: () {
+                medicineController.deleteMedicine("id");
                 Get.back();
               },
               child: Center(

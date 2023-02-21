@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
+import 'package:pfa_application_1/view/widgets/component/blog_card.dart';
+import 'package:pfa_application_1/view/widgets/component/popular_card.dart';
 
 class HelpBlog extends StatefulWidget {
   const HelpBlog({super.key});
@@ -170,124 +172,4 @@ textButton(BuildContext context, String title, String route, Color couleur) {
       ));
 }
 
-class BlogCard extends StatelessWidget {
-  const BlogCard(
-      {super.key, required this.blogTitle, required this.blogPicture});
-  final String blogTitle;
-  final String blogPicture;
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: () {
-          Get.toNamed(AppRoute.blogdetails);
-        },
-        child: Container(
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(40),
-              boxShadow: [
-                BoxShadow(
-                  blurRadius: 6,
-                  spreadRadius: 1,
-                  color: Color.fromARGB(255, 207, 207, 207),
-                )
-              ]),
-          width: 200,
-          height: 200,
-          margin: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: Image.asset(
-                    blogPicture,
-                    width: 150,
-                    height: 100,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 18),
-                child: Text(
-                  blogTitle,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700),
-                ),
-              ),
-            ],
-          ),
-        ));
-  }
-}
 
-class PopularCard extends StatelessWidget {
-  const PopularCard(
-      {super.key,
-      required this.blogTitle,
-      required this.blogPicture,
-      required this.route});
-  final String blogTitle;
-  final String blogPicture;
-  final String route;
-  @override
-  Widget build(BuildContext context) {
-    return Column(children: [
-      GestureDetector(
-        onTap: () {
-          Get.toNamed(route);
-        },
-        child: Container(
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  blurRadius: 6,
-                  spreadRadius: 1,
-                  color: Color.fromARGB(255, 207, 207, 207),
-                )
-              ]),
-          width: 600,
-          height: 150,
-          margin: EdgeInsets.all(16),
-          child: Row(
-            //  crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 20, left: 10),
-                  child: Image.asset(
-                    blogPicture,
-                    width: 150,
-                    height: 100,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 6),
-                child: Text(
-                  blogTitle,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700),
-                ),
-              ),
-            ],
-          ),
-        ),
-      )
-    ]);
-    /*  GestureDetector(
-        onTap: () {
-          Navigator.of(context).pushNamed("/blog/details");
-        },*/
-  }
-}

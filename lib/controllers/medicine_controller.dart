@@ -7,14 +7,14 @@ import 'package:http/http.dart' as http;
 
 class MedicineController extends GetxController {
   Future<Medicine> addMedicine(String name, int dosage, String type,
-      String startingTime, int interval) async {
+      String start_time, String interval) async {
     final response =
-        await http.post(Uri.parse('https://localhost3600/medicines'),
+        await http.post(Uri.parse('http://localhost:3600/medicines'),
             body: jsonEncode(<String, dynamic>{
               'name': name,
               'dosage': dosage,
               'type': type,
-              'startingTime': startingTime,
+              'start_time': start_time,
               'interval': interval,
             }));
 
@@ -27,25 +27,32 @@ class MedicineController extends GetxController {
 
   Future<Medicine> deleteMedicine(String id) async {
     final response =
-        await http.delete(Uri.parse('https://localhost3600/medicines/$id'));
+        await http.delete(Uri.parse('http://localhost:3600/medicines/$id'));
     if (response.statusCode == 200) {
       return Medicine.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to delete Medicine');
     }
   }
-/*
-  Future<List<Medicine>> fetchMedicines() async {
-    final response =
-        await http.get(Uri.parse('https://localhost3600/medicines'));
 
-    if (response.statusCode == 200) {
-      var jsonResponse = jsonDecode(response.body) as List<dynamic>;
-      var medicineList= jsonResponse.map((e) => Medicine.fromJson(e).toList()) ;
-      return medicineList ; 
-     
+  Future<Medicine> getMedicine(String id) async {
+    final response =
+        await http.get(Uri.parse('http://localhost:3600/medicines/$id'));
+    if (response.statusCode == 201) {
+      return Medicine.fromJson(json.decode(response.body));
     } else {
-      throw Exception('Unexpected Error');
+      throw Exception('Failed to delete Medicine');
     }
-  }*/
+  }
+}
+
+Future<List<Medicine>> fetchMedicines() async {
+  final response = await http.get(Uri.parse('http://localhost:3600/medicines'));
+
+  if (response.statusCode == 200) {
+    final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
+    return parsed.map<Medicine>((e) => Medicine.fromJson(e)).toList();
+  } else {
+    throw Exception('Failed to load Medicines');
+  }
 }

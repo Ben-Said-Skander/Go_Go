@@ -6,14 +6,14 @@ class Medicine {
   final String? dosage;
   final String? type;
   final int? interval;
-  final String? startingTime;
+  final String? start_time;
 //Constructeur
   Medicine({
     this.name,
     this.dosage,
     this.type,
     this.interval,
-    this.startingTime,
+    this.start_time,
     // this.notificationID
   });
 
@@ -26,7 +26,7 @@ class Medicine {
       "dosage": dosage,
       "type": type,
       "interval": interval,
-      "startingTime": startingTime
+      "start_time": start_time
     };
   }
 
@@ -38,7 +38,7 @@ class Medicine {
       dosage: parsedJson["dosage"],
       type: parsedJson["type"],
       interval: parsedJson["interval"],
-      startingTime: parsedJson["start"],
+      start_time: parsedJson["start_time"],
     );
   }
 }

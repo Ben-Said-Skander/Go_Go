@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 class PopularCard extends StatelessWidget {
   const PopularCard(
@@ -34,7 +32,6 @@ class PopularCard extends StatelessWidget {
           height: 120,
           margin: EdgeInsets.all(16),
           child: Row(
-            //  crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
                 child: Padding(
@@ -61,9 +58,5 @@ class PopularCard extends StatelessWidget {
         ),
       )
     ]);
-    /*  GestureDetector(
-        onTap: () {
-          Navigator.of(context).pushNamed("/blog/details");
-        },*/
   }
 }

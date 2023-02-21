@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/controllers/medicine_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
+import 'package:pfa_application_1/core/functions/alertDeleteMedicine.dart';
 
 class Details extends StatefulWidget {
   const Details({super.key});
@@ -57,8 +58,9 @@ class _DetailsState extends State<Details> {
               color: AppColor.mainColor),
           child: TextButton(
               onPressed: () {
-                medicineController.deleteMedicine("id");
-                Get.back();
+                alertDeleteMedicine();
+                // medicineController.deleteMedicine("id");
+                // Get.back();
               },
               child: Center(
                   child: Text(

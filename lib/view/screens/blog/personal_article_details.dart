@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/controllers/blog_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
+import 'package:pfa_application_1/core/constants/routes.dart';
 
 class PersonalArticleDetails extends StatefulWidget {
   const PersonalArticleDetails({super.key});
@@ -19,30 +20,11 @@ class _PersonalArticleDetailsState extends State<PersonalArticleDetails> {
     return Scaffold(
       //   backgroundColor: Colors.white,
       body: ListView(children: [
-        /*
-            Padding(
-              padding: const EdgeInsets.only(left: 18.0),
-              child: IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  icon: Icon(Icons.arrow_back_ios)),*/
-
         Stack(
           children: [
             Image.asset(
               "assets/image/doliprane.jpg",
-              //     height: 400,
             ),
-            /*  Positioned(
-                    child: Padding(
-                        padding: const EdgeInsets.only(left: 5),
-                        child: IconButton(
-                            onPressed: () {
-                              Get.back();
-                            },
-                            icon: Icon(Icons.arrow_back_ios)))),*/
-
             Padding(
                 padding: const EdgeInsets.only(left: 12, top: 5),
                 child: IconButton(
@@ -96,8 +78,7 @@ class _PersonalArticleDetailsState extends State<PersonalArticleDetails> {
                               color: AppColor.mainColor),
                           child: TextButton(
                               onPressed: () {
-                                blogController.deleteArticle("id");
-                                Get.back();
+                                alertDeleteArticle();
                               },
                               child: Center(
                                   child: Text(
@@ -117,4 +98,37 @@ class _PersonalArticleDetailsState extends State<PersonalArticleDetails> {
       ]),
     );
   }
+}
+
+Future<bool> alertDeleteArticle() {
+  Get.defaultDialog(
+      radius: 30,
+      title: " Warning ",
+      titleStyle: const TextStyle(
+          color: AppColor.mainColor,
+          fontWeight: FontWeight.bold,
+          fontFamily: "Poppins"),
+      middleText: "Are you sure you want to delete the article ",
+      middleTextStyle: const TextStyle(fontFamily: "Poppins"),
+      actions: [
+        ElevatedButton(
+            style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(AppColor.mainColor)),
+            onPressed: () {
+              // blogController.deleteArticle("id");
+              Get.offAndToNamed(AppRoute.home);
+            },
+            child: const Text(
+              "Yes",
+              style: TextStyle(fontFamily: "Poppins"),
+            )),
+        ElevatedButton(
+            style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(AppColor.mainColor)),
+            onPressed: () {
+              Get.toNamed(AppRoute.home);
+            },
+            child: const Text("No", style: TextStyle(fontFamily: "Poppins"))),
+      ]);
+  return Future.value(true);
 }

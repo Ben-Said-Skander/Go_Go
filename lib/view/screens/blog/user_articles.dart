@@ -68,16 +68,6 @@ class _UserArticleState extends State<UserArticle> {
         SizedBox(
           height: 40,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            textButton(context, "Drug Experience", "blog", Colors.grey),
-            textButton(context, "Missing Drug", "missingBlog", Colors.grey),
-            textButton(context, "Seeking Help", "helpBlog", Colors.grey),
-            textButton(
-                context, "Your Articles", "userArticle", AppColor.mainColor),
-          ],
-        ),
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
           child: Text(
@@ -109,8 +99,6 @@ class _UserArticleState extends State<UserArticle> {
   }
 }
 
-
-
 textButton(BuildContext context, String title, String route, Color couleur) {
   return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
@@ -121,4 +109,3 @@ textButton(BuildContext context, String title, String route, Color couleur) {
         child: Text(title, style: TextStyle(fontSize: 12, color: couleur)),
       ));
 }
-

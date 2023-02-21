@@ -4,6 +4,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
+import 'package:pfa_application_1/core/functions/alertExit.dart';
 import 'package:pfa_application_1/view/screens/blog/blog.dart';
 import 'package:pfa_application_1/view/screens/medicine_description.dart';
 import 'package:pfa_application_1/view/screens/reminder.dart';
@@ -60,11 +61,13 @@ class _HomeState extends State<Home> {
             ),
           ),
         ),
-        body: IndexedStack(index: selectedIndex, children: [
-          Reminders(),
-          SearchPage(),
-          MedicineDescription(),
-          Blog(),
-        ]));
+        body: WillPopScope(
+            child: IndexedStack(index: selectedIndex, children: [
+              Reminders(),
+              SearchPage(),
+              MedicineDescription(),
+              Blog(),
+            ]),
+            onWillPop: alertExit));
   }
 }

@@ -7,8 +7,9 @@ import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/functions/alertExit.dart';
 import 'package:pfa_application_1/view/screens/blog/blog.dart';
 import 'package:pfa_application_1/view/screens/medicine_description.dart';
-import 'package:pfa_application_1/view/screens/reminder.dart';
-import 'package:pfa_application_1/view/screens/search_page.dart';
+import 'package:pfa_application_1/view/screens/reminders/reminder.dart';
+
+import 'package:pfa_application_1/view/screens/search%20page/search_page.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -42,7 +43,7 @@ class _HomeState extends State<Home> {
                   size: 20,
                 ),
                 Icon(
-                  FontAwesomeIcons.search,
+                  FontAwesomeIcons.magnifyingGlass,
                   size: 20,
                 ),
                 Icon(
@@ -62,12 +63,14 @@ class _HomeState extends State<Home> {
           ),
         ),
         body: WillPopScope(
-            child: IndexedStack(index: selectedIndex, children: [
+           child:
+            IndexedStack(index: selectedIndex, children: [
               Reminders(),
               SearchPage(),
               MedicineDescription(),
               Blog(),
             ]),
-            onWillPop: alertExit));
+          onWillPop: alertExit)
+           );
   }
 }

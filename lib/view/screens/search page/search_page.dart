@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:pfa_application_1/core/constants/colors.dart';
+
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});

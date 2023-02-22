@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:pfa_application_1/controllers/medicine_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/functions/alertDeleteMedicine.dart';
+import 'package:pfa_application_1/models/medicine.dart';
 
 class Details extends StatefulWidget {
   const Details({super.key});
@@ -14,6 +15,13 @@ class Details extends StatefulWidget {
 
 class _DetailsState extends State<Details> {
   MedicineController medicineController = Get.find();
+  late Future<Medicine> futureCard;
+  @override
+  void initState() {
+    futureCard = medicineController.getMedicine("id");
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -233,3 +241,85 @@ class MedicineInfo extends StatelessWidget {
     );
   }
 }
+/*       Get Details
+Scaffold(
+        body: Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(15, 40.0, 0, 40),
+          child: Row(
+            children: [
+              IconButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  icon: Icon(Icons.arrow_back_ios)),
+              Padding(
+                padding: const EdgeInsets.only(left: 108.0),
+                child: Center(
+                  child: Text(
+                    "Details",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Poppins",
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        FutureBuilder(
+            future: futureCard,
+            builder: ((context, snapshot) {
+              if (snapshot.hasData) {
+                return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      MedicineInfo(
+                          med_name: "Doliprane",
+                          med_dosage: "500mg",
+                          med_pic: "assets/piills.jpgh"),
+                      MidSectionInfo(
+                          med_type: "Pill",
+                          dosage_interval: "Every 6 hours",
+                          start_time: "14h"),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 50, 20, 0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25),
+                              color: AppColor.mainColor),
+                          child: TextButton(
+                              onPressed: () {
+                                alertDeleteMedicine();
+                                // medicineController.deleteMedicine("id");
+                                // Get.back();
+                              },
+                              child: Center(
+                                  child: Text(
+                                "Delete",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "Poppins",
+                                ),
+                              ))),
+                        ),
+                      ),
+                    ]);
+              } else {
+                return Padding(
+                  padding: const EdgeInsets.only(top: 250.0),
+                  child: Center(
+                      child: Text("Request failed",
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: AppColor.mainColor,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: "Poppins"))),
+                );
+              }
+            }))
+      ],
+    ));
+*/

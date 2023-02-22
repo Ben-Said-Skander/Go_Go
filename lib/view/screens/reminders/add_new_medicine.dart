@@ -191,7 +191,7 @@ class _AddMedicineState extends State<AddMedicine> {
             child: TextButton(
                 onPressed: () {
                   medicineController.addMedicine(
-                      "ska", 500, "xxx", "startingTime", "6");
+                      "ska", "500", "xxx", "startingTime", "6");
                   Get.back();
                 },
                 child: Center(

@@ -5,7 +5,7 @@ class Medicine {
   final String? name;
   final String? dosage;
   final String? type;
-  final int? interval;
+  final String? interval;
   final String? start_time;
 //Constructeur
   Medicine({

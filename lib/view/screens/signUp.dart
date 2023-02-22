@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pfa_application_1/controllers/register_controller.dart';
+
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
 
@@ -13,6 +15,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  RegisterController registerController = Get.find();
   late TextEditingController emailController;
   late TextEditingController passwordController;
   late TextEditingController phoneController;
@@ -159,6 +162,8 @@ class _SignUpState extends State<SignUp> {
                     ),
                     child: TextButton(
                         onPressed: () {
+                          /*registerController.register("Ben Said Skander",
+                              "bensaid303@gmail.com", "123", 99549510);*/
                           Get.toNamed(AppRoute.signIn);
                         },
                         child: Center(

@@ -32,7 +32,7 @@ class BlogCard extends StatelessWidget {
             children: [
               Center(
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(top: 15),
                   child: Image.asset(
                     blogPicture,
                     width: 150,
@@ -41,7 +41,7 @@ class BlogCard extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 30,
+                height: 15,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 18),
@@ -49,7 +49,7 @@ class BlogCard extends StatelessWidget {
                   blogTitle,
                   style: TextStyle(
                       color: Colors.black,
-                      fontSize: 14,
+                      fontSize: 13,
                       fontWeight: FontWeight.w700),
                 ),
               ),

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/user.dart';
 
-class Auth extends GetxController {
+class AuthController extends GetxController {
   Future<User> login(String email, String password) async {
     final response = await http.post(Uri.parse('https://localhost3600/auth'),
         body:

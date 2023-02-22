@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pfa_application_1/controllers/auth_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
 import 'package:pfa_application_1/view/widgets/wave_clipper.dart';
@@ -15,7 +16,7 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   late TextEditingController emailController;
   late TextEditingController passwordController;
-
+  AuthController authController = Get.find();
   @override
   void dispose() {
     emailController.dispose();
@@ -152,6 +153,7 @@ class _SignInState extends State<SignIn> {
                           TextStyle(color: Colors.white, fontFamily: "Poppins"),
                     ),
                     onPressed: () {
+                  //    authController.login("bensaid303@gmail.com", "123");
                       Get.offAndToNamed(AppRoute.home);
                     },
                   ))),

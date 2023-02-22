@@ -9,8 +9,6 @@ import 'package:pfa_application_1/view/widgets/component/reminder_med_card.dart'
 //import 'package:pfa_application_1/models/medicine.dart';
 import 'package:pfa_application_1/view/widgets/curve_clipper.dart';
 
-
-
 class Reminders extends StatefulWidget {
   const Reminders({super.key});
 
@@ -19,11 +17,11 @@ class Reminders extends StatefulWidget {
 }
 
 class _RemindersState extends State<Reminders> {
- // MedicineController medicineController = Get.find();
+  // MedicineController medicineController = Get.find();
   //late final Future<List<Medicine>> futureCard;
   @override
   void initState() {
-  //  futureCard = medicineController.fetchMedicines();
+    //  futureCard = medicineController.fetchMedicines();
     super.initState();
   }
 
@@ -31,6 +29,7 @@ class _RemindersState extends State<Reminders> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        heroTag: 'btn1',
         onPressed: () {
           Get.toNamed(AppRoute.addMedicine);
         },

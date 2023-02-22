@@ -6,7 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/functions/alertExit.dart';
 import 'package:pfa_application_1/view/screens/blog/blog.dart';
-import 'package:pfa_application_1/view/screens/medicine_description.dart';
+import 'package:pfa_application_1/view/screens/medicine%20description/medicine_description.dart';
 import 'package:pfa_application_1/view/screens/reminders/reminder.dart';
 
 import 'package:pfa_application_1/view/screens/search%20page/search_page.dart';

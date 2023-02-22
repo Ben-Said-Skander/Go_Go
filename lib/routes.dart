@@ -6,7 +6,7 @@ import 'package:pfa_application_1/core/constants/routes.dart';
 import 'package:pfa_application_1/view/screens/blog/personal_article_details.dart';
 import 'package:pfa_application_1/view/screens/blog/user_articles.dart';
 import 'package:pfa_application_1/view/screens/forget_password.dart';
-import 'package:pfa_application_1/view/screens/medicine_description.dart';
+import 'package:pfa_application_1/view/screens/medicine%20description/medicine_description.dart';
 import 'package:pfa_application_1/view/screens/onboarding_page.dart';
 import 'package:pfa_application_1/view/screens/reminders/medicine_details.dart';
 import 'package:pfa_application_1/view/screens/reminders/reminder.dart';
@@ -91,5 +91,5 @@ List<GetPage<dynamic>>? routes = [
       page: () => const PersonalArticleDetails(),
       binding: BlogBindings()),
   GetPage(
-      name: AppRoute.test, page: () => const test(), binding: BlogBindings()),
+      name: AppRoute.test, page: () => const test(), binding: MedicinesBindings()),
 ];

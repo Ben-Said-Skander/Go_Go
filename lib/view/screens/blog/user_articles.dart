@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
-import 'package:pfa_application_1/view/widgets/component/blog_card.dart';
-
+import 'package:pfa_application_1/view/widgets/component/user_blog_card.dart';
 
 class UserArticle extends StatefulWidget {
   const UserArticle({super.key});
@@ -105,7 +104,7 @@ class _UserArticleState extends State<UserArticle> {
                   crossAxisCount: 2),
               itemCount: 4,
               itemBuilder: ((context, index) {
-                return (BlogCard(
+                return (UserBlogCard(
                     blogTitle: "My experience with Doliprane",
                     blogPicture: "assets/image/piills.jpg"));
               })),

@@ -78,6 +78,7 @@ class _PersonalArticleDetailsState extends State<PersonalArticleDetails> {
                               color: AppColor.mainColor),
                           child: TextButton(
                               onPressed: () {
+                                // blogController.deleteArticle("id");
                                 alertDeleteArticle();
                               },
                               child: Center(

@@ -4,6 +4,11 @@ import 'package:http/http.dart' as http;
 import '../models/user.dart';
 
 class UserController extends GetxController {
+  Future<User> getUser(String id) async {
+    final response = await http.get(Uri.parse('https://localhost3600/user'));
+    return User.fromJson(jsonDecode(response.body));
+  }
+
   Future<User> updateEmail(String email) async {
     final response = await http.patch(
         Uri.parse('https://localhost3600/user/updateEmail'),

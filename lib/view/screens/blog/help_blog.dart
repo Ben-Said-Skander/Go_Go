@@ -19,6 +19,7 @@ class _HelpBlogState extends State<HelpBlog> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        heroTag: 'btn4',
         onPressed: () {
           Get.toNamed(AppRoute.addBlog);
         },

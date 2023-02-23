@@ -22,6 +22,7 @@ class _AddBlogState extends State<AddBlog> {
 
   late TextEditingController titleController;
   late TextEditingController bodyController;
+
   String dropdownvalue = "Drug Experience";
   var categories = [
     "Drug Experience",
@@ -229,9 +230,10 @@ class _AddBlogState extends State<AddBlog> {
                 color: AppColor.mainColor),
             child: TextButton(
                 onPressed: () {
-                  blogController.fetchArticles();
-                  //blogController.createArticle("NewBlog", "neww", "newww");
-                  // Get.back();
+                  //blogController.fetchArticles();
+                  blogController.createArticle(
+                      titleController.text, "category", bodyController.text);
+                  Get.back();
                 },
                 child: Center(
                     child: Text(

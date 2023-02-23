@@ -11,7 +11,7 @@ class UserBlogCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          Get.toNamed(AppRoute.userArticle);
+          Get.toNamed(AppRoute.personalArticleDetails);
         },
         child: Container(
           decoration: BoxDecoration(

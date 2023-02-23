@@ -11,15 +11,4 @@ class MedicineDescription {
       this.indications_and_usage,
       this.description,
       this.generic_name});
-
-  factory MedicineDescription.fromJson(Map<String, dynamic> parsedJson) {
-    return MedicineDescription(
-      // notificationID: parsedJson["ids"],
-      adverse_reactions: parsedJson["adverse_reactions"],
-      dosage_and_administration: parsedJson["dosage_and_administration"],
-      indications_and_usage: parsedJson["indications_and_usage"],
-      description: parsedJson["description"],
-      generic_name: parsedJson["generic_name"],
-    );
-  }
 }

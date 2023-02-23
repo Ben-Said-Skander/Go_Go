@@ -1,8 +1,11 @@
 // ignore_for_file: prefer_const_constructors, non_constant_identifier_names, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, recursive_getters, sized_box_for_whitespace
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pfa_application_1/controllers/blog_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
-import 'package:pfa_application_1/core/constants/routes.dart';
+
+import 'package:pfa_application_1/models/blog.dart';
+import 'package:pfa_application_1/view/widgets/component/blog_card.dart';
 import 'package:pfa_application_1/view/widgets/component/medicine_card.dart';
 
 class SeeAll extends StatefulWidget {
@@ -13,6 +16,14 @@ class SeeAll extends StatefulWidget {
 }
 
 class _SeeAllState extends State<SeeAll> {
+  BlogController blogController = Get.find();
+  late Future<List<Blog>> futureCard;
+  @override
+  void initState() {
+    futureCard = blogController.fetchArticles();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,21 +81,43 @@ class _SeeAllState extends State<SeeAll> {
           ),
         ),
         Container(
-          height: 560,
-          padding: EdgeInsets.only(top: 10),
-          child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2),
-              itemCount: 4,
-              itemBuilder: ((context, index) {
-                return MedCard(
-                    med_name: "Doliprane",
-                    med_pic: "assets/image/sirop.jpg",
-                    med_interval: "Every 8 hours");
-              })),
-        ),
+            height: 560,
+            padding: EdgeInsets.only(top: 10),
+            child: FutureBuilder<List<Blog>>(
+                future: futureCard,
+                builder: ((context, snapshot) {
+                  if (snapshot.hasData) {
+                    return GridView.builder(
+                        itemCount: snapshot.data!.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2),
+                        itemBuilder: ((context, index) {
+                          return BlogCard(
+                              blogTitle: "My experience with Doliprane",
+                              blogPicture: "assets/image/piills.jpg");
+                        }));
+                  } else {
+                    return GridView.builder(
+                        itemCount: 4,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2),
+                        itemBuilder: ((context, index) {
+                          return BlogCard(
+                              blogTitle: "My experience with Doliprane",
+                              blogPicture: "assets/image/piills.jpg");
+                        }));
+                    /*
+                    return Center(
+                        child: Text("No Articles found",
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: "Poppins")));*/
+                  }
+                }))),
       ]),
     );
   }
 }
-

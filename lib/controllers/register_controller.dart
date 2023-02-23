@@ -8,6 +8,7 @@ class RegisterController extends GetxController {
       String fullname, String email, String password, int phoneNumber) async {
     final response =
         await http.post(Uri.parse('http://192.168.4.161:3600//register'),
+            headers: {"Content-Type": "Application/json"},
             body: jsonEncode(<String, dynamic>{
               'fullname': fullname,
               'phoneNumber': phoneNumber,

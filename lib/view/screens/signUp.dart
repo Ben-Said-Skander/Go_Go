@@ -20,14 +20,14 @@ class _SignUpState extends State<SignUp> {
   late TextEditingController passwordController;
   late TextEditingController phoneController;
   late TextEditingController nameController;
-  late TextEditingController confirmPasswordController;
+
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
     phoneController.dispose();
     nameController.dispose();
-    confirmPasswordController.dispose();
+
     super.dispose();
   }
 
@@ -37,7 +37,7 @@ class _SignUpState extends State<SignUp> {
     phoneController = TextEditingController();
     nameController = TextEditingController();
     passwordController = TextEditingController();
-    confirmPasswordController = TextEditingController();
+
     super.initState();
   }
 
@@ -162,8 +162,13 @@ class _SignUpState extends State<SignUp> {
                     ),
                     child: TextButton(
                         onPressed: () {
-                          /*registerController.register("Ben Said Skander",
-                              "bensaid303@gmail.com", "123", 99549510);*/
+                          registerController.register(
+                              nameController.text,
+                              emailController.text,
+                              passwordController.text,
+                              phoneController.hashCode
+                              //99549510
+                              );
                           Get.toNamed(AppRoute.signIn);
                         },
                         child: Center(

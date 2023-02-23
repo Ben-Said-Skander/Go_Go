@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:pfa_application_1/controllers/blog_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
+import 'package:pfa_application_1/models/blog.dart';
 
 class PersonalArticleDetails extends StatefulWidget {
   const PersonalArticleDetails({super.key});
@@ -15,87 +16,182 @@ class PersonalArticleDetails extends StatefulWidget {
 
 class _PersonalArticleDetailsState extends State<PersonalArticleDetails> {
   BlogController blogController = Get.find();
+  late Future<Blog> futureArticle;
+  @override
+  void initState() {
+    futureArticle = blogController.getArticle("id");
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //   backgroundColor: Colors.white,
       body: ListView(children: [
-        Stack(
-          children: [
-            Image.asset(
-              "assets/image/doliprane.jpg",
-            ),
-            Padding(
-                padding: const EdgeInsets.only(left: 12, top: 5),
-                child: IconButton(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    icon: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.black,
-                    ))),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 190, 0, 0),
-              child: Container(
-                height: 622,
-                width: double.infinity,
-                //   height: 800,
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 240, 240, 240),
-                  borderRadius: BorderRadius.circular(40),
-                ),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 12,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(22, 10, 0, 10),
-                        child: Text("Blog Title",
-                            style: TextStyle(
-                                color: AppColor.mainColor,
-                                fontFamily: "Poppins",
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold)),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20, top: 40),
-                        child: Text("Blog body is here",
-                            style: TextStyle(
-                              fontSize: 16,
-                            )),
-                      ),
-                      SizedBox(
-                        height: 300,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 90, 20, 0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
-                              color: AppColor.mainColor),
-                          child: TextButton(
-                              onPressed: () {
-                                // blogController.deleteArticle("id");
-                                alertDeleteArticle();
-                              },
-                              child: Center(
-                                  child: Text(
-                                "Delete",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "Poppins",
-                                ),
-                              ))),
+        FutureBuilder(
+            future: futureArticle,
+            builder: ((context, snapshot) {
+              if (snapshot.hasData) {
+                return Stack(
+                  children: [
+                    Image.asset(
+                      "assets/image/doliprane.jpg",
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.only(left: 12, top: 5),
+                        child: IconButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            icon: Icon(
+                              Icons.arrow_back_ios,
+                              color: Colors.black,
+                            ))),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 190, 0, 0),
+                      child: Container(
+                        height: 622,
+                        width: double.infinity,
+                        //   height: 800,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 240, 240, 240),
+                          borderRadius: BorderRadius.circular(40),
                         ),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 12,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(22, 10, 0, 10),
+                                child: Text("Blog Title",
+                                    style: TextStyle(
+                                        color: AppColor.mainColor,
+                                        fontFamily: "Poppins",
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 20, top: 40),
+                                child: Text("Blog body is here",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                    )),
+                              ),
+                              SizedBox(
+                                height: 300,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(20, 90, 20, 0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(25),
+                                      color: AppColor.mainColor),
+                                  child: TextButton(
+                                      onPressed: () {
+                                        blogController.deleteArticle("id");
+                                        alertDeleteArticle();
+                                      },
+                                      child: Center(
+                                          child: Text(
+                                        "Delete",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "Poppins",
+                                        ),
+                                      ))),
+                                ),
+                              ),
+                            ]),
                       ),
-                    ]),
-              ),
-            ),
-          ],
-        )
+                    ),
+                  ],
+                );
+              } else {
+                return Stack(
+                  children: [
+                    Image.asset(
+                      "assets/image/doliprane.jpg",
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.only(left: 12, top: 5),
+                        child: IconButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            icon: Icon(
+                              Icons.arrow_back_ios,
+                              color: Colors.black,
+                            ))),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 190, 0, 0),
+                      child: Container(
+                        height: 622,
+                        width: double.infinity,
+                        //   height: 800,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 240, 240, 240),
+                          borderRadius: BorderRadius.circular(40),
+                        ),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 12,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(22, 10, 0, 10),
+                                child: Text("Blog Title",
+                                    style: TextStyle(
+                                        color: AppColor.mainColor,
+                                        fontFamily: "Poppins",
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 20, top: 40),
+                                child: Text("Blog body is here",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                    )),
+                              ),
+                              SizedBox(
+                                height: 300,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(20, 90, 20, 0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(25),
+                                      color: AppColor.mainColor),
+                                  child: TextButton(
+                                      onPressed: () {
+                                        blogController.deleteArticle("id");
+                                        alertDeleteArticle();
+                                      },
+                                      child: Center(
+                                          child: Text(
+                                        "Delete",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "Poppins",
+                                        ),
+                                      ))),
+                                ),
+                              ),
+                            ]),
+                      ),
+                    ),
+                  ],
+                );
+              }
+            }))
       ]),
     );
   }

@@ -2,8 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pfa_application_1/controllers/blog_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
+import 'package:pfa_application_1/models/blog.dart';
 import 'package:pfa_application_1/view/widgets/component/blog_card.dart';
 
 class MissingBlog extends StatefulWidget {
@@ -14,6 +16,14 @@ class MissingBlog extends StatefulWidget {
 }
 
 class _MissingBlogState extends State<MissingBlog> {
+  BlogController blogController = Get.find();
+  late Future<List<Blog>> futureCard;
+  @override
+  void initState() {
+    futureCard = blogController.fetchArticles();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,24 +49,28 @@ class _MissingBlogState extends State<MissingBlog> {
             ),
             child: Row(
               children: [
-                SizedBox(
-                  width: 40,
+                Center(
+                  child: Padding(
+                      padding: const EdgeInsets.only(left: 40),
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.toNamed(AppRoute.settings);
+                        },
+                        child: CircleAvatar(
+                          backgroundImage: AssetImage(
+                            "assets/image/me2.jpg",
+                          ),
+                          radius: 28,
+                        ),
+                      )),
                 ),
-                IconButton(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    icon: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                    )),
                 SizedBox(
                   width: 22,
                 ),
                 Text(
-                  "Missing Drug",
+                  "Ben Said Skander",
                   style: TextStyle(
-                      color: Colors.white, fontSize: 20, fontFamily: "Poppins"),
+                      color: Colors.white, fontSize: 19, fontFamily: "Poppins"),
                 ),
               ],
             ),
@@ -70,7 +84,7 @@ class _MissingBlogState extends State<MissingBlog> {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
               child: Text(
-                "All Articles ",
+                "Missing Drug ",
                 style: TextStyle(
                   color: AppColor.mainColor,
                   fontWeight: FontWeight.w700,
@@ -94,18 +108,31 @@ class _MissingBlogState extends State<MissingBlog> {
           ],
         ),
         Container(
-          height: 600,
-          padding: EdgeInsets.only(top: 0),
-          child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2),
-              itemCount: 4,
-              itemBuilder: ((context, index) {
-                return (BlogCard(
-                    blogTitle: "My experience with Doliprane",
-                    blogPicture: "assets/image/piills.jpg"));
-              })),
-        ),
+            height: 560,
+            padding: EdgeInsets.only(top: 35),
+            child: FutureBuilder<List<Blog>>(
+                future: futureCard,
+                builder: ((context, snapshot) {
+                  if (snapshot.hasData) {
+                    return GridView.builder(
+                        itemCount: snapshot.data!.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2),
+                        itemBuilder: ((context, index) {
+                          return BlogCard(
+                              blogTitle: "My experience with Doliprane",
+                              blogPicture: "assets/image/piills.jpg");
+                        }));
+                  } else {
+                    return Center(
+                        child: Text("No Articles found",
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: "Poppins")));
+                  }
+                }))),
       ]),
     );
   }

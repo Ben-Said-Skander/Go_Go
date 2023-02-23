@@ -29,7 +29,7 @@ import 'view/screens/signUp.dart';
 
 List<GetPage<dynamic>>? routes = [
   GetPage(name: AppRoute.onBoarding, page: () => const OnBoarding()),
-  GetPage(name: AppRoute.home, page: () => const Home()),
+  GetPage(name: AppRoute.home, page: () => const Home(),bindings: [BlogBindings(),MedicinesBindings()]),
   GetPage(
       name: AppRoute.details,
       page: () => const Details(),

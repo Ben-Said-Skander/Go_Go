@@ -132,7 +132,7 @@ class _SignInState extends State<SignIn> {
                         color: Color.fromARGB(255, 16, 152, 170),
                         fontSize: 14)),
                 onTap: () {
-                 Get.toNamed(AppRoute.forgotPassword) ;
+                  Get.toNamed(AppRoute.forgotPassword);
                 },
               ),
             ),
@@ -153,7 +153,8 @@ class _SignInState extends State<SignIn> {
                           TextStyle(color: Colors.white, fontFamily: "Poppins"),
                     ),
                     onPressed: () {
-                  //    authController.login("bensaid303@gmail.com", "123");
+                      authController.login(
+                          emailController.text, passwordController.text);
                       Get.offAndToNamed(AppRoute.home);
                     },
                   ))),

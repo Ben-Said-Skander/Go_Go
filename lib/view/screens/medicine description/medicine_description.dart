@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
+
 import 'package:pfa_application_1/core/constants/colors.dart';
 
 class MedicineDescription extends StatefulWidget {
@@ -72,7 +72,7 @@ class _MedicineDescriptionState extends State<MedicineDescription> {
                         hintText: "Search for your medicines",
                         hintStyle: TextStyle(color: Colors.black),
                         prefixIcon:
-                            Icon(FontAwesomeIcons.search, color: Colors.black),
+                            Icon(FontAwesomeIcons.magnifyingGlass, color: Colors.black),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 color: Color.fromARGB(255, 200, 200, 200)),

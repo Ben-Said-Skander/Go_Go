@@ -66,7 +66,7 @@ class _SearchPageState extends State<SearchPage> {
                             filled: true,
                             hintText: "Locate your medicines",
                             hintStyle: TextStyle(color: Colors.black),
-                            prefixIcon: Icon(FontAwesomeIcons.search,
+                            prefixIcon: Icon(FontAwesomeIcons.magnifyingGlass,
                                 color: Colors.black),
                             enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),

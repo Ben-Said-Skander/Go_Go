@@ -104,10 +104,11 @@ class _AddMedicineState extends State<AddMedicine> {
           child: TextFormField(
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
-                focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: AppColor.secondryColor)),
-                hintText: "Dosage",
-                prefixIcon: Icon(FontAwesomeIcons.pills)),
+              focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: AppColor.secondryColor)),
+              hintText: "Dosage",
+              prefixIcon: Icon(FontAwesomeIcons.hashtag),
+            ),
             controller: med_dosageController,
             cursorColor: Color.fromARGB(255, 16, 152, 170),
           ),
@@ -189,9 +190,13 @@ class _AddMedicineState extends State<AddMedicine> {
                 color: AppColor.mainColor),
             child: TextButton(
                 onPressed: () {
-                  /*medicineController.addMedicine(
-                      "lallounti", "500", "xxx", "startingTime", "6");*/
-                  medicineController.fetchMedicines();
+                  medicineController.addMedicine(
+                      med_nameController.text,
+                      med_dosageController.text,
+                      "xxx",
+                      starting_timeController.text,
+                      "6");
+                //  medicineController.fetchMedicines();
                   Get.back();
                 },
                 child: Center(
@@ -241,6 +246,8 @@ class _MedicineTypeState extends State<MedicineType> {
   int pillsIndex = 0;
   int syringeIndex = 0;
 
+  int typeIndex = 0;
+
   Color bottleColor = Colors.grey;
   Color pillsColor = Colors.grey;
   Color syringeColor = Colors.grey;
@@ -260,6 +267,10 @@ class _MedicineTypeState extends State<MedicineType> {
                 iconSize: 70,
                 onPressed: () {
                   setState(() {
+                    // To test what type of medicine it is
+                    typeIndex = 1;
+                    print(typeIndex);
+                    /************** */
                     bottleIndex = 1;
                     pillsIndex = 0;
                     syringeIndex = 0;
@@ -280,6 +291,10 @@ class _MedicineTypeState extends State<MedicineType> {
               IconButton(
                 onPressed: () {
                   setState(() {
+                    // To test what type of medicine it is
+                    typeIndex = 2;
+                    print(typeIndex);
+                    /************** */
                     pillsIndex = 1;
                     bottleIndex = 0;
                     syringeIndex = 0;
@@ -301,6 +316,10 @@ class _MedicineTypeState extends State<MedicineType> {
               IconButton(
                 onPressed: () {
                   setState(() {
+                    // To test what type of medicine it is
+                    typeIndex = 3;
+                    print(typeIndex);
+                    /************** */
                     syringeIndex = 1;
                     pillsIndex = 0;
                     bottleIndex = 0;

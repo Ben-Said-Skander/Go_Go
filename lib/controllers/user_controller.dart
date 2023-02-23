@@ -14,7 +14,7 @@ class UserController extends GetxController {
     final response = await http.patch(
         Uri.parse('http://192.168.4.161:3600/user/updateEmail'),
         body: <String, String>{'email': email});
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200) {
       return User.fromJson(json.decode(response.body));
     } else {
       throw Exception('User update failed');
@@ -25,7 +25,7 @@ class UserController extends GetxController {
     final response = await http.patch(
         Uri.parse('http://192.168.4.161:3600/user/updateName'),
         body: <String, String>{'name': name});
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200) {
       return User.fromJson(json.decode(response.body));
     } else {
       throw Exception('User update failed');
@@ -36,7 +36,7 @@ class UserController extends GetxController {
     final response = await http.patch(
         Uri.parse('http://192.168.4.161:3600/user/updatePhone'),
         body: <dynamic, int>{'phone': phone});
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200) {
       return User.fromJson(json.decode(response.body));
     } else {
       throw Exception('User update failed');

@@ -229,8 +229,9 @@ class _AddBlogState extends State<AddBlog> {
                 color: AppColor.mainColor),
             child: TextButton(
                 onPressed: () {
-                  blogController.createArticle("blog333", "neww", "newww");
-                  Get.back();
+                  blogController.fetchArticles();
+                  //blogController.createArticle("NewBlog", "neww", "newww");
+                  // Get.back();
                 },
                 child: Center(
                     child: Text(

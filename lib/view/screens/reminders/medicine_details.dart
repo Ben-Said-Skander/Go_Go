@@ -18,7 +18,7 @@ class _DetailsState extends State<Details> {
   late Future<Medicine> futureCard;
   @override
   void initState() {
-    futureCard = medicineController.getMedicine("id");
+    //   futureCard = medicineController.getMedicine("id");
     super.initState();
   }
 
@@ -66,7 +66,10 @@ class _DetailsState extends State<Details> {
               color: AppColor.mainColor),
           child: TextButton(
               onPressed: () {
-                alertDeleteMedicine();
+                  alertDeleteMedicine();
+                //medicineController.deleteMedicine("63f64cc6326d2f515c529aa4");
+                //medicineController.fetchMedicines();
+               // medicineController.addMedicine("xx", "xx", "xx", "xx", "xx");
                 // medicineController.deleteMedicine("id");
                 // Get.back();
               },

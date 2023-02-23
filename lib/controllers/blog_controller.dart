@@ -7,14 +7,18 @@ import '../models/blog.dart';
 
 class BlogController extends GetxController {
   Future<Blog> createArticle(String title, String category, String body) async {
-    final response = await http.post(Uri.parse('http://192.168.4.161:3600/blog'),
+    final response = await http.post(
+        Uri.parse('http://192.168.101.161:3600/blog'),
+        headers: {"Content-Type": "Application/json"},
         body: jsonEncode(<String, String>{
           'title': title,
           'category': category,
           'body': body
         }));
     if (response.statusCode == 201) {
-      return Blog.fromJson(json.decode(response.body));
+      var article = Blog.fromJson(json.decode(response.body));
+      print(article);
+      return article;
     } else {
       throw Exception('Blog loading failed');
     }
@@ -22,9 +26,11 @@ class BlogController extends GetxController {
 
   Future<Blog> deleteArticle(String id) async {
     final response =
-        await http.delete(Uri.parse('http://192.168.4.161:3600/blog/$id'));
+        await http.delete(Uri.parse('http://192.168.101.161:3600/blog/$id'));
     if (response.statusCode == 200) {
-      return Blog.fromJson(json.decode(response.body));
+      var article = Blog.fromJson(json.decode(response.body));
+      print(article);
+      return article;
     } else {
       ;
       throw Exception('Failed to delete Blog');
@@ -33,20 +39,25 @@ class BlogController extends GetxController {
 
   Future<Blog> getArticle(String id) async {
     final response =
-        await http.get(Uri.parse('http://192.168.4.161:3600/blog/$id'));
-    if (response.statusCode == 201) {
-      return Blog.fromJson(json.decode(response.body));
+        await http.get(Uri.parse('http://192.168.101.161:3600/blog/$id'));
+    if (response.statusCode == 200) {
+      var article = Blog.fromJson(json.decode(response.body));
+      print(article);
+      return article;
     } else {
       throw Exception('Failed to delete Medicine');
     }
   }
 
   Future<List<Blog>> fetchArticles() async {
-    final response = await http.get(Uri.parse('http://192.168.4.161:3600/blog'));
+    final response =
+        await http.get(Uri.parse('http://192.168.101.161:3600/blog'));
 
     if (response.statusCode == 200) {
       final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
-      return parsed.map<Blog>((e) => Blog.fromJson(e)).toList();
+      var articles = parsed.map<Blog>((e) => Blog.fromJson(e)).toList();
+      print(articles);
+      return articles;
     } else {
       throw Exception('Failed to load Articles');
     }

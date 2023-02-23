@@ -18,7 +18,7 @@ class _BlogDetailsState extends State<BlogDetails> {
   late Future<Blog> futureCard;
   @override
   void initState() {
-    futureCard = blogController.getArticle("id");
+   // futureCard = blogController.getArticle("id");
     super.initState();
   }
 

@@ -5,7 +5,8 @@ import '../models/user.dart';
 
 class AuthController extends GetxController {
   Future<User> login(String email, String password) async {
-    final response = await http.post(Uri.parse('https://localhost3600/auth'),
+    final response = await http.post(
+        Uri.parse('http://192.168.4.161:3600/auth'),
         body:
             jsonEncode(<String, String>{'email': email, 'password': password}));
     if (response.statusCode == 201) {

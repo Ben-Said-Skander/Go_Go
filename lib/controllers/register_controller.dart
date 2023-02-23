@@ -7,7 +7,7 @@ class RegisterController extends GetxController {
   Future<User> register(
       String fullname, String email, String password, int phoneNumber) async {
     final response =
-        await http.post(Uri.parse('https://localhost3600/register'),
+        await http.post(Uri.parse('http://192.168.4.161:3600//register'),
             body: jsonEncode(<String, dynamic>{
               'fullname': fullname,
               'phoneNumber': phoneNumber,

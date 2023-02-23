@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:pfa_application_1/controllers/medicine_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 
-
 class AddMedicine extends StatefulWidget {
   const AddMedicine({super.key});
 
@@ -190,8 +189,9 @@ class _AddMedicineState extends State<AddMedicine> {
                 color: AppColor.mainColor),
             child: TextButton(
                 onPressed: () {
-                  medicineController.addMedicine(
-                      "ska", "500", "xxx", "startingTime", "6");
+                  /*medicineController.addMedicine(
+                      "lallounti", "500", "xxx", "startingTime", "6");*/
+                  medicineController.fetchMedicines();
                   Get.back();
                 },
                 child: Center(

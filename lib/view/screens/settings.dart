@@ -82,7 +82,7 @@ class _SettingsState extends State<Settings> {
               return Padding(
                 padding: const EdgeInsets.only(top: 28.0),
                 child: Center(
-                    child: Text("No Reminders found",
+                    child: Text("Request failed",
                         style: TextStyle(
                             fontSize: 20,
                             color: AppColor.mainColor,

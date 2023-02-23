@@ -38,20 +38,19 @@ class _UserArticleState extends State<UserArticle> {
             ),
             child: Row(
               children: [
-                Center(
-                  child: Padding(
-                      padding: const EdgeInsets.only(left: 40),
-                      child: GestureDetector(
-                        onTap: () {
-                          Get.toNamed(AppRoute.settings);
-                        },
-                        child: CircleAvatar(
-                          backgroundImage: AssetImage(
-                            "assets/image/me2.jpg",
-                          ),
-                          radius: 28,
-                        ),
-                      )),
+                SizedBox(
+                  width: 40,
+                ),
+                IconButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.white,
+                    )),
+                SizedBox(
+                  width: 22,
                 ),
                 SizedBox(
                   width: 22,
@@ -59,7 +58,7 @@ class _UserArticleState extends State<UserArticle> {
                 Text(
                   "Ben Said Skander",
                   style: TextStyle(
-                      color: Colors.white, fontSize: 19, fontFamily: "Poppins"),
+                      color: Colors.white, fontSize: 20, fontFamily: "Poppins"),
                 ),
               ],
             ),

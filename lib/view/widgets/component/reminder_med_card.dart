@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
 
-
 class ReminderMedCard extends StatelessWidget {
   const ReminderMedCard(
       {Key? key,
@@ -63,7 +62,7 @@ class ReminderMedCard extends StatelessWidget {
                 child: Text(
                   med_interval,
                   style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.cyan,
                       fontSize: 14,
                       fontWeight: FontWeight.w700),
                 ),

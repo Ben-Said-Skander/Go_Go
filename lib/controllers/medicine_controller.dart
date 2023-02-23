@@ -9,7 +9,8 @@ class MedicineController extends GetxController {
   Future<Medicine> addMedicine(String name, String dosage, String type,
       String interval, String start_time) async {
     final response =
-        await http.post(Uri.parse('http://192.168.4.161:3600/medicines'),
+        await http.post(Uri.parse('http://192.168.101.161:3600/medicines'),
+            headers: {"Content-Type": "Application/json"},
             body: jsonEncode(<String, String>{
               'name': name,
               'dosage': dosage,
@@ -19,17 +20,21 @@ class MedicineController extends GetxController {
             }));
 
     if (response.statusCode == 201) {
-      return Medicine.fromJson(json.decode(response.body));
+      var medicine = Medicine.fromJson(json.decode(response.body));
+      print(medicine);
+      return medicine;
     } else {
       throw Exception('Medicine loading failed');
     }
   }
 
   Future<Medicine> deleteMedicine(String id) async {
-    final response =
-        await http.delete(Uri.parse('http://192.168.4.161:3600/medicines/$id'));
+    final response = await http
+        .delete(Uri.parse('http://192.168.101.161:3600/medicines/$id'));
     if (response.statusCode == 200) {
-      return Medicine.fromJson(json.decode(response.body));
+      var medicine = Medicine.fromJson(json.decode(response.body));
+      print(medicine);
+      return medicine;
     } else {
       throw Exception('Failed to delete Medicine');
     }
@@ -37,9 +42,11 @@ class MedicineController extends GetxController {
 
   Future<Medicine> getMedicine(String id) async {
     final response =
-        await http.get(Uri.parse('http://192.168.4.161:3600/medicines/$id'));
-    if (response.statusCode == 201) {
-      return Medicine.fromJson(json.decode(response.body));
+        await http.get(Uri.parse('http://192.168.101.161:3600/medicines/$id'));
+    if (response.statusCode == 200) {
+      var medicine = Medicine.fromJson(json.decode(response.body));
+      print(medicine);
+      return medicine;
     } else {
       throw Exception('Failed to load Medicine');
     }
@@ -47,11 +54,14 @@ class MedicineController extends GetxController {
 
   Future<List<Medicine>> fetchMedicines() async {
     final response =
-        await http.get(Uri.parse('http://192.168.4.161:3600/medicines'));
+        await http.get(Uri.parse('http://192.168.101.161:3600/medicines'));
 
     if (response.statusCode == 200) {
       final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
-      return parsed.map<Medicine>((e) => Medicine.fromJson(e)).toList();
+      var medicineList =
+          parsed.map<Medicine>((e) => Medicine.fromJson(e)).toList();
+      print(medicineList);
+      return medicineList;
     } else {
       throw Exception('Failed to load Medicines');
     }

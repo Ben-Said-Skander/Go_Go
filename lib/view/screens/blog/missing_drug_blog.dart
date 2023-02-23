@@ -6,7 +6,6 @@ import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
 import 'package:pfa_application_1/view/widgets/component/blog_card.dart';
 
-
 class MissingBlog extends StatefulWidget {
   const MissingBlog({super.key});
 
@@ -40,28 +39,24 @@ class _MissingBlogState extends State<MissingBlog> {
             ),
             child: Row(
               children: [
-                Center(
-                  child: Padding(
-                      padding: const EdgeInsets.only(left: 40),
-                      child: GestureDetector(
-                        onTap: () {
-                          Get.toNamed(AppRoute.settings);
-                        },
-                        child: CircleAvatar(
-                          backgroundImage: AssetImage(
-                            "assets/image/me2.jpg",
-                          ),
-                          radius: 28,
-                        ),
-                      )),
+                SizedBox(
+                  width: 40,
                 ),
+                IconButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.white,
+                    )),
                 SizedBox(
                   width: 22,
                 ),
                 Text(
-                  "Ben Said Skander",
+                  "Missing Drug",
                   style: TextStyle(
-                      color: Colors.white, fontSize: 19, fontFamily: "Poppins"),
+                      color: Colors.white, fontSize: 20, fontFamily: "Poppins"),
                 ),
               ],
             ),
@@ -75,7 +70,7 @@ class _MissingBlogState extends State<MissingBlog> {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
               child: Text(
-                "Missing Drug ",
+                "All Articles ",
                 style: TextStyle(
                   color: AppColor.mainColor,
                   fontWeight: FontWeight.w700,

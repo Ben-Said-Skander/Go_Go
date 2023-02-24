@@ -19,7 +19,7 @@ class RemoteService extends GetxController {
               e.indicationsAndUsage,
               e.generic_name,
               e.description));
-
+      print(medicinesList);
       return medicinesList;
     } else {
       throw Exception('Failed to load Medicines');

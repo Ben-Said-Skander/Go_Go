@@ -3,8 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:pfa_application_1/models/medicine_desciption.dart';
-import 'package:pfa_application_1/service/remote.dart';
+import 'package:pfa_application_1/controllers/pharmacyController.dart';
+
+import 'package:pfa_application_1/models/pharmacy.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -14,10 +15,10 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-RemoteService remoteService=Get.find() ;
-  late Future<List<MedicineDescription>> drugsList;
   late TextEditingController searchController;
-
+  PharmacyController pharmacyController = Get.find();
+  late final Future<List<Pharmacy>> futureLocations =
+      pharmacyController.getAllPharmacies();
   @override
   void dispose() {
     searchController.dispose();
@@ -26,7 +27,6 @@ RemoteService remoteService=Get.find() ;
 
   @override
   void initState() {
-    drugsList = remoteService.getMedicines();
     searchController = TextEditingController();
     super.initState();
   }
@@ -37,7 +37,7 @@ RemoteService remoteService=Get.find() ;
         body: Column(
       children: [
         FutureBuilder(
-            future: drugsList,
+            future: futureLocations,
             builder: ((context, snapshot) {
               if (snapshot.hasData) {
                 return SafeArea(

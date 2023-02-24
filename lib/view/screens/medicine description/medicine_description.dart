@@ -5,30 +5,31 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import 'package:pfa_application_1/core/constants/colors.dart';
+import 'package:pfa_application_1/models/medicine_desciption.dart';
 import 'package:pfa_application_1/service/remote.dart';
 
-class MedicineDescription extends StatefulWidget {
-  const MedicineDescription({super.key});
+class MedicineDescriptionPage extends StatefulWidget {
+  const MedicineDescriptionPage({super.key});
 
   @override
-  State<MedicineDescription> createState() => _MedicineDescriptionState();
+  State<MedicineDescriptionPage> createState() => _MedicineDescriptionState();
 }
 
-class _MedicineDescriptionState extends State<MedicineDescription> {
+class _MedicineDescriptionState extends State<MedicineDescriptionPage> {
   late TextEditingController searchController;
   RemoteService remoteService = Get.find();
-  late Future<List<MedicineDescription>> drugsList;
+  late Future<List<MedicineDescription>> futureCard;
   @override
   void dispose() {
     searchController.dispose();
-    // drugsList=remoteService.getMedicines();
+
     super.dispose();
   }
 
   @override
   void initState() {
     searchController = TextEditingController();
-
+    futureCard = remoteService.getMedicines();
     super.initState();
   }
 
@@ -36,90 +37,129 @@ class _MedicineDescriptionState extends State<MedicineDescription> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppColor.mainColor,
-        body: ListView(children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 32, left: 25),
-            child: Text("Search for your medicines",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: "Poppins")),
-          ),
-          SizedBox(
-            height: 40,
-          ),
-          Stack(
-            children: [
-              Container(
-                height: 800,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(100.0),
-                      topRight: Radius.circular(100),
-                    )),
-              ),
-              Container(
-                height: 100,
-                child: ListView(children: [
-                  Container(
-                    padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
-                    width: 100,
-                    child: TextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        fillColor: Colors.white,
-                        filled: true,
-                        hintText: "Search for your medicines",
-                        hintStyle: TextStyle(color: Colors.black),
-                        prefixIcon: Icon(FontAwesomeIcons.magnifyingGlass,
-                            color: Colors.black),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 200, 200, 200)),
-                            borderRadius: BorderRadius.circular(30)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 200, 200, 200)),
-                            borderRadius: BorderRadius.circular(30)),
-                      ),
-                      controller: searchController,
-                      cursorColor: Color.fromARGB(255, 16, 152, 170),
+        backgroundColor: Colors.white,
+        body: FutureBuilder(
+            future: futureCard,
+            builder: ((context, snapshot) {
+              return ListView(children: [
+                Stack(
+                  children: [
+                    Container(
+                      height: 150,
+                      color: AppColor.mainColor,
                     ),
-                  ),
-                ]),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 130.0, left: 25),
-                child: Text("Medicine name",
-                    style: TextStyle(
-                        color: AppColor.mainColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: "Poppins")),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 270.0, left: 25),
-                child: Text("Description",
-                    style: TextStyle(
-                        color: AppColor.mainColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: "Poppins")),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 420.0, left: 25),
-                child: Text("How to use it",
-                    style: TextStyle(
-                        color: AppColor.mainColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: "Poppins")),
-              )
-            ],
-          )
-        ]));
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0, left: 18),
+                      child: Text("Search for your medicines",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "Poppins")),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 100.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(80),
+                                topRight: Radius.circular(80))),
+                        height: 50,
+                      ),
+                    )
+                  ],
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(80),
+                          topRight: Radius.circular(80))),
+                  height: 100,
+                  child: ListView(children: [
+                    Container(
+                      padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
+                      width: 100,
+                      child: TextFormField(
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          fillColor: Colors.white,
+                          filled: true,
+                          hintText: "Search for your medicines",
+                          hintStyle: TextStyle(color: Colors.black),
+                          prefixIcon: Icon(FontAwesomeIcons.magnifyingGlass,
+                              color: Colors.black),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 200, 200, 200)),
+                              borderRadius: BorderRadius.circular(30)),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 200, 200, 200)),
+                              borderRadius: BorderRadius.circular(30)),
+                        ),
+                        controller: searchController,
+                        cursorColor: Color.fromARGB(255, 16, 152, 170),
+                      ),
+                    ),
+                  ]),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 25.0, top: 20),
+                  child: Text("Medicine name",
+                      style: TextStyle(
+                          color: AppColor.mainColor,
+                          fontSize: 19,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "Poppins")),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(bottom: 28.0, left: 25, top: 10),
+                  child: Text("Data",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "Poppins")),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 25.0, top: 20),
+                  child: Text("Description",
+                      style: TextStyle(
+                          color: AppColor.mainColor,
+                          fontSize: 19,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "Poppins")),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(bottom: 28.0, left: 25, top: 10),
+                  child: Text("Data",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "Poppins")),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 25.0, top: 20),
+                  child: Text("How to use it",
+                      style: TextStyle(
+                          color: AppColor.mainColor,
+                          fontSize: 19,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "Poppins")),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(bottom: 28.0, left: 25, top: 10),
+                  child: Text("data",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "Poppins")),
+                ),
+              ]);
+            })));
   }
 }

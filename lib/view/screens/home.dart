@@ -8,7 +8,6 @@ import 'package:pfa_application_1/core/functions/alertExit.dart';
 import 'package:pfa_application_1/view/screens/blog/blog.dart';
 import 'package:pfa_application_1/view/screens/medicine%20description/medicine_description.dart';
 import 'package:pfa_application_1/view/screens/reminders/reminder.dart';
-
 import 'package:pfa_application_1/view/screens/search%20page/search_page.dart';
 
 class Home extends StatefulWidget {
@@ -24,10 +23,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // backgroundColor: AppColor.medicineColor,
         bottomNavigationBar: Container(
           padding: EdgeInsets.all(14),
-          //   color: AppColor.medicineColor,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(50),
             child: CurvedNavigationBar(
@@ -63,14 +60,12 @@ class _HomeState extends State<Home> {
           ),
         ),
         body: WillPopScope(
-           child:
-            IndexedStack(index: selectedIndex, children: [
+            child: IndexedStack(index: selectedIndex, children: [
               Reminders(),
               SearchPage(),
-              MedicineDescription(),
-              Blog(),
+              MedicineDescriptionPage(),
+              BlogPage(),
             ]),
-          onWillPop: alertExit)
-           );
+            onWillPop: alertExit));
   }
 }

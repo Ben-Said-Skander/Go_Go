@@ -42,7 +42,7 @@ class _RemindersState extends State<Reminders> {
           color: Color.fromARGB(255, 251, 251, 251),
         ),
       ),
-      body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      body: ListView(children: [
         Container(
           height: 170,
           child: ClipPath(
@@ -64,7 +64,7 @@ class _RemindersState extends State<Reminders> {
               )),
         ),
         Padding(
-            padding: const EdgeInsets.fromLTRB(20, 35, 0, 0),
+            padding: const EdgeInsets.fromLTRB(20, 35, 0, 30),
             child: Text(" Worry less , Live healthier ",
                 style: TextStyle(
                     fontSize: 20,

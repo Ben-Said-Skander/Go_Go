@@ -27,6 +27,7 @@ class _RemindersState extends State<Reminders> {
     super.initState();
   }
 
+  var id = {"id": "id"};
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,23 +84,37 @@ class _RemindersState extends State<Reminders> {
                               crossAxisCount: 2),
                       itemCount: snapshot.data?.length,
                       itemBuilder: ((context, index) {
-                        return ReminderMedCard(
-                            med_name: "Doliprane",
-                            med_pic: "assets/image/sirop.jpg",
-                            med_interval: "Every 8 hours");
+                        return GestureDetector(
+                          onTap: () {
+                            Get.toNamed(
+                              AppRoute.details, /*  parameters:id  */
+                            );
+                          },
+                          child: ReminderMedCard(
+                              med_name: "${snapshot.data![index].name}",
+                              med_pic: "assets/image/sirop.jpg",
+                              med_interval:
+                                  "${snapshot.data![index].interval}"),
+                        );
                       }));
                 } else {
-                  return GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2),
-                      itemCount: 4,
-                      itemBuilder: ((context, index) {
-                        return ReminderMedCard(
-                            med_name: "Doliprane",
-                            med_pic: "assets/image/sirop.jpg",
-                            med_interval: "Every 8 hours");
-                      }));
+                  return GestureDetector(
+                      onTap: () {
+                        Get.toNamed(
+                          AppRoute.details, /*parameters:*/
+                        );
+                      },
+                      child: GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2),
+                          itemCount: 4,
+                          itemBuilder: ((context, index) {
+                            return ReminderMedCard(
+                                med_name: "Doliprane",
+                                med_pic: "assets/image/sirop.jpg",
+                                med_interval: "Every 8 hours");
+                          })));
                   /* return Center(
                     child: Text("No Reminders found",
                         style: TextStyle(

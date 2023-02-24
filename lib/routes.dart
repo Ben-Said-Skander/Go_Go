@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
 import 'package:pfa_application_1/bindings/blog_bindings.dart';
+import 'package:pfa_application_1/bindings/medicine_description.dart';
 import 'package:pfa_application_1/bindings/medicines_bindings.dart';
 import 'package:pfa_application_1/bindings/user_bindings.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
+import 'package:pfa_application_1/service/models/medicine_description_api.dart';
 import 'package:pfa_application_1/view/screens/blog/personal_article_details.dart';
 import 'package:pfa_application_1/view/screens/blog/user_articles.dart';
 import 'package:pfa_application_1/view/screens/forget_password.dart';
@@ -29,7 +31,10 @@ import 'view/screens/signUp.dart';
 
 List<GetPage<dynamic>>? routes = [
   GetPage(name: AppRoute.onBoarding, page: () => const OnBoarding()),
-  GetPage(name: AppRoute.home, page: () => const Home(),bindings: [BlogBindings(),MedicinesBindings()]),
+  GetPage(
+      name: AppRoute.home,
+      page: () => const Home(),
+      bindings: [BlogBindings(), MedicinesBindings(),MedicineDescriptionBindings()]),
   GetPage(
       name: AppRoute.details,
       page: () => const Details(),
@@ -85,11 +90,14 @@ List<GetPage<dynamic>>? routes = [
   GetPage(name: AppRoute.resetPasswrod, page: () => const ResetPassword()),
   GetPage(
       name: AppRoute.medicineDescription,
-      page: () => const MedicineDescription()),
+      page: () => const MedicineDescription(),
+      binding: MedicineDescriptionBindings()),
   GetPage(
       name: AppRoute.personalArticleDetails,
       page: () => const PersonalArticleDetails(),
       binding: BlogBindings()),
   GetPage(
-      name: AppRoute.test, page: () => const test(), binding: MedicinesBindings()),
+      name: AppRoute.test,
+      page: () => const test(),
+      binding: MedicinesBindings()),
 ];

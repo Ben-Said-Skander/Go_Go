@@ -27,7 +27,7 @@ class _PersonalArticleDetailsState extends State<PersonalArticleDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(children: [
-        FutureBuilder(
+        FutureBuilder<Blog>(
             future: futureArticle,
             builder: ((context, snapshot) {
               if (snapshot.hasData) {
@@ -65,7 +65,7 @@ class _PersonalArticleDetailsState extends State<PersonalArticleDetails> {
                               Padding(
                                 padding:
                                     const EdgeInsets.fromLTRB(22, 10, 0, 10),
-                                child: Text("Blog Title",
+                                child: Text("${snapshot.data!.title}",
                                     style: TextStyle(
                                         color: AppColor.mainColor,
                                         fontFamily: "Poppins",
@@ -75,7 +75,7 @@ class _PersonalArticleDetailsState extends State<PersonalArticleDetails> {
                               Padding(
                                 padding:
                                     const EdgeInsets.only(left: 20, top: 40),
-                                child: Text("Blog body is here",
+                                child: Text("${snapshot.data!.body}",
                                     style: TextStyle(
                                       fontSize: 16,
                                     )),

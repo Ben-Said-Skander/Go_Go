@@ -94,7 +94,7 @@ class _SeeAllState extends State<SeeAll> {
                                 crossAxisCount: 2),
                         itemBuilder: ((context, index) {
                           return BlogCard(
-                              blogTitle: "My experience with Doliprane",
+                              blogTitle: "${snapshot.data![index].title}",
                               blogPicture: "assets/image/piills.jpg");
                         }));
                   } else {

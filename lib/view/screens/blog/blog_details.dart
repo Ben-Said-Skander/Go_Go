@@ -25,7 +25,7 @@ class _BlogDetailsState extends State<BlogDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: FutureBuilder(
+        body: FutureBuilder<Blog>(
             future: futureCard,
             builder: ((context, snapshot) {
               if (snapshot.hasData) {
@@ -64,7 +64,7 @@ class _BlogDetailsState extends State<BlogDetails> {
                                 Padding(
                                   padding:
                                       const EdgeInsets.fromLTRB(22, 10, 0, 10),
-                                  child: Text("Blog Title",
+                                  child: Text("${snapshot.data!.title}",
                                       style: TextStyle(
                                           color: AppColor.mainColor,
                                           fontFamily: "Poppins",
@@ -74,7 +74,7 @@ class _BlogDetailsState extends State<BlogDetails> {
                                 Padding(
                                   padding:
                                       const EdgeInsets.only(left: 20, top: 40),
-                                  child: Text("Blog body is here",
+                                  child: Text("${snapshot.data!.body}",
                                       style: TextStyle(
                                         fontSize: 16,
                                       )),

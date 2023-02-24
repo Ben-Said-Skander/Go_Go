@@ -49,26 +49,22 @@ class _HelpBlogState extends State<HelpBlog> {
             ),
             child: Row(
               children: [
-                Center(
-                  child: Padding(
-                      padding: const EdgeInsets.only(left: 40),
-                      child: GestureDetector(
-                        onTap: () {
-                          Get.toNamed(AppRoute.settings);
-                        },
-                        child: CircleAvatar(
-                          backgroundImage: AssetImage(
-                            "assets/image/me2.jpg",
-                          ),
-                          radius: 28,
-                        ),
-                      )),
+                SizedBox(
+                  width: 40,
                 ),
+                IconButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.white,
+                    )),
                 SizedBox(
                   width: 22,
                 ),
                 Text(
-                  "Ben Said Skander",
+                  "Seeking Help",
                   style: TextStyle(
                       color: Colors.white, fontSize: 19, fontFamily: "Poppins"),
                 ),
@@ -84,7 +80,7 @@ class _HelpBlogState extends State<HelpBlog> {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
               child: Text(
-                "Seeking Help ",
+                "All Articles ",
                 style: TextStyle(
                   color: AppColor.mainColor,
                   fontWeight: FontWeight.w700,
@@ -120,9 +116,16 @@ class _HelpBlogState extends State<HelpBlog> {
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2),
                         itemBuilder: ((context, index) {
-                          return BlogCard(
-                              blogTitle: "My experience with Doliprane",
-                              blogPicture: "assets/image/piills.jpg");
+                          return GestureDetector(
+                            onTap: () {
+                              Get.toNamed(
+                                AppRoute.blogdetails, /*parameters:*/
+                              );
+                            },
+                            child: BlogCard(
+                                blogTitle: "${snapshot.data![index].title}",
+                                blogPicture: "assets/image/piills.jpg"),
+                          );
                         }));
                   } else {
                     return GridView.builder(
@@ -131,9 +134,15 @@ class _HelpBlogState extends State<HelpBlog> {
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2),
                         itemBuilder: ((context, index) {
-                          return BlogCard(
-                              blogTitle: "My experience with Doliprane",
-                              blogPicture: "assets/image/piills.jpg");
+                          return GestureDetector(
+                              onTap: () {
+                                Get.toNamed(
+                                  AppRoute.blogdetails, /*parameters:*/
+                                );
+                              },
+                              child: BlogCard(
+                                  blogTitle: "My experience with Doliprane",
+                                  blogPicture: "assets/image/piills.jpg"));
                         }));
                     /*
                     return Center(

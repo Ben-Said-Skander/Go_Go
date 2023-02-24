@@ -2,8 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
 import 'package:pfa_application_1/core/constants/colors.dart';
+import 'package:pfa_application_1/service/remote.dart';
 
 class MedicineDescription extends StatefulWidget {
   const MedicineDescription({super.key});
@@ -14,11 +16,12 @@ class MedicineDescription extends StatefulWidget {
 
 class _MedicineDescriptionState extends State<MedicineDescription> {
   late TextEditingController searchController;
-
+  RemoteService remoteService = Get.find();
+  late Future<List<MedicineDescription>> drugsList;
   @override
   void dispose() {
     searchController.dispose();
-
+    // drugsList=remoteService.getMedicines();
     super.dispose();
   }
 
@@ -71,8 +74,8 @@ class _MedicineDescriptionState extends State<MedicineDescription> {
                         filled: true,
                         hintText: "Search for your medicines",
                         hintStyle: TextStyle(color: Colors.black),
-                        prefixIcon:
-                            Icon(FontAwesomeIcons.magnifyingGlass, color: Colors.black),
+                        prefixIcon: Icon(FontAwesomeIcons.magnifyingGlass,
+                            color: Colors.black),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 color: Color.fromARGB(255, 200, 200, 200)),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:pfa_application_1/core/constants/routes.dart';
+
 
 class UserBlogCard extends StatelessWidget {
   const UserBlogCard(
@@ -9,11 +8,7 @@ class UserBlogCard extends StatelessWidget {
   final String blogPicture;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: () {
-          Get.toNamed(AppRoute.personalArticleDetails);
-        },
-        child: Container(
+    return Container(
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(30),
@@ -55,6 +50,6 @@ class UserBlogCard extends StatelessWidget {
               ),
             ],
           ),
-        ));
+        );
   }
 }

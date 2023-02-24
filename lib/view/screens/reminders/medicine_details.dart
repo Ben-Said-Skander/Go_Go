@@ -51,7 +51,7 @@ class _DetailsState extends State<Details> {
             ],
           ),
         ),
-        FutureBuilder(
+        FutureBuilder<Medicine>(
             future: futureCard,
             builder: ((context, snapshot) {
               if (snapshot.hasData) {
@@ -59,12 +59,12 @@ class _DetailsState extends State<Details> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       MedicineInfo(
-                          med_name: "Doliprane",
-                          med_dosage: "500mg",
+                          med_name: "${snapshot.data!.name}",
+                          med_dosage: "${snapshot.data!.dosage}",
                           med_pic: "assets/piills.jpgh"),
                       MidSectionInfo(
-                          med_type: "Pill",
-                          dosage_interval: "Every 6 hours",
+                          med_type: "${snapshot.data!.type}",
+                          dosage_interval: "${snapshot.data!.interval}",
                           start_time: "14h"),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(20, 50, 20, 0),

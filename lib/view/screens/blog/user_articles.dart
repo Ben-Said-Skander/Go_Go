@@ -6,7 +6,7 @@ import 'package:pfa_application_1/controllers/blog_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
 import 'package:pfa_application_1/models/blog.dart';
-import 'package:pfa_application_1/view/widgets/component/blog_card.dart';
+import 'package:pfa_application_1/view/widgets/component/user_blog_card.dart';
 
 class UserArticle extends StatefulWidget {
   const UserArticle({super.key});
@@ -49,21 +49,17 @@ class _UserArticleState extends State<UserArticle> {
             ),
             child: Row(
               children: [
-                Center(
-                  child: Padding(
-                      padding: const EdgeInsets.only(left: 40),
-                      child: GestureDetector(
-                        onTap: () {
-                          Get.toNamed(AppRoute.settings);
-                        },
-                        child: CircleAvatar(
-                          backgroundImage: AssetImage(
-                            "assets/image/me2.jpg",
-                          ),
-                          radius: 28,
-                        ),
-                      )),
+                SizedBox(
+                  width: 40,
                 ),
+                IconButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.white,
+                    )),
                 SizedBox(
                   width: 22,
                 ),
@@ -120,21 +116,34 @@ class _UserArticleState extends State<UserArticle> {
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2),
                         itemBuilder: ((context, index) {
-                          return BlogCard(
-                              blogTitle: "My experience with Doliprane",
-                              blogPicture: "assets/image/piills.jpg");
+                          return GestureDetector(
+                            onTap: () {
+                              Get.toNamed(
+                                AppRoute.personalArticleDetails, /*parameters:*/
+                              );
+                            },
+                            child: UserBlogCard(
+                                blogTitle: "${snapshot.data![index].title}",
+                                blogPicture: "assets/image/piills.jpg"),
+                          );
                         }));
                   } else {
-                    return GridView.builder(
-                        itemCount: 4,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2),
-                        itemBuilder: ((context, index) {
-                          return BlogCard(
-                              blogTitle: "My experience with Doliprane",
-                              blogPicture: "assets/image/piills.jpg");
-                        }));
+                    return GestureDetector(
+                        onTap: () {
+                          Get.toNamed(
+                            AppRoute.personalArticleDetails, /*parameters:*/
+                          );
+                        },
+                        child: GridView.builder(
+                            itemCount: 4,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2),
+                            itemBuilder: ((context, index) {
+                              return UserBlogCard(
+                                  blogTitle: "My experience with Doliprane",
+                                  blogPicture: "assets/image/piills.jpg");
+                            })));
                     /*
                     return Center(
                         child: Text("No Articles found",

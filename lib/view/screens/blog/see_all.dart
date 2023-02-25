@@ -6,7 +6,6 @@ import 'package:pfa_application_1/core/constants/colors.dart';
 
 import 'package:pfa_application_1/models/blog.dart';
 import 'package:pfa_application_1/view/widgets/component/blog_card.dart';
-import 'package:pfa_application_1/view/widgets/component/medicine_card.dart';
 
 class SeeAll extends StatefulWidget {
   const SeeAll({super.key});
@@ -54,8 +53,8 @@ class _SeeAllState extends State<SeeAll> {
                       ),
                       Center(
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 110.0, top: 40),
-                          child: Text("See All",
+                          padding: const EdgeInsets.only(left: 55.0, top: 40),
+                          child: Text("Drug Experience ",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -71,7 +70,7 @@ class _SeeAllState extends State<SeeAll> {
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 50, 0, 0),
           child: Text(
-            " Drug Experience ",
+            "All Articles  ",
             style: TextStyle(
               color: AppColor.mainColor,
               fontWeight: FontWeight.w700,

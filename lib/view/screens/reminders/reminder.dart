@@ -51,7 +51,7 @@ class _RemindersState extends State<Reminders> {
                 color: AppColor.mainColor,
                 child: Center(
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 28.0),
+                    padding: const EdgeInsets.only(top: 10.0),
                     child: Text(
                       "Reminder",
                       style: TextStyle(

@@ -90,10 +90,10 @@ class _MissingBlogState extends State<MissingBlog> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 180),
+              padding: const EdgeInsets.only(left: 200),
               child: IconButton(
                 onPressed: () {
-                  // Get.back();
+               Get.toNamed(AppRoute.searchArticles);
                 },
                 icon: Icon(
                   Icons.search_outlined,

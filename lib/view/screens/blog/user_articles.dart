@@ -93,7 +93,7 @@ class _UserArticleState extends State<UserArticle> {
               padding: const EdgeInsets.only(left: 180),
               child: IconButton(
                 onPressed: () {
-                  // Get.back();
+                  Get.toNamed(AppRoute.searchArticles);
                 },
                 icon: Icon(
                   Icons.search_outlined,

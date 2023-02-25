@@ -125,7 +125,10 @@ class _BlogPageState extends State<BlogPage> {
                             padding: const EdgeInsets.only(right: 15),
                             child: Text(
                               "See all",
-                              style: TextStyle(color: Colors.black),
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: "Poppins",
+                                  fontWeight: FontWeight.w600),
                             ),
                           ))
                     ]),

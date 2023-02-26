@@ -13,7 +13,7 @@ class BlogCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
           boxShadow: [
             BoxShadow(
-              blurRadius: 4,
+              blurRadius: 2,
               spreadRadius: 1,
               color: Color.fromARGB(255, 207, 207, 207),
             )
@@ -42,6 +42,7 @@ class BlogCard extends StatelessWidget {
             child: Text(
               blogTitle,
               style: TextStyle(
+                  //  fontFamily: "Poppins",
                   color: Colors.black,
                   fontSize: 13,
                   fontWeight: FontWeight.w700),

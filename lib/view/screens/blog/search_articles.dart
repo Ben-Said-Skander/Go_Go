@@ -50,14 +50,26 @@ class _SearchArticlesState extends State<SearchArticles> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 60, left: 20),
-            child: Text("Search for article",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: AppColor.mainColor,
-                    fontSize: 20,
-                    fontFamily: "Poppins")),
-          ),
+              padding: const EdgeInsets.only(top: 60, left: 5, right: 30),
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Text("Search for article",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: AppColor.mainColor,
+                          fontSize: 20,
+                          fontFamily: "Poppins")),
+                ],
+              )),
           Container(
             padding: EdgeInsets.only(top: 40, left: 20),
             width: 400,
@@ -92,6 +104,7 @@ class _SearchArticlesState extends State<SearchArticles> {
             height: 40,
           ),
           GridView.builder(
+              shrinkWrap: true,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2),
               itemCount: filteredArticles.length,

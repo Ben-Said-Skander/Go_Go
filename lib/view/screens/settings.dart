@@ -80,7 +80,7 @@ class _SettingsState extends State<Settings> {
               ]);
             } else {
               return Padding(
-                padding: const EdgeInsets.only(top: 28.0),
+                padding: const EdgeInsets.only(top: 80.0),
                 child: Center(
                     child: Text("Request failed",
                         style: TextStyle(

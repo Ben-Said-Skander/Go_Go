@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         bottomNavigationBar: Container(
-          padding: EdgeInsets.all(14),
+          padding: EdgeInsets.all(12),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(50),
             child: CurvedNavigationBar(

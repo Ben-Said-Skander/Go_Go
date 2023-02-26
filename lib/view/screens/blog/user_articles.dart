@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/controllers/blog_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
@@ -64,7 +65,7 @@ class _UserArticleState extends State<UserArticle> {
                   width: 22,
                 ),
                 Text(
-                  "Ben Said Skander",
+                  "Your Articles",
                   style: TextStyle(
                       color: Colors.white, fontSize: 19, fontFamily: "Poppins"),
                 ),
@@ -80,7 +81,7 @@ class _UserArticleState extends State<UserArticle> {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
               child: Text(
-                "Your Articles ",
+                "All Articles ",
                 style: TextStyle(
                   color: AppColor.mainColor,
                   fontWeight: FontWeight.w700,
@@ -96,8 +97,9 @@ class _UserArticleState extends State<UserArticle> {
                   Get.toNamed(AppRoute.searchArticles);
                 },
                 icon: Icon(
-                  Icons.search_outlined,
+                  FontAwesomeIcons.magnifyingGlass,
                   color: Colors.black,
+                  size: 20,
                 ),
               ),
             ),

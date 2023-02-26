@@ -164,21 +164,41 @@ class _BlogPageState extends State<BlogPage> {
                 ),
               ),
               //${snapshot.data![index].title}
-              PopularCard(
-                blogTitle: "My experience with Doliprane",
-                blogPicture: "assets/image/sirop.jpg",
-                route: "/blog/details",
+              GestureDetector(
+                onTap: () {
+                  Get.toNamed(
+                    AppRoute.blogdetails, /*parameters:*/
+                  );
+                },
+                child: PopularCard(
+                  blogTitle: "My experience with Doliprane",
+                  blogPicture: "assets/image/sirop.jpg",
+                  route: "/blog/details",
+                ),
               ),
-              PopularCard(
-                blogTitle: "My experience with Doliprane",
-                blogPicture: "assets/image/sirop.jpg",
-                route: "/blog/details",
+              GestureDetector(
+                onTap: () {
+                  Get.toNamed(
+                    AppRoute.blogdetails, /*parameters:*/
+                  );
+                },
+                child: PopularCard(
+                  blogTitle: "My experience with Doliprane",
+                  blogPicture: "assets/image/sirop.jpg",
+                  route: "/blog/details",
+                ),
               ),
-              PopularCard(
-                blogTitle: "My experience with Doliprane",
-                blogPicture: "assets/image/sirop.jpg",
-                route: "/blog/details",
-              )
+              GestureDetector(
+                  onTap: () {
+                    Get.toNamed(
+                      AppRoute.blogdetails, /*parameters:*/
+                    );
+                  },
+                  child: PopularCard(
+                    blogTitle: "My experience with Doliprane",
+                    blogPicture: "assets/image/sirop.jpg",
+                    route: "/blog/details",
+                  ))
             ]);
           })),
     );

@@ -133,7 +133,12 @@ class _AddBlogState extends State<AddBlog> {
                         value: dropdownvalue, // initial value
                         items: categories.map((String items) {
                           return DropdownMenuItem(
-                              value: items, child: Text(items));
+                              value: items,
+                              child: Text(
+                                items,
+                                style: TextStyle(
+                                    fontFamily: "Poppins", fontSize: 14),
+                              ));
                         }).toList(),
                         onChanged: (String? newValue) {
                           setState(() {

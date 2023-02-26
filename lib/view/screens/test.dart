@@ -2,17 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import 'package:get/get.dart';
-import 'package:pfa_application_1/controllers/blog_controller.dart';
-
-import 'dart:convert';
-
-import 'package:http/http.dart' as http;
-//import 'package:pfa_application_1/controllers/blog_controller.dart';
-
-import 'package:pfa_application_1/models/blog.dart';
-import 'package:pfa_application_1/view/widgets/component/blog_card.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:pfa_application_1/core/constants/colors.dart';
 
 class test extends StatefulWidget {
   const test({super.key});
@@ -22,12 +14,31 @@ class test extends StatefulWidget {
 }
 
 class _testState extends State<test> {
-  List<Blog> articles = [];
-  List<Blog> filteredArticles = [];
+//   List<Pharmacy> pharmacies = [];
+  //List<Pharmacy> filteredPharmacy = [];
   late TextEditingController searchController;
-  BlogController blogController = Get.find();
-  /* late final Future<List<Pharmacy>> futureLocations =
-      pharmacyController.getAllPharmacies();*/
+  late LocationPermission permission;
+  late Position currentPosition;
+  late GoogleMapController mapController;
+  CameraPosition initialLocation = CameraPosition(target: LatLng(0.0, 0.0));
+
+ // PharmacyController pharmacyController = Get.find();
+ // late final Future<List<Pharmacy>> futureLocations =
+   //   pharmacyController.getAllPharmacies();
+
+  getCurrentLocation() async {
+    await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
+        .then((Position position) async {
+      setState(() {
+        currentPosition = position;
+        print('Current Position :${currentPosition}');
+      });
+      mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+          target: LatLng(position.latitude, position.longitude), zoom: 40.0)));
+    });
+    permission = await Geolocator.requestPermission();
+  }
+
   @override
   void dispose() {
     searchController.dispose();
@@ -36,12 +47,13 @@ class _testState extends State<test> {
 
   @override
   void initState() {
-    fetchArticles().then((articleFromServer) {
+   /* pharmacyController.getAllPharmacies().then((pharmacyFromServer) {
       setState(() {
-        articles = articleFromServer;
-        filteredArticles = articles;
+        pharmacies = pharmacyFromServer;
+        filteredPharmacy = pharmacies;
       });
-    });
+    });*/
+    getCurrentLocation();
     searchController = TextEditingController();
     super.initState();
   }
@@ -49,90 +61,83 @@ class _testState extends State<test> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(children: [
-      SafeArea(
-        child: Stack(
-          children: [
-            Container(
-                height: 200,
-                width: 450,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(30.0),
-                        bottomRight: Radius.circular(30)),
-                    color: Color.fromARGB(255, 16, 152, 170)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 32, left: 25),
-                      child: Text("Locate your medicines",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: "Poppins")),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(top: 40, left: 20),
-                      width: 400,
-                      child: TextFormField(
-                        onChanged: (titleEntered) {
-                          filteredArticles = articles
-                              .where((article) => article.title!
-                                  .toLowerCase()
-                                  .contains(titleEntered.toLowerCase()))
-                              .toList();
-                        },
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                          fillColor: Colors.white,
-                          filled: true,
-                          hintText: "Locate your medicines",
-                          hintStyle: TextStyle(color: Colors.black),
-                          prefixIcon: Icon(FontAwesomeIcons.magnifyingGlass,
-                              color: Colors.black),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.circular(30)),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.circular(30)),
-                        ),
-                        controller: searchController,
-                        cursorColor: Color.fromARGB(255, 16, 152, 170),
+        body: Column(
+      children: [
+        SafeArea(
+          child: Stack(
+            children: [
+              Container(
+                  height: 150,
+                  width: 450,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(30.0),
+                          bottomRight: Radius.circular(30)),
+                      color: Color.fromARGB(255, 16, 152, 170)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20, left: 25),
+                        child: Text("Locate your medicines",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: "Poppins")),
                       ),
-                    ),
-                  ],
-                )),
-          ],
+                      Container(
+                        padding: EdgeInsets.only(top: 18, left: 20),
+                        width: 400,
+                        child: TextFormField(
+                       //   onChanged: (string) {
+                /*            filteredPharmacy = pharmacies
+                                .where((pharmacy) => pharmacy.longitude
+                                    .toString()
+                                    .toLowerCase()
+                                    .contains(string.toLowerCase()))
+                                .toList();
+                          },*/
+                       //   keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            fillColor: Colors.white,
+                            filled: true,
+                            hintText: "Locate your medicines",
+                            hintStyle: TextStyle(color: Colors.black),
+                            prefixIcon: Icon(FontAwesomeIcons.magnifyingGlass,
+                                color: Colors.black),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                                borderRadius: BorderRadius.circular(30)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                                borderRadius: BorderRadius.circular(30)),
+                          ),
+                       //   controller: searchController,
+                          cursorColor: Color.fromARGB(255, 16, 152, 170),
+                        ),
+                      ),
+                    ],
+                  )),
+            ],
+          ),
         ),
-      ),
-      GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2),
-          itemCount: filteredArticles.length,
-          itemBuilder: ((context, index) {
-            return BlogCard(
-                blogTitle: filteredArticles[index].title!,
-                blogPicture: 'blogPicture');
-          }))
-    ]));
-  }
-}
-
-Future<List<Blog>> fetchArticles() async {
-  List<Blog> totalArticles = [];
-  final response =
-      await http.get(Uri.parse('http://192.168.101.161:3600/blog'));
-
-  if (response.statusCode == 200) {
-    final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
-    totalArticles = parsed.map<Blog>((e) => Blog.fromJson(e)).toList();
-    ;
-    print(totalArticles);
-    return totalArticles;
-  } else {
-    throw Exception('Failed to load Articles');
+        Container(
+          padding: EdgeInsets.only(top: 15),
+          height: 582,
+          child: GoogleMap(
+            initialCameraPosition: initialLocation,
+            myLocationEnabled: true,
+            myLocationButtonEnabled: true,
+            mapType: MapType.normal,
+            zoomGesturesEnabled: true,
+            zoomControlsEnabled: true,
+            onMapCreated: (GoogleMapController controller) {
+              mapController = controller;
+            },
+          ),
+        )
+      ],
+    ));
   }
 }

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/controllers/blog_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
@@ -96,8 +97,9 @@ class _HelpBlogState extends State<HelpBlog> {
                   Get.toNamed(AppRoute.searchArticles);
                 },
                 icon: Icon(
-                  Icons.search_outlined,
+                  FontAwesomeIcons.magnifyingGlass,
                   color: Colors.black,
+                  size: 20,
                 ),
               ),
             ),

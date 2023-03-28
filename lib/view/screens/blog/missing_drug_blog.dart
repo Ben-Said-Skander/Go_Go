@@ -120,8 +120,9 @@ class _MissingBlogState extends State<MissingBlog> {
                         itemBuilder: ((context, index) {
                           return GestureDetector(
                             onTap: () {
+                                     var id = "${snapshot.data![index].id}" ;
                               Get.toNamed(
-                                AppRoute.blogdetails, /*parameters:*/
+                                AppRoute.blogdetails, arguments: id
                               );
                             },
                             child: BlogCard(

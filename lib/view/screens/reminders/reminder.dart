@@ -25,7 +25,6 @@ class _RemindersState extends State<Reminders> {
     super.initState();
   }
 
-  var id = {"id": "id"};
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,9 +83,8 @@ class _RemindersState extends State<Reminders> {
                       itemBuilder: ((context, index) {
                         return GestureDetector(
                           onTap: () {
-                            Get.toNamed(
-                              AppRoute.details, /*  parameters:id  */
-                            );
+                            var id = "${snapshot.data![index].id}";
+                            Get.toNamed(AppRoute.details, arguments: id);
                           },
                           child: ReminderMedCard(
                               med_name: "${snapshot.data![index].name}",

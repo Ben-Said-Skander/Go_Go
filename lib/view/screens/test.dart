@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/controllers/medicine_controller.dart';
+
 import 'package:pfa_application_1/core/constants/colors.dart';
 
 class test extends StatefulWidget {
@@ -190,15 +191,8 @@ class _testState extends State<test> {
                 color: AppColor.mainColor),
             child: TextButton(
                 onPressed: () {
-                  /*   medicineController.addMedicine(
-                      med_nameController.text,
-                      med_dosageController.text,
-                      "xxx",
-                      starting_timeController.text,
-                      "6");*/
-                  medicineController.fetchMedicines();
-                  //medicineController.deleteMedicine("63f7245bc402f485ffa62f83");
-                  //  Get.back();
+
+                     
                 },
                 child: Center(
                     child: Text(

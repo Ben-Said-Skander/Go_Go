@@ -1,11 +1,12 @@
 class User {
+  final String? id;
   final String? fullname;
   final int? phoneNumber;
   final String? email;
   final String? password;
 
   //Constructeur
-  User({this.fullname, this.email, this.password, this.phoneNumber});
+  User({this.fullname, this.email, this.password, this.phoneNumber, this.id});
 
   // Transform attributs to Json Format
 
@@ -20,10 +21,10 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> parsedJson) {
     return User(
-      fullname: parsedJson["fullname"],
-      email: parsedJson["email"],
-      password: parsedJson["password"],
-      phoneNumber: parsedJson["phoneNumber"],
-    );
+        fullname: parsedJson["fullname"],
+        email: parsedJson["email"],
+        password: parsedJson["password"],
+        phoneNumber: parsedJson["phoneNumber"],
+        id: parsedJson['_id']['\$oid']);
   }
 }

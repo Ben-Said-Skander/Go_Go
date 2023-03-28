@@ -120,8 +120,9 @@ class _HelpBlogState extends State<HelpBlog> {
                         itemBuilder: ((context, index) {
                           return GestureDetector(
                             onTap: () {
+                              var id = "${snapshot.data![index].id}" ;
                               Get.toNamed(
-                                AppRoute.blogdetails, /*parameters:*/
+                                AppRoute.blogdetails, arguments: id
                               );
                             },
                             child: BlogCard(

@@ -18,6 +18,7 @@ class BlogPage extends StatefulWidget {
 
 class _BlogPageState extends State<BlogPage> {
   BlogController blogController = Get.find();
+
   late Future<List<Blog>> futureCard;
 
   @override
@@ -142,9 +143,8 @@ class _BlogPageState extends State<BlogPage> {
                       itemBuilder: ((context, index) {
                         return GestureDetector(
                             onTap: () {
-                              Get.toNamed(
-                                AppRoute.blogdetails, /*parameters:*/
-                              );
+                              var id = "${snapshot.data![index].id}";
+                              Get.toNamed(AppRoute.blogdetails, arguments: id);
                             },
                             child: BlogCard(
                                 blogTitle: "${snapshot.data![index].title}",
@@ -165,21 +165,18 @@ class _BlogPageState extends State<BlogPage> {
                 Container(
                   height: 200,
                   child: ListView.builder(
-                    itemCount: 3,
-                    itemBuilder: ((context, index) {
-              return GestureDetector(
-                        onTap: () {
-                          Get.toNamed(
-                            AppRoute.blogdetails, /*parameters:*/
-                          );
-                        },
-                        child: PopularCard(
-                            blogTitle: "${snapshot.data![index].title}",
-                            blogPicture: "assets/image/piills.jpg",
-                            route:"/blog/details"
-                            ) );
-                    
-                  })),
+                      itemCount: 3,
+                      itemBuilder: ((context, index) {
+                        return GestureDetector(
+                            onTap: () {
+                              var id = "${snapshot.data![index].id}";
+                              Get.toNamed(AppRoute.blogdetails, arguments: id);
+                            },
+                            child: PopularCard(
+                                blogTitle: "${snapshot.data![index].title}",
+                                blogPicture: "assets/image/piills.jpg",
+                                route: "/blog/details"));
+                      })),
                 )
               ]);
             } else {

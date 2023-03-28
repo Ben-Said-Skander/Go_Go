@@ -17,9 +17,10 @@ class PersonalArticleDetails extends StatefulWidget {
 class _PersonalArticleDetailsState extends State<PersonalArticleDetails> {
   BlogController blogController = Get.find();
   late Future<Blog> futureArticle;
+  final id = Get.arguments as String;
   @override
   void initState() {
-    futureArticle = blogController.getArticle("6423098bc4d569413df26436");
+    futureArticle = blogController.getArticle(id);
     super.initState();
   }
 

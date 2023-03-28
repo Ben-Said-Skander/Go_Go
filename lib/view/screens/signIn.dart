@@ -155,7 +155,7 @@ class _SignInState extends State<SignIn> {
                     onPressed: () {
                       authController.login(
                           emailController.text, passwordController.text);
-                      Get.offAndToNamed(AppRoute.home);
+                       Get.offAndToNamed(AppRoute.home);
                     },
                   ))),
           Padding(

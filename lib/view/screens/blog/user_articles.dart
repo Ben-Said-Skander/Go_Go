@@ -120,8 +120,9 @@ class _UserArticleState extends State<UserArticle> {
                         itemBuilder: ((context, index) {
                           return GestureDetector(
                             onTap: () {
+                              var id = "${snapshot.data![index].id}" ;
                               Get.toNamed(
-                                AppRoute.personalArticleDetails, /*parameters:*/
+                                AppRoute.personalArticleDetails, arguments: id
                               );
                             },
                             child: UserBlogCard(

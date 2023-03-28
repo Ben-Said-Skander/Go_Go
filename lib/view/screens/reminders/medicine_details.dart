@@ -16,9 +16,10 @@ class Details extends StatefulWidget {
 class _DetailsState extends State<Details> {
   MedicineController medicineController = Get.find();
   late Future<Medicine> futureCard;
+  final id = Get.arguments as String;
   @override
   void initState() {
-    futureCard = medicineController.getMedicine("63f7246bc402f485ffa62f85");
+    futureCard = medicineController.getMedicine(id);
     super.initState();
   }
 
@@ -90,8 +91,7 @@ class _DetailsState extends State<Details> {
                       ),
                     ]);
               } else {
-               
-                 return Padding(
+                return Padding(
                   padding: const EdgeInsets.only(top: 250.0),
                   child: Center(
                       child: Text("Request failed",

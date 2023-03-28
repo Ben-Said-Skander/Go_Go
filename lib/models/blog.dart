@@ -1,10 +1,12 @@
 class Blog {
+  final String? id;
   final String? title;
   final String? category;
   final String? body;
 
 //Constructeur
   Blog({
+    this.id,
     this.title,
     this.category,
     this.body,
@@ -18,6 +20,7 @@ class Blog {
 
   Map<String, dynamic> toJson() {
     return {
+      "id": id,
       "title": title,
       "category": category,
       "body": body,
@@ -26,9 +29,9 @@ class Blog {
 
   factory Blog.fromJson(Map<String, dynamic> parsedJson) {
     return Blog(
-      title: parsedJson["title"],
-      category: parsedJson["category"],
-      body: parsedJson["body"],
-    );
+        title: parsedJson["title"],
+        category: parsedJson["category"],
+        body: parsedJson["body"],
+        id: parsedJson['_id']);
   }
 }

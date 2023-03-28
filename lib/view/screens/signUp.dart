@@ -163,14 +163,11 @@ class _SignUpState extends State<SignUp> {
                     child: TextButton(
                         onPressed: () {
                           registerController.register(
-                              "fffff", "gggggg", "55555", "6666"
-                              /*  nameController.text,
-                              passwordController.text,
+                              nameController.text,
                               emailController.text,
-                              99549510*/
-                              // phoneController.hashCode
-                              );
-                          //   Get.toNamed(AppRoute.signIn);
+                              passwordController.text,
+                              phoneController.text);
+                          Get.offAndToNamed(AppRoute.home);
                         },
                         child: Center(
                             child: Text(

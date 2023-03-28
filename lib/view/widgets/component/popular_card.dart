@@ -23,14 +23,14 @@ class PopularCard extends StatelessWidget {
                 color: Color.fromARGB(255, 207, 207, 207),
               )
             ]),
-        width: 600,
+        width: 500,
         height: 120,
         margin: EdgeInsets.all(16),
         child: Row(
           children: [
             Center(
               child: Padding(
-                padding: const EdgeInsets.only(top: 8, left: 10),
+                padding: const EdgeInsets.only(top: 8, left: 0),
                 child: Image.asset(
                   blogPicture,
                   width: 150,

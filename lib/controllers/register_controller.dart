@@ -5,11 +5,11 @@ import '../models/user.dart';
 
 class RegisterController extends GetxController {
   Future<User> register(
-      String fullname, String email, String password, int phoneNumber) async {
+      String fullname, String email, String password, String phoneNumber) async {
     final response =
-        await http.post(Uri.parse('http://192.168.4.161:3600//register'),
+        await http.post(Uri.parse('http://192.168.1.14:3600/register'),
             headers: {"Content-Type": "Application/json"},
-            body: jsonEncode(<String, dynamic>{
+            body: jsonEncode(<String, String>{
               'fullname': fullname,
               'phoneNumber': phoneNumber,
               'email': email,

@@ -1,4 +1,6 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_local_variable
+
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,7 +10,7 @@ import 'package:pfa_application_1/controllers/pharmacyController.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/models/pharmacy.dart';
-//import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -18,6 +20,10 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  Set<Marker> markers = {};
+  late PolylinePoints polylinePoints;
+  List<LatLng> polylineCoordinates = [];
+  Map<PolylineId, Polyline> polylines = {};
   List<Pharmacy> pharmacies = [];
   List<Pharmacy> filteredPharmacy = [];
   late TextEditingController searchController;
@@ -43,6 +49,63 @@ class _SearchPageState extends State<SearchPage> {
     permission = await Geolocator.requestPermission();
   }
 
+  createMarkers(double startLatitude, double startLongitude,
+      double destinationLatitude, double destinationLongitude) {
+    Marker starterMarker = Marker(
+      markerId: MarkerId('Marker1'),
+      position: LatLng(startLatitude, startLongitude),
+      icon: BitmapDescriptor.defaultMarker,
+      visible: true,
+    );
+    Marker destinationMarker = Marker(
+      markerId: MarkerId('Marker2'),
+      position: LatLng(destinationLatitude, destinationLongitude),
+      icon: BitmapDescriptor.defaultMarker,
+      visible: true,
+    );
+    markers.add(starterMarker);
+    markers.add(destinationMarker);
+    return markers;
+  }
+
+  createPolylines(double startLatitude, double startLongitude,
+      double destinationLatitude, double destinationLongitude) async {
+    polylinePoints = PolylinePoints();
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+      "AIzaSyC2HrUyqcy4IO9OEZ4BWEYBNe7MpobW5Us",
+      PointLatLng(startLatitude, startLongitude),
+      PointLatLng(destinationLatitude, destinationLongitude),
+      travelMode: TravelMode.transit,
+    );
+
+    if (result.points.isNotEmpty) {
+      result.points.forEach((PointLatLng point) {
+        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+      });
+    }
+    PolylineId id = PolylineId("poly");
+    //initializing Polyline
+    Polyline polyline = Polyline(
+        polylineId: id,
+        color: AppColor.mainColor,
+        points: polylineCoordinates,
+        width: 3);
+    // Adding the polyline to the map
+    polylines[id] = polyline;
+    //return polylines
+  }
+
+  double coordinateDistance(
+      double lat1, double long1, double lat2, double long2) {
+    var p = 0.017453292519943295;
+    var c = cos;
+    var a = 0.5 -
+        c((lat2 - lat1) * p) / 2 +
+        c(lat1 * p) * c(lat2 * p) * (1 - c((long2 - long1) * p)) / 2;
+    return 12742 * asin(sqrt(a));
+    // it will return distance in KM
+  }
+
   @override
   void dispose() {
     searchController.dispose();
@@ -51,6 +114,7 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   void initState() {
+    createPolylines(34.8443519, 10.7567297, 39.8443519, 16.7567297);
     pharmacyController.getAllPharmacies().then((pharmacyFromServer) {
       setState(() {
         pharmacies = pharmacyFromServer;
@@ -70,10 +134,14 @@ class _SearchPageState extends State<SearchPage> {
         SafeArea(
           child: Stack(
             children: [
+              
               Container(
-                  padding: EdgeInsets.only(top: 8),
+                  padding: EdgeInsets.only(top: 0),
                   height: 730,
                   child: GoogleMap(
+                    markers: createMarkers(
+                        34.8443519, 10.7567297, 39.8443519, 16.7567297),
+                    polylines: Set<Polyline>.of(polylines.values),
                     initialCameraPosition: initialLocation,
                     myLocationEnabled: true,
                     myLocationButtonEnabled: true,
@@ -155,3 +223,4 @@ class _SearchPageState extends State<SearchPage> {
     ));
   }
 }
+//Current Position :Latitude: 34.8443519, Longitude: 10.7567297

@@ -44,7 +44,7 @@ class BlogCard extends StatelessWidget {
               style: TextStyle(
                   //  fontFamily: "Poppins",
                   color: Colors.black,
-                  fontSize: 13,
+                  fontSize: 14,
                   fontWeight: FontWeight.w700),
             ),
           ),

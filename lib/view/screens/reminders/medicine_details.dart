@@ -18,7 +18,7 @@ class _DetailsState extends State<Details> {
   late Future<Medicine> futureCard;
   @override
   void initState() {
-    futureCard = medicineController.getMedicine("id");
+    futureCard = medicineController.getMedicine("63f7246bc402f485ffa62f85");
     super.initState();
   }
 
@@ -28,7 +28,7 @@ class _DetailsState extends State<Details> {
         body: Column(
       children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(15, 40.0, 0, 40),
+          padding: const EdgeInsets.fromLTRB(15, 40.0, 0, 20),
           child: Row(
             children: [
               IconButton(
@@ -90,41 +90,8 @@ class _DetailsState extends State<Details> {
                       ),
                     ]);
               } else {
-                return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      MedicineInfo(
-                          med_name: "Doliprane",
-                          med_dosage: "500mg",
-                          med_pic: "assets/piills.jpgh"),
-                      MidSectionInfo(
-                          med_type: "Pill",
-                          dosage_interval: "Every 6 hours",
-                          start_time: "14h"),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 50, 20, 0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
-                              color: AppColor.mainColor),
-                          child: TextButton(
-                              onPressed: () {
-                                alertDeleteMedicine();
-                                medicineController.deleteMedicine("id");
-                                //Get.back();
-                              },
-                              child: Center(
-                                  child: Text(
-                                "Delete",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "Poppins",
-                                ),
-                              ))),
-                        ),
-                      ),
-                    ]);
-                /* return Padding(
+               
+                 return Padding(
                   padding: const EdgeInsets.only(top: 250.0),
                   child: Center(
                       child: Text("Request failed",
@@ -133,7 +100,7 @@ class _DetailsState extends State<Details> {
                               color: AppColor.mainColor,
                               fontWeight: FontWeight.w700,
                               fontFamily: "Poppins"))),
-                );*/
+                );
               }
             }))
       ],
@@ -239,7 +206,7 @@ class MedicineInfo extends StatelessWidget {
                 borderRadius: BorderRadius.circular(40),
                 boxShadow: [
                   BoxShadow(
-                    blurRadius: 6,
+                    blurRadius: 4,
                     spreadRadius: 1,
                     color: Color.fromARGB(255, 207, 207, 207),
                   )

@@ -130,29 +130,11 @@ class _UserArticleState extends State<UserArticle> {
                           );
                         }));
                   } else {
-                    return GestureDetector(
-                        onTap: () {
-                          Get.toNamed(
-                            AppRoute.personalArticleDetails, /*parameters:*/
-                          );
-                        },
-                        child: GridView.builder(
-                            itemCount: 4,
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2),
-                            itemBuilder: ((context, index) {
-                              return UserBlogCard(
-                                  blogTitle: "My experience with Doliprane",
-                                  blogPicture: "assets/image/piills.jpg");
-                            })));
-                    /*
                     return Center(
-                        child: Text("No Articles found",
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: "Poppins")));*/
+                        child: CircularProgressIndicator(
+                      backgroundColor: Color.fromARGB(255, 16, 152, 170),
+                      value: 5,
+                    ));
                   }
                 }))),
       ]),

@@ -65,7 +65,7 @@ class _MedicineDescriptionState extends State<MedicineDescriptionPage> {
                           child: Text("Search for your medicines",
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 20,
+                                  fontSize: 19,
                                   fontWeight: FontWeight.w500,
                                   fontFamily: "Poppins")),
                         ),
@@ -111,7 +111,7 @@ class _MedicineDescriptionState extends State<MedicineDescriptionPage> {
             child: Text("Medicine name",
                 style: TextStyle(
                     color: AppColor.mainColor,
-                    fontSize: 19,
+                    fontSize: 18,
                     fontWeight: FontWeight.w600,
                     fontFamily: "Poppins")),
           ),
@@ -128,7 +128,7 @@ class _MedicineDescriptionState extends State<MedicineDescriptionPage> {
             child: Text("Description",
                 style: TextStyle(
                     color: AppColor.mainColor,
-                    fontSize: 19,
+                    fontSize: 18,
                     fontWeight: FontWeight.w600,
                     fontFamily: "Poppins")),
           ),
@@ -145,7 +145,7 @@ class _MedicineDescriptionState extends State<MedicineDescriptionPage> {
             child: Text("How to use it",
                 style: TextStyle(
                     color: AppColor.mainColor,
-                    fontSize: 19,
+                    fontSize: 18,
                     fontWeight: FontWeight.w600,
                     fontFamily: "Poppins")),
           ),

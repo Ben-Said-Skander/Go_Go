@@ -134,5 +134,5 @@ List<GetPage<dynamic>>? routes = [
   GetPage(
       name: AppRoute.test,
       page: () => const test(),
-      binding: BlogBindings()),
+      binding: MedicinesBindings()),
 ];

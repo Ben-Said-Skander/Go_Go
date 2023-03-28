@@ -131,11 +131,10 @@ class _MissingBlogState extends State<MissingBlog> {
                         }));
                   } else {
                     return Center(
-                        child: Text("No Articles found",
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: "Poppins")));
+                        child: CircularProgressIndicator(
+                      backgroundColor: Color.fromARGB(255, 16, 152, 170),
+                      value: 5,
+                    ));
                   }
                 }))),
       ]),

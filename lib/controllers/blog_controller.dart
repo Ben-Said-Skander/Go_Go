@@ -7,8 +7,7 @@ import '../models/blog.dart';
 
 class BlogController extends GetxController {
   Future<Blog> createArticle(String title, String category, String body) async {
-    final response = await http.post(
-        Uri.parse('http://192.168.101.161:3600/blog'),
+    final response = await http.post(Uri.parse('http://192.168.1.14:3600/blog'),
         headers: {"Content-Type": "Application/json"},
         body: jsonEncode(<String, String>{
           'title': title,
@@ -26,7 +25,7 @@ class BlogController extends GetxController {
 
   Future<Blog> deleteArticle(String id) async {
     final response =
-        await http.delete(Uri.parse('http://192.168.101.161:3600/blog/$id'));
+        await http.delete(Uri.parse('http://192.168.1.14:3600/blog/$id'));
     if (response.statusCode == 200) {
       var article = Blog.fromJson(json.decode(response.body));
       print(article);
@@ -39,7 +38,7 @@ class BlogController extends GetxController {
 
   Future<Blog> getArticle(String id) async {
     final response =
-        await http.get(Uri.parse('http://192.168.101.161:3600/blog/$id'));
+        await http.get(Uri.parse('http://192.168.1.14:3600/blog/$id'));
     if (response.statusCode == 200) {
       var article = Blog.fromJson(json.decode(response.body));
       print(article);
@@ -50,8 +49,7 @@ class BlogController extends GetxController {
   }
 
   Future<List<Blog>> fetchArticles() async {
-    final response =
-        await http.get(Uri.parse('http://192.168.101.161:3600/blog'));
+    final response = await http.get(Uri.parse('http://192.168.1.14:3600/blog'));
 
     if (response.statusCode == 200) {
       final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();

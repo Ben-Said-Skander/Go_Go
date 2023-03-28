@@ -33,9 +33,9 @@ class _OnBoardingState extends State<OnBoarding> {
               borderRadius: BorderRadius.only()),
           child: Center(
               child: Image.asset(
-            "assets/image/logo.jpg",
-            width: 150,
-            height: 150,
+            "assets/image/logo.png",
+            width: 200,
+            height: 230,
           )),
         ),
         Container(

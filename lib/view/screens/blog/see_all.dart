@@ -97,23 +97,13 @@ class _SeeAllState extends State<SeeAll> {
                               blogPicture: "assets/image/piills.jpg");
                         }));
                   } else {
-                    return GridView.builder(
-                        itemCount: 4,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2),
-                        itemBuilder: ((context, index) {
-                          return BlogCard(
-                              blogTitle: "My experience with Doliprane",
-                              blogPicture: "assets/image/piills.jpg");
-                        }));
-                    /*
-                    return Center(
-                        child: Text("No Articles found",
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: "Poppins")));*/
+             
+                    return Center(child:CircularProgressIndicator(
+              backgroundColor: Color.fromARGB(255, 16, 152, 170),
+              value: 5,
+            ) 
+         
+            );
                   }
                 }))),
       ]),

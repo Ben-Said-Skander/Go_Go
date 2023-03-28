@@ -57,7 +57,7 @@ class ReminderMedCard extends StatelessWidget {
             child: Text(
               med_interval,
               style: TextStyle(
-                  color: Color.fromARGB(255, 212, 85, 0),
+                  color: Color.fromARGB(255, 5, 115, 137),
                   fontSize: 14,
                   fontWeight: FontWeight.w700),
             ),

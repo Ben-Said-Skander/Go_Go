@@ -2,9 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/controllers/medicine_controller.dart';
-
 import 'package:pfa_application_1/core/constants/colors.dart';
-
 import 'package:pfa_application_1/core/constants/routes.dart';
 import 'package:pfa_application_1/models/medicine.dart';
 import 'package:pfa_application_1/view/widgets/component/reminder_med_card.dart';
@@ -98,31 +96,14 @@ class _RemindersState extends State<Reminders> {
                         );
                       }));
                 } else {
-                  return GestureDetector(
-                      onTap: () {
-                        Get.toNamed(
-                          AppRoute.details, /*parameters:*/
-                        );
-                      },
-                      child: GridView.builder(
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2),
-                          itemCount: 4,
-                          itemBuilder: ((context, index) {
-                            return ReminderMedCard(
-                                med_name: "Doliprane",
-                                med_pic: "assets/image/sirop.jpg",
-                                med_interval: "Every 8 hours");
-                          })));
-                  /* return Center(
+                  return Center(
                     child: Text("No Reminders found",
                         style: TextStyle(
                             fontSize: 20,
                             color: AppColor.mainColor,
                             fontWeight: FontWeight.w700,
                             fontFamily: "Poppins")),
-                  );*/
+                  );
                 }
               }),
         )

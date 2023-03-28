@@ -29,19 +29,18 @@ class _AddBlogState extends State<AddBlog> {
     "In need of a missing drug",
     "Questions about a drug",
   ];
+  @override
+  void dispose() {
+    titleController.dispose();
+    bodyController.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
     titleController = TextEditingController();
     bodyController = TextEditingController();
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    titleController.dispose();
-    bodyController.dispose();
-    super.dispose();
   }
 
   uploadImage() async {
@@ -215,6 +214,7 @@ class _AddBlogState extends State<AddBlog> {
             child: Padding(
               padding: EdgeInsets.fromLTRB(20, 15, 20, 0),
               child: TextFormField(
+                controller: bodyController,
                 minLines: null,
                 maxLines: 20,
                 keyboardType: TextInputType.multiline,
@@ -235,7 +235,6 @@ class _AddBlogState extends State<AddBlog> {
                 color: AppColor.mainColor),
             child: TextButton(
                 onPressed: () {
-                  //blogController.fetchArticles();
                   blogController.createArticle(
                       titleController.text, "category", bodyController.text);
                   Get.back();

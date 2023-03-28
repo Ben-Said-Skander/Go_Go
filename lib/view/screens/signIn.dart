@@ -44,12 +44,12 @@ class _SignInState extends State<SignIn> {
             color: AppColor.mainColor,
             height: 200,
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 80, 0, 0),
+              padding: const EdgeInsets.fromLTRB(20, 60, 0, 0),
               child: Text("Welcome back ",
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 23,
-                      fontWeight: FontWeight.w500,
+                      fontSize: 25,
+                      //   fontWeight: FontWeight.w600,
                       fontFamily: "Poppins")),
             ),
           ),

@@ -196,7 +196,7 @@ class _AddMedicineState extends State<AddMedicine> {
                       "xxx",
                       starting_timeController.text,
                       "6");
-                //  medicineController.fetchMedicines();
+          
                   Get.back();
                 },
                 child: Center(

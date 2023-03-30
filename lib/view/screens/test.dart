@@ -57,14 +57,48 @@ class ImageScreen extends StatefulWidget {
 
 class _ImageScreenState extends State<ImageScreen> {
   BlogController blogController = Get.find();
-  late Future<Uint8List> image;
+  late Future<List<dynamic>> images;
+//  late Future<Uint8List> image;
 
   @override
   void initState() {
     super.initState();
-    image = blogController.getImage("64245d61cc7d51fe06a7e45b");
+    images = blogController.fetchImages();
+    //  image = blogController.getImage("64245d61cc7d51fe06a7e45b");
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Image List'),
+      ),
+      body: FutureBuilder<List<dynamic>>(
+        future: images,
+        builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
+          if (snapshot.hasData) {
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (BuildContext context, int index) {
+                final image = snapshot.data![index];
+                return ListTile(
+                 // title: Text(image['name']),
+                  leading: Image.memory(image['data']),
+                );
+              },
+            );
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
+    );
+  }
+}
+//Get image
+/*
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,3 +118,4 @@ class _ImageScreenState extends State<ImageScreen> {
     );
   }
 }
+*/

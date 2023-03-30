@@ -6,6 +6,13 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class MedicineController extends GetxController {
+  var medicineXList = List<Medicine>.empty().obs;
+  var isLoading = true.obs;
+  @override
+  void initState() {
+    fetchMedicines();
+  }
+
   Future<Medicine> addMedicine(String name, String dosage, String type,
       String interval, String start_time) async {
     final response =
@@ -53,17 +60,23 @@ class MedicineController extends GetxController {
   }
 
   Future<List<Medicine>> fetchMedicines() async {
-    final response =
-        await http.get(Uri.parse('http://192.168.1.14:3600/medicines'));
+    try {
+      isLoading(true);
+      final response =
+          await http.get(Uri.parse('http://192.168.1.14:3600/medicines'));
 
-    if (response.statusCode == 200) {
-      final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
-      var medicineList =
-          parsed.map<Medicine>((e) => Medicine.fromJson(e)).toList();
-      print(medicineList);
-      return medicineList;
-    } else {
-      throw Exception('Failed to load Medicines');
+      if (response.statusCode == 200) {
+        final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
+        var medicineList =
+            parsed.map<Medicine>((e) => Medicine.fromJson(e)).toList();
+        print(medicineList);
+        medicineXList.assignAll(medicineList);
+        return medicineXList;
+      } else {
+        throw Exception('Failed to load Medicines');
+      }
+    } finally {
+      isLoading(false);
     }
   }
 }

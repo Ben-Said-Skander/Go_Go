@@ -11,6 +11,13 @@ import '../models/blog.dart';
 import "../models/image.dart";
 
 class BlogController extends GetxController {
+  var articlesXList = List<Blog>.empty().obs;
+  var isLoading = true.obs;
+  @override
+  void initState() {
+    fetchArticles();
+  }
+
   Future<Blog> createArticle(String title, String category, String body) async {
     final response = await http.post(Uri.parse('http://192.168.1.14:3600/blog'),
         headers: {"Content-Type": "Application/json"},
@@ -54,15 +61,22 @@ class BlogController extends GetxController {
   }
 
   Future<List<Blog>> fetchArticles() async {
-    final response = await http.get(Uri.parse('http://192.168.1.14:3600/blog'));
+    try {
+      isLoading(true);
+      final response =
+          await http.get(Uri.parse('http://192.168.1.14:3600/blog'));
 
-    if (response.statusCode == 200) {
-      final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
-      var articles = parsed.map<Blog>((e) => Blog.fromJson(e)).toList();
-      print(articles);
-      return articles;
-    } else {
-      throw Exception('Failed to load Articles');
+      if (response.statusCode == 200) {
+        final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
+        var articles = parsed.map<Blog>((e) => Blog.fromJson(e)).toList();
+        print(articles);
+        articlesXList.assignAll(articles);
+        return articlesXList;
+      } else {
+        throw Exception('Failed to load Articles');
+      }
+    } finally {
+      isLoading(false);
     }
   }
 
@@ -78,6 +92,7 @@ class BlogController extends GetxController {
       print('Upload failed');
     }
   }
+
 /*
   Future<Picture> getImage(String id) async {
     final response =
@@ -90,14 +105,15 @@ class BlogController extends GetxController {
     }
   }
 }*/
-Future<Uint8List> getImage(String id) async {
-  final response = await http.get(Uri.parse('http://192.168.1.14:3600/image/${id}'));
-  if (response.statusCode == 200) {
-    return response.bodyBytes;
-  } else {
-    throw Exception('Failed to load image');
+  Future<Uint8List> getImage(String id) async {
+    final response =
+        await http.get(Uri.parse('http://192.168.1.14:3600/image/${id}'));
+    if (response.statusCode == 200) {
+      return response.bodyBytes;
+    } else {
+      throw Exception('Failed to load image');
+    }
   }
-}
 
 /*
 Future<List<Picture>> getAllImages() async {
@@ -110,8 +126,9 @@ Future<List<Picture>> getAllImages() async {
     throw Exception('Failed to load images');
   }
 }*/
-Future<List<dynamic>> fetchImages() async {
-    final response = await http.get(Uri.parse('http://your-backend-url/images'));
+  Future<List<dynamic>> fetchImages() async {
+    final response =
+        await http.get(Uri.parse('http://192.168.1.14:3600/image'));
     if (response.statusCode == 200) {
       // Convert the response body to a list of images
       final List<dynamic> imagesJson = json.decode(response.body);

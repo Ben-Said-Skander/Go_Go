@@ -31,163 +31,164 @@ class _BlogPageState extends State<BlogPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        heroTag: 'btn2',
-        onPressed: () {
-          Get.toNamed(AppRoute.addBlog);
-        },
-        backgroundColor: AppColor.mainColor,
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
+        floatingActionButton: FloatingActionButton(
+          heroTag: 'btn2',
+          onPressed: () {
+            Get.toNamed(AppRoute.addBlog);
+          },
+          backgroundColor: AppColor.mainColor,
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
         ),
-      ),
-      body: FutureBuilder<List<Blog>>(
-          future: futureCard,
-          builder: ((context, snapshot) {
-            if (snapshot.hasData) {
-              return ListView(children: [
-                SafeArea(
-                  child: Container(
-                    height: 120,
-                    width: 500,
-                    decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.only(bottomLeft: Radius.circular(80)),
-                      color: Color.fromARGB(255, 16, 152, 170),
-                    ),
-                    child: Row(
-                      children: [
-                        Center(
-                          child: Padding(
-                              padding: const EdgeInsets.only(left: 40),
-                              child: GestureDetector(
-                                onTap: () {
-                                  Get.toNamed(AppRoute.settings);
-                                },
-                                child: CircleAvatar(
-                                  backgroundImage: AssetImage(
-                                    "assets/image/me2.jpg",
+        body: Obx((() => FutureBuilder<List<Blog>>(
+            future: blogController.fetchArticles(),
+            builder: ((context, snapshot) {
+              if (snapshot.hasData) {
+                return ListView(children: [
+                  SafeArea(
+                    child: Container(
+                      height: 120,
+                      width: 500,
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.only(bottomLeft: Radius.circular(80)),
+                        color: Color.fromARGB(255, 16, 152, 170),
+                      ),
+                      child: Row(
+                        children: [
+                          Center(
+                            child: Padding(
+                                padding: const EdgeInsets.only(left: 40),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Get.toNamed(AppRoute.settings);
+                                  },
+                                  child: CircleAvatar(
+                                    backgroundImage: AssetImage(
+                                      "assets/image/me2.jpg",
+                                    ),
+                                    radius: 28,
                                   ),
-                                  radius: 28,
-                                ),
-                              )),
-                        ),
-                        SizedBox(
-                          width: 22,
-                        ),
-                        Text(
-                          "Ben Said Skander",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 19,
-                              fontFamily: "Poppins"),
-                        ),
+                                )),
+                          ),
+                          SizedBox(
+                            width: 22,
+                          ),
+                          Text(
+                            "Ben Said Skander",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 19,
+                                fontFamily: "Poppins"),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Container(
+                    height: 50,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        textButton(context, "Drug Experience", "blog",
+                            AppColor.mainColor),
+                        textButton(context, "Missing Drug", "missingBlog",
+                            Colors.grey),
+                        textButton(
+                            context, "Seeking Help", "helpBlog", Colors.grey),
+                        textButton(context, "Your Articles", "userArticle",
+                            Colors.grey),
                       ],
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 40,
-                ),
-                Container(
-                  height: 50,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      textButton(context, "Drug Experience", "blog",
-                          AppColor.mainColor),
-                      textButton(
-                          context, "Missing Drug", "missingBlog", Colors.grey),
-                      textButton(
-                          context, "Seeking Help", "helpBlog", Colors.grey),
-                      textButton(
-                          context, "Your Articles", "userArticle", Colors.grey),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 28, 0, 15),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Drug Experience",
+                            style: TextStyle(
+                                color: AppColor.mainColor,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "Poppins",
+                                fontSize: 18),
+                          ),
+                          TextButton(
+                              onPressed: () {
+                                Get.toNamed(AppRoute.seeAll);
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 15),
+                                child: Text(
+                                  "See all",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: "Poppins",
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ))
+                        ]),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 28, 0, 15),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Drug Experience",
-                          style: TextStyle(
-                              color: AppColor.mainColor,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "Poppins",
-                              fontSize: 18),
-                        ),
-                        TextButton(
-                            onPressed: () {
-                              Get.toNamed(AppRoute.seeAll);
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 15),
-                              child: Text(
-                                "See all",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontFamily: "Poppins",
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ))
-                      ]),
-                ),
-                Container(
-                    height: 220,
+                  Container(
+                      height: 220,
+                      child: ListView.builder(
+                        itemCount: 4,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: ((context, index) {
+                          return GestureDetector(
+                              onTap: () {
+                                var id = "${snapshot.data![index].id}";
+                                Get.toNamed(AppRoute.blogdetails,
+                                    arguments: id);
+                              },
+                              child: BlogCard(
+                                  blogTitle: "${snapshot.data![index].title}",
+                                  blogPicture: "assets/image/piills.jpg"));
+                        }),
+                      )),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 28, 0, 15),
+                    child: Text(
+                      "Popular",
+                      style: TextStyle(
+                          color: AppColor.mainColor,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "Poppins",
+                          fontSize: 18),
+                    ),
+                  ),
+                  Container(
+                    height: 200,
                     child: ListView.builder(
-                      itemCount: 4,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: ((context, index) {
-                        return GestureDetector(
-                            onTap: () {
-                              var id = "${snapshot.data![index].id}";
-                              Get.toNamed(AppRoute.blogdetails, arguments: id);
-                            },
-                            child: BlogCard(
-                                blogTitle: "${snapshot.data![index].title}",
-                                blogPicture: "assets/image/piills.jpg"));
-                      }),
-                    )),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 28, 0, 15),
-                  child: Text(
-                    "Popular",
-                    style: TextStyle(
-                        color: AppColor.mainColor,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "Poppins",
-                        fontSize: 18),
-                  ),
-                ),
-                Container(
-                  height: 200,
-                  child: ListView.builder(
-                      itemCount: 3,
-                      itemBuilder: ((context, index) {
-                        return GestureDetector(
-                            onTap: () {
-                              var id = "${snapshot.data![index].id}";
-                              Get.toNamed(AppRoute.blogdetails, arguments: id);
-                            },
-                            child: PopularCard(
-                                blogTitle: "${snapshot.data![index].title}",
-                                blogPicture: "assets/image/piills.jpg",
-                                route: "/blog/details"));
-                      })),
-                )
-              ]);
-            } else {
-              return Center(
-                  child: CircularProgressIndicator(
-                backgroundColor: Color.fromARGB(255, 16, 152, 170),
-                value: 5,
-              ));
-            }
-          })),
-    );
+                        itemCount: 3,
+                        itemBuilder: ((context, index) {
+                          return GestureDetector(
+                              onTap: () {
+                                var id = "${snapshot.data![index].id}";
+                                Get.toNamed(AppRoute.blogdetails,
+                                    arguments: id);
+                              },
+                              child: PopularCard(
+                                  blogTitle: "${snapshot.data![index].title}",
+                                  blogPicture: "assets/image/piills.jpg",
+                                  route: "/blog/details"));
+                        })),
+                  )
+                ]);
+              } else {
+                return Center(
+                    child: CircularProgressIndicator(
+                  backgroundColor: Color.fromARGB(255, 16, 152, 170),
+                  value: 5,
+                ));
+              }
+            })))));
   }
 }
 

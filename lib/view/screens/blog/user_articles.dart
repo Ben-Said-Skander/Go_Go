@@ -17,7 +17,8 @@ class UserArticle extends StatefulWidget {
 }
 
 class _UserArticleState extends State<UserArticle> {
-  BlogController blogController = Get.find();
+    final blogController = Get.put(BlogController());
+ // BlogController blogController = Get.find();
   late Future<List<Blog>> futureCard;
   @override
   void initState() {
@@ -108,36 +109,37 @@ class _UserArticleState extends State<UserArticle> {
         Container(
             height: 560,
             padding: EdgeInsets.only(top: 35),
-            child: FutureBuilder<List<Blog>>(
-                future: futureCard,
-                builder: ((context, snapshot) {
-                  if (snapshot.hasData) {
-                    return GridView.builder(
-                        itemCount: snapshot.data!.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2),
-                        itemBuilder: ((context, index) {
-                          return GestureDetector(
-                            onTap: () {
-                              var id = "${snapshot.data![index].id}" ;
-                              Get.toNamed(
-                                AppRoute.personalArticleDetails, arguments: id
-                              );
-                            },
-                            child: UserBlogCard(
-                                blogTitle: "${snapshot.data![index].title}",
-                                blogPicture: "assets/image/piills.jpg"),
-                          );
-                        }));
-                  } else {
-                    return Center(
-                        child: CircularProgressIndicator(
-                      backgroundColor: Color.fromARGB(255, 16, 152, 170),
-                      value: 5,
-                    ));
-                  }
-                }))),
+            child: Obx(
+              (() => FutureBuilder<List<Blog>>(
+                  future: blogController.fetchArticles(),
+                  builder: ((context, snapshot) {
+                    if (snapshot.hasData) {
+                      return GridView.builder(
+                          itemCount: snapshot.data!.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2),
+                          itemBuilder: ((context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                var id = "${snapshot.data![index].id}";
+                                Get.toNamed(AppRoute.personalArticleDetails,
+                                    arguments: id);
+                              },
+                              child: UserBlogCard(
+                                  blogTitle: "${snapshot.data![index].title}",
+                                  blogPicture: "assets/image/piills.jpg"),
+                            );
+                          }));
+                    } else {
+                      return Center(
+                          child: CircularProgressIndicator(
+                        backgroundColor: Color.fromARGB(255, 16, 152, 170),
+                        value: 5,
+                      ));
+                    }
+                  }))),
+            ))
       ]),
     );
   }

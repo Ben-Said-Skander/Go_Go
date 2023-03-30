@@ -16,35 +16,14 @@ class Reminders extends StatefulWidget {
   State<Reminders> createState() => _RemindersState();
 }
 
-class _RemindersState extends State<Reminders> with WidgetsBindingObserver {
+class _RemindersState extends State<Reminders> {
   final medicineController = Get.put(MedicineController());
   //MedicineController medicineController = Get.find();
   late final Future<List<Medicine>> futureCard;
   @override
   void initState() {
-    WidgetsBinding.instance.addObserver(this);
     futureCard = medicineController.fetchMedicines();
     super.initState();
-  }
-
-  @override
-  void setState(VoidCallback fn) {
-    futureCard = medicineController.fetchMedicines();
-    super.setState(fn);
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
-      futureCard = medicineController
-          .fetchMedicines(); // Reload the data when the app is resumed
-    }
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
   }
 
   @override
@@ -92,11 +71,8 @@ class _RemindersState extends State<Reminders> with WidgetsBindingObserver {
                     fontFamily: "Poppins"))),
         Container(
             height: 500,
-            //padding: EdgeInsets.only(top: 15),
-            child:      
-            //    Obx(           () =>
-               FutureBuilder<List<Medicine>>(
-                  future: futureCard,
+            child: Obx(() => FutureBuilder<List<Medicine>>(
+                  future: medicineController.fetchMedicines(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return GridView.builder(
@@ -120,18 +96,24 @@ class _RemindersState extends State<Reminders> with WidgetsBindingObserver {
                                       "${snapshot.data![index].interval}"),
                             );
                           }));
+                    } else if (snapshot.hasError) {
+                      return Center(
+                        child: Text(
+                          "Error loading data",
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: AppColor.mainColor,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: "Poppins"),
+                        ),
+                      );
                     } else {
                       return Center(
-                        child: Text("No Reminders found",
-                            style: TextStyle(
-                                fontSize: 20,
-                                color: AppColor.mainColor,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: "Poppins")),
+                        child: CircularProgressIndicator(),
                       );
                     }
-                  }),
-            )
+                  },
+                )))
       ]),
     );
   }

@@ -16,13 +16,35 @@ class Reminders extends StatefulWidget {
   State<Reminders> createState() => _RemindersState();
 }
 
-class _RemindersState extends State<Reminders> {
-  MedicineController medicineController = Get.find();
+class _RemindersState extends State<Reminders> with WidgetsBindingObserver {
+  final medicineController = Get.put(MedicineController());
+  //MedicineController medicineController = Get.find();
   late final Future<List<Medicine>> futureCard;
   @override
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
     futureCard = medicineController.fetchMedicines();
     super.initState();
+  }
+
+  @override
+  void setState(VoidCallback fn) {
+    futureCard = medicineController.fetchMedicines();
+    super.setState(fn);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      futureCard = medicineController
+          .fetchMedicines(); // Reload the data when the app is resumed
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 
   @override
@@ -69,42 +91,47 @@ class _RemindersState extends State<Reminders> {
                     fontWeight: FontWeight.w700,
                     fontFamily: "Poppins"))),
         Container(
-          height: 500,
-          //padding: EdgeInsets.only(top: 15),
-          child: FutureBuilder<List<Medicine>>(
-              future: futureCard,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2),
-                      itemCount: snapshot.data?.length,
-                      itemBuilder: ((context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            var id = "${snapshot.data![index].id}";
-                            Get.toNamed(AppRoute.details, arguments: id);
-                          },
-                          child: ReminderMedCard(
-                              med_name: "${snapshot.data![index].name}",
-                              med_pic: "assets/image/sirop.jpg",
-                              med_interval:
-                                  "${snapshot.data![index].interval}"),
-                        );
-                      }));
-                } else {
-                  return Center(
-                    child: Text("No Reminders found",
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: AppColor.mainColor,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: "Poppins")),
-                  );
-                }
-              }),
-        )
+            height: 500,
+            //padding: EdgeInsets.only(top: 15),
+            child:      
+            //    Obx(           () =>
+               FutureBuilder<List<Medicine>>(
+                  future: futureCard,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2),
+                          itemCount: snapshot.data?.length,
+                          itemBuilder: ((context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                var id = "${snapshot.data![index].id}";
+                                Get.toNamed(
+                                  AppRoute.details,
+                                  arguments: id,
+                                );
+                              },
+                              child: ReminderMedCard(
+                                  med_name: "${snapshot.data![index].name}",
+                                  med_pic: "assets/image/sirop.jpg",
+                                  med_interval:
+                                      "${snapshot.data![index].interval}"),
+                            );
+                          }));
+                    } else {
+                      return Center(
+                        child: Text("No Reminders found",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: AppColor.mainColor,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: "Poppins")),
+                      );
+                    }
+                  }),
+            )
       ]),
     );
   }

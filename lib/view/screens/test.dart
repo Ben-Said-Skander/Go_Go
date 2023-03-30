@@ -1,337 +1,85 @@
-// ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, camel_case_types, avoid_unnecessary_containers
+import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:pfa_application_1/controllers/medicine_controller.dart';
 
-import 'package:pfa_application_1/core/constants/colors.dart';
+import 'package:pfa_application_1/controllers/blog_controller.dart';
 
-class test extends StatefulWidget {
-  const test({super.key});
+import 'package:pfa_application_1/models/image.dart';
+
+/*
+class ImageScreen extends StatefulWidget {
+  ImageScreen();
 
   @override
-  State<test> createState() => _testState();
+  _ImageScreenState createState() => _ImageScreenState();
 }
 
-class _testState extends State<test> {
-  MedicineController medicineController = Get.find();
-
-  late TextEditingController med_nameController;
-  late TextEditingController med_dosageController;
-  late TextEditingController starting_timeController;
-  String dropdownvalue = "Every 2 hours";
-  var intervals = [
-    "Every 1 hour",
-    "Every 2 hours",
-    "Every 4 hours",
-    "Every 6 hours",
-    "Every 8 hours",
-    "Every 12 hours",
-    "Every 24 hours",
-  ];
-  int selectedIndex = 0;
-
-  @override
-  void dispose() {
-    med_nameController.dispose();
-    med_dosageController.dispose();
-    starting_timeController.dispose();
-    super.dispose();
-  }
-
+class _ImageScreenState extends State<ImageScreen> {
+  late Future<Picture>? image;
+  BlogController blogController = Get.find();
   @override
   void initState() {
-    med_nameController = TextEditingController();
-    med_dosageController = TextEditingController();
-    starting_timeController = TextEditingController();
+    image = blogController.getImage("64245abd22d5463cfa4c9d2a");
+  //  print(image);
     super.initState();
   }
 
-  FocusNode myFocusNode = new FocusNode();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(15, 18.0, 0, 28),
-          child: Row(
-            children: [
-              IconButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: Icon(Icons.arrow_back_ios)),
-              Padding(
-                padding: const EdgeInsets.only(left: 80.0),
-                child: Center(
-                  child: Text(
-                    "Add New Medicine",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontFamily: "Poppins",
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
-          child: Titles(title: "Medicine name"),
-        ),
-        Container(
-          padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
-          width: 350,
-          child: TextFormField(
-            keyboardType: TextInputType.text,
-            decoration: InputDecoration(
-                focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: AppColor.secondryColor)),
-                hintText: "Medicine name",
-                prefixIcon: Icon(FontAwesomeIcons.pills)),
-            controller: med_nameController,
-            cursorColor: Color.fromARGB(255, 16, 152, 170),
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(20, 25, 20, 0),
-          child: Titles(title: "Dosage in mg"),
-        ),
-        Container(
-          padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
-          width: 350,
-          child: TextFormField(
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: AppColor.secondryColor)),
-              hintText: "Dosage",
-              prefixIcon: Icon(FontAwesomeIcons.hashtag),
-            ),
-            controller: med_dosageController,
-            cursorColor: Color.fromARGB(255, 16, 152, 170),
-          ),
-        ),
-        Padding(
-            padding: EdgeInsets.fromLTRB(30, 50, 20, 0),
-            child: Text("Medicine Type",
-                style: TextStyle(
-                    color: AppColor.mainColor,
-                    fontFamily: "Poppins",
-                    fontWeight: FontWeight.w600))),
-        MedicineType(),
-        Padding(
-          padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
-          child: Row(
-            children: [
-              Text("Remind me every",
-                  style: TextStyle(
-                      color: AppColor.mainColor,
-                      fontFamily: "Poppins",
-                      fontWeight: FontWeight.w600)),
-              SizedBox(
-                width: 20,
-              ),
-              DropdownButton(
-                  iconEnabledColor: AppColor.mainColor,
-                  hint: Text("Select Interval"),
-                  elevation: 4,
-                  value: dropdownvalue, // initial value
-                  items: intervals.map((String items) {
-                    return DropdownMenuItem(
-                        value: items,
-                        child: Text(
-                          items,
-                          style: TextStyle(fontFamily: "Poppins"),
-                        ));
-                  }).toList(),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      dropdownvalue = newValue!;
-                    });
-                  })
-            ],
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(25, 13, 0, 0),
-          child: Row(
-            children: [
-              Text(
-                "Starting Time",
-                style: TextStyle(
-                    color: AppColor.mainColor,
-                    fontFamily: "Poppins",
-                    fontWeight: FontWeight.w600),
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                width: 200,
-                child: TextFormField(
-                  controller: starting_timeController,
-                  keyboardType: TextInputType.datetime,
-                  decoration: InputDecoration(
-                      focusedBorder: UnderlineInputBorder(
-                          borderSide:
-                              BorderSide(color: AppColor.secondryColor)),
-                      hintText: "16:05:00"),
-                  cursorColor: Color.fromARGB(255, 16, 152, 170),
-                ),
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(20, 60, 20, 0),
-          child: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                color: AppColor.mainColor),
-            child: TextButton(
-                onPressed: () {
-
-                     
-                },
-                child: Center(
-                    child: Text(
-                  "Confirm",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: "Poppins",
-                      fontWeight: FontWeight.w600),
-                ))),
-          ),
-        ),
+        FutureBuilder<Picture>(
+            future: image,
+            builder: ((context, snapshot) {
+              if (snapshot.hasData) {
+                print(snapshot.data!.data!);
+                return Center(child: Image.memory(snapshot.data!.data!));
+              } else {
+                return Center(
+                    child: CircularProgressIndicator(
+                  backgroundColor: Color.fromARGB(255, 16, 152, 170),
+                  value: 5,
+                ));
+              }
+            }))
       ]),
     );
   }
+}*/
+class ImageScreen extends StatefulWidget {
+  ImageScreen();
+
+  @override
+  _ImageScreenState createState() => _ImageScreenState();
 }
 
-class Titles extends StatelessWidget {
-  const Titles({super.key, required this.title});
-  final String title;
+class _ImageScreenState extends State<ImageScreen> {
+  BlogController blogController = Get.find();
+  late Future<Uint8List> image;
+
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 15, 0, 0),
-      child: Container(
-        child: Text(
-          title,
-          style: TextStyle(
-              color: AppColor.mainColor,
-              fontFamily: "Poppins",
-              fontWeight: FontWeight.w600),
-        ),
-      ),
-    );
+  void initState() {
+    super.initState();
+    image = blogController.getImage("64245d61cc7d51fe06a7e45b");
   }
-}
 
-class MedicineType extends StatefulWidget {
-  const MedicineType({super.key});
-
-  @override
-  State<MedicineType> createState() => _MedicineTypeState();
-}
-
-class _MedicineTypeState extends State<MedicineType> {
-  int bottleIndex = 0;
-  int pillsIndex = 0;
-  int syringeIndex = 0;
-
-  int typeIndex = 0;
-
-  Color bottleColor = Colors.grey;
-  Color pillsColor = Colors.grey;
-  Color syringeColor = Colors.grey;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 25),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            children: [
-              IconButton(
-                icon: Icon(
-                  FontAwesomeIcons.bottleDroplet,
-                ),
-                iconSize: 70,
-                onPressed: () {
-                  setState(() {
-                    // To test what type of medicine it is
-                    typeIndex = 1;
-                    print(typeIndex);
-                    /************** */
-                    bottleIndex = 1;
-                    pillsIndex = 0;
-                    syringeIndex = 0;
-                  });
-                  if (bottleIndex == 1) {
-                    bottleColor = Color.fromARGB(255, 4, 107, 120);
-                    pillsColor = Colors.grey;
-                    syringeColor = Colors.grey;
-                  }
-                },
-                color: bottleColor,
-              ),
-              Text("Bottle")
-            ],
-          ),
-          Column(
-            children: [
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    // To test what type of medicine it is
-                    typeIndex = 2;
-                    print(typeIndex);
-                    /************** */
-                    pillsIndex = 1;
-                    bottleIndex = 0;
-                    syringeIndex = 0;
-                  });
-                  if (pillsIndex == 1) {
-                    pillsColor = Color.fromARGB(255, 4, 107, 120);
-                    syringeColor = Colors.grey;
-                    bottleColor = Colors.grey;
-                  }
-                },
-                icon: Icon(FontAwesomeIcons.pills, color: pillsColor),
-                iconSize: 70,
-              ),
-              Text("Pills")
-            ],
-          ),
-          Column(
-            children: [
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    // To test what type of medicine it is
-                    typeIndex = 3;
-                    print(typeIndex);
-                    /************** */
-                    syringeIndex = 1;
-                    pillsIndex = 0;
-                    bottleIndex = 0;
-                  });
-                  if (syringeIndex == 1) {
-                    syringeColor = Color.fromARGB(255, 4, 107, 120);
-                    bottleColor = Colors.grey;
-                    pillsColor = Colors.grey;
-                  }
-                },
-                icon: Icon(FontAwesomeIcons.syringe, color: syringeColor),
-                iconSize: 70,
-              ),
-              Text("Syringe")
-            ],
-          ),
-        ],
+    return Scaffold(
+      body: FutureBuilder<Uint8List>(
+        future: image,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Center(
+              child: Image.memory(snapshot.data!),
+            );
+          } else if (snapshot.hasError) {
+            return Text('${snapshot.error}');
+          }
+          return CircularProgressIndicator();
+        },
       ),
     );
   }

@@ -16,6 +16,7 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   RegisterController registerController = Get.find();
+  final _formKey = GlobalKey<FormState>();
   late TextEditingController emailController;
   late TextEditingController passwordController;
   late TextEditingController phoneController;
@@ -71,135 +72,173 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
             child: Container(
-              height: 650,
-              child: ListView(children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(35, 30, 0, 0),
-                  child: Text("Create an account",
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 16, 152, 170),
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: "Poppins")),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 45, 0, 0),
-                  child: Text("Full Name",
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 16, 152, 170),
-                          fontFamily: "Poppins")),
-                ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                  width: 350,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        hintText: "Full Name", prefixIcon: Icon(Icons.person)),
-                    controller: nameController,
-                    cursorColor: Color.fromARGB(255, 16, 152, 170),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
-                  child: Text("Email",
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 16, 152, 170),
-                          fontFamily: "Poppins")),
-                ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                  width: 350,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        hintText: "Email", prefixIcon: Icon(Icons.mail)),
-                    controller: emailController,
-                    cursorColor: Color.fromARGB(255, 16, 152, 170),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
-                  child: Text("Phone Number",
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 16, 152, 170),
-                          fontFamily: "Poppins")),
-                ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                  width: 350,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        hintText: "Phone Number",
-                        prefixIcon: Icon(Icons.phone)),
-                    controller: phoneController,
-                    keyboardType: TextInputType.phone,
-                    cursorColor: Color.fromARGB(255, 16, 152, 170),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
-                  child: Text("Password",
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 16, 152, 170),
-                          fontFamily: "Poppins")),
-                ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                  width: 350,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        hintText: "Password", prefixIcon: Icon(Icons.password)),
-                    controller: passwordController,
-                    cursorColor: Color.fromARGB(255, 16, 152, 170),
-                    obscureText: true,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 55, 20, 0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      color: Color.fromARGB(255, 16, 152, 170),
-                    ),
-                    child: TextButton(
-                        onPressed: () {
-                          registerController.register(
-                              nameController.text,
-                              emailController.text,
-                              passwordController.text,
-                              phoneController.text);
-                          Get.offAndToNamed(AppRoute.home);
-                        },
-                        child: Center(
-                            child: Text(
-                          "Sign Up",
+                height: 650,
+                child: Form(
+                  key: _formKey,
+                  child: ListView(children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(35, 30, 0, 0),
+                      child: Text("Create an account",
                           style: TextStyle(
-                              color: Colors.white, fontFamily: "Poppins"),
-                        ))),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 75),
-                  child: Row(
-                    children: [
-                      Text(
-                        "Already have an account ?",
-                        style: TextStyle(
-                            color: Colors.grey, fontFamily: "Poppins"),
+                              color: Color.fromARGB(255, 16, 152, 170),
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: "Poppins")),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 45, 0, 0),
+                      child: Text("Full Name",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 16, 152, 170),
+                              fontFamily: "Poppins")),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      width: 350,
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Enter Something";
+                          } else {
+                            return null;
+                          }
+                        },
+                        decoration: InputDecoration(
+                            hintText: "Full Name",
+                            prefixIcon: Icon(Icons.person)),
+                        controller: nameController,
+                        cursorColor: Color.fromARGB(255, 16, 152, 170),
                       ),
-                      TextButton(
-                          child: Text("Sign In",
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
+                      child: Text("Email",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 16, 152, 170),
+                              fontFamily: "Poppins")),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      width: 350,
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty ||
+                              !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                  .hasMatch(value)) {
+                            return 'Enter a valid email!';
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                            hintText: "Email", prefixIcon: Icon(Icons.mail)),
+                        controller: emailController,
+                        cursorColor: Color.fromARGB(255, 16, 152, 170),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
+                      child: Text("Phone Number",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 16, 152, 170),
+                              fontFamily: "Poppins")),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      width: 350,
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Enter Something";
+                          } else {
+                            return null;
+                          }
+                        },
+                        decoration: InputDecoration(
+                            hintText: "Phone Number",
+                            prefixIcon: Icon(Icons.phone)),
+                        controller: phoneController,
+                        keyboardType: TextInputType.phone,
+                        cursorColor: Color.fromARGB(255, 16, 152, 170),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
+                      child: Text("Password",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 16, 152, 170),
+                              fontFamily: "Poppins")),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      width: 350,
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Enter Something";
+                          } else {
+                            return null;
+                          }
+                        },
+                        decoration: InputDecoration(
+                            hintText: "Password",
+                            prefixIcon: Icon(Icons.password)),
+                        controller: passwordController,
+                        cursorColor: Color.fromARGB(255, 16, 152, 170),
+                        obscureText: true,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 55, 20, 0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: Color.fromARGB(255, 16, 152, 170),
+                        ),
+                        child: TextButton(
+                            onPressed: () {
+                              final form = _formKey.currentState;
+                              if (form != null && form.validate()) {
+                                registerController.register(
+                                    nameController.text,
+                                    emailController.text,
+                                    passwordController.text,
+                                    phoneController.text);
+                                Get.offAndToNamed(AppRoute.signIn);
+                              } else {
+                                print("not ok");
+                              }
+                            },
+                            child: Center(
+                                child: Text(
+                              "Sign Up",
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColor.mainColor,
-                                  fontFamily: "Poppins")),
-                          onPressed: () {
-                            Get.offAndToNamed(AppRoute.signIn);
-                          }),
-                    ],
-                  ),
-                )
-              ]),
-            ))
+                                  color: Colors.white, fontFamily: "Poppins"),
+                            ))),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 75),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Already have an account ?",
+                            style: TextStyle(
+                                color: Colors.grey, fontFamily: "Poppins"),
+                          ),
+                          TextButton(
+                              child: Text("Sign In",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColor.mainColor,
+                                      fontFamily: "Poppins")),
+                              onPressed: () {
+                                Get.offAndToNamed(AppRoute.signIn);
+                              }),
+                        ],
+                      ),
+                    )
+                  ]),
+                )))
       ]),
     );
   }

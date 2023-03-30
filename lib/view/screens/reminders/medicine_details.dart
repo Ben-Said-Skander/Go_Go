@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/controllers/medicine_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
-import 'package:pfa_application_1/core/functions/alertDeleteMedicine.dart';
+
 import 'package:pfa_application_1/models/medicine.dart';
 
 class Details extends StatefulWidget {
@@ -66,7 +66,7 @@ class _DetailsState extends State<Details> {
                       MidSectionInfo(
                           med_type: "${snapshot.data!.type}",
                           dosage_interval: "${snapshot.data!.interval}",
-                          start_time: "14h"),
+                          start_time: "${snapshot.data!.start_time}h"),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(20, 50, 20, 0),
                         child: Container(
@@ -75,9 +75,11 @@ class _DetailsState extends State<Details> {
                               color: AppColor.mainColor),
                           child: TextButton(
                               onPressed: () {
-                                alertDeleteMedicine();
-                                medicineController.deleteMedicine("id");
-                                //Get.back();
+                                //   alertDeleteMedicine();
+                                medicineController.deleteMedicine(id);
+                                Get.back(result: true);
+
+                                // Get.offAndToNamed(AppRoute.reminder);
                               },
                               child: Center(
                                   child: Text(

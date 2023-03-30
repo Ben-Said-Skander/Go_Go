@@ -236,7 +236,9 @@ class _AddBlogState extends State<AddBlog> {
             child: TextButton(
                 onPressed: () {
                   blogController.createArticle(
-                      titleController.text, "category", bodyController.text);
+                      titleController.text, dropdownvalue, bodyController.text);
+
+                  blogController.postPicture(image);
                   Get.back();
                 },
                 child: Center(

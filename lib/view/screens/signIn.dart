@@ -14,6 +14,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  final _formKey = GlobalKey<FormState>();
   late TextEditingController emailController;
   late TextEditingController passwordController;
   AuthController authController = Get.find();
@@ -69,117 +70,141 @@ class _SignInState extends State<SignIn> {
                 // offset: Offset(2, 1),
               )
             ]),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          SizedBox(
-            height: 14,
-          ),
-          Center(
-            child: Text(
-              'Sign In',
-              style: TextStyle(
-                  color: AppColor.mainColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 23,
-                  fontFamily: "Poppins"),
+        child: Form(
+          key: _formKey,
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            SizedBox(
+              height: 14,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 50, 0, 0),
-            child: Text("Email",
-                style: TextStyle(
-                  color: AppColor.mainColor,
-                  fontFamily: "Poppins",
-                )),
-          ),
-          Container(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-            width: 350,
-            child: TextFormField(
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                  hintText: "Email", prefixIcon: Icon(Icons.mail)),
-              controller: emailController,
-              cursorColor: Color.fromARGB(255, 16, 152, 170),
-            ),
-          ),
-          Padding(
-              padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
+            Center(
               child: Text(
-                "Password",
+                'Sign In',
                 style: TextStyle(
-                  color: AppColor.mainColor,
-                  fontFamily: "Poppins",
-                ),
-              )),
-          Container(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-            width: 350,
-            child: TextFormField(
-              decoration: InputDecoration(
-                  hintText: "Password", prefixIcon: Icon(Icons.password)),
-              controller: passwordController,
-              cursorColor: Color.fromARGB(255, 16, 152, 170),
-              obscureText: true,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(120, 15, 0, 0),
-            child: Center(
-              child: InkWell(
-                child: Text('Forgot your Password ?',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: Color.fromARGB(255, 16, 152, 170),
-                        fontSize: 14)),
-                onTap: () {
-                  Get.toNamed(AppRoute.forgotPassword);
-                },
+                    color: AppColor.mainColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 23,
+                    fontFamily: "Poppins"),
               ),
             ),
-          ),
-          Padding(
-              padding: const EdgeInsets.fromLTRB(120, 60, 20, 0),
-              child: Container(
-                  height: 50,
-                  width: 120,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: Color.fromARGB(255, 16, 152, 170),
-                  ),
-                  child: MaterialButton(
-                    child: Text(
-                      "Log In",
-                      style:
-                          TextStyle(color: Colors.white, fontFamily: "Poppins"),
-                    ),
-                    onPressed: () {
-                      authController.login(
-                          emailController.text, passwordController.text);
-                       Get.offAndToNamed(AppRoute.home);
-                    },
-                  ))),
-          Padding(
-            padding: EdgeInsets.only(left: 108),
-            child: Row(
-              children: [
-                Text(
-                  "New user ?",
-                  style: TextStyle(color: Colors.grey, fontFamily: "Poppins"),
-                ),
-                TextButton(
-                    child: Text("Sign Up",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: AppColor.mainColor,
-                            fontFamily: "Poppins")),
-                    onPressed: () {
-                      Get.toNamed(AppRoute.signup);
-                    }),
-              ],
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 50, 0, 0),
+              child: Text("Email",
+                  style: TextStyle(
+                    color: AppColor.mainColor,
+                    fontFamily: "Poppins",
+                  )),
             ),
-          ),
-        ]),
-      ),
+            Container(
+              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+              width: 350,
+              child: TextFormField(
+                validator: (value) {
+                  if (value!.isEmpty ||
+                      !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                          .hasMatch(value)) {
+                    return 'Enter a valid email!';
+                  }
+                  return null;
+                },
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                    hintText: "Email", prefixIcon: Icon(Icons.mail)),
+                controller: emailController,
+                cursorColor: Color.fromARGB(255, 16, 152, 170),
+              ),
+            ),
+            Padding(
+                padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
+                child: Text(
+                  "Password",
+                  style: TextStyle(
+                    color: AppColor.mainColor,
+                    fontFamily: "Poppins",
+                  ),
+                )),
+            Container(
+              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+              width: 350,
+              child: TextFormField(
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Enter Something";
+                  } else {
+                    return null;
+                  }
+                },
+                decoration: InputDecoration(
+                    hintText: "Password", prefixIcon: Icon(Icons.password)),
+                controller: passwordController,
+                cursorColor: Color.fromARGB(255, 16, 152, 170),
+                obscureText: true,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(120, 15, 0, 0),
+              child: Center(
+                child: InkWell(
+                  child: Text('Forgot your Password ?',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: Color.fromARGB(255, 16, 152, 170),
+                          fontSize: 14)),
+                  onTap: () {
+                    Get.toNamed(AppRoute.forgotPassword);
+                  },
+                ),
+              ),
+            ),
+            Padding(
+                padding: const EdgeInsets.fromLTRB(120, 60, 20, 0),
+                child: Container(
+                    height: 50,
+                    width: 120,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Color.fromARGB(255, 16, 152, 170),
+                    ),
+                    child: MaterialButton(
+                      child: Text(
+                        "Log In",
+                        style: TextStyle(
+                            color: Colors.white, fontFamily: "Poppins"),
+                      ),
+                      onPressed: () {
+                        final form = _formKey.currentState;
+                        if (form != null && form.validate()) {
+                          authController.login(
+                              emailController.text, passwordController.text);
+                          Get.offAndToNamed(AppRoute.home);
+                        } else {
+                          print("not ok");
+                        }
+                      },
+                    ))),
+            Padding(
+              padding: EdgeInsets.only(left: 108),
+              child: Row(
+                children: [
+                  Text(
+                    "New user ?",
+                    style: TextStyle(color: Colors.grey, fontFamily: "Poppins"),
+                  ),
+                  TextButton(
+                      child: Text("Sign Up",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: AppColor.mainColor,
+                              fontFamily: "Poppins")),
+                      onPressed: () {
+                        Get.toNamed(AppRoute.signup);
+                      }),
+                ],
+              ),
+            ),
+          ]),
+        ),
+      )
     ]));
   }
 }

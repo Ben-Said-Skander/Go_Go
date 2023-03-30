@@ -14,6 +14,15 @@ class AddMedicine extends StatefulWidget {
 }
 
 class _AddMedicineState extends State<AddMedicine> {
+  int bottleIndex = 0;
+  int pillsIndex = 0;
+  int syringeIndex = 0;
+
+  int typeIndex = 0;
+
+  Color bottleColor = Colors.grey;
+  Color pillsColor = Colors.grey;
+  Color syringeColor = Colors.grey;
   MedicineController medicineController = Get.find();
 
   late TextEditingController med_nameController;
@@ -45,6 +54,16 @@ class _AddMedicineState extends State<AddMedicine> {
     med_dosageController = TextEditingController();
     starting_timeController = TextEditingController();
     super.initState();
+  }
+
+  String chooseType(int index) {
+    if (index == 1) {
+      return "Bottle";
+    } else if (index == 2) {
+      return "Pills";
+    } else {
+      return "Syringe";
+    }
   }
 
   FocusNode myFocusNode = new FocusNode();
@@ -120,7 +139,96 @@ class _AddMedicineState extends State<AddMedicine> {
                     color: AppColor.mainColor,
                     fontFamily: "Poppins",
                     fontWeight: FontWeight.w600))),
-        MedicineType(),
+
+        /****************************************** */
+        Padding(
+          padding: const EdgeInsets.only(top: 25),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  IconButton(
+                    icon: Icon(
+                      FontAwesomeIcons.bottleDroplet,
+                    ),
+                    iconSize: 70,
+                    onPressed: () {
+                      setState(() {
+                        // To test what type of medicine it is
+                        typeIndex = 1;
+                        print(typeIndex);
+                        /************** */
+                        bottleIndex = 1;
+                        pillsIndex = 0;
+                        syringeIndex = 0;
+                      });
+                      if (bottleIndex == 1) {
+                        bottleColor = Color.fromARGB(255, 4, 107, 120);
+                        pillsColor = Colors.grey;
+                        syringeColor = Colors.grey;
+                      }
+                    },
+                    color: bottleColor,
+                  ),
+                  Text("Bottle")
+                ],
+              ),
+              Column(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        // To test what type of medicine it is
+                        typeIndex = 2;
+                        print(typeIndex);
+                        /************** */
+                        pillsIndex = 1;
+                        bottleIndex = 0;
+                        syringeIndex = 0;
+                      });
+                      if (pillsIndex == 1) {
+                        pillsColor = Color.fromARGB(255, 4, 107, 120);
+                        syringeColor = Colors.grey;
+                        bottleColor = Colors.grey;
+                      }
+                    },
+                    icon: Icon(FontAwesomeIcons.pills, color: pillsColor),
+                    iconSize: 70,
+                  ),
+                  Text("Pills")
+                ],
+              ),
+              Column(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        // To test what type of medicine it is
+                        typeIndex = 3;
+                        print(typeIndex);
+                        /************** */
+                        syringeIndex = 1;
+                        pillsIndex = 0;
+                        bottleIndex = 0;
+                      });
+                      if (syringeIndex == 1) {
+                        syringeColor = Color.fromARGB(255, 4, 107, 120);
+                        bottleColor = Colors.grey;
+                        pillsColor = Colors.grey;
+                      }
+                    },
+                    icon: Icon(FontAwesomeIcons.syringe, color: syringeColor),
+                    iconSize: 70,
+                  ),
+                  Text("Syringe")
+                ],
+              ),
+            ],
+          ),
+        ),
+        //MedicineType(),
+        /************************************************ */
         Padding(
           padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
           child: Row(
@@ -191,12 +299,13 @@ class _AddMedicineState extends State<AddMedicine> {
             child: TextButton(
                 onPressed: () {
                   medicineController.addMedicine(
-                      med_nameController.text,
-                      med_dosageController.text,
-                      "xxx",
-                      starting_timeController.text,
-                      "6");
-          
+                    med_nameController.text,
+                    med_dosageController.text,
+                    chooseType(typeIndex),
+                    dropdownvalue,
+                    starting_timeController.text,
+                  );
+
                   Get.back();
                 },
                 child: Center(
@@ -229,114 +338,6 @@ class Titles extends StatelessWidget {
               fontFamily: "Poppins",
               fontWeight: FontWeight.w600),
         ),
-      ),
-    );
-  }
-}
-
-class MedicineType extends StatefulWidget {
-  const MedicineType({super.key});
-
-  @override
-  State<MedicineType> createState() => _MedicineTypeState();
-}
-
-class _MedicineTypeState extends State<MedicineType> {
-  int bottleIndex = 0;
-  int pillsIndex = 0;
-  int syringeIndex = 0;
-
-  int typeIndex = 0;
-
-  Color bottleColor = Colors.grey;
-  Color pillsColor = Colors.grey;
-  Color syringeColor = Colors.grey;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 25),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            children: [
-              IconButton(
-                icon: Icon(
-                  FontAwesomeIcons.bottleDroplet,
-                ),
-                iconSize: 70,
-                onPressed: () {
-                  setState(() {
-                    // To test what type of medicine it is
-                    typeIndex = 1;
-                    print(typeIndex);
-                    /************** */
-                    bottleIndex = 1;
-                    pillsIndex = 0;
-                    syringeIndex = 0;
-                  });
-                  if (bottleIndex == 1) {
-                    bottleColor = Color.fromARGB(255, 4, 107, 120);
-                    pillsColor = Colors.grey;
-                    syringeColor = Colors.grey;
-                  }
-                },
-                color: bottleColor,
-              ),
-              Text("Bottle")
-            ],
-          ),
-          Column(
-            children: [
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    // To test what type of medicine it is
-                    typeIndex = 2;
-                    print(typeIndex);
-                    /************** */
-                    pillsIndex = 1;
-                    bottleIndex = 0;
-                    syringeIndex = 0;
-                  });
-                  if (pillsIndex == 1) {
-                    pillsColor = Color.fromARGB(255, 4, 107, 120);
-                    syringeColor = Colors.grey;
-                    bottleColor = Colors.grey;
-                  }
-                },
-                icon: Icon(FontAwesomeIcons.pills, color: pillsColor),
-                iconSize: 70,
-              ),
-              Text("Pills")
-            ],
-          ),
-          Column(
-            children: [
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    // To test what type of medicine it is
-                    typeIndex = 3;
-                    print(typeIndex);
-                    /************** */
-                    syringeIndex = 1;
-                    pillsIndex = 0;
-                    bottleIndex = 0;
-                  });
-                  if (syringeIndex == 1) {
-                    syringeColor = Color.fromARGB(255, 4, 107, 120);
-                    bottleColor = Colors.grey;
-                    pillsColor = Colors.grey;
-                  }
-                },
-                icon: Icon(FontAwesomeIcons.syringe, color: syringeColor),
-                iconSize: 70,
-              ),
-              Text("Syringe")
-            ],
-          ),
-        ],
       ),
     );
   }

@@ -6,6 +6,7 @@ import 'package:pfa_application_1/core/constants/routes.dart';
 import 'package:pfa_application_1/routes.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -22,7 +23,7 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
         getPages: routes,
-        initialRoute: AppRoute.home);
+        initialRoute: AppRoute.searchPage);
   }
 }
 //AIzaSyC2HrUyqcy4IO9OEZ4BWEYBNe7MpobW5Us

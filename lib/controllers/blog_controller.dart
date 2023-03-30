@@ -115,24 +115,33 @@ class BlogController extends GetxController {
     }
   }
 
-/*
-Future<List<Picture>> getAllImages() async {
-  final response = await http.get(Uri.parse('http://192.168.1.14:3600/image'));
-  if (response.statusCode == 200) {
-    List<dynamic> imageList = jsonDecode(response.body);
-    List<Picture> images = imageList.map((e) => Picture.fromJson(e)).toList();
-    return images;
-  } else {
-    throw Exception('Failed to load images');
-  }
-}*/
-  Future<List<dynamic>> fetchImages() async {
+  Future<List<Uint8List>> fetchImages() async {
     final response =
         await http.get(Uri.parse('http://192.168.1.14:3600/image'));
     if (response.statusCode == 200) {
       // Convert the response body to a list of images
-      final List<dynamic> imagesJson = json.decode(response.body);
+      final List<Uint8List> imagesJson = json.decode(response.body);
       return imagesJson;
+    } else {
+      throw Exception('Failed to load images');
+    }
+  }
+
+  /***************************************************************** */
+
+  Future<List<Uint8List>> getAllImagesXXX() async {
+    final response =
+        await http.get(Uri.parse('http://192.168.1.14:3600/images'));
+    if (response.statusCode == 200) {
+      final List<dynamic> ids = json.decode(response.body);
+      final List<Uint8List> images = [];
+
+      for (final id in ids) {
+        final image = await getImage(id);
+        images.add(image);
+      }
+
+      return images;
     } else {
       throw Exception('Failed to load images');
     }

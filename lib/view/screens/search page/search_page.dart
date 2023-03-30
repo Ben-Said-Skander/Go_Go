@@ -11,6 +11,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/models/pharmacy.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -95,17 +96,6 @@ class _SearchPageState extends State<SearchPage> {
     //return polylines
   }
 
-  double coordinateDistance(
-      double lat1, double long1, double lat2, double long2) {
-    var p = 0.017453292519943295;
-    var c = cos;
-    var a = 0.5 -
-        c((lat2 - lat1) * p) / 2 +
-        c(lat1 * p) * c(lat2 * p) * (1 - c((long2 - long1) * p)) / 2;
-    return 12742 * asin(sqrt(a));
-    // it will return distance in KM
-  }
-
   @override
   void dispose() {
     searchController.dispose();
@@ -114,6 +104,8 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   void initState() {
+    _pharmaciesFuture = pharmController.getAllPharmacies();
+
     createPolylines(34.8443519, 10.7567297, 39.8443519, 16.7567297);
     pharmacyController.getAllPharmacies().then((pharmacyFromServer) {
       setState(() {
@@ -126,6 +118,49 @@ class _SearchPageState extends State<SearchPage> {
     super.initState();
   }
 
+  Future<void> openGoogleMaps(double latitude, double longitude) async {
+    final url =
+        'https://www.google.com/maps/dir/?api=1&destination=$latitude,$longitude';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+      print("error") ;
+    }
+  }
+
+  /******************************* */
+  Future<List<Pharmacy>>? _pharmaciesFuture;
+  PharmacyController pharmController = Get.find();
+
+  List<String> pharmacyName = [];
+  List<double> pharmacyLat = [];
+  List<double> pharmacyLong = [];
+  List<double> pharmacyDistances = [];
+  List<double> distances = [];
+  double calculateDistance(
+      double lat1, double long1, double lat2, double long2) {
+    const int earthRadius = 6371; // in km
+    double dLat = (lat2 - lat1) * pi / 180;
+    double dLon = (long2 - long1) * pi / 180;
+    double a = sin(dLat / 2) * sin(dLat / 2) +
+        cos(lat1 * pi / 180) *
+            cos(lat2 * pi / 180) *
+            sin(dLon / 2) *
+            sin(dLon / 2);
+    double c = 2 * atan2(sqrt(a), sqrt(1 - a));
+    double distance = earthRadius * c;
+    // distances.add(distance);
+    return distance;
+  }
+
+  List<int> pharmacyIndexes(List distances) {
+    List<int> indexes = distances.asMap().keys.toList();
+    indexes.sort((a, b) => distances[a].compareTo(distances[b]));
+    print(indexes);
+    return indexes;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,7 +169,6 @@ class _SearchPageState extends State<SearchPage> {
         SafeArea(
           child: Stack(
             children: [
-              
               Container(
                   padding: EdgeInsets.only(top: 0),
                   height: 730,
@@ -195,25 +229,54 @@ class _SearchPageState extends State<SearchPage> {
                       cursorColor: Color.fromARGB(255, 16, 152, 170),
                     ),
                   ),
-                  Padding(
-                      padding: const EdgeInsets.fromLTRB(140, 20, 20, 0),
-                      child: Container(
-                          height: 50,
-                          width: 130,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            color: Color.fromARGB(255, 16, 152, 170),
-                          ),
-                          child: MaterialButton(
-                            child: Text(
-                              "Show Route",
-                              style: TextStyle(
-                                  color: Colors.white, fontFamily: "Poppins"),
-                            ),
-                            onPressed: () {
-                              // Show route
-                            },
-                          ))),
+                  FutureBuilder<List<Pharmacy>>(
+                      future: _pharmaciesFuture,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return CircularProgressIndicator();
+                        } else if (snapshot.hasError) {
+                          return Text('Error: ${snapshot.error}');
+                        } else {
+                          var pharmacy = snapshot.data!;
+                          for (int i = 0; i < pharmacy.length; i++) {
+                            pharmacyName.add(pharmacy[i].name!);
+                            pharmacyLat.add(pharmacy[i].latitude!);
+                            pharmacyLong.add(pharmacy[i].longitude!);
+                            final pharmDist = calculateDistance(
+                               34.8443519, 10.7567297, pharmacyLat[i], pharmacyLong[i]);
+                            pharmacyDistances.add(pharmDist);
+                          }
+                          final pharmIndex = pharmacyIndexes(pharmacyDistances);
+                          print(pharmIndex);
+                          print( pharmacyLong[pharmIndex[0]]) ;
+                          print( pharmacyLat[pharmIndex[0]]) ;
+                          return Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(140, 20, 20, 0),
+                              child: Container(
+                                  height: 50,
+                                  width: 130,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30),
+                                    color: Color.fromARGB(255, 16, 152, 170),
+                                  ),
+                                  child: MaterialButton(
+                                      child: Text(
+                                        "Show Route",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Poppins"),
+                                      ),
+                                      onPressed: () {
+                                        
+                                        openGoogleMaps(
+                                          pharmacyLat[pharmIndex[0]],
+                                           pharmacyLong[pharmIndex[0]],
+                                          );
+                                      })));
+                        }
+                      })
                 ],
               )
             ],

@@ -21,7 +21,7 @@ class _SignUpState extends State<SignUp> {
   late TextEditingController passwordController;
   late TextEditingController phoneController;
   late TextEditingController nameController;
-
+  bool registrationSuccessful = false;
   @override
   void dispose() {
     emailController.dispose();
@@ -195,7 +195,7 @@ class _SignUpState extends State<SignUp> {
                           color: Color.fromARGB(255, 16, 152, 170),
                         ),
                         child: TextButton(
-                            onPressed: () {
+                            onPressed: ()async {
                               final form = _formKey.currentState;
                               if (form != null && form.validate()) {
                                 registerController.register(
@@ -207,6 +207,7 @@ class _SignUpState extends State<SignUp> {
                               } else {
                                 print("not ok");
                               }
+                             
                             },
                             child: Center(
                                 child: Text(

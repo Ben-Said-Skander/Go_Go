@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:pfa_application_1/core/constants/routes.dart';
 import '../models/user.dart';
 
 class RegisterController extends GetxController {
@@ -18,6 +19,7 @@ class RegisterController extends GetxController {
 
     if (response.statusCode == 201) {
       var user = User.fromJson(json.decode(response.body));
+   
       print(user);
       return user;
     } else {

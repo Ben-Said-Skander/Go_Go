@@ -125,7 +125,7 @@ class _SearchPageState extends State<SearchPage> {
       await launch(url);
     } else {
       throw 'Could not launch $url';
-      print("error") ;
+      print("error");
     }
   }
 
@@ -164,14 +164,14 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
+        body: ListView(
       children: [
         SafeArea(
           child: Stack(
             children: [
               Container(
                   padding: EdgeInsets.only(top: 0),
-                  height: 730,
+                  height: 800,
                   child: GoogleMap(
                     markers: createMarkers(
                         34.8443519, 10.7567297, 39.8443519, 16.7567297),
@@ -243,14 +243,14 @@ class _SearchPageState extends State<SearchPage> {
                             pharmacyName.add(pharmacy[i].name!);
                             pharmacyLat.add(pharmacy[i].latitude!);
                             pharmacyLong.add(pharmacy[i].longitude!);
-                            final pharmDist = calculateDistance(
-                               34.8443519, 10.7567297, pharmacyLat[i], pharmacyLong[i]);
+                            final pharmDist = calculateDistance(34.8443519,
+                                10.7567297, pharmacyLat[i], pharmacyLong[i]);
                             pharmacyDistances.add(pharmDist);
                           }
                           final pharmIndex = pharmacyIndexes(pharmacyDistances);
                           print(pharmIndex);
-                          print( pharmacyLong[pharmIndex[0]]) ;
-                          print( pharmacyLat[pharmIndex[0]]) ;
+                          print(pharmacyLong[pharmIndex[0]]);
+                          print(pharmacyLat[pharmIndex[0]]);
                           return Padding(
                               padding:
                                   const EdgeInsets.fromLTRB(140, 20, 20, 0),
@@ -269,11 +269,20 @@ class _SearchPageState extends State<SearchPage> {
                                             fontFamily: "Poppins"),
                                       ),
                                       onPressed: () {
-                                        
-                                        openGoogleMaps(
-                                          pharmacyLat[pharmIndex[0]],
-                                           pharmacyLong[pharmIndex[0]],
-                                          );
+                                        for (int i = 0;
+                                            i <= pharmIndex.length;
+                                            i++) {
+                                          if (pharmacy[i].drugs![
+                                                  searchController.text] ==
+                                              true) {
+                                            openGoogleMaps(
+                                              pharmacyLat[pharmIndex[0]],
+                                              pharmacyLong[pharmIndex[0]],
+                                            );
+                                            print(i);
+                                            break;
+                                          }
+                                        }
                                       })));
                         }
                       })

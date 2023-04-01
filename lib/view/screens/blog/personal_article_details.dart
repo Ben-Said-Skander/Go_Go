@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, sort_child_properties_last, prefer_const_constructors, avoid_unnecessary_containers, sized_box_for_whitespace
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/controllers/blog_controller.dart';
@@ -93,8 +94,31 @@ class _PersonalArticleDetailsState extends State<PersonalArticleDetails> {
                                       color: AppColor.mainColor),
                                   child: TextButton(
                                       onPressed: () {
-                                        blogController.deleteArticle(id);
-                                        //alertDeleteArticle();
+                                        AwesomeDialog(
+                                          context: context,
+                                          dialogType: DialogType.warning,
+                                          headerAnimationLoop: false,
+                                          animType: AnimType.topSlide,
+                                          showCloseIcon: true,
+                                          closeIcon: const Icon(
+                                              Icons.close_fullscreen_outlined),
+                                          title: 'Warning',
+                                          desc:
+                                              'Are you sure you want to delete the article',
+                                          btnCancelOnPress: () {
+                                            Get.back();
+                                          },
+                                          onDismissCallback: (type) {
+                                            debugPrint(
+                                                'Dialog Dismiss from callback $type');
+                                          },
+                                          btnOkOnPress: () {
+                                            blogController.deleteArticle(id);
+                                            Get.back(result: true);
+                                          },
+                                        ).show();
+
+                                   
                                       },
                                       child: Center(
                                           child: Text(
@@ -112,11 +136,7 @@ class _PersonalArticleDetailsState extends State<PersonalArticleDetails> {
                   ],
                 );
               } else {
-                return Center(
-                    child: CircularProgressIndicator(
-                  backgroundColor: Color.fromARGB(255, 16, 152, 170),
-                  value: 5,
-                ));
+                return Center(child: CircularProgressIndicator());
               }
             }))
       ]),

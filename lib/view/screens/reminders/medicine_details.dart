@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable, non_constant_identifier_names, prefer_const_literals_to_create_immutables
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/controllers/medicine_controller.dart';
@@ -75,9 +76,29 @@ class _DetailsState extends State<Details> {
                               color: AppColor.mainColor),
                           child: TextButton(
                               onPressed: () {
-                                //   alertDeleteMedicine();
-                                medicineController.deleteMedicine(id);
-                                Get.back(result: true);
+                                AwesomeDialog(
+                                  context: context,
+                                  dialogType: DialogType.warning,
+                                  headerAnimationLoop: false,
+                                  animType: AnimType.topSlide,
+                                  showCloseIcon: true,
+                                  closeIcon: const Icon(
+                                      Icons.close_fullscreen_outlined),
+                                  title: 'Warning',
+                                  desc:
+                                      'Are you sure you want to delete the reminder',
+                                  btnCancelOnPress: () {
+                                    Get.back();
+                                  },
+                                  onDismissCallback: (type) {
+                                    debugPrint(
+                                        'Dialog Dismiss from callback $type');
+                                  },
+                                  btnOkOnPress: () {
+                                    medicineController.deleteMedicine(id);
+                                    Get.back(result: true);
+                                  },
+                                ).show();
 
                                 // Get.offAndToNamed(AppRoute.reminder);
                               },

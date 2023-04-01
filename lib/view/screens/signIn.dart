@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_unnecessary_containers
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/controllers/auth_controller.dart';
@@ -58,7 +59,7 @@ class _SignInState extends State<SignIn> {
       ),
       Container(
         margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-        height: 500,
+        height: 530,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(40),
@@ -179,7 +180,17 @@ class _SignInState extends State<SignIn> {
                             // registration was successful
                             Get.offAndToNamed(AppRoute.home);
                           } else {
-                            print("Authentication failed");
+                            AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.error,
+                              animType: AnimType.rightSlide,
+                              headerAnimationLoop: false,
+                              title: 'Error',
+                              desc: 'There is no Account for this email',
+                              btnOkOnPress: () {},
+                              btnOkIcon: Icons.cancel,
+                              btnOkColor: Colors.red,
+                            ).show();
                           }
                         } else {
                           print("not ok");

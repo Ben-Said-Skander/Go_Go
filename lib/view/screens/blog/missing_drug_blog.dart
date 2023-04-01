@@ -155,8 +155,7 @@ class _MissingBlogState extends State<MissingBlog> {
                   } else {
                     return Center(
                         child: CircularProgressIndicator(
-                      backgroundColor: Color.fromARGB(255, 16, 152, 170),
-                      value: 5,
+                    
                     ));
                   }
                 })))

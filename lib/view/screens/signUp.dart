@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/controllers/register_controller.dart';
@@ -204,7 +205,23 @@ class _SignUpState extends State<SignUp> {
                                     passwordController.text,
                                     phoneController.text)) {
                                   // registration was successful
-                                  Get.offAndToNamed(AppRoute.signIn);
+                                  AwesomeDialog(
+                                    context: context,
+                                    animType: AnimType.leftSlide,
+                                    headerAnimationLoop: false,
+                                    dialogType: DialogType.success,
+                                    showCloseIcon: true,
+                                    title: 'Succes',
+                                    desc: 'Registration completed successfully',
+                                    btnOkOnPress: () {
+                                      Get.offAndToNamed(AppRoute.signIn);
+                                    },
+                                    btnOkIcon: Icons.check_circle,
+                                    onDismissCallback: (type) {
+                                      debugPrint(
+                                          'Dialog Dissmiss from callback $type');
+                                    },
+                                  ).show();
                                 } else {
                                   print("registration failed");
                                 }

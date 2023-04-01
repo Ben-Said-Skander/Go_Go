@@ -13,7 +13,7 @@ class BlogCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
           boxShadow: [
             BoxShadow(
-              blurRadius: 2,
+              blurRadius: 1,
               spreadRadius: 1,
               color: Color.fromARGB(255, 207, 207, 207),
             )
@@ -38,13 +38,13 @@ class BlogCard extends StatelessWidget {
             height: 15,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 18),
+            padding: const EdgeInsets.only(left: 18, top: 10),
             child: Text(
               blogTitle,
               style: TextStyle(
-                  //  fontFamily: "Poppins",
+                  fontFamily: "Poppins",
                   color: Colors.black,
-                  fontSize: 14,
+                  fontSize: 15,
                   fontWeight: FontWeight.w700),
             ),
           ),

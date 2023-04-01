@@ -18,7 +18,7 @@ class PopularCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             boxShadow: [
               BoxShadow(
-                blurRadius: 2,
+                blurRadius: 1,
                 spreadRadius: 1,
                 color: Color.fromARGB(255, 207, 207, 207),
               )
@@ -39,13 +39,13 @@ class PopularCard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 0),
+              padding: const EdgeInsets.only(left: 15),
               child: Text(
                 blogTitle,
                 style: TextStyle(
                     fontFamily: "Poppins",
                     color: Colors.black,
-                    fontSize: 13,
+                    fontSize: 15,
                     fontWeight: FontWeight.w700),
               ),
             ),

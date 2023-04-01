@@ -21,10 +21,17 @@ class RegisterController extends GetxController {
           'phoneNumber': phoneNumber,
         }),
       );
+      if (response.statusCode == 201) {
+      // Login was successful
       return true;
-    } catch (error) {
-      throw Exception('User loading failed');
+    } else {
+      // Login failed
+      return false;
     }
+  } catch (error) {
+    // Handle any errors that may occur
+    throw Exception('Failed to login: $error');
+  }
   }
 }
 

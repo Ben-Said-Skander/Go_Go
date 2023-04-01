@@ -182,11 +182,7 @@ class _BlogPageState extends State<BlogPage> {
                   )
                 ]);
               } else {
-                return Center(
-                    child: CircularProgressIndicator(
-                  backgroundColor: Color.fromARGB(255, 16, 152, 170),
-                  value: 5,
-                ));
+                return Center(child: CircularProgressIndicator());
               }
             })))));
   }

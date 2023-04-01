@@ -276,8 +276,8 @@ class _SearchPageState extends State<SearchPage> {
                                                   searchController.text] ==
                                               true) {
                                             openGoogleMaps(
-                                              pharmacyLat[pharmIndex[0]],
-                                              pharmacyLong[pharmIndex[0]],
+                                              pharmacyLat[pharmIndex[i]],
+                                              pharmacyLong[pharmIndex[i]],
                                             );
                                             print(i);
                                             break;

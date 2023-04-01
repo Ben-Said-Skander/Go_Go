@@ -147,8 +147,7 @@ class _HelpBlogState extends State<HelpBlog> {
       } else {
         return Center(
           child: CircularProgressIndicator(
-            backgroundColor: Color.fromARGB(255, 16, 152, 170),
-            value: 5,
+        
           )
         );
       }

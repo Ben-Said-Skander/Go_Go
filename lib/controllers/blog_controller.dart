@@ -15,7 +15,8 @@ class BlogController extends GetxController {
   var isLoading = true.obs;
   @override
   void initState() {
-    fetchArticles();
+    fetchArticles() ;
+    
   }
 
   Future<Blog> createArticle(String title, String category, String body) async {
@@ -71,6 +72,7 @@ class BlogController extends GetxController {
         var articles = parsed.map<Blog>((e) => Blog.fromJson(e)).toList();
         print(articles);
         articlesXList.assignAll(articles);
+
         return articlesXList;
       } else {
         throw Exception('Failed to load Articles');

@@ -9,6 +9,15 @@ import 'package:pfa_application_1/core/constants/routes.dart';
 import 'package:pfa_application_1/models/blog.dart';
 import 'package:pfa_application_1/view/widgets/component/blog_card.dart';
 
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:pfa_application_1/controllers/blog_controller.dart';
+import 'package:pfa_application_1/core/constants/colors.dart';
+import 'package:pfa_application_1/core/constants/routes.dart';
+import 'package:pfa_application_1/models/blog.dart';
+import 'package:pfa_application_1/view/widgets/component/blog_card.dart';
+
 class MissingBlog extends StatefulWidget {
   const MissingBlog({super.key});
 
@@ -106,27 +115,38 @@ class _MissingBlogState extends State<MissingBlog> {
             ),
           ],
         ),
-     Container(
+        Container(
             height: 560,
             padding: EdgeInsets.only(top: 10),
-            child: Obx(() => FutureBuilder<List<Blog>>(
+            child: FutureBuilder<List<Blog>>(
                 future: blogController.fetchArticles(),
                 builder: ((context, snapshot) {
                   if (snapshot.hasData) {
-                    List<Widget> articleWidgets = [];
+                    List<Blog> filteredData = [];
                     for (int i = 0; i < snapshot.data!.length; i++) {
-                      if (snapshot.data![i].category == "In need of a missing drug") {
-                        
-                        articleWidgets.add(BlogCard(
-                            blogTitle: "${snapshot.data![i].title}",
-                            blogPicture: "assets/image/piills.jpg"));
+                      if (snapshot.data![i].category ==
+                          "In need of a missing drug") {
+                        filteredData.add(snapshot.data![i]);
                       }
                     }
-                    if (articleWidgets.isNotEmpty) {
-                      return GridView.count(
-                        crossAxisCount: 2,
-                        children: articleWidgets,
-                      );
+                    if (filteredData.length > 0) {
+                      return GridView.builder(
+                          itemCount: filteredData.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2),
+                          itemBuilder: ((context, index) {
+                            return GestureDetector(
+                                onTap: () {
+                                  var id = "${filteredData[index].id}";
+                                  Get.toNamed(AppRoute.blogdetails,
+                                      arguments: id);
+                                },
+                                child: BlogCard(
+                                  blogTitle: "${filteredData[index].title}",
+                                  blogPicture: "assets/image/piills.jpg",
+                                ));
+                          }));
                     } else {
                       return Text("No data to show");
                     }
@@ -139,8 +159,7 @@ class _MissingBlogState extends State<MissingBlog> {
                       value: 5,
                     ));
                   }
-                }))))
-       
+                })))
       ]),
     );
   }

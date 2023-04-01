@@ -190,32 +190,34 @@ class _SignUpState extends State<SignUp> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 55, 20, 0),
                       child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
-                          color: Color.fromARGB(255, 16, 152, 170),
-                        ),
-                        child: TextButton(
-                            onPressed: ()async {
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25),
+                            color: Color.fromARGB(255, 16, 152, 170),
+                          ),
+                          child: TextButton(
+                            onPressed: () async {
                               final form = _formKey.currentState;
                               if (form != null && form.validate()) {
-                                registerController.register(
+                                if (await registerController.register(
                                     nameController.text,
                                     emailController.text,
                                     passwordController.text,
-                                    phoneController.text);
-                                Get.offAndToNamed(AppRoute.signIn);
-                              } else {
-                                print("not ok");
+                                    phoneController.text)) {
+                                  // registration was successful
+                                  Get.offAndToNamed(AppRoute.signIn);
+                                } else {
+                                  print("registration failed");
+                                }
                               }
-                             
                             },
                             child: Center(
-                                child: Text(
-                              "Sign Up",
-                              style: TextStyle(
-                                  color: Colors.white, fontFamily: "Poppins"),
-                            ))),
-                      ),
+                              child: Text(
+                                "Sign Up",
+                                style: TextStyle(
+                                    color: Colors.white, fontFamily: "Poppins"),
+                              ),
+                            ),
+                          )),
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 75),

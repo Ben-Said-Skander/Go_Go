@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class MedicineController extends GetxController {
-  var medicineXList = List<Medicine>.empty().obs;
+ var medicineXList = List<Medicine>.empty().obs;
   var isLoading = true.obs;
   @override
   void initState() {
@@ -59,7 +59,7 @@ class MedicineController extends GetxController {
     }
   }
 
-  Future<List<Medicine>> fetchMedicines() async {
+Future<List<Medicine>> fetchMedicines() async {
     try {
       isLoading(true);
       final response =

@@ -171,12 +171,16 @@ class _SignInState extends State<SignIn> {
                         style: TextStyle(
                             color: Colors.white, fontFamily: "Poppins"),
                       ),
-                      onPressed: () {
+                      onPressed: () async {
                         final form = _formKey.currentState;
                         if (form != null && form.validate()) {
-                          authController.login(
-                              emailController.text, passwordController.text);
-                          Get.offAndToNamed(AppRoute.home);
+                          if (await authController.login(
+                              emailController.text, passwordController.text)) {
+                            // registration was successful
+                            Get.offAndToNamed(AppRoute.home);
+                          } else {
+                            print("Authentication failed");
+                          }
                         } else {
                           print("not ok");
                         }

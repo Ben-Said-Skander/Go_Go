@@ -106,41 +106,57 @@ class _HelpBlogState extends State<HelpBlog> {
             ),
           ],
         ),
-        
-        Container(
-            height: 560,
-            padding: EdgeInsets.only(top: 10),
-            child: Obx(() => FutureBuilder<List<Blog>>(
-                future: blogController.fetchArticles(),
-                builder: ((context, snapshot) {
-                  if (snapshot.hasData) {
-                    List<Widget> articleWidgets = [];
-                    for (int i = 0; i < snapshot.data!.length; i++) {
-                      if (snapshot.data![i].category ==
-                          "Questions about a drug") {
-                        articleWidgets.add(BlogCard(
-                            blogTitle: "${snapshot.data![i].title}",
-                            blogPicture: "assets/image/piills.jpg"));
-                      }
-                    }
-                    if (articleWidgets.isNotEmpty) {
-                      return GridView.count(
-                        crossAxisCount: 2,
-                        children: articleWidgets,
-                      );
-                    } else {
-                      return Text("No data to show");
-                    }
-                  } else if (snapshot.hasError) {
-                    return Text("Error loading data");
-                  } else {
-                    return Center(
-                        child: CircularProgressIndicator(
-                      backgroundColor: Color.fromARGB(255, 16, 152, 170),
-                      value: 5,
-                    ));
-                  }
-                }))))
+        //Questions about a drug
+       Container(
+  height: 560,
+  padding: EdgeInsets.only(top: 10),
+  child: FutureBuilder<List<Blog>>(
+    future: blogController.fetchArticles(),
+    builder: ((context, snapshot) {
+      if (snapshot.hasData) {
+        List<Blog> filteredData = [];
+        for (int i = 0; i < snapshot.data!.length; i++) {
+          if (snapshot.data![i].category == "Questions about a drug") {
+            filteredData.add(snapshot.data![i]);
+          }
+        }
+        if (filteredData.length > 0) {
+          return GridView.builder(
+            itemCount: filteredData.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2
+            ),
+            itemBuilder: ((context, index) {
+              return GestureDetector(
+                onTap: () {
+                  var id = "${filteredData[index].id}";
+                  Get.toNamed(AppRoute.blogdetails, arguments: id);
+                },
+                child: BlogCard(
+                  blogTitle: "${filteredData[index].title}",
+                  blogPicture: "assets/image/piills.jpg",
+                )
+              );
+            })
+          );
+        } else {
+          return Text("No data to show");
+        }
+      } else if (snapshot.hasError) {
+        return Text("Error loading data");
+      } else {
+        return Center(
+          child: CircularProgressIndicator(
+            backgroundColor: Color.fromARGB(255, 16, 152, 170),
+            value: 5,
+          )
+        );
+      }
+    })
+  )
+)
+
+        //)
       ]),
     );
   }

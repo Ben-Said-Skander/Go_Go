@@ -1,5 +1,3 @@
-// ignore_for_file: unused_import, unused_local_variable
-
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
@@ -15,8 +13,7 @@ class BlogController extends GetxController {
   var isLoading = true.obs;
   @override
   void initState() {
-    fetchArticles() ;
-    
+    fetchArticles();
   }
 
   Future<Blog> createArticle(String title, String category, String body) async {
@@ -82,6 +79,7 @@ class BlogController extends GetxController {
     }
   }
 
+  /***************************************************************** */
   Future postPicture(File imageFile) async {
     final req = http.MultipartRequest(
         'POST', Uri.parse('http://192.168.1.14:3600/images'));
@@ -95,54 +93,34 @@ class BlogController extends GetxController {
     }
   }
 
-/*
   Future<Picture> getImage(String id) async {
-    final response =
-        await http.get(Uri.parse("http://192.168.1.14:3600/image/${id}"));
+    final response = await http.get(
+      Uri.parse('http://192.168.1.14:3600/image/$id'),
+      headers: {'Content-Type': 'application/octet-stream'},
+      //  responseType: http.ResponseType.bytes
+    );
     if (response.statusCode == 200) {
-      final json = jsonDecode(response.body);
-      return Picture.fromJson(json);
-    } else {
-      throw Exception('Failed to get image by id: $id');
-    }
-  }
-}*/
-  Future<Uint8List> getImage(String id) async {
-    final response =
-        await http.get(Uri.parse('http://192.168.1.14:3600/image/${id}'));
-    if (response.statusCode == 200) {
-      return response.bodyBytes;
+      final contentType = response.headers['content-type'];
+      final bytes = response.bodyBytes;
+      final base64String = base64.encode(bytes);
+      return Picture(id: id, contentType: contentType!, data: bytes);
     } else {
       throw Exception('Failed to load image');
     }
   }
 
-  Future<List<Uint8List>> fetchImages() async {
+  Future<List<Picture>> getAllImages() async {
     final response =
         await http.get(Uri.parse('http://192.168.1.14:3600/image'));
     if (response.statusCode == 200) {
-      // Convert the response body to a list of images
-      final List<Uint8List> imagesJson = json.decode(response.body);
-      return imagesJson;
-    } else {
-      throw Exception('Failed to load images');
-    }
-  }
-
-  /***************************************************************** */
-
-  Future<List<Uint8List>> getAllImagesXXX() async {
-    final response =
-        await http.get(Uri.parse('http://192.168.1.14:3600/images'));
-    if (response.statusCode == 200) {
-      final List<dynamic> ids = json.decode(response.body);
-      final List<Uint8List> images = [];
-
-      for (final id in ids) {
-        final image = await getImage(id);
-        images.add(image);
+      final jsonData = json.decode(response.body);
+      final List<Picture> images = [];
+      for (var data in jsonData) {
+        final id = data['id'];
+        final contentType = data['contentType'];
+        final bytes = base64.decode(data['data']);
+        images.add(Picture(id: id, contentType: contentType, data: bytes));
       }
-
       return images;
     } else {
       throw Exception('Failed to load images');

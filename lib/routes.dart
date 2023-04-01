@@ -136,5 +136,5 @@ List<GetPage<dynamic>>? routes = [
   GetPage(
       name: AppRoute.test,
       page: () =>  ImageScreen(),
-      binding: PharmaciesBindings()),
+      binding: BlogBindings()),
 ];

@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
-import 'package:flutter/widgets.dart';
+
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:pfa_application_1/models/image.dart';
@@ -12,9 +11,10 @@ class BlogController extends GetxController {
   var articlesXList = List<Blog>.empty().obs;
   var isLoading = true.obs;
   @override
+  /*
   void initState() {
     fetchArticles();
-  }
+  }*/
 
   Future<Blog> createArticle(String title, String category, String body) async {
     final response = await http.post(Uri.parse('http://192.168.1.14:3600/blog'),
@@ -102,7 +102,7 @@ class BlogController extends GetxController {
     if (response.statusCode == 200) {
       final contentType = response.headers['content-type'];
       final bytes = response.bodyBytes;
-      final base64String = base64.encode(bytes);
+     // final base64String = base64.encode(bytes);
       return Picture(id: id, contentType: contentType!, data: bytes);
     } else {
       throw Exception('Failed to load image');

@@ -9,14 +9,6 @@ import 'package:pfa_application_1/core/constants/routes.dart';
 import 'package:pfa_application_1/models/blog.dart';
 import 'package:pfa_application_1/view/widgets/component/blog_card.dart';
 
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
-import 'package:pfa_application_1/controllers/blog_controller.dart';
-import 'package:pfa_application_1/core/constants/colors.dart';
-import 'package:pfa_application_1/core/constants/routes.dart';
-import 'package:pfa_application_1/models/blog.dart';
-import 'package:pfa_application_1/view/widgets/component/blog_card.dart';
 
 class MissingBlog extends StatefulWidget {
   const MissingBlog({super.key});

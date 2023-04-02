@@ -125,7 +125,7 @@ class _SearchPageState extends State<SearchPage> {
       await launch(url);
     } else {
       throw 'Could not launch $url';
-      print("error");
+      
     }
   }
 

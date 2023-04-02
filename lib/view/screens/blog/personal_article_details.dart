@@ -36,7 +36,7 @@ class _PersonalArticleDetailsState extends State<PersonalArticleDetails> {
                 return Stack(
                   children: [
                     Image.asset(
-                      "assets/image/doliprane.jpg",
+                      "assets/image/med.jpg",
                     ),
                     Padding(
                         padding: const EdgeInsets.only(left: 12, top: 5),
@@ -117,8 +117,6 @@ class _PersonalArticleDetailsState extends State<PersonalArticleDetails> {
                                             Get.back(result: true);
                                           },
                                         ).show();
-
-                                   
                                       },
                                       child: Center(
                                           child: Text(

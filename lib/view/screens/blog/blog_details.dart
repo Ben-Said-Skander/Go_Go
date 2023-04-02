@@ -48,7 +48,10 @@ class _BlogDetailsState extends State<BlogDetails> {
                                 width: double.infinity,
                               );
                             } else {
-                              return Center(child: CircularProgressIndicator());
+                              return Image.asset(
+                                "assets/image/med.jpg",
+                                height: 220, width: double.infinity,     fit: BoxFit.fill, 
+                              );
                             }
                           })),
                       Padding(

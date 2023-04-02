@@ -26,16 +26,16 @@ class BlogCard extends StatelessWidget {
         children: [
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(top: 15),
+              padding: const EdgeInsets.only(top: 25),
               child: Image.asset(
                 blogPicture,
-                width: 150,
+                width: 200,
                 height: 100,
               ),
             ),
           ),
           SizedBox(
-            height: 15,
+            height: 5,
           ),
           Padding(
             padding: const EdgeInsets.only(left: 18, top: 10),

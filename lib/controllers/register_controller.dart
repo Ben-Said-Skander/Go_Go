@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../models/user.dart';
+
 
 class RegisterController extends GetxController {
   bool _isRegistred = false;

@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
         getPages: routes,
-        initialRoute: AppRoute.home);
+        initialRoute: AppRoute.searchPage);
   }
 }
 //AIzaSyC2HrUyqcy4IO9OEZ4BWEYBNe7MpobW5Us

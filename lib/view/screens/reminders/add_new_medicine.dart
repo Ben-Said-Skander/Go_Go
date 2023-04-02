@@ -18,7 +18,7 @@ class _AddMedicineState extends State<AddMedicine> {
   int pillsIndex = 0;
   int syringeIndex = 0;
 
-  int typeIndex = 0;
+  int typeIndex = 1;
 
   Color bottleColor = Colors.grey;
   Color pillsColor = Colors.grey;
@@ -28,6 +28,7 @@ class _AddMedicineState extends State<AddMedicine> {
   late TextEditingController med_nameController;
   late TextEditingController med_dosageController;
   late TextEditingController starting_timeController;
+  final _formKey = GlobalKey<FormState>();
   String dropdownvalue = "Every 2 hours";
   var intervals = [
     "Every 1 hour",
@@ -70,7 +71,9 @@ class _AddMedicineState extends State<AddMedicine> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(children: [
+        body: Form(
+      key: _formKey,
+      child: ListView(children: [
         Padding(
           padding: const EdgeInsets.fromLTRB(15, 18.0, 0, 28),
           child: Row(
@@ -103,6 +106,13 @@ class _AddMedicineState extends State<AddMedicine> {
           padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
           width: 350,
           child: TextFormField(
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Enter Something";
+              } else {
+                return null;
+              }
+            },
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
                 focusedBorder: UnderlineInputBorder(
@@ -121,6 +131,13 @@ class _AddMedicineState extends State<AddMedicine> {
           padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
           width: 350,
           child: TextFormField(
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Enter Something";
+              } else {
+                return null;
+              }
+            },
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
               focusedBorder: UnderlineInputBorder(
@@ -277,8 +294,15 @@ class _AddMedicineState extends State<AddMedicine> {
                 padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                 width: 200,
                 child: TextFormField(
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Enter Something";
+                    } else {
+                      return null;
+                    }
+                  },
                   controller: starting_timeController,
-                  keyboardType: TextInputType.datetime,
+                  keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                       focusedBorder: UnderlineInputBorder(
                           borderSide:
@@ -298,15 +322,18 @@ class _AddMedicineState extends State<AddMedicine> {
                 color: AppColor.mainColor),
             child: TextButton(
                 onPressed: () {
-                  medicineController.addMedicine(
-                    med_nameController.text,
-                    med_dosageController.text,
-                    chooseType(typeIndex),
-                    dropdownvalue,
-                    starting_timeController.text,
-                  );
+                  final form = _formKey.currentState;
+                  if (form != null && form.validate()) {
+                    medicineController.addMedicine(
+                      med_nameController.text,
+                      med_dosageController.text,
+                      chooseType(typeIndex),
+                      dropdownvalue,
+                      starting_timeController.text,
+                    );
 
-                  Get.back();
+                    Get.back();
+                  }
                 },
                 child: Center(
                     child: Text(
@@ -319,7 +346,7 @@ class _AddMedicineState extends State<AddMedicine> {
           ),
         ),
       ]),
-    );
+    ));
   }
 }
 

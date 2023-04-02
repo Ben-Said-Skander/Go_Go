@@ -12,7 +12,7 @@ class MedicineController extends GetxController {
   Future<Medicine> addMedicine(String name, String dosage, String type,
       String interval, String start_time) async {
     final response =
-        await http.post(Uri.parse('http://192.168.1.14:3600/medicines'),
+        await http.post(Uri.parse('http://192.168.119.161:3600/medicines'),
             headers: {"Content-Type": "Application/json"},
             body: jsonEncode(<String, String>{
               'name': name,
@@ -32,8 +32,8 @@ class MedicineController extends GetxController {
   }
 
   Future<Medicine> deleteMedicine(String id) async {
-    final response =
-        await http.delete(Uri.parse('http://192.168.1.14:3600/medicines/$id'));
+    final response = await http
+        .delete(Uri.parse('http://192.168.119.161:3600/medicines/$id'));
     if (response.statusCode == 200) {
       var medicine = Medicine.fromJson(json.decode(response.body));
       print(medicine);
@@ -45,7 +45,7 @@ class MedicineController extends GetxController {
 
   Future<Medicine> getMedicine(String id) async {
     final response =
-        await http.get(Uri.parse('http://192.168.1.14:3600/medicines/$id'));
+        await http.get(Uri.parse('http://192.168.119.161:3600/medicines/$id'));
     if (response.statusCode == 200) {
       var medicine = Medicine.fromJson(json.decode(response.body));
       print(medicine);
@@ -59,7 +59,7 @@ class MedicineController extends GetxController {
     try {
       isLoading(true);
       final response =
-          await http.get(Uri.parse('http://192.168.1.14:3600/medicines'));
+          await http.get(Uri.parse('http://192.168.119.161:3600/medicines'));
 
       if (response.statusCode == 200) {
         final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();

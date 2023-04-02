@@ -6,7 +6,7 @@ import 'package:pfa_application_1/models/pharmacy.dart';
 class PharmacyController extends GetxController {
   Future<List<Pharmacy>> getAllPharmacies() async {
     final response =
-        await http.get(Uri.parse("http://192.168.1.14:3600/pharmacies"));
+        await http.get(Uri.parse("http://192.168.67.161:3600/pharmacies"));
     if (response.statusCode == 200) {
       var jsonList = jsonDecode(response.body).cast<Map<String, dynamic>>();
       var pharmaciesList =

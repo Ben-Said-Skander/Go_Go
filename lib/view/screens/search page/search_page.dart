@@ -2,6 +2,7 @@
 
 import 'dart:math';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
@@ -32,6 +33,7 @@ class _SearchPageState extends State<SearchPage> {
   late Position currentPosition;
   late GoogleMapController mapController;
   CameraPosition initialLocation = CameraPosition(target: LatLng(0.0, 0.0));
+  int isMedAvailable = 1;
 
   PharmacyController pharmacyController = Get.find();
   late final Future<List<Pharmacy>> futureLocations =
@@ -125,7 +127,6 @@ class _SearchPageState extends State<SearchPage> {
       await launch(url);
     } else {
       throw 'Could not launch $url';
-      
     }
   }
 
@@ -270,17 +271,40 @@ class _SearchPageState extends State<SearchPage> {
                                       ),
                                       onPressed: () {
                                         for (int i = 0;
-                                            i <= pharmIndex.length;
+                                            i < pharmIndex.length ;
                                             i++) {
                                           if (pharmacy[i].drugs![
                                                   searchController.text] ==
                                               true) {
-                                            openGoogleMaps(
-                                              pharmacyLat[pharmIndex[i]],
-                                              pharmacyLong[pharmIndex[i]],
-                                            );
+                                            setState(() {
+                                              isMedAvailable = 0;
+                                            });
+                                            if (isMedAvailable == 0) {
+                                              try {
+                                                openGoogleMaps(
+                                                  pharmacyLat[pharmIndex[i]],
+                                                  pharmacyLong[pharmIndex[i]],
+                                                );
+                                                break;
+                                              } catch (error) {
+                                                print(error);
+                                              }
+                                            } else {
+                                              AwesomeDialog(
+                                                context: context,
+                                                dialogType: DialogType.error,
+                                                animType: AnimType.rightSlide,
+                                                headerAnimationLoop: false,
+                                                title: 'Drug not available',
+                                                desc:
+                                                    'The drug you are looking for is not available at any pharmacy',
+                                                btnOkOnPress: () {},
+                                                btnOkIcon: Icons.cancel,
+                                                btnOkColor: Colors.red,
+                                              ).show();
+                                            }
+
                                             print(i);
-                                            break;
                                           }
                                         }
                                       })));

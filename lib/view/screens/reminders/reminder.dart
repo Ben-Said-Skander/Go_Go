@@ -20,6 +20,7 @@ class _RemindersState extends State<Reminders> {
   final medicineController = Get.put(MedicineController());
   //MedicineController medicineController = Get.find();
   late final Future<List<Medicine>> futureCard;
+  String medTypeImage = "pills.jpg";
   @override
   void initState() {
     futureCard = medicineController.fetchMedicines();
@@ -91,7 +92,8 @@ class _RemindersState extends State<Reminders> {
                               },
                               child: ReminderMedCard(
                                   med_name: "${snapshot.data![index].name}",
-                                  med_pic: "assets/image/sirop.jpg",
+                                  med_pic:
+                                      "assets/image/${snapshot.data![index].type}.jpg",
                                   med_interval:
                                       "${snapshot.data![index].interval}"),
                             );

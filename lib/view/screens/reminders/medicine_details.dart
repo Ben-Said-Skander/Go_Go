@@ -18,6 +18,8 @@ class _DetailsState extends State<Details> {
   MedicineController medicineController = Get.find();
   late Future<Medicine> futureCard;
   final id = Get.arguments as String;
+  
+
   @override
   void initState() {
     futureCard = medicineController.getMedicine(id);
@@ -57,17 +59,18 @@ class _DetailsState extends State<Details> {
             future: futureCard,
             builder: ((context, snapshot) {
               if (snapshot.hasData) {
+              
                 return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       MedicineInfo(
                           med_name: "${snapshot.data!.name}",
                           med_dosage: "${snapshot.data!.dosage}",
-                          med_pic: "assets/piills.jpgh"),
+                          med_pic: "assets/image/${snapshot.data!.type}.jpg"),
                       MidSectionInfo(
                           med_type: "${snapshot.data!.type}",
                           dosage_interval: "${snapshot.data!.interval}",
-                          start_time: "${snapshot.data!.start_time}h"),
+                          start_time: "${snapshot.data!.start_time}"),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(20, 50, 20, 0),
                         child: Container(
@@ -114,16 +117,7 @@ class _DetailsState extends State<Details> {
                       ),
                     ]);
               } else {
-                return Padding(
-                  padding: const EdgeInsets.only(top: 250.0),
-                  child: Center(
-                      child: Text("Request failed",
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: AppColor.mainColor,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: "Poppins"))),
-                );
+                return Center(child: CircularProgressIndicator());
               }
             }))
       ],
@@ -238,7 +232,7 @@ class MedicineInfo extends StatelessWidget {
             height: 250,
             margin: EdgeInsets.all(16),
             child: Image.asset(
-              "assets/image/piills.jpg",
+              med_pic,
               width: 100,
               height: 100,
             ),

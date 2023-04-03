@@ -120,16 +120,6 @@ class _SearchPageState extends State<SearchPage> {
     super.initState();
   }
 
-  Future<void> openGoogleMaps(double latitude, double longitude) async {
-    final url =
-        'https://www.google.com/maps/dir/?api=1&destination=$latitude,$longitude';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
   /******************************* */
   Future<List<Pharmacy>>? _pharmaciesFuture;
   PharmacyController pharmController = Get.find();
@@ -158,10 +148,22 @@ class _SearchPageState extends State<SearchPage> {
   List<int> pharmacyIndexes(List distances) {
     List<int> indexes = distances.asMap().keys.toList();
     indexes.sort((a, b) => distances[a].compareTo(distances[b]));
-    print(indexes);
+    //print(indexes);
     return indexes;
   }
 
+  Future<void> openGoogleMaps(double latitude, double longitude) async {
+    final url =
+        'https://www.google.com/maps/dir/?api=1&destination=$latitude,$longitude';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  int index = -1;
+  List trueIndex = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -249,9 +251,7 @@ class _SearchPageState extends State<SearchPage> {
                             pharmacyDistances.add(pharmDist);
                           }
                           final pharmIndex = pharmacyIndexes(pharmacyDistances);
-                          print(pharmIndex);
-                          print(pharmacyLong[pharmIndex[0]]);
-                          print(pharmacyLat[pharmIndex[0]]);
+
                           return Padding(
                               padding:
                                   const EdgeInsets.fromLTRB(140, 20, 20, 0),
@@ -271,42 +271,34 @@ class _SearchPageState extends State<SearchPage> {
                                       ),
                                       onPressed: () {
                                         for (int i = 0;
-                                            i < pharmIndex.length ;
+                                            i < pharmacy.length;
                                             i++) {
                                           if (pharmacy[i].drugs![
                                                   searchController.text] ==
                                               true) {
-                                            setState(() {
-                                              isMedAvailable = 0;
-                                            });
-                                            if (isMedAvailable == 0) {
-                                              try {
-                                                openGoogleMaps(
-                                                  pharmacyLat[pharmIndex[i]],
-                                                  pharmacyLong[pharmIndex[i]],
-                                                );
-                                                break;
-                                              } catch (error) {
-                                                print(error);
-                                              }
-                                            } else {
-                                              AwesomeDialog(
-                                                context: context,
-                                                dialogType: DialogType.error,
-                                                animType: AnimType.rightSlide,
-                                                headerAnimationLoop: false,
-                                                title: 'Drug not available',
-                                                desc:
-                                                    'The drug you are looking for is not available at any pharmacy',
-                                                btnOkOnPress: () {},
-                                                btnOkIcon: Icons.cancel,
-                                                btnOkColor: Colors.red,
-                                              ).show();
-                                            }
-
-                                            print(i);
+                                            trueIndex.add(i);
                                           }
                                         }
+                                        print(trueIndex);
+                                        print(pharmIndex);
+
+                                        for (int i = 0;
+                                            i < trueIndex.length;
+                                            i++) {
+                                          if (pharmIndex
+                                              .contains(trueIndex[i])) {
+                                            index = pharmIndex
+                                                .indexOf(trueIndex[i]);
+                                            break;
+                                          }
+                                        }
+
+                                        print(index);
+
+                                        openGoogleMaps(
+                                          pharmacyLat[index],
+                                          pharmacyLong[index],
+                                        );
                                       })));
                         }
                       })

@@ -11,14 +11,18 @@ import 'package:pfa_application_1/core/constants/routes.dart';
 import 'package:pfa_application_1/view/screens/blog/personal_article_details.dart';
 import 'package:pfa_application_1/view/screens/blog/search_articles.dart';
 import 'package:pfa_application_1/view/screens/blog/user_articles.dart';
-import 'package:pfa_application_1/view/screens/forget_password.dart';
+
 import 'package:pfa_application_1/view/screens/medicine%20description/medicine_description.dart';
 import 'package:pfa_application_1/view/screens/onboarding_page.dart';
 import 'package:pfa_application_1/view/screens/reminders/medicine_details.dart';
 import 'package:pfa_application_1/view/screens/reminders/reminder.dart';
-import 'package:pfa_application_1/view/screens/reset_password.dart';
+import 'package:pfa_application_1/view/screens/reset%20password/forget_password.dart';
+import 'package:pfa_application_1/view/screens/reset%20password/reset_password.dart';
+import 'package:pfa_application_1/view/screens/reset%20password/verify_code.dart';
+
 import 'package:pfa_application_1/view/screens/search%20page/search_page.dart';
 import 'package:pfa_application_1/view/screens/test.dart';
+
 import 'view/screens/home.dart';
 
 import 'view/screens/blog/add_new_blog.dart';
@@ -113,8 +117,20 @@ List<GetPage<dynamic>>? routes = [
       page: () => const UserArticle(),
       binding: BlogBindings()),
   /********************************************************** */
-  GetPage(name: AppRoute.forgotPassword, page: () => const ForgotPassword()),
-  GetPage(name: AppRoute.resetPasswrod, page: () => const ResetPassword()),
+  GetPage(
+      name: AppRoute.forgotPassword,
+      page: () => const ForgotPassword(),
+      binding: UserBindings()),
+  /********************************************************** */
+  GetPage(
+      name: AppRoute.resetPasswrod,
+      page: () => const ResetPassword(),
+      binding: UserBindings()),
+  /********************************************************** */
+  GetPage(
+      name: AppRoute.verifyCode,
+      page: () => const VerifyCode(),
+      binding: UserBindings()),
   /********************************************************** */
   GetPage(
       name: AppRoute.medicineDescription,

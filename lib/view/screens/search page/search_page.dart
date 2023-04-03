@@ -277,6 +277,7 @@ class _SearchPageState extends State<SearchPage> {
                                               fontFamily: "Poppins"),
                                         ),
                                         onPressed: () {
+                                          try{
                                           for (int i = 0;
                                               i < pharmacy.length;
                                               i++) {
@@ -318,9 +319,22 @@ class _SearchPageState extends State<SearchPage> {
                                               dialogType: DialogType.error,
                                               animType: AnimType.rightSlide,
                                               headerAnimationLoop: false,
-                                              title: 'Error',
+                                              title: 'Not Available',
                                               desc:
                                                   'There is no Account for this email',
+                                              btnOkOnPress: () {},
+                                              btnOkIcon: Icons.cancel,
+                                              btnOkColor: Colors.red,
+                                            ).show();
+                                          }}catch(error){
+                                             AwesomeDialog(
+                                              context: context,
+                                              dialogType: DialogType.error,
+                                              animType: AnimType.rightSlide,
+                                              headerAnimationLoop: false,
+                                              title: 'Not Available',
+                                              desc:
+                                                  'The drug you are looking for is not available at any pharmacy .',
                                               btnOkOnPress: () {},
                                               btnOkIcon: Icons.cancel,
                                               btnOkColor: Colors.red,

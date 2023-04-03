@@ -161,9 +161,12 @@ class _SearchPageState extends State<SearchPage> {
       throw 'Could not launch $url';
     }
   }
-  int aaasba=0;
+
+  int aaasba = 0;
+  int count = 0;
   int index = -1;
   List trueIndex = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -242,6 +245,7 @@ class _SearchPageState extends State<SearchPage> {
                           return Text('Error: ${snapshot.error}');
                         } else {
                           var pharmacy = snapshot.data!;
+
                           for (int i = 0; i < pharmacy.length; i++) {
                             pharmacyName.add(pharmacy[i].name!);
                             pharmacyLat.add(pharmacy[i].latitude!);
@@ -250,57 +254,84 @@ class _SearchPageState extends State<SearchPage> {
                                 10.7567297, pharmacyLat[i], pharmacyLong[i]);
                             pharmacyDistances.add(pharmDist);
                           }
-                          final pharmIndex = pharmacyIndexes(pharmacyDistances);
+                          if (count < 1) {
+                            List pharmIndex =
+                                pharmacyIndexes(pharmacyDistances);
+                            count++;
 
-                          return Padding(
-                              padding:
-                                  const EdgeInsets.fromLTRB(140, 20, 20, 0),
-                              child: Container(
-                                  height: 50,
-                                  width: 130,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(30),
-                                    color: Color.fromARGB(255, 16, 152, 170),
-                                  ),
-                                  child: MaterialButton(
-                                      child: Text(
-                                        "Show Route",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Poppins"),
-                                      ),
-                                      onPressed: () {
-                                        for (int i = 0;
-                                            i < pharmacy.length;
-                                            i++) {
-                                          if (pharmacy[i].drugs![
-                                                  searchController.text] ==
-                                              true) {
-                                            trueIndex.add(i);
+                            return Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(140, 20, 20, 0),
+                                child: Container(
+                                    height: 50,
+                                    width: 130,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      color: Color.fromARGB(255, 16, 152, 170),
+                                    ),
+                                    child: MaterialButton(
+                                        child: Text(
+                                          "Show Route",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Poppins"),
+                                        ),
+                                        onPressed: () {
+                                          for (int i = 0;
+                                              i < pharmacy.length;
+                                              i++) {
+                                            if (pharmacy[i].drugs![
+                                                    searchController.text] ==
+                                                true) {
+                                              trueIndex.add(i);
+                                            }
                                           }
-                                        }
-                                        print(trueIndex);
-                                        print(pharmIndex);
+                                          print(
+                                              "**********************************");
+                                          print(trueIndex);
+                                          print(pharmIndex);
 
-                                        int index = pharmIndex.indexWhere(
-                                            (element) =>
-                                                trueIndex.contains(element));
-                                        index = (index == -1)
-                                            ? index
-                                            : pharmIndex.indexOf(
-                                                pharmIndex.firstWhere(
-                                                    (element) => trueIndex
-                                                        .contains(element)));
+                                          int index = pharmIndex.indexWhere(
+                                              (element) =>
+                                                  trueIndex.contains(element));
+                                          index = (index == -1)
+                                              ? index
+                                              : pharmIndex.indexOf(
+                                                  pharmIndex.firstWhere(
+                                                      (element) => trueIndex
+                                                          .contains(element)));
 
-                                        print(index);
-                                        aaasba=pharmIndex[index]; 
+                                          print(index);
+                                          print(
+                                              "**********************************");
+                                          aaasba = pharmIndex[index];
 
-                                        
-                                        openGoogleMaps(
-                                          pharmacyLat[aaasba],
-                                          pharmacyLong[aaasba],
-                                        );
-                                      })));
+                                          if (index != -1) {
+                                            openGoogleMaps(
+                                              pharmacyLat[aaasba],
+                                              pharmacyLong[aaasba],
+                                            );
+                                            trueIndex = [];
+                                          } else {
+                                            AwesomeDialog(
+                                              context: context,
+                                              dialogType: DialogType.error,
+                                              animType: AnimType.rightSlide,
+                                              headerAnimationLoop: false,
+                                              title: 'Error',
+                                              desc:
+                                                  'There is no Account for this email',
+                                              btnOkOnPress: () {},
+                                              btnOkIcon: Icons.cancel,
+                                              btnOkColor: Colors.red,
+                                            ).show();
+                                          }
+                                          /*
+                                      */
+                                        })));
+                          } else {
+                            return Text("data");
+                          }
                         }
                       })
                 ],

@@ -22,6 +22,10 @@ import 'package:pfa_application_1/view/screens/reset%20password/verify_code.dart
 
 import 'package:pfa_application_1/view/screens/search%20page/search_page.dart';
 import 'package:pfa_application_1/view/screens/test.dart';
+import 'package:pfa_application_1/view/screens/update%20profile/updateEmail.dart';
+import 'package:pfa_application_1/view/screens/update%20profile/updateName.dart';
+import 'package:pfa_application_1/view/screens/update%20profile/updatePhone.dart';
+
 
 import 'view/screens/home.dart';
 
@@ -148,6 +152,22 @@ List<GetPage<dynamic>>? routes = [
       page: () => const SearchArticles(),
       binding: BlogBindings()),
 
+ 
+  /********************************************************** */
+  GetPage(
+      name: AppRoute.updateEmail,
+      page: () => const UpdateEmail(),
+      binding: UserBindings()),
+  /********************************************************** */
+  GetPage(
+      name: AppRoute.updateName,
+      page: () => const UpdateName(),
+      binding: UserBindings()),
+  /********************************************************** */
+  GetPage(
+      name: AppRoute.updatePhone,
+      page: () => const UpdatePhone(),
+      binding: UserBindings()),
   /********************************************************** */
   GetPage(
       name: AppRoute.test, page: () => ImageScreen(), binding: BlogBindings()),

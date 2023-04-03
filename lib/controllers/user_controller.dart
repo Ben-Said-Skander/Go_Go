@@ -5,9 +5,16 @@ import '../models/user.dart';
 
 class UserController extends GetxController {
   Future<User> getUser(String id) async {
-    final response =
-        await http.get(Uri.parse('http://192.168.245.161:3600/user/${id}'));
-    return User.fromJson(jsonDecode(response.body));
+    try {
+      final response =
+          await http.get(Uri.parse('http://192.168.245.161:3600/user/${id}'));
+
+      var user = User.fromJson(jsonDecode(response.body));
+
+      return user;
+    } catch (Error) {
+      throw Exception('User loading failed');
+    }
   }
 
   Future<bool> updateEmail(String id, String email) async {
@@ -35,7 +42,7 @@ class UserController extends GetxController {
   Future<bool> updateName(String id, String name) async {
     final response = await http.put(
         Uri.parse('http://192.168.245.161:3600/user/updateName/${id}'),
-        body: <String, String>{'name': name});
+        body: <String, String>{'fullname': name});
     if (response.statusCode == 200) {
       return true;
     } else {
@@ -43,10 +50,10 @@ class UserController extends GetxController {
     }
   }
 
-  Future<bool> updatePhone(String id, int phone) async {
+  Future<bool> updatePhone(String id, String phone) async {
     final response = await http.put(
         Uri.parse('http://192.168.245.161:3600/user/updatePhone/${id}'),
-        body: <dynamic, int>{'phone': phone});
+        body: <String, String>{'phoneNumber': phone});
     if (response.statusCode == 200) {
       return true;
     } else {

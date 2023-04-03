@@ -24,4 +24,8 @@ class AppRoute {
   static const String personalArticleDetails = "/personalArticleDetails";
   static const String searchArticles = "/searchArticles";
   static const String verifyCode = "/verifyCode";
+  static const String updateProfile = "/updateProfile";
+  static const String updateName = "/updateName";
+  static const String updateEmail = "/updateEmail";
+  static const String updatePhone = "/updatePhone";
 }

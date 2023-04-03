@@ -25,6 +25,6 @@ class User {
         email: parsedJson["email"],
         password: parsedJson["password"],
         phoneNumber: parsedJson["phoneNumber"],
-        id: parsedJson['_id']['\$oid']);
+        id: parsedJson['_id']);
   }
 }

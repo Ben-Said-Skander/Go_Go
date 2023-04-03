@@ -24,6 +24,7 @@ class _AddBlogState extends State<AddBlog> {
   late TextEditingController bodyController;
 
   String dropdownvalue = "Drug Experience";
+  String initialImage="assets/image/add.png" ;
   var categories = [
     "Drug Experience",
     "In need of a missing drug",
@@ -95,7 +96,7 @@ class _AddBlogState extends State<AddBlog> {
                         color: Color.fromARGB(255, 215, 215, 215),
                         width: 150,
                         height: 150,
-                        child: image == null
+                        child: image.path == ""
                             ? Icon(
                                 Icons.add_a_photo,
                                 color: AppColor.mainColor,

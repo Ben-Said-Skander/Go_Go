@@ -161,7 +161,7 @@ class _SearchPageState extends State<SearchPage> {
       throw 'Could not launch $url';
     }
   }
-
+  int aaasba=0;
   int index = -1;
   List trueIndex = [];
   @override
@@ -282,22 +282,23 @@ class _SearchPageState extends State<SearchPage> {
                                         print(trueIndex);
                                         print(pharmIndex);
 
-                                        for (int i = 0;
-                                            i < trueIndex.length;
-                                            i++) {
-                                          if (pharmIndex
-                                              .contains(trueIndex[i])) {
-                                            index = pharmIndex
-                                                .indexOf(trueIndex[i]);
-                                            break;
-                                          }
-                                        }
+                                        int index = pharmIndex.indexWhere(
+                                            (element) =>
+                                                trueIndex.contains(element));
+                                        index = (index == -1)
+                                            ? index
+                                            : pharmIndex.indexOf(
+                                                pharmIndex.firstWhere(
+                                                    (element) => trueIndex
+                                                        .contains(element)));
 
                                         print(index);
+                                        aaasba=pharmIndex[index]; 
 
+                                        
                                         openGoogleMaps(
-                                          pharmacyLat[index],
-                                          pharmacyLong[index],
+                                          pharmacyLat[aaasba],
+                                          pharmacyLong[aaasba],
                                         );
                                       })));
                         }

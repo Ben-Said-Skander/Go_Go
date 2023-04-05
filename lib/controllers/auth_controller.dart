@@ -3,12 +3,13 @@
 import 'package:get/get.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:pfa_application_1/core/constants/link_api.dart';
 
 class AuthController extends GetxController {
   Future<bool> login(String email, String password) async {
   try {
     final response = await http.post(
-      Uri.parse('http://192.168.1.14:3600/auth'),
+      Uri.parse('${LinkApi.auth}'),
       headers: {
         'Content-Type': 'application/json',
       },

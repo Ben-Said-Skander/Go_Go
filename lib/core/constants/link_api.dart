@@ -1,17 +1,17 @@
 class LinkApi {
-  static const server = "http://192.168.198.161:3600/";
-  static const medicines = "medicines";
-  static const register = "register";
-  static const user = "user";
-  static const blog = "blog";
-  static const images = "images";
-  static const image = "image";
-  static const auth = "auth";
-  static const pharmacies = "pharmacies";
+  static const String server = "http://192.168.189.161:3600";
+  static const String medicines = "$server/medicines";
+  static const String register = "$server/register";
+  static const String user = "$server/user";
+  static const String blog = "$server/blog";
+  static const String images = "$server/images";
+  static const String image = "$server/image";
+  static const String auth = "$server/auth";
+  static const String pharmacies = "$server/pharmacies";
 
-  static const updateEmail = "/updateEmail";
-  static const updatePassword = "/updatePassword";
-  static const updateName = "/updateName";
-  static const updatePhone = "/updatePhone";
-  static const forgotPassword = "/forgotPassword";
+  static const String updateEmail = "$server/user/updateEmail";
+  static const String updatePassword = "$server/user/updatePassword";
+  static const String updateName = "$server/user/updateName";
+  static const String updatePhone = "$server/user/updatePhone";
+  static const String forgotPassword = "$server/user/forgotPassword";
 }

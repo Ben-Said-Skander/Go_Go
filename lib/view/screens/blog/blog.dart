@@ -67,7 +67,7 @@ class _BlogPageState extends State<BlogPage> {
                                   },
                                   child: CircleAvatar(
                                     backgroundImage: AssetImage(
-                                      "assets/image/me2.jpg",
+                                      "assets/image/user.png",
                                     ),
                                     radius: 28,
                                   ),

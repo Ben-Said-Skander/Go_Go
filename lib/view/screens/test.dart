@@ -1,129 +1,99 @@
-// ignore_for_file: unused_local_variable
-
+// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:pfa_application_1/controllers/blog_controller.dart';
-
+import 'package:pfa_application_1/core/constants/colors.dart';
+import 'package:pfa_application_1/core/constants/routes.dart';
+import 'package:pfa_application_1/models/blog.dart';
 import 'package:pfa_application_1/models/image.dart';
 
+
 class ImageScreen extends StatefulWidget {
-  ImageScreen();
+  const ImageScreen({super.key});
 
   @override
-  _ImageScreenState createState() => _ImageScreenState();
+  State<ImageScreen> createState() => _ImageScreenState();
 }
 
 class _ImageScreenState extends State<ImageScreen> {
-  //late Future<Uint8List>? image;
-  //Future<List<Pharmacy>>? _pharmaciesFuture;
   BlogController blogController = Get.find();
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Image Grid'),
-      ),
-      body: FutureBuilder<List<Picture>>(
-     //   future: blogController.getAllImages(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            final images = snapshot.data!;
-            return GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 8,
-              ),
-              itemCount: images.length,
-              itemBuilder: (context, index) {
-                final image = images[index];
-                return Image.memory(image.data!);
-              },
-            );
-          } else if (snapshot.hasError) {
-            return Center(
-              child: Text('Error: ${snapshot.error}'),
-            );
-          } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
-      ),
-    );
-  }
-}
-/*
-   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: FutureBuilder<Uint8List>(
-        future: image,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return Center(
-              child: Image.memory(snapshot.data!),
-            );
-          } else if (snapshot.hasError) {
-            return Text('${snapshot.error}');
-          }
-          return CircularProgressIndicator();
-        },
-      ),
-    );
-  }
-}
-*/
-/*
-class ImageScreen extends StatefulWidget {
-  @override
-  _ImageScreenState createState() => _ImageScreenState();
-}
 
-class _ImageScreenState extends State<ImageScreen> {
-  List<Uint8List> _images = [];
-  BlogController blogController = Get.find();
+  late Future<List<Blog>> futureCard;
+  late Future<List<Picture>> futurePicture;
+
+  List imagesID = [];
+  List articlesID = [];
+  List<Map<String, String>> combinedList = [];
+
   @override
   void initState() {
+    futureCard = blogController.fetchArticles();
+    futurePicture = blogController.getAllImages();
+
     super.initState();
-    _loadImages();
   }
 
-  Future<void> _loadImages() async {
-    try {
-      final images = await blogController.getAllImagesXXX();
-      setState(() {
-        _images = images;
-        print(_images);
-      });
-    } catch (e) {
-      // Handle error
-      print(e);
-    }
-  }
+  List<String> blogID = []; // create an empty list to hold the ids
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('My Images'),
-      ),
-      body: _images.isEmpty
-          ? Center(child: CircularProgressIndicator())
-          : GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-              ),
-              itemCount: _images.length,
-              itemBuilder: (context, index) {
-                final image = _images[index];
-                return Image.memory(image);
-              },
-            ),
-    );
-  }
-}*/
+        floatingActionButton: FloatingActionButton(
+          heroTag: 'btn2',
+          onPressed: () {
+            Get.toNamed(AppRoute.addBlog);
+          },
+          backgroundColor: AppColor.mainColor,
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+        ),
+        body: FutureBuilder<List<dynamic>>(
+            future: Future.wait([futureCard, futurePicture]),
+            builder: ((context, snapshot) {
+              if (snapshot.hasData) {
+                List<Blog> articles = snapshot.data![0];
+                List<Picture> images = snapshot.data![1];
+                for (int i = 0; i < articles.length; i++) {
+                  articlesID.add(articles[i].id);
+                }
+                ;
+                for (int i = 0; i < images.length; i++) {
+                  imagesID.add(imagesID[i].id);
+                }
+                for (int i = 0; i < articlesID.length; i++) {
+                  Map<String, String> item = {
+                    "id": articlesID[i],
+                    "value": imagesID[i]
+                  };
+                  combinedList.add(item);
+                }
 
+                return Text("combinedList");
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
+            })));
+  }
+}
+
+textButton(BuildContext context, String title, String route, Color couleur) {
+  return Container(
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+      child: GestureDetector(
+        onTap: () {
+          Get.toNamed(route);
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(left: 10.0),
+          child: Text(title,
+              style: TextStyle(
+                  fontSize: 14,
+                  color: couleur,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: "Poppins")),
+        ),
+      ));
+}

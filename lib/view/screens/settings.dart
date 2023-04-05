@@ -58,7 +58,7 @@ class _SettingsState extends State<Settings> {
                     Center(
                         child: CircleAvatar(
                       backgroundImage: AssetImage(
-                        "assets/image/me2.jpg",
+                        "assets/image/user.png",
                       ),
                       radius: 40,
                     )),

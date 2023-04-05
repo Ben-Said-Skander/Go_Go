@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:pfa_application_1/core/constants/link_api.dart';
 import 'package:pfa_application_1/models/image.dart';
 import '../models/blog.dart';
 import "../models/image.dart";
@@ -13,7 +14,7 @@ class BlogController extends GetxController {
 
   Future<Blog> createArticle(String title, String category, String body) async {
     final response = await http.post(
-        Uri.parse('http://192.168.189.161:3600/blog'),
+        Uri.parse('${LinkApi.blog}'),
         headers: {"Content-Type": "Application/json"},
         body: jsonEncode(<String, String>{
           'title': title,
@@ -31,7 +32,7 @@ class BlogController extends GetxController {
 
   Future<Blog> deleteArticle(String id) async {
     final response =
-        await http.delete(Uri.parse('http://192.168.189.161:3600/blog/$id'));
+        await http.delete(Uri.parse('${LinkApi.blog}/$id'));
     if (response.statusCode == 200) {
       var article = Blog.fromJson(json.decode(response.body));
       print(article);
@@ -44,7 +45,7 @@ class BlogController extends GetxController {
 
   Future<Blog> getArticle(String id) async {
     final response =
-        await http.get(Uri.parse('http://192.168.189.161:3600/blog/$id'));
+        await http.get(Uri.parse('${LinkApi.blog}/$id'));
     if (response.statusCode == 200) {
       var article = Blog.fromJson(json.decode(response.body));
       print(article);
@@ -58,7 +59,7 @@ class BlogController extends GetxController {
     try {
       isLoading(true);
       final response =
-          await http.get(Uri.parse('http://192.168.189.161:3600/blog'));
+          await http.get(Uri.parse('${LinkApi.blog}'));
 
       if (response.statusCode == 200) {
         final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
@@ -77,7 +78,7 @@ class BlogController extends GetxController {
 
   Future<Picture> getImage(String id) async {
     final response = await http.get(
-      Uri.parse('http://192.168.189.161:3600/image/$id'),
+      Uri.parse('${LinkApi.image}/$id'),
       headers: {'Content-Type': 'application/octet-stream'},
       //  responseType: http.ResponseType.bytes
     );
@@ -93,7 +94,7 @@ class BlogController extends GetxController {
 
   Future<List<Picture>> getAllImages() async {
     final response =
-        await http.get(Uri.parse('http://192.168.189.161:3600/image'));
+        await http.get(Uri.parse('${LinkApi.image}'));
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
       final List<Picture> images = [];
@@ -111,7 +112,7 @@ class BlogController extends GetxController {
 
   Future postPicture(File imageFile) async {
     final req = http.MultipartRequest(
-        'POST', Uri.parse('http://192.168.189.161:3600/images'));
+        'POST', Uri.parse('${LinkApi.images}'));
     req.files.add(await http.MultipartFile.fromPath('image', imageFile.path));
     var response = await req.send();
 
@@ -125,7 +126,7 @@ class BlogController extends GetxController {
   Future<bool> createNewBlogWithImage(
       String title, String category, String body, File image) async {
     var request = http.MultipartRequest(
-        'POST', Uri.parse('http://192.168.189.161:3600/images'));
+        'POST', Uri.parse('${LinkApi.images}'));
     request.fields['title'] = title;
     request.fields['category'] = category;
     request.fields['body'] = body;

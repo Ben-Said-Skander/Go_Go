@@ -1,4 +1,3 @@
-// ignore_for_file: prefer_const_constructors, must_be_immutable, non_constant_identifier_names, prefer_const_literals_to_create_immutables
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,7 +17,6 @@ class _DetailsState extends State<Details> {
   MedicineController medicineController = Get.find();
   late Future<Medicine> futureCard;
   final id = Get.arguments as String;
-  
 
   @override
   void initState() {
@@ -59,7 +57,6 @@ class _DetailsState extends State<Details> {
             future: futureCard,
             builder: ((context, snapshot) {
               if (snapshot.hasData) {
-              
                 return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

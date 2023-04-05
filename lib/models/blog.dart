@@ -1,5 +1,6 @@
 class Blog {
   final String? id;
+  final String? imageId;
   final String? title;
   final String? category;
   final String? body;
@@ -7,6 +8,7 @@ class Blog {
 //Constructeur
   Blog({
     this.id,
+    this.imageId,
     this.title,
     this.category,
     this.body,
@@ -32,6 +34,7 @@ class Blog {
         title: parsedJson["title"],
         category: parsedJson["category"],
         body: parsedJson["body"],
-        id: parsedJson['_id']);
+        id: parsedJson['_id'],
+        imageId: parsedJson['imageId']);
   }
 }

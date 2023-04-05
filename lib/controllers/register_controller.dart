@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:pfa_application_1/core/constants/link_api.dart';
 
 
 class RegisterController extends GetxController {
@@ -12,7 +13,7 @@ class RegisterController extends GetxController {
       String phoneNumber) async {
     try {
       final response = await http.post(
-        Uri.parse('http://192.168.1.14:3600/register'),
+        Uri.parse('${LinkApi.register}'),
         headers: {"Content-Type": "Application/json"},
         body: jsonEncode(<String, String>{
           'fullname': fullname,
@@ -38,7 +39,7 @@ class RegisterController extends GetxController {
 //    throw Exception('User loading failed');
 Future<Map<String, dynamic>> registerUser(
     String username, String email, String password, String phoneNumber) async {
-  final url = Uri.parse('http://192.168.1.14:3600/register');
+  final url = Uri.parse('${LinkApi.medicines}');
 
   final response = await http.post(
     url,

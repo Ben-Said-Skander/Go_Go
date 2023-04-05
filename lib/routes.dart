@@ -26,7 +26,6 @@ import 'package:pfa_application_1/view/screens/update%20profile/updateEmail.dart
 import 'package:pfa_application_1/view/screens/update%20profile/updateName.dart';
 import 'package:pfa_application_1/view/screens/update%20profile/updatePhone.dart';
 
-
 import 'view/screens/home.dart';
 
 import 'view/screens/blog/add_new_blog.dart';
@@ -152,7 +151,6 @@ List<GetPage<dynamic>>? routes = [
       page: () => const SearchArticles(),
       binding: BlogBindings()),
 
- 
   /********************************************************** */
   GetPage(
       name: AppRoute.updateEmail,
@@ -170,5 +168,7 @@ List<GetPage<dynamic>>? routes = [
       binding: UserBindings()),
   /********************************************************** */
   GetPage(
-      name: AppRoute.test, page: () => ImageScreen(), binding: BlogBindings()),
+      name: AppRoute.test,
+      page: () => ImageScreen(),
+      binding: BlogBindings()),
 ];

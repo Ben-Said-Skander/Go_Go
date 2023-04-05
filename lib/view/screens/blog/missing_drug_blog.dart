@@ -9,7 +9,6 @@ import 'package:pfa_application_1/core/constants/routes.dart';
 import 'package:pfa_application_1/models/blog.dart';
 import 'package:pfa_application_1/view/widgets/component/blog_card.dart';
 
-
 class MissingBlog extends StatefulWidget {
   const MissingBlog({super.key});
 
@@ -130,13 +129,17 @@ class _MissingBlogState extends State<MissingBlog> {
                           itemBuilder: ((context, index) {
                             return GestureDetector(
                                 onTap: () {
-                                  var id = "${filteredData[index].id}";
-                                  Get.toNamed(AppRoute.blogdetails,
-                                      arguments: id);
+                                  var articleId = "${snapshot.data![index].id}";
+                                  var imageId =
+                                      "${snapshot.data![index].imageId}";
+                                  Get.toNamed(AppRoute.blogdetails, arguments: {
+                                    'articleId': '${articleId}',
+                                    'imageId': '${imageId}'
+                                  });
                                 },
                                 child: BlogCard(
                                   blogTitle: "${filteredData[index].title}",
-                                  blogPicture: "assets/image/piills.jpg",
+                                  blogPicture: "assets/image/hand2.jpg",
                                 ));
                           }));
                     } else {
@@ -145,10 +148,7 @@ class _MissingBlogState extends State<MissingBlog> {
                   } else if (snapshot.hasError) {
                     return Text("Error loading data");
                   } else {
-                    return Center(
-                        child: CircularProgressIndicator(
-                    
-                    ));
+                    return Center(child: CircularProgressIndicator());
                   }
                 })))
       ]),

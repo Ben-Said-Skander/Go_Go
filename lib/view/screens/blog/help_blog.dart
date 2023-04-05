@@ -129,12 +129,17 @@ class _HelpBlogState extends State<HelpBlog> {
             itemBuilder: ((context, index) {
               return GestureDetector(
                 onTap: () {
-                  var id = "${filteredData[index].id}";
-                  Get.toNamed(AppRoute.blogdetails, arguments: id);
+                  var articleId = "${snapshot.data![index].id}";
+                                var imageId =
+                                    "${snapshot.data![index].imageId}";
+                                Get.toNamed(AppRoute.blogdetails, arguments: {
+                                  'articleId': '${articleId}',
+                                  'imageId': '${imageId}'
+                                });
                 },
                 child: BlogCard(
                   blogTitle: "${filteredData[index].title}",
-                  blogPicture: "assets/image/piills.jpg",
+                  blogPicture: "assets/image/hand2.jpg",
                 )
               );
             })

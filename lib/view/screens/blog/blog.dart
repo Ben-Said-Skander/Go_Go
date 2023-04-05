@@ -6,7 +6,6 @@ import 'package:pfa_application_1/controllers/blog_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
 import 'package:pfa_application_1/models/blog.dart';
-import 'package:pfa_application_1/models/image.dart';
 import 'package:pfa_application_1/view/widgets/component/blog_card.dart';
 import 'package:pfa_application_1/view/widgets/component/popular_card.dart';
 
@@ -21,14 +20,10 @@ class _BlogPageState extends State<BlogPage> {
   BlogController blogController = Get.find();
 
   late Future<List<Blog>> futureCard;
-  late Future<List<Picture>> futurePicture;
-
-  List imagesID = [];
 
   @override
   void initState() {
     futureCard = blogController.fetchArticles();
-    futurePicture = blogController.getAllImages();
 
     super.initState();
   }
@@ -51,7 +46,6 @@ class _BlogPageState extends State<BlogPage> {
             future: blogController.fetchArticles(),
             builder: ((context, snapshot) {
               if (snapshot.hasData) {
-                
                 return ListView(children: [
                   SafeArea(
                     child: Container(
@@ -149,9 +143,13 @@ class _BlogPageState extends State<BlogPage> {
                         itemBuilder: ((context, index) {
                           return GestureDetector(
                               onTap: () {
-                                var id = "${snapshot.data![index].id}";
-                                Get.toNamed(AppRoute.blogdetails,
-                                    arguments: id);
+                                var articleId = "${snapshot.data![index].id}";
+                                var imageId =
+                                    "${snapshot.data![index].imageId}";
+                                Get.toNamed(AppRoute.blogdetails, arguments: {
+                                  'articleId': '${articleId}',
+                                  'imageId': '${imageId}'
+                                });
                               },
                               child: BlogCard(
                                   blogTitle: "${snapshot.data![index].title}",
@@ -176,9 +174,13 @@ class _BlogPageState extends State<BlogPage> {
                         itemBuilder: ((context, index) {
                           return GestureDetector(
                               onTap: () {
-                                var id = "${snapshot.data![index].id}";
-                                Get.toNamed(AppRoute.blogdetails,
-                                    arguments: id);
+                                var articleId = "${snapshot.data![index].id}";
+                                var imageId =
+                                    "${snapshot.data![index].imageId}";
+                                Get.toNamed(AppRoute.blogdetails, arguments: {
+                                  'articleId': '${articleId}',
+                                  'imageId': '${imageId}'
+                                });
                               },
                               child: PopularCard(
                                   blogTitle: "${snapshot.data![index].title}",

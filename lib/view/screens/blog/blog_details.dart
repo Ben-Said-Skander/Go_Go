@@ -18,12 +18,13 @@ class _BlogDetailsState extends State<BlogDetails> {
   BlogController blogController = Get.find();
   late Future<Blog> futureCard;
   late Future<Picture> futureImage;
-  final id = Get.arguments as String;
+  final articleId = Get.arguments["articleId"] as String;
+   final imageId = Get.arguments["imageId"] as String;
 
   @override
   void initState() {
-    futureCard = blogController.getArticle(id);
-    futureImage = blogController.getImage("6427151d24e60d1085de79dc");
+    futureCard = blogController.getArticle(articleId);
+    futureImage = blogController.getImage(imageId);
     super.initState();
   }
 

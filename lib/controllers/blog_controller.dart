@@ -13,7 +13,7 @@ class BlogController extends GetxController {
 
   Future<Blog> createArticle(String title, String category, String body) async {
     final response = await http.post(
-        Uri.parse('http://192.168.198.161:3600/blog'),
+        Uri.parse('http://192.168.189.161:3600/blog'),
         headers: {"Content-Type": "Application/json"},
         body: jsonEncode(<String, String>{
           'title': title,
@@ -31,7 +31,7 @@ class BlogController extends GetxController {
 
   Future<Blog> deleteArticle(String id) async {
     final response =
-        await http.delete(Uri.parse('http://192.168.198.161:3600/blog/$id'));
+        await http.delete(Uri.parse('http://192.168.189.161:3600/blog/$id'));
     if (response.statusCode == 200) {
       var article = Blog.fromJson(json.decode(response.body));
       print(article);
@@ -44,7 +44,7 @@ class BlogController extends GetxController {
 
   Future<Blog> getArticle(String id) async {
     final response =
-        await http.get(Uri.parse('http://192.168.198.161:3600/blog/$id'));
+        await http.get(Uri.parse('http://192.168.189.161:3600/blog/$id'));
     if (response.statusCode == 200) {
       var article = Blog.fromJson(json.decode(response.body));
       print(article);
@@ -58,7 +58,7 @@ class BlogController extends GetxController {
     try {
       isLoading(true);
       final response =
-          await http.get(Uri.parse('http://192.168.198.161:3600/blog'));
+          await http.get(Uri.parse('http://192.168.189.161:3600/blog'));
 
       if (response.statusCode == 200) {
         final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
@@ -77,7 +77,7 @@ class BlogController extends GetxController {
 
   Future<Picture> getImage(String id) async {
     final response = await http.get(
-      Uri.parse('http://192.168.198.161:3600/image/$id'),
+      Uri.parse('http://192.168.189.161:3600/image/$id'),
       headers: {'Content-Type': 'application/octet-stream'},
       //  responseType: http.ResponseType.bytes
     );
@@ -93,7 +93,7 @@ class BlogController extends GetxController {
 
   Future<List<Picture>> getAllImages() async {
     final response =
-        await http.get(Uri.parse('http://192.168.198.161:3600/image'));
+        await http.get(Uri.parse('http://192.168.189.161:3600/image'));
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
       final List<Picture> images = [];
@@ -111,7 +111,7 @@ class BlogController extends GetxController {
 
   Future postPicture(File imageFile) async {
     final req = http.MultipartRequest(
-        'POST', Uri.parse('http://192.168.198.161:3600/images'));
+        'POST', Uri.parse('http://192.168.189.161:3600/images'));
     req.files.add(await http.MultipartFile.fromPath('image', imageFile.path));
     var response = await req.send();
 

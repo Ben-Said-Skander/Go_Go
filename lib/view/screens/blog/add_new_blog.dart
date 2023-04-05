@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -24,7 +25,7 @@ class _AddBlogState extends State<AddBlog> {
   late TextEditingController bodyController;
 
   String dropdownvalue = "Drug Experience";
-  String initialImage="assets/image/add.png" ;
+  String initialImage = "assets/image/add.png";
   var categories = [
     "Drug Experience",
     "In need of a missing drug",
@@ -236,11 +237,25 @@ class _AddBlogState extends State<AddBlog> {
                 color: AppColor.mainColor),
             child: TextButton(
                 onPressed: () {
-                  blogController.createArticle(
-                      titleController.text, dropdownvalue, bodyController.text);
+                  if(image.path!=""){
+                     blogController.createNewBlogWithImage(titleController.text,
+                      dropdownvalue, bodyController.text, image);
 
-                  blogController.postPicture(image);
                   Get.back();
+                  }else{
+                         AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.error,
+                              animType: AnimType.rightSlide,
+                              headerAnimationLoop: false,
+                              title: 'Error',
+                              desc: 'An article picture must be submitted',
+                              btnOkOnPress: () {},
+                              btnOkIcon: Icons.cancel,
+                              btnOkColor: Colors.red,
+                            ).show();
+                  }
+                 
                 },
                 child: Center(
                     child: Text(

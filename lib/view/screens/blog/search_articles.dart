@@ -8,6 +8,7 @@ import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
 import 'package:pfa_application_1/models/blog.dart';
 import 'package:pfa_application_1/view/widgets/component/blog_card.dart';
+import 'package:proste_bezier_curve/proste_bezier_curve.dart';
 
 class SearchArticles extends StatefulWidget {
   const SearchArticles({Key? key}) : super(key: key);
@@ -40,31 +41,59 @@ class _SearchArticlesState extends State<SearchArticles> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         body: ListView(children: [
-      Padding(
-          padding: const EdgeInsets.only(top: 15, left: 5, right: 30),
-          child: Row(
-            children: [
-              IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.black,
+      Container(
+          height: 150,
+          width: double.infinity,
+          child: ClipPath(
+            clipper: ProsteBezierCurve(
+              position: ClipPosition.bottom,
+              list: [
+                BezierCurveSection(
+                  start: Offset(0, 125),
+                  top: Offset(screenWidth / 4, 150),
+                  end: Offset(screenWidth / 2, 125),
                 ),
+                BezierCurveSection(
+                  start: Offset(screenWidth / 2, 125),
+                  top: Offset(screenWidth / 4 * 3, 100),
+                  end: Offset(screenWidth, 150),
+                ),
+              ],
+            ),
+            child: Container(
+              color: AppColor.mainColor,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: Padding(
+                    padding:
+                        const EdgeInsets.only(top: 0.0, left: 0, bottom: 30),
+                    child: Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          icon: Icon(
+                            Icons.arrow_back_ios,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text("Search for article",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontFamily: "Poppins")),
+                      ],
+                    )),
               ),
-              Text("Search for article",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: AppColor.mainColor,
-                      fontSize: 20,
-                      fontFamily: "Poppins")),
-            ],
+            ),
           )),
       Container(
-        padding: EdgeInsets.only(top: 40, left: 20),
+        padding: EdgeInsets.only(top: 60, left: 20),
         width: 400,
         child: TextFormField(
           keyboardType: TextInputType.emailAddress,

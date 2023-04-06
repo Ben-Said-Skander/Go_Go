@@ -38,7 +38,7 @@ class BlogCard extends StatelessWidget {
             height: 5,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 18, top: 10),
+            padding: const EdgeInsets.only(left: 18, top: 7),
             child: Text(
               blogTitle,
               style: TextStyle(

@@ -7,6 +7,7 @@ import 'package:pfa_application_1/controllers/register_controller.dart';
 
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
+import 'package:proste_bezier_curve/proste_bezier_curve.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -16,7 +17,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  RegisterController registerController = Get.find();
+   RegisterController registerController = Get.find();
   final _formKey = GlobalKey<FormState>();
   late TextEditingController emailController;
   late TextEditingController passwordController;
@@ -46,39 +47,46 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.mainColor,
       body: ListView(children: [
-        SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 43.0),
-            child: Center(
-                child: Text(
-              "Sign Up",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 23,
-                  fontWeight: FontWeight.w700,
-                  fontFamily: "Poppins"),
-            )),
+        ClipPath(
+          clipper: ProsteThirdOrderBezierCurve(
+            position: ClipPosition.bottom,
+            list: [
+              ThirdOrderBezierCurveSection(
+                p1: Offset(0, 100),
+                p2: Offset(0, 210),
+                p3: Offset(MediaQuery.of(context).size.width, 100),
+                p4: Offset(MediaQuery.of(context).size.width, 200),
+              ),
+            ],
+          ),
+          child: Container(
+            height: 200,
+            color: AppColor.mainColor,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 48.0),
+              child: Center(
+                  child: Text(
+                "Sign Up",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 23,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: "Poppins"),
+              )),
+            ),
           ),
         ),
         Container(
-            margin: EdgeInsets.only(top: 50),
-            height: 700,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(80),
-                topRight: Radius.circular(80),
-              ),
-            ),
-            child: Container(
-                height: 650,
-                child: Form(
-                  key: _formKey,
-                  child: ListView(children: [
+            height: 650,
+            child: Form(
+              key: _formKey,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(35, 30, 0, 0),
+                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                       child: Text("Create an account",
                           style: TextStyle(
                               color: Color.fromARGB(255, 16, 152, 170),
@@ -87,15 +95,15 @@ class _SignUpState extends State<SignUp> {
                               fontFamily: "Poppins")),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 45, 0, 0),
+                      padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
                       child: Text("Full Name",
                           style: TextStyle(
                               color: Color.fromARGB(255, 16, 152, 170),
                               fontFamily: "Poppins")),
                     ),
                     Container(
-                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      width: 350,
+                      padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
+                      width: 400,
                       child: TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -112,15 +120,15 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
+                      padding: const EdgeInsets.fromLTRB(20, 35, 0, 0),
                       child: Text("Email",
                           style: TextStyle(
                               color: Color.fromARGB(255, 16, 152, 170),
                               fontFamily: "Poppins")),
                     ),
                     Container(
-                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      width: 350,
+                      padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
+                      width: 400,
                       child: TextFormField(
                         validator: (value) {
                           if (value!.isEmpty ||
@@ -137,15 +145,15 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
+                      padding: const EdgeInsets.fromLTRB(20, 35, 0, 0),
                       child: Text("Phone Number",
                           style: TextStyle(
                               color: Color.fromARGB(255, 16, 152, 170),
                               fontFamily: "Poppins")),
                     ),
                     Container(
-                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      width: 350,
+                      padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
+                      width: 400,
                       child: TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -171,7 +179,7 @@ class _SignUpState extends State<SignUp> {
                     ),
                     Container(
                       padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      width: 350,
+                      width: 400,
                       child: TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -189,7 +197,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 55, 20, 0),
+                      padding: const EdgeInsets.fromLTRB(20, 45, 20, 0),
                       child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(25),
@@ -199,7 +207,7 @@ class _SignUpState extends State<SignUp> {
                             onPressed: () async {
                               final form = _formKey.currentState;
                               if (form != null && form.validate()) {
-                                if (await registerController.register(
+                                        if (await registerController.register(
                                     nameController.text,
                                     emailController.text,
                                     passwordController.text,
@@ -256,9 +264,9 @@ class _SignUpState extends State<SignUp> {
                               }),
                         ],
                       ),
-                    )
+                    ),
                   ]),
-                )))
+            )),
       ]),
     );
   }

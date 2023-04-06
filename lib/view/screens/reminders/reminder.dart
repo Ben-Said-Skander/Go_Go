@@ -19,12 +19,33 @@ class Reminders extends StatefulWidget {
 class _RemindersState extends State<Reminders> {
   final medicineController = Get.put(MedicineController());
   //MedicineController medicineController = Get.find();
-  late final Future<List<Medicine>> futureCard;
+  late List<Medicine> medicineList = [];
   String medTypeImage = "pills.jpg";
+  bool isLoading = false;
+
   @override
   void initState() {
-    futureCard = medicineController.fetchMedicines();
     super.initState();
+    refreshData();
+  }
+
+  Future<void> refreshData() async {
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      final List<Medicine> medicines =
+          await medicineController.fetchMedicines();
+      setState(() {
+        medicineList = medicines;
+        isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      print('Error fetching data: $e');
+    }
   }
 
   @override
@@ -41,82 +62,89 @@ class _RemindersState extends State<Reminders> {
           color: Color.fromARGB(255, 251, 251, 251),
         ),
       ),
-      body: ListView(children: [
-        Container(
-          height: 170,
-          child: ClipPath(
-              clipper: CurveClipper(),
-              child: Container(
-                color: AppColor.mainColor,
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: Text(
-                      "Reminder",
-                      style: TextStyle(
+      body: RefreshIndicator(
+        onRefresh: refreshData,
+        child: ListView(
+          children: [
+            Container(
+              height: 170,
+              child: ClipPath(
+                clipper: CurveClipper(),
+                child: Container(
+                  color: AppColor.mainColor,
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Text(
+                        "Reminder",
+                        style: TextStyle(
                           fontSize: 22,
                           color: Colors.white,
-                          fontFamily: "Poppins"),
+                          fontFamily: "Poppins",
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              )),
-        ),
-        Padding(
-            padding: const EdgeInsets.fromLTRB(20, 35, 0, 30),
-            child: Text(" Worry less , Live healthier ",
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 35, 0, 30),
+              child: Text(
+                " Worry less, Live healthier",
                 style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: "Poppins"))),
-        Container(
-            height: 500,
-            child: Obx(() => FutureBuilder<List<Medicine>>(
-                  future: medicineController.fetchMedicines(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return GridView.builder(
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w700,
+                  fontFamily: "Poppins",
+                ),
+              ),
+            ),
+            Container(
+              height: 500,
+              child: isLoading
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : medicineList.isNotEmpty
+                      ? GridView.builder(
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2),
-                          itemCount: snapshot.data?.length,
+                          itemCount: medicineList.length,
                           itemBuilder: ((context, index) {
                             return GestureDetector(
                               onTap: () {
-                                var id = "${snapshot.data![index].id}";
+                                var id = "${medicineList[index].id}";
                                 Get.toNamed(
                                   AppRoute.details,
                                   arguments: id,
                                 );
                               },
                               child: ReminderMedCard(
-                                  med_name: "${snapshot.data![index].name}",
-                                  med_pic:
-                                      "assets/image/${snapshot.data![index].type}.jpg",
-                                  med_interval:
-                                      "${snapshot.data![index].interval}"),
+                                med_name: "${medicineList[index].name}",
+                                med_pic:
+                                    "assets/image/${medicineList[index].type}.jpg",
+                                med_interval: "${medicineList[index].interval}",
+                              ),
                             );
-                          }));
-                    } else if (snapshot.hasError) {
-                      return Center(
-                        child: Text(
-                          "Error loading data",
-                          style: TextStyle(
+                          }),
+                        )
+                      : Center(
+                          child: Text(
+                            "No medicines found.",
+                            style: TextStyle(
                               fontSize: 20,
                               color: AppColor.mainColor,
                               fontWeight: FontWeight.w700,
-                              fontFamily: "Poppins"),
+                              fontFamily: "Poppins",
+                            ),
+                          ),
                         ),
-                      );
-                    } else {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                  },
-                )))
-      ]),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

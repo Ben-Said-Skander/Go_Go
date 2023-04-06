@@ -19,11 +19,34 @@ class SeeAll extends StatefulWidget {
 class _SeeAllState extends State<SeeAll> {
   BlogController blogController = Get.find();
   late Future<List<Blog>> futureCard;
+  late List<Blog> articleList = [];
+  String medTypeImage = "pills.jpg";
+  bool isLoading = false;
+
   @override
   void initState() {
-    futureCard = blogController.fetchArticles();
     super.initState();
+    refreshData();
   }
+
+  Future<void> refreshData() async {
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      final List<Blog> articles = await blogController.fetchArticles();
+      setState(() {
+        articleList = articles;
+        isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      print('Error fetching data: $e');
+    }
+  }
+
 
   int count = 0;
   @override
@@ -40,7 +63,9 @@ class _SeeAllState extends State<SeeAll> {
           color: Colors.white,
         ),
       ),
-      body: ListView(children: [
+      body: RefreshIndicator(
+        onRefresh: refreshData,
+        child:ListView(children: [
         SafeArea(
           child: Container(
             height: 120,
@@ -151,6 +176,6 @@ class _SeeAllState extends State<SeeAll> {
                   }
                 })))
       ]),
-    );
+    ));
   }
 }

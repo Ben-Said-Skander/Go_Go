@@ -1,5 +1,5 @@
 class LinkApi {
-  static const String server = "http://192.168.172.161:3600";
+  static const String server = "http://192.168.1.15:3600";
   static const String medicines = "$server/medicines";
   static const String register = "$server/register";
   static const String user = "$server/user";

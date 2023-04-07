@@ -4,11 +4,17 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/controllers/blog_controller.dart';
+import 'package:pfa_application_1/controllers/medicine_controller.dart';
 import 'package:pfa_application_1/controllers/register_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
 import 'package:pfa_application_1/models/blog.dart';
 import 'package:pfa_application_1/models/image.dart';
+import 'package:pfa_application_1/models/medicine.dart';
+import 'package:pfa_application_1/view/widgets/component/blog_card.dart';
+import 'package:pfa_application_1/view/widgets/component/popular_card.dart';
+import 'package:pfa_application_1/view/widgets/component/reminder_med_card.dart';
+import 'package:pfa_application_1/view/widgets/curve_clipper.dart';
 import 'package:proste_bezier_curve/proste_bezier_curve.dart';
 
 class ImageScreen extends StatefulWidget {
@@ -19,272 +25,228 @@ class ImageScreen extends StatefulWidget {
 }
 
 class _ImageScreenState extends State<ImageScreen> {
-   RegisterController registerController = Get.find();
-  final _formKey = GlobalKey<FormState>();
-  late TextEditingController emailController;
-  late TextEditingController passwordController;
-  late TextEditingController phoneController;
-  late TextEditingController nameController;
-  bool registrationSuccessful = false;
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    phoneController.dispose();
-    nameController.dispose();
+  BlogController blogController = Get.find();
 
-    super.dispose();
-  }
+  late Future<List<Blog>> futureCard;
+  late List<Blog> articleList = [];
+  String medTypeImage = "pills.jpg";
+  bool isLoading = false;
 
   @override
   void initState() {
-    emailController = TextEditingController();
-    phoneController = TextEditingController();
-    nameController = TextEditingController();
-    passwordController = TextEditingController();
-
     super.initState();
+    refreshData();
+  }
+
+  Future<void> refreshData() async {
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      final List<Blog> articles = await blogController.fetchArticles();
+      setState(() {
+        articleList = articles;
+        isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      print('Error fetching data: $e');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(children: [
-        ClipPath(
-          clipper: ProsteThirdOrderBezierCurve(
-            position: ClipPosition.bottom,
-            list: [
-              ThirdOrderBezierCurveSection(
-                p1: Offset(0, 100),
-                p2: Offset(0, 210),
-                p3: Offset(MediaQuery.of(context).size.width, 100),
-                p4: Offset(MediaQuery.of(context).size.width, 200),
-              ),
-            ],
-          ),
-          child: Container(
-            height: 200,
-            color: AppColor.mainColor,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 48.0),
-              child: Center(
-                  child: Text(
-                "Sign Up",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 23,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: "Poppins"),
-              )),
-            ),
+        floatingActionButton: FloatingActionButton(
+          heroTag: 'btn2',
+          onPressed: () {
+            Get.toNamed(AppRoute.addBlog);
+          },
+          backgroundColor: AppColor.mainColor,
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
           ),
         ),
-        Container(
-            height: 650,
-            child: Form(
-              key: _formKey,
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                      child: Text("Create an account",
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 16, 152, 170),
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: "Poppins")),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
-                      child: Text("Full Name",
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 16, 152, 170),
-                              fontFamily: "Poppins")),
-                    ),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
-                      width: 400,
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Enter Something";
-                          } else {
-                            return null;
-                          }
-                        },
-                        decoration: InputDecoration(
-                            hintText: "Full Name",
-                            prefixIcon: Icon(Icons.person)),
-                        controller: nameController,
-                        cursorColor: Color.fromARGB(255, 16, 152, 170),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 35, 0, 0),
-                      child: Text("Email",
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 16, 152, 170),
-                              fontFamily: "Poppins")),
-                    ),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
-                      width: 400,
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value!.isEmpty ||
-                              !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                  .hasMatch(value)) {
-                            return 'Enter a valid email!';
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                            hintText: "Email", prefixIcon: Icon(Icons.mail)),
-                        controller: emailController,
-                        cursorColor: Color.fromARGB(255, 16, 152, 170),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 35, 0, 0),
-                      child: Text("Phone Number",
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 16, 152, 170),
-                              fontFamily: "Poppins")),
-                    ),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
-                      width: 400,
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Enter Something";
-                          } else {
-                            return null;
-                          }
-                        },
-                        decoration: InputDecoration(
-                            hintText: "Phone Number",
-                            prefixIcon: Icon(Icons.phone)),
-                        controller: phoneController,
-                        keyboardType: TextInputType.phone,
-                        cursorColor: Color.fromARGB(255, 16, 152, 170),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
-                      child: Text("Password",
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 16, 152, 170),
-                              fontFamily: "Poppins")),
-                    ),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      width: 400,
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Enter Something";
-                          } else {
-                            return null;
-                          }
-                        },
-                        decoration: InputDecoration(
-                            hintText: "Password",
-                            prefixIcon: Icon(Icons.password)),
-                        controller: passwordController,
-                        cursorColor: Color.fromARGB(255, 16, 152, 170),
-                        obscureText: true,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 45, 20, 0),
-                      child: Container(
+        body: FutureBuilder<List<Blog>>(
+            future: blogController.fetchArticles(),
+            builder: ((context, snapshot) {
+              if (snapshot.hasData) {
+                return RefreshIndicator(
+                    onRefresh: () => refreshData(),
+                    child: ListView(children: [
+                      SafeArea(
+                        child: Container(
+                          height: 120,
+                          width: 500,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(80)),
                             color: Color.fromARGB(255, 16, 152, 170),
                           ),
-                          child: TextButton(
-                            onPressed: () async {
-                              final form = _formKey.currentState;
-                              if (form != null && form.validate()) {
-                                        if (await registerController.register(
-                                    nameController.text,
-                                    emailController.text,
-                                    passwordController.text,
-                                    phoneController.text)) {
-                                  // registration was successful
-                                  AwesomeDialog(
-                                    context: context,
-                                    animType: AnimType.leftSlide,
-                                    headerAnimationLoop: false,
-                                    dialogType: DialogType.success,
-                                    showCloseIcon: true,
-                                    title: 'Succes',
-                                    desc: 'Registration completed successfully',
-                                    btnOkOnPress: () {
-                                      Get.offAndToNamed(AppRoute.signIn);
-                                    },
-                                    btnOkIcon: Icons.check_circle,
-                                    onDismissCallback: (type) {
-                                      debugPrint(
-                                          'Dialog Dissmiss from callback $type');
-                                    },
-                                  ).show();
-                                } else {
-                                  print("registration failed");
-                                }
-                              }
-                            },
-                            child: Center(
-                              child: Text(
-                                "Sign Up",
-                                style: TextStyle(
-                                    color: Colors.white, fontFamily: "Poppins"),
+                          child: Row(
+                            children: [
+                              Center(
+                                child: Padding(
+                                    padding: const EdgeInsets.only(left: 40),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Get.toNamed(AppRoute.settings);
+                                      },
+                                      child: CircleAvatar(
+                                        backgroundImage: AssetImage(
+                                          "assets/image/user.png",
+                                        ),
+                                        radius: 28,
+                                      ),
+                                    )),
                               ),
-                            ),
-                          )),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 75),
-                      child: Row(
-                        children: [
-                          Text(
-                            "Already have an account ?",
-                            style: TextStyle(
-                                color: Colors.grey, fontFamily: "Poppins"),
+                              SizedBox(
+                                width: 22,
+                              ),
+                              Text(
+                                "Ben Said Skander",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 19,
+                                    fontFamily: "Poppins"),
+                              ),
+                            ],
                           ),
-                          TextButton(
-                              child: Text("Sign In",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: AppColor.mainColor,
-                                      fontFamily: "Poppins")),
-                              onPressed: () {
-                                Get.offAndToNamed(AppRoute.signIn);
-                              }),
-                        ],
+                        ),
                       ),
-                    ),
-                  ]),
-            )),
-      ]),
-    );
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Container(
+                        height: 50,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            textButton(context, "Drug Experience", "blog",
+                                AppColor.mainColor),
+                            textButton(context, "Missing Drug", "missingBlog",
+                                Colors.grey),
+                            textButton(context, "Seeking Help", "helpBlog",
+                                Colors.grey),
+                            textButton(context, "Your Articles", "userArticle",
+                                Colors.grey),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 28, 0, 15),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Drug Experience",
+                                style: TextStyle(
+                                    color: AppColor.mainColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "Poppins",
+                                    fontSize: 18),
+                              ),
+                              TextButton(
+                                  onPressed: () {
+                                    Get.toNamed(AppRoute.seeAll);
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 15),
+                                    child: Text(
+                                      "See all",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: "Poppins",
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ))
+                            ]),
+                      ),
+                      Container(
+                          height: 220,
+                          child: ListView.builder(
+                            itemCount: snapshot.data!.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: ((context, index) {
+                              return GestureDetector(
+                                  onTap: () {
+                                    var articleId =
+                                        "${snapshot.data![index].id}";
+                                    var imageId =
+                                        "${snapshot.data![index].imageId}";
+                                    Get.toNamed(AppRoute.blogdetails,
+                                        arguments: {
+                                          'articleId': '${articleId}',
+                                          'imageId': '${imageId}'
+                                        });
+                                  },
+                                  child: BlogCard(
+                                      blogTitle:
+                                          "${snapshot.data![index].title}",
+                                      blogPicture: "assets/image/hand2.jpg"));
+                            }),
+                          )),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 28, 0, 15),
+                        child: Text(
+                          "Popular",
+                          style: TextStyle(
+                              color: AppColor.mainColor,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Poppins",
+                              fontSize: 18),
+                        ),
+                      ),
+                      Container(
+                        height: 200,
+                        child: ListView.builder(
+                            itemCount: 3,
+                            itemBuilder: ((context, index) {
+                              return GestureDetector(
+                                  onTap: () {
+                                    var articleId =
+                                        "${snapshot.data![index].id}";
+                                    var imageId =
+                                        "${snapshot.data![index].imageId}";
+                                    Get.toNamed(AppRoute.blogdetails,
+                                        arguments: {
+                                          'articleId': '${articleId}',
+                                          'imageId': '${imageId}'
+                                        });
+                                  },
+                                  child: PopularCard(
+                                      blogTitle:
+                                          "${snapshot.data![index].title}",
+                                      blogPicture: "assets/image/hand2.jpg",
+                                      route: "/blog/details"));
+                            })),
+                      )
+                    ]));
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
+            })));
   }
 }
 
-/*
-ClipPath(
-          clipper: ProsteThirdOrderBezierCurve(
-            position: ClipPosition.bottom,
-            list: [
-              ThirdOrderBezierCurveSection(
-                p1: Offset(0, 100),
-                p2: Offset(0, 210),
-                p3: Offset(MediaQuery.of(context).size.width, 100),
-                p4: Offset(MediaQuery.of(context).size.width, 200),
-              ),
-            ],
-          ),
-          child: Container(*/
+textButton(BuildContext context, String title, String route, Color couleur) {
+  return Container(
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+      child: GestureDetector(
+        onTap: () {
+          Get.toNamed(route);
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(left: 10.0),
+          child: Text(title,
+              style: TextStyle(
+                  fontSize: 14,
+                  color: couleur,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: "Poppins")),
+        ),
+      ));
+}

@@ -106,7 +106,7 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   void initState() {
-    _pharmaciesFuture = pharmController.getAllPharmacies();
+    refreshData();
 
     createPolylines(34.8443519, 10.7567297, 39.8443519, 16.7567297);
     pharmacyController.getAllPharmacies().then((pharmacyFromServer) {
@@ -120,8 +120,7 @@ class _SearchPageState extends State<SearchPage> {
     super.initState();
   }
 
-  /******************************* */
-  Future<List<Pharmacy>>? _pharmaciesFuture;
+
   PharmacyController pharmController = Get.find();
 
   List<String> pharmacyName = [];
@@ -162,15 +161,39 @@ class _SearchPageState extends State<SearchPage> {
     }
   }
 
-  int aaasba = 0;
+  int pharmacyIndex = 0;
   int count = 0;
   int index = -1;
   List trueIndex = [];
+  bool isLoading = false;
+  late List<Pharmacy> pharmList = [];
+    @override
+ 
+  Future<void> refreshData() async {
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      final List<Pharmacy> pharm =
+          await pharmacyController.getAllPharmacies();
+      setState(() {
+        pharmList = pharm;
+        isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      print('Error fetching data: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView(
+        body: RefreshIndicator(
+          onRefresh: refreshData,
+          child:ListView(
       children: [
         SafeArea(
           child: Stack(
@@ -236,7 +259,7 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   ),
                   FutureBuilder<List<Pharmacy>>(
-                      future: _pharmaciesFuture,
+                      future: pharmacyController.getAllPharmacies(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
@@ -254,7 +277,7 @@ class _SearchPageState extends State<SearchPage> {
                                 10.7567297, pharmacyLat[i], pharmacyLong[i]);
                             pharmacyDistances.add(pharmDist);
                           }
-                          if (count < 1) {
+                          
                             List pharmIndex =
                                 pharmacyIndexes(pharmacyDistances);
                             count++;
@@ -305,12 +328,12 @@ class _SearchPageState extends State<SearchPage> {
                                           print(index);
                                           print(
                                               "**********************************");
-                                          aaasba = pharmIndex[index];
+                                          pharmacyIndex = pharmIndex[index];
 
                                           if (index != -1) {
                                             openGoogleMaps(
-                                              pharmacyLat[aaasba],
-                                              pharmacyLong[aaasba],
+                                              pharmacyLat[pharmacyIndex],
+                                              pharmacyLong[pharmacyIndex],
                                             );
                                             trueIndex = [];
                                           } else {
@@ -340,12 +363,9 @@ class _SearchPageState extends State<SearchPage> {
                                               btnOkColor: Colors.red,
                                             ).show();
                                           }
-                                          /*
-                                      */
+                                    
                                         })));
-                          } else {
-                            return Text("data");
-                          }
+                         
                         }
                       })
                 ],
@@ -354,7 +374,7 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ),
       ],
-    ));
+    )));
   }
 }
 //Current Position :Latitude: 34.8443519, Longitude: 10.7567297

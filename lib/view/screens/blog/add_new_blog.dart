@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pfa_application_1/controllers/blog_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AddBlog extends StatefulWidget {
   const AddBlog({super.key});
@@ -26,11 +27,21 @@ class _AddBlogState extends State<AddBlog> {
 
   String dropdownvalue = "Drug Experience";
   String initialImage = "assets/image/add.png";
+  late String? userId;
   var categories = [
     "Drug Experience",
     "In need of a missing drug",
     "Questions about a drug",
   ];
+  Future<String?> getUserId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var userId = await prefs.getString('userID');
+    print("****************************************");
+    print(userId);
+    print("****************************************");
+    return userId;
+  }
+
   @override
   void dispose() {
     titleController.dispose();
@@ -40,6 +51,11 @@ class _AddBlogState extends State<AddBlog> {
 
   @override
   void initState() {
+    getUserId().then((value) {
+      setState(() {
+        userId = value;
+      });
+    });
     titleController = TextEditingController();
     bodyController = TextEditingController();
     super.initState();
@@ -236,26 +252,35 @@ class _AddBlogState extends State<AddBlog> {
                 borderRadius: BorderRadius.circular(25),
                 color: AppColor.mainColor),
             child: TextButton(
-                onPressed: () {
-                  if(image.path!=""){
-                     blogController.createNewBlogWithImage(titleController.text,
-                      dropdownvalue, bodyController.text, image);
+                onPressed: () async {
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  String? userId = prefs.getString('userID');
+                  if (userId != null && image.path != '') {
+                    bool result = await blogController.createNewBlogWithImage(
+                      titleController.text,
+                      dropdownvalue,
+                      bodyController.text,
+                      userId,
+                      image,
+                    );
+                    print("****************************");
+                    print(userId);
 
-                  Get.back();
-                  }else{
-                         AwesomeDialog(
-                              context: context,
-                              dialogType: DialogType.error,
-                              animType: AnimType.rightSlide,
-                              headerAnimationLoop: false,
-                              title: 'Error',
-                              desc: 'An article picture must be submitted',
-                              btnOkOnPress: () {},
-                              btnOkIcon: Icons.cancel,
-                              btnOkColor: Colors.red,
-                            ).show();
+                    Get.back();
+                  } else {
+                    AwesomeDialog(
+                      context: context,
+                      dialogType: DialogType.error,
+                      animType: AnimType.rightSlide,
+                      headerAnimationLoop: false,
+                      title: 'Error',
+                      desc: 'An article picture must be submitted',
+                      btnOkOnPress: () {},
+                      btnOkIcon: Icons.cancel,
+                      btnOkColor: Colors.red,
+                    ).show();
                   }
-                 
                 },
                 child: Center(
                     child: Text(

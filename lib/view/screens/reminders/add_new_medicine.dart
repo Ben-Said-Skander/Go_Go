@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/controllers/medicine_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AddMedicine extends StatefulWidget {
   const AddMedicine({super.key});
@@ -39,7 +40,16 @@ class _AddMedicineState extends State<AddMedicine> {
     "Every 12 hours",
     "Every 24 hours",
   ];
+  late String? userId;
   int selectedIndex = 0;
+   Future<String?> getUserId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var userId = await prefs.getString('userID');
+    print("****************************************");
+    print(userId);
+    print("****************************************");
+    return userId;
+  }
 
   @override
   void dispose() {
@@ -54,6 +64,11 @@ class _AddMedicineState extends State<AddMedicine> {
     med_nameController = TextEditingController();
     med_dosageController = TextEditingController();
     starting_timeController = TextEditingController();
+     getUserId().then((value) {
+      setState(() {
+        userId = value;
+      });
+    });
     super.initState();
   }
 
@@ -330,6 +345,7 @@ class _AddMedicineState extends State<AddMedicine> {
                       chooseType(typeIndex),
                       dropdownvalue,
                       starting_timeController.text,
+                      userId!
                     );
 
                     Get.back();

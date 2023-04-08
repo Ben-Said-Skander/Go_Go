@@ -106,6 +106,7 @@ class _RemindersState extends State<Reminders> {
                   ? Center(
                       child: CircularProgressIndicator(),
                     )
+                    
                   : medicineList.isNotEmpty
                       ? GridView.builder(
                           gridDelegate:
@@ -132,7 +133,7 @@ class _RemindersState extends State<Reminders> {
                         )
                       : Center(
                           child: Text(
-                            "No medicines found.",
+                            "No reminders found.",
                             style: TextStyle(
                               fontSize: 20,
                               color: AppColor.mainColor,

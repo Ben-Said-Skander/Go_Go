@@ -5,6 +5,7 @@ import 'package:pfa_application_1/controllers/user_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
 import 'package:pfa_application_1/models/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -15,11 +16,25 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   UserController userController = Get.find();
-  late Future<User> futureUser;
+  late String? userId;
+
   @override
   void initState() {
-    futureUser = userController.getUser("6427438ff34140942d230633");
     super.initState();
+    getUserId().then((value) {
+      setState(() {
+        userId = value;
+      });
+    });
+  }
+
+  Future<String?> getUserId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var userId = await prefs.getString('userID');
+    print("****************************************");
+    print(userId);
+    print("****************************************");
+    return userId;
   }
 
   @override
@@ -49,7 +64,7 @@ class _SettingsState extends State<Settings> {
         ),
       ),
       FutureBuilder<User>(
-          future: userController.getUser("6427438ff34140942d230633"),
+          future: userController.getUser(userId ?? ""),
           builder: ((context, snapshot) {
             if (snapshot.hasData) {
               return Column(children: [
@@ -129,7 +144,7 @@ settingFormField(String title, String fieldData, String id, String route) {
                     Get.toNamed(AppRoute.updateName, arguments: id);
                   } else if (route == "Email") {
                     Get.toNamed(AppRoute.updateEmail, arguments: id);
-                  } else if(route == "Phone") {
+                  } else if (route == "Phone") {
                     Get.toNamed(AppRoute.updatePhone, arguments: id);
                   }
                 },

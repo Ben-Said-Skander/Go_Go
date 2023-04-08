@@ -11,7 +11,7 @@ class MedicineController extends GetxController {
   var isLoading = true.obs;
 
   Future<Medicine> addMedicine(String name, String dosage, String type,
-      String interval, String start_time) async {
+      String interval, String start_time, String medicineId) async {
     final response =
         await http.post(Uri.parse('${LinkApi.medicines}'),
             headers: {"Content-Type": "Application/json"},
@@ -21,6 +21,7 @@ class MedicineController extends GetxController {
               'type': type,
               'interval': interval,
               'start_time': start_time,
+              "medicineId":medicineId
             }));
 
     if (response.statusCode == 201) {

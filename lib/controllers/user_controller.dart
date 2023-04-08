@@ -5,10 +5,20 @@ import 'package:pfa_application_1/core/constants/link_api.dart';
 import '../models/user.dart';
 
 class UserController extends GetxController {
+  Future<List<User>> getAllUsers() async {
+    final response = await http.get(Uri.parse("${LinkApi.user}"));
+    if (response.statusCode == 200) {
+      final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
+      var userList = parsed.map<User>((e) => User.fromJson(e)).toList();
+      return userList;
+    } else {
+      throw ("Get all users failed");
+    }
+  }
+
   Future<User> getUser(String id) async {
     try {
-      final response =
-          await http.get(Uri.parse('${LinkApi.user}/${id}'));
+      final response = await http.get(Uri.parse('${LinkApi.user}/${id}'));
 
       var user = User.fromJson(jsonDecode(response.body));
 
@@ -19,8 +29,7 @@ class UserController extends GetxController {
   }
 
   Future<bool> updateEmail(String id, String email) async {
-    final response = await http.put(
-        Uri.parse('${LinkApi.updateEmail}/${id}'),
+    final response = await http.put(Uri.parse('${LinkApi.updateEmail}/${id}'),
         body: <String, String>{'email': email});
     if (response.statusCode == 200) {
       return true;
@@ -41,8 +50,7 @@ class UserController extends GetxController {
   }
 
   Future<bool> updateName(String id, String name) async {
-    final response = await http.put(
-        Uri.parse('${LinkApi.updateName}/${id}'),
+    final response = await http.put(Uri.parse('${LinkApi.updateName}/${id}'),
         body: <String, String>{'fullname': name});
     if (response.statusCode == 200) {
       return true;
@@ -52,8 +60,7 @@ class UserController extends GetxController {
   }
 
   Future<bool> updatePhone(String id, String phone) async {
-    final response = await http.put(
-        Uri.parse('${LinkApi.updatePhone}/${id}'),
+    final response = await http.put(Uri.parse('${LinkApi.updatePhone}/${id}'),
         body: <String, String>{'phoneNumber': phone});
     if (response.statusCode == 200) {
       return true;
@@ -63,8 +70,7 @@ class UserController extends GetxController {
   }
 
   Future<bool> resetPassword(String email) async {
-    final response = await http.post(
-        Uri.parse("${LinkApi.forgotPassword}"),
+    final response = await http.post(Uri.parse("${LinkApi.forgotPassword}"),
         headers: {"Content-Type": "Application/json"},
         body: jsonEncode(<String, String>{"email": email}));
     if (response.statusCode == 200) {

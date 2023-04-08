@@ -4,9 +4,12 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/controllers/auth_controller.dart';
+import 'package:pfa_application_1/controllers/user_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
+import 'package:pfa_application_1/models/user.dart';
 import 'package:pfa_application_1/view/widgets/wave_clipper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -19,6 +22,10 @@ class _SignInState extends State<SignIn> {
   late TextEditingController emailController;
   late TextEditingController passwordController;
   AuthController authController = Get.find();
+  UserController userController = Get.find();
+  List<User>? userList;
+  String userID = "";
+
   @override
   void dispose() {
     emailController.dispose();
@@ -30,7 +37,13 @@ class _SignInState extends State<SignIn> {
   void initState() {
     emailController = TextEditingController();
     passwordController = TextEditingController();
+    getAllUsers();
     super.initState();
+  }
+
+  Future<void> getAllUsers() async {
+    userList = await userController.getAllUsers();
+    setState(() {});
   }
 
   @override
@@ -177,6 +190,22 @@ class _SignInState extends State<SignIn> {
                         if (form != null && form.validate()) {
                           if (await authController.login(
                               emailController.text, passwordController.text)) {
+                            SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            if (userList != null) {
+                              for (int i = 0; i < userList!.length; i++) {
+                                if (userList![i].email ==
+                                    emailController.text) {
+                                  userID = userList![i].id!;
+                                  prefs.setString("userID", userID);
+                               
+                                }
+                              }
+                              print("****************************************");
+                              print(userID);
+                              print("****************************************");
+                            }
+
                             // registration was successful
                             Get.offAndToNamed(AppRoute.home);
                           } else {

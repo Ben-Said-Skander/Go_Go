@@ -47,135 +47,144 @@ class _SeeAllState extends State<SeeAll> {
     }
   }
 
-
   int count = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        heroTag: 'btn3',
-        onPressed: () {
-          Get.toNamed(AppRoute.addBlog);
-        },
-        backgroundColor: AppColor.mainColor,
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
+        floatingActionButton: FloatingActionButton(
+          heroTag: 'btn3',
+          onPressed: () {
+            Get.toNamed(AppRoute.addBlog);
+          },
+          backgroundColor: AppColor.mainColor,
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
         ),
-      ),
-      body: RefreshIndicator(
-        onRefresh: refreshData,
-        child:ListView(children: [
-        SafeArea(
-          child: Container(
-            height: 120,
-            width: 500,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(80)),
-              color: Color.fromARGB(255, 16, 152, 170),
-            ),
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 40,
+        body: RefreshIndicator(
+          onRefresh: refreshData,
+          child: ListView(children: [
+            SafeArea(
+              child: Container(
+                height: 120,
+                width: 500,
+                decoration: BoxDecoration(
+                  borderRadius:
+                      BorderRadius.only(bottomLeft: Radius.circular(80)),
+                  color: Color.fromARGB(255, 16, 152, 170),
                 ),
-                IconButton(
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 40,
+                    ),
+                    IconButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          color: Colors.white,
+                        )),
+                    SizedBox(
+                      width: 80,
+                    ),
+                    Text(
+                      "See All",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 19,
+                          fontFamily: "Poppins"),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                  child: Text(
+                    "All Articles ",
+                    style: TextStyle(
+                      color: AppColor.mainColor,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20,
+                      fontFamily: "Poppins",
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 200),
+                  child: IconButton(
                     onPressed: () {
-                      Get.back();
+                      Get.toNamed(AppRoute.searchArticles);
                     },
                     icon: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                    )),
-                SizedBox(
-                  width: 80,
-                ),
-                Text(
-                  "See All",
-                  style: TextStyle(
-                      color: Colors.white, fontSize: 19, fontFamily: "Poppins"),
+                      FontAwesomeIcons.magnifyingGlass,
+                      color: Colors.black,
+                      size: 20,
+                    ),
+                  ),
                 ),
               ],
             ),
-          ),
-        ),
-        SizedBox(
-          height: 40,
-        ),
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-              child: Text(
-                "All Articles ",
-                style: TextStyle(
-                  color: AppColor.mainColor,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20,
-                  fontFamily: "Poppins",
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 200),
-              child: IconButton(
-                onPressed: () {
-                  Get.toNamed(AppRoute.searchArticles);
-                },
-                icon: Icon(
-                  FontAwesomeIcons.magnifyingGlass,
-                  color: Colors.black,
-                  size: 20,
-                ),
-              ),
-            ),
-          ],
-        ),
-        Container(
-            height: 560,
-            padding: EdgeInsets.only(top: 10),
-            child: FutureBuilder<List<Blog>>(
-                future: blogController.fetchArticles(),
-                builder: ((context, snapshot) {
-                  if (snapshot.hasData) {
-                    List<Blog> filteredData = [];
-                    for (int i = 0; i < snapshot.data!.length; i++) {
-                      if (snapshot.data![i].category == "Drug Experience") {
-                        filteredData.add(snapshot.data![i]);
+            Container(
+                height: 560,
+                padding: EdgeInsets.only(top: 10),
+                child: FutureBuilder<List<Blog>>(
+                    future: blogController.fetchArticles(),
+                    builder: ((context, snapshot) {
+                      if (snapshot.hasData) {
+                        List<Blog> filteredData = [];
+                        for (int i = 0; i < snapshot.data!.length; i++) {
+                          if (snapshot.data![i].category == "Drug Experience") {
+                            filteredData.add(snapshot.data![i]);
+                          }
+                        }
+                        if (filteredData.length > 0) {
+                          return GridView.builder(
+                              itemCount: filteredData.length,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2),
+                              itemBuilder: ((context, index) {
+                                return GestureDetector(
+                                    onTap: () {
+                                      var articleId =
+                                          "${snapshot.data![index].id}";
+                                      var imageId =
+                                          "${snapshot.data![index].imageId}";
+                                      Get.toNamed(AppRoute.blogdetails,
+                                          arguments: {
+                                            'articleId': '${articleId}',
+                                            'imageId': '${imageId}'
+                                          });
+                                    },
+                                    child: BlogCard(
+                                      blogTitle: "${filteredData[index].title}",
+                                      blogPicture: "assets/image/hand2.jpg",
+                                    ));
+                              }));
+                        } else {
+                          return Center(
+                              child: Text("No data to show",
+                                  style: TextStyle(
+                                      color: AppColor.mainColor,
+                                      fontSize: 18,
+                                      fontFamily: "Poppins")));
+                        }
+                      } else if (snapshot.hasError) {
+                        return Text("Error loading data");
+                      } else {
+                        return Center(child: CircularProgressIndicator());
                       }
-                    }
-                    if (filteredData.length > 0) {
-                      return GridView.builder(
-                          itemCount: filteredData.length,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2),
-                          itemBuilder: ((context, index) {
-                            return GestureDetector(
-                                onTap: () {
-                                  var articleId = "${snapshot.data![index].id}";
-                                  var imageId =
-                                      "${snapshot.data![index].imageId}";
-                                  Get.toNamed(AppRoute.blogdetails, arguments: {
-                                    'articleId': '${articleId}',
-                                    'imageId': '${imageId}'
-                                  });
-                                },
-                                child: BlogCard(
-                                  blogTitle: "${filteredData[index].title}",
-                                  blogPicture: "assets/image/hand2.jpg",
-                                ));
-                          }));
-                    } else {
-                      return Text("No data to show");
-                    }
-                  } else if (snapshot.hasError) {
-                    return Text("Error loading data");
-                  } else {
-                    return Center(child: CircularProgressIndicator());
-                  }
-                })))
-      ]),
-    ));
+                    })))
+          ]),
+        ));
   }
 }

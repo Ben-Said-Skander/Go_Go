@@ -7,6 +7,7 @@ import 'package:pfa_application_1/controllers/blog_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
 import 'package:pfa_application_1/models/blog.dart';
+import 'package:pfa_application_1/models/image.dart';
 
 class PersonalArticleDetails extends StatefulWidget {
   const PersonalArticleDetails({super.key});
@@ -17,160 +18,140 @@ class PersonalArticleDetails extends StatefulWidget {
 
 class _PersonalArticleDetailsState extends State<PersonalArticleDetails> {
   BlogController blogController = Get.find();
-  late Future<Blog> futureArticle;
-  final id = Get.arguments as String;
+  late Future<Blog> futureCard;
+  late Future<Picture> futureImage;
+  final articleId = Get.arguments["articleId"] as String;
+  final imageId = Get.arguments["imageId"] as String;
+
   @override
   void initState() {
-    futureArticle = blogController.getArticle(id);
+    futureCard = blogController.getArticle(articleId);
+    futureImage = blogController.getImage(imageId);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(children: [
-        FutureBuilder<Blog>(
-            future: futureArticle,
+        body: FutureBuilder<Blog>(
+            future: futureCard,
             builder: ((context, snapshot) {
               if (snapshot.hasData) {
-                return Stack(
-                  children: [
-                    Image.asset(
-                      "assets/image/med.jpg",
-                    ),
-                    Padding(
-                        padding: const EdgeInsets.only(left: 12, top: 5),
-                        child: IconButton(
-                            onPressed: () {
-                              Get.back();
-                            },
-                            icon: Icon(
-                              Icons.arrow_back_ios,
-                              color: Colors.black,
-                            ))),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 190, 0, 0),
-                      child: Container(
-                        height: 622,
-                        width: double.infinity,
-                        //   height: 800,
-                        decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 240, 240, 240),
-                          borderRadius: BorderRadius.circular(40),
-                        ),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height: 12,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(22, 10, 0, 10),
-                                child: Text("${snapshot.data!.title}",
-                                    style: TextStyle(
-                                        color: AppColor.mainColor,
-                                        fontFamily: "Poppins",
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold)),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 20, top: 40),
-                                child: Text("${snapshot.data!.body}",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                    )),
-                              ),
-                              SizedBox(
-                                height: 300,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(20, 90, 20, 0),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(25),
-                                      color: AppColor.mainColor),
-                                  child: TextButton(
-                                      onPressed: () {
-                                        AwesomeDialog(
-                                          context: context,
-                                          dialogType: DialogType.warning,
-                                          headerAnimationLoop: false,
-                                          animType: AnimType.topSlide,
-                                          showCloseIcon: true,
-                                          closeIcon: const Icon(
-                                              Icons.close_fullscreen_outlined),
-                                          title: 'Warning',
-                                          desc:
-                                              'Are you sure you want to delete the article',
-                                          btnCancelOnPress: () {
-                                            Get.back();
-                                          },
-                                          onDismissCallback: (type) {
-                                            debugPrint(
-                                                'Dialog Dismiss from callback $type');
-                                          },
-                                          btnOkOnPress: () {
-                                            blogController.deleteArticle(id);
-                                            Get.back(result: true);
-                                          },
-                                        ).show();
-                                      },
-                                      child: Center(
-                                          child: Text(
-                                        "Delete",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: "Poppins",
-                                        ),
-                                      ))),
+                return ListView(children: [
+                  Stack(
+                    children: [
+                      FutureBuilder<Picture>(
+                          future: futureImage,
+                          builder: ((context, snapshot) {
+                            if (snapshot.hasData) {
+                              return Image.memory(
+                                snapshot.data!.data!,
+                                fit: BoxFit.fill, // fill the available space
+                                height: 270,
+                                width: double.infinity,
+                              );
+                            } else {
+                              return Image.asset(
+                                "assets/image/med.jpg",
+                                height: 220,
+                                width: double.infinity,
+                                fit: BoxFit.fill,
+                              );
+                            }
+                          })),
+                      Padding(
+                          padding: const EdgeInsets.only(left: 12, top: 5),
+                          child: IconButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              icon: Icon(
+                                Icons.arrow_back_ios,
+                                color: Colors.black,
+                              ))),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 190, 0, 0),
+                        child: Container(
+                          height: 622,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 240, 240, 240),
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 12,
                                 ),
-                              ),
-                            ]),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(22, 10, 0, 10),
+                                  child: Text("${snapshot.data!.title}",
+                                      style: TextStyle(
+                                          color: AppColor.mainColor,
+                                          fontFamily: "Poppins",
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 20, top: 40),
+                                  child: Text("${snapshot.data!.body}",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                      )),
+                                ),
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 120, right: 20, top: 400),
+                                    child: Container(
+                                      width: 170,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          color: AppColor.mainColor),
+                                      child: MaterialButton(
+                                        onPressed: () {
+                                          AwesomeDialog(
+                                            context: context,
+                                            dialogType: DialogType.warning,
+                                            headerAnimationLoop: false,
+                                            animType: AnimType.topSlide,
+                                            showCloseIcon: true,
+                                            closeIcon: const Icon(Icons
+                                                .close_fullscreen_outlined),
+                                            title: 'Warning',
+                                            desc:
+                                                'Are you sure you want to delete the article',
+                                            btnCancelOnPress: () {
+                                              Get.back();
+                                            },
+                                            onDismissCallback: (type) {
+                                              debugPrint(
+                                                  'Dialog Dismiss from callback $type');
+                                            },
+                                            btnOkOnPress: () {
+                                              blogController
+                                                  .deleteArticle(articleId);
+                                              Get.back(result: true);
+                                            },
+                                          ).show();
+                                        },
+                                        child: Text("Delete",
+                                            style:
+                                                TextStyle(color: Colors.white)),
+                                      ),
+                                    ))
+                              ]),
+                        ),
                       ),
-                    ),
-                  ],
-                );
+                    ],
+                  )
+                ]);
               } else {
                 return Center(child: CircularProgressIndicator());
               }
-            }))
-      ]),
-    );
+            })));
   }
-}
-
-Future<bool> alertDeleteArticle() {
-  Get.defaultDialog(
-      radius: 30,
-      title: " Warning ",
-      titleStyle: const TextStyle(
-          color: AppColor.mainColor,
-          fontWeight: FontWeight.bold,
-          fontFamily: "Poppins"),
-      middleText: "Are you sure you want to delete the article ",
-      middleTextStyle: const TextStyle(fontFamily: "Poppins"),
-      actions: [
-        ElevatedButton(
-            style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(AppColor.mainColor)),
-            onPressed: () {
-              // blogController.deleteArticle("id");
-              Get.offAndToNamed(AppRoute.home);
-            },
-            child: const Text(
-              "Yes",
-              style: TextStyle(fontFamily: "Poppins"),
-            )),
-        ElevatedButton(
-            style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(AppColor.mainColor)),
-            onPressed: () {
-              Get.toNamed(AppRoute.home);
-            },
-            child: const Text("No", style: TextStyle(fontFamily: "Poppins"))),
-      ]);
-  return Future.value(true);
 }

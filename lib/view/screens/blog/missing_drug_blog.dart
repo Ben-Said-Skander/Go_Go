@@ -168,7 +168,10 @@ class _MissingBlogState extends State<MissingBlog> {
                                 ));
                           }));
                     } else {
-                      return Text("No data to show");
+                      return Text("No data to show",style: TextStyle(
+                                      color: AppColor.mainColor,
+                                      fontSize: 18,
+                                      fontFamily: "Poppins"));
                     }
                   } else if (snapshot.hasError) {
                     return Text("Error loading data");

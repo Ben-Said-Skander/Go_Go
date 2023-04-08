@@ -13,8 +13,7 @@ class BlogController extends GetxController {
   var isLoading = true.obs;
 
   Future<Blog> createArticle(String title, String category, String body) async {
-    final response = await http.post(
-        Uri.parse('${LinkApi.blog}'),
+    final response = await http.post(Uri.parse('${LinkApi.blog}'),
         headers: {"Content-Type": "Application/json"},
         body: jsonEncode(<String, String>{
           'title': title,
@@ -31,8 +30,7 @@ class BlogController extends GetxController {
   }
 
   Future<Blog> deleteArticle(String id) async {
-    final response =
-        await http.delete(Uri.parse('${LinkApi.blog}/$id'));
+    final response = await http.delete(Uri.parse('${LinkApi.blog}/$id'));
     if (response.statusCode == 200) {
       var article = Blog.fromJson(json.decode(response.body));
       print(article);
@@ -44,8 +42,7 @@ class BlogController extends GetxController {
   }
 
   Future<Blog> getArticle(String id) async {
-    final response =
-        await http.get(Uri.parse('${LinkApi.blog}/$id'));
+    final response = await http.get(Uri.parse('${LinkApi.blog}/$id'));
     if (response.statusCode == 200) {
       var article = Blog.fromJson(json.decode(response.body));
       print(article);
@@ -58,8 +55,7 @@ class BlogController extends GetxController {
   Future<List<Blog>> fetchArticles() async {
     try {
       isLoading(true);
-      final response =
-          await http.get(Uri.parse('${LinkApi.blog}'));
+      final response = await http.get(Uri.parse('${LinkApi.blog}'));
 
       if (response.statusCode == 200) {
         final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
@@ -93,8 +89,7 @@ class BlogController extends GetxController {
   }
 
   Future<List<Picture>> getAllImages() async {
-    final response =
-        await http.get(Uri.parse('${LinkApi.image}'));
+    final response = await http.get(Uri.parse('${LinkApi.image}'));
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
       final List<Picture> images = [];
@@ -111,8 +106,7 @@ class BlogController extends GetxController {
   }
 
   Future postPicture(File imageFile) async {
-    final req = http.MultipartRequest(
-        'POST', Uri.parse('${LinkApi.images}'));
+    final req = http.MultipartRequest('POST', Uri.parse('${LinkApi.images}'));
     req.files.add(await http.MultipartFile.fromPath('image', imageFile.path));
     var response = await req.send();
 
@@ -123,22 +117,25 @@ class BlogController extends GetxController {
     }
   }
 
-  Future<bool> createNewBlogWithImage(
-      String title, String category, String body, File image) async {
-    var request = http.MultipartRequest(
-        'POST', Uri.parse('${LinkApi.images}'));
-    request.fields['title'] = title;
-    request.fields['category'] = category;
-    request.fields['body'] = body;
-    request.files.add(await http.MultipartFile.fromPath('image', image.path));
-    var response = await request.send();
-    if (response.statusCode == 201) {
-      var jsonStr = await response.stream.bytesToString();
-      //var article = Blog.fromJson(json.decode(jsonStr));
-      //print(article);
-      return true;
-    } else {
-      throw Exception('Blog loading failed');
-    }
-  }
+ Future<bool> createNewBlogWithImage(String title, String category, String body, String userId, File image) async {
+  var request = http.MultipartRequest('POST', Uri.parse('${LinkApi.images}'));
+  request.fields['title'] = title;
+  request.fields['category'] = category;
+  request.fields['body'] = body;
+  request.fields['userId'] = userId;
+  request.files.add(await http.MultipartFile.fromPath('image', image.path));
+  var response = await request.send();
+  if (response.statusCode == 201) {
+  var jsonStr = await response.stream.bytesToString();
+  //var article = Blog.fromJson(json.decode(jsonStr));
+  //print(article);
+  return true;
+} else {
+  print("****************************");
+  print(response.statusCode);
+  throw Exception('Blog loading failed');
+}
+
+}
+
 }

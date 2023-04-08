@@ -7,6 +7,7 @@ import 'package:pfa_application_1/bindings/register_bindings.dart';
 import 'package:pfa_application_1/bindings/user_bindings.dart';
 
 import 'package:pfa_application_1/core/constants/routes.dart';
+import 'package:pfa_application_1/splash_screen.dart';
 
 import 'package:pfa_application_1/view/screens/blog/personal_article_details.dart';
 import 'package:pfa_application_1/view/screens/blog/search_articles.dart';
@@ -48,6 +49,11 @@ List<GetPage<dynamic>>? routes = [
     MedicineDescriptionBindings(),
     PharmaciesBindings()
   ]),
+  GetPage(
+    name: AppRoute.splash,
+    page: () => const SplashScreen(),
+  ),
+  /********************************************************** */
   /********************************************************** */
   GetPage(
       name: AppRoute.details,
@@ -168,7 +174,5 @@ List<GetPage<dynamic>>? routes = [
       binding: UserBindings()),
   /********************************************************** */
   GetPage(
-      name: AppRoute.test,
-      page: () => ImageScreen(),
-      binding: BlogBindings()),
+      name: AppRoute.test, page: () => ImageScreen(), binding: BlogBindings()),
 ];

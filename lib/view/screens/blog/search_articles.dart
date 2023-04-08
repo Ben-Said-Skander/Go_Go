@@ -45,20 +45,15 @@ class _SearchArticlesState extends State<SearchArticles> {
     return Scaffold(
         body: ListView(children: [
       Container(
-          height: 150,
+          height: 250,
           width: double.infinity,
           child: ClipPath(
             clipper: ProsteBezierCurve(
               position: ClipPosition.bottom,
               list: [
                 BezierCurveSection(
-                  start: Offset(0, 125),
-                  top: Offset(screenWidth / 4, 150),
-                  end: Offset(screenWidth / 2, 125),
-                ),
-                BezierCurveSection(
-                  start: Offset(screenWidth / 2, 125),
-                  top: Offset(screenWidth / 4 * 3, 100),
+                  start: Offset(0, 150),
+                  top: Offset(screenWidth / 2, 200),
                   end: Offset(screenWidth, 150),
                 ),
               ],
@@ -68,32 +63,37 @@ class _SearchArticlesState extends State<SearchArticles> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 10.0),
                 child: Padding(
-                    padding:
-                        const EdgeInsets.only(top: 0.0, left: 0, bottom: 30),
+                    padding: const EdgeInsets.only(top: 0.0, bottom: 80),
                     child: Row(
                       children: [
-                        IconButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          icon: Icon(
-                            Icons.arrow_back_ios,
-                            color: Colors.white,
+                        Padding(
+                          padding: const EdgeInsets.only(left: 3.0),
+                          child: IconButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            icon: Icon(
+                              Icons.arrow_back_ios,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
-                        Text("Search for article",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontFamily: "Poppins")),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 45.0),
+                          child: Text("Search for article",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: 22,
+                                  fontFamily: "Poppins")),
+                        ),
                       ],
                     )),
               ),
             ),
           )),
       Container(
-        padding: EdgeInsets.only(top: 60, left: 20),
+        padding: EdgeInsets.only(top: 0, left: 20),
         width: 400,
         child: TextFormField(
           keyboardType: TextInputType.emailAddress,

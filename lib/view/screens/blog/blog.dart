@@ -178,7 +178,7 @@ class _BlogPageState extends State<BlogPage> {
                                   child: BlogCard(
                                       blogTitle:
                                           "${snapshot.data![index].title}",
-                                      blogPicture: "assets/image/hand2.jpg"));
+                                      blogPicture: "assets/image/blog1.jpg"));
                             }),
                           )),
                       Padding(

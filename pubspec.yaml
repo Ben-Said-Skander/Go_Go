@@ -50,6 +50,8 @@ dependencies:
   awesome_dialog: ^3.0.2
   proste_bezier_curve: ^2.0.2
 
+  
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

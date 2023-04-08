@@ -76,7 +76,7 @@ class _OnBoardingState extends State<OnBoarding> {
                             Padding(
                               padding: EdgeInsets.only(left: 60, right: 15),
                               child: Text(
-                                "No longer need to search , Locate the nearest pharmacy that has the drug you look for",
+                                "You no longer have to search for the nearest pharmacy that carries the drug you are looking for , simply locate it now.",
                                 style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w300,
@@ -132,7 +132,7 @@ class _OnBoardingState extends State<OnBoarding> {
                             Padding(
                               padding: EdgeInsets.only(left: 50, right: 15),
                               child: Text(
-                                "A pill remminder system to make sure you never skip taking your medicines",
+                                "Introducing a pill reminder system that ensures you never miss taking your medication.",
                                 style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w300,
@@ -166,6 +166,62 @@ class _OnBoardingState extends State<OnBoarding> {
                         ),
                       ),
                       Container(
+                        height: 700,
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 180,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 40, right: 15),
+                              child: Text(
+                                "Learn more about your medicine  ",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: "Poppins"),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 30, right: 15),
+                              child: Text(
+                                "Search for your medicine and learn how to use it properly",
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w300,
+                                    color: Color.fromARGB(255, 130, 130, 130),
+                                    fontFamily: "Poppins"),
+                              ),
+                            ),
+                            Image.asset(
+                              "assets/image/dot3.jpg",
+                              width: 160,
+                              height: 100,
+                            ),
+                            SizedBox(
+                              height: 60,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: AppColor.mainColor),
+                              child: MaterialButton(
+                                onPressed: () {
+                                  Get.toNamed(AppRoute.signup);
+                                },
+                                child: Text("Get Started",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "Poppins")),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
                         height: 600,
                         child: Column(
                           children: [
@@ -175,7 +231,7 @@ class _OnBoardingState extends State<OnBoarding> {
                             Padding(
                               padding: EdgeInsets.only(left: 45, right: 15),
                               child: Text(
-                                "A community to help you when in need",
+                                "A community to help you when you are in need",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w700,
@@ -188,7 +244,7 @@ class _OnBoardingState extends State<OnBoarding> {
                             Padding(
                               padding: EdgeInsets.only(left: 40, right: 15),
                               child: Text(
-                                "A place where you can discuss your health issue and where you can find help",
+                                "A place where you can discuss your health issues and where you can find help",
                                 style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w300,

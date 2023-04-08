@@ -19,14 +19,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    Timer(Duration(seconds: 3), () => Get.offAndToNamed(AppRoute.onBoarding));
-    Future.delayed(Duration(milliseconds: 500), () {
+    Timer(Duration(seconds: 4), () => Get.offAndToNamed(AppRoute.onBoarding));
+    Future.delayed(Duration(seconds: 0), () {
       setState(() {
         _opacity = 1;
       });
     });
-     Timer(Duration(seconds: 3), () => Get.offAndToNamed(AppRoute.onBoarding));
-    Future.delayed(Duration(milliseconds: 500), () {
+
+    Future.delayed(Duration(seconds: 0), () {
       setState(() {
         imageOpacity = 1;
       });
@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: AnimatedOpacity(
           opacity: imageOpacity,
           duration: Duration(milliseconds:1500), // Set the duration of the fade animation
-          child: Image.asset(
+          child:Image.asset(
             "assets/image/logo.png",
             width: 200,
             height: 200,

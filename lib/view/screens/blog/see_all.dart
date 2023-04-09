@@ -134,7 +134,7 @@ class _SeeAllState extends State<SeeAll> {
               ],
             ),
             Container(
-                height: 560,
+                height: 600,
                 padding: EdgeInsets.only(top: 10),
                 child: FutureBuilder<List<Blog>>(
                     future: blogController.fetchArticles(),
@@ -167,7 +167,7 @@ class _SeeAllState extends State<SeeAll> {
                                     },
                                     child: BlogCard(
                                       blogTitle: "${filteredData[index].title}",
-                                      blogPicture: "assets/image/hand2.jpg",
+                                      blogPicture: "assets/image/logo.png",
                                     ));
                               }));
                         } else {

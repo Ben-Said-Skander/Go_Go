@@ -34,17 +34,16 @@ class BlogCard extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
-            height: 5,
-          ),
           Padding(
-            padding: const EdgeInsets.only(left: 18, top: 7),
+            padding: const EdgeInsets.only(left: 18, top: 0),
             child: Text(
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
               blogTitle,
               style: TextStyle(
                   fontFamily: "Poppins",
                   color: Colors.black,
-                  fontSize: 15,
+                  fontSize: 13,
                   fontWeight: FontWeight.w700),
             ),
           ),

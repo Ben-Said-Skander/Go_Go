@@ -3,9 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/controllers/blog_controller.dart';
+import 'package:pfa_application_1/controllers/user_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/models/blog.dart';
 import 'package:pfa_application_1/models/image.dart';
+import 'package:pfa_application_1/models/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BlogDetails extends StatefulWidget {
   const BlogDetails({super.key});
@@ -16,16 +19,35 @@ class BlogDetails extends StatefulWidget {
 
 class _BlogDetailsState extends State<BlogDetails> {
   BlogController blogController = Get.find();
+  UserController userController = Get.put(UserController());
   late Future<Blog> futureCard;
   late Future<Picture> futureImage;
+  late Future<User> user;
   final articleId = Get.arguments["articleId"] as String;
-   final imageId = Get.arguments["imageId"] as String;
+  final imageId = Get.arguments["imageId"] as String;
+  late String? userId;
+  String username = "";
 
   @override
   void initState() {
     futureCard = blogController.getArticle(articleId);
     futureImage = blogController.getImage(imageId);
+
+    getUserId().then((value) {
+      setState(() {
+        userId = value;
+      });
+    });
     super.initState();
+  }
+
+  Future<String?> getUserId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var userId = await prefs.getString('userID');
+    print("****************************************");
+    print(userId);
+    print("****************************************");
+    return userId;
   }
 
   @override
@@ -35,6 +57,9 @@ class _BlogDetailsState extends State<BlogDetails> {
             future: futureCard,
             builder: ((context, snapshot) {
               if (snapshot.hasData) {
+                username = snapshot.data!.userId!;
+                print(username);
+
                 return ListView(children: [
                   Stack(
                     children: [
@@ -49,10 +74,7 @@ class _BlogDetailsState extends State<BlogDetails> {
                                 width: double.infinity,
                               );
                             } else {
-                              return Image.asset(
-                                "assets/image/med.jpg",
-                                height: 220, width: double.infinity,     fit: BoxFit.fill, 
-                              );
+                              return Center(child: CircularProgressIndicator());
                             }
                           })),
                       Padding(
@@ -101,8 +123,41 @@ class _BlogDetailsState extends State<BlogDetails> {
                               ]),
                         ),
                       ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 18.0, top: 750),
+                            child: Text('Posted by : ',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColor.mainColor,
+                                  fontSize: 16,
+                                )),
+                          ),
+                          Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 18.0, top: 750),
+                              child: FutureBuilder<User>(
+                                future: userController.getUser(username),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                          ConnectionState.done &&
+                                      snapshot.hasData) {
+                                    return Text(
+                                      snapshot.data!.fullname!,
+                                      style: TextStyle(
+                                          fontSize: 16, fontFamily: "Poppins"),
+                                    );
+                                  } else {
+                                    return CircularProgressIndicator();
+                                  }
+                                },
+                              ))
+                        ],
+                      )
                     ],
-                  )
+                  ),
                 ]);
               } else {
                 return Center(child: CircularProgressIndicator());

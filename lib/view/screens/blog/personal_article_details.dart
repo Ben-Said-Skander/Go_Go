@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/controllers/blog_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
-import 'package:pfa_application_1/core/constants/routes.dart';
 import 'package:pfa_application_1/models/blog.dart';
 import 'package:pfa_application_1/models/image.dart';
 
@@ -51,12 +50,7 @@ class _PersonalArticleDetailsState extends State<PersonalArticleDetails> {
                                 width: double.infinity,
                               );
                             } else {
-                              return Image.asset(
-                                "assets/image/med.jpg",
-                                height: 220,
-                                width: double.infinity,
-                                fit: BoxFit.fill,
-                              );
+                               return Center(child: CircularProgressIndicator());
                             }
                           })),
                       Padding(
@@ -104,7 +98,7 @@ class _PersonalArticleDetailsState extends State<PersonalArticleDetails> {
                                 ),
                                 Padding(
                                     padding: EdgeInsets.only(
-                                        left: 120, right: 20, top: 400),
+                                        left: 120, right: 20, top: 350),
                                     child: Container(
                                       width: 170,
                                       decoration: BoxDecoration(

@@ -39,6 +39,7 @@ class _AddMedicineState extends State<AddMedicine> {
     "Every 8 hours",
     "Every 12 hours",
     "Every 24 hours",
+    "Not repeated"
   ];
   late String? userId;
   int selectedIndex = 0;
@@ -121,8 +122,9 @@ class _AddMedicineState extends State<AddMedicine> {
           padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
           width: 350,
           child: TextFormField(
+            maxLength: 15,
             validator: (value) {
-              if (value!.isEmpty) {
+              if (value!.isEmpty ) {
                 return "Enter Something";
               } else {
                 return null;
@@ -309,6 +311,7 @@ class _AddMedicineState extends State<AddMedicine> {
                 padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                 width: 200,
                 child: TextFormField(
+                  maxLength: 2,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Enter Something";

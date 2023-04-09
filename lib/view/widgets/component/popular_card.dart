@@ -23,7 +23,7 @@ class PopularCard extends StatelessWidget {
                 color: Color.fromARGB(255, 207, 207, 207),
               )
             ]),
-        width: 500,
+        width: 600,
         height: 120,
         margin: EdgeInsets.all(16),
         child: Row(
@@ -33,19 +33,21 @@ class PopularCard extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 8, left: 0),
                 child: Image.asset(
                   blogPicture,
-                  width: 150,
+                  width: 120,
                   height: 100,
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15),
+            Container(
+              width: 200,
               child: Text(
+                 maxLines: 2,
+                 overflow: TextOverflow.ellipsis,
                 blogTitle,
                 style: TextStyle(
                     fontFamily: "Poppins",
                     color: Colors.black,
-                    fontSize: 15,
+                    fontSize: 13,
                     fontWeight: FontWeight.w700),
               ),
             ),

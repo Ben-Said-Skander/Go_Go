@@ -108,7 +108,8 @@ class _RemindersState extends State<Reminders> {
                     )
                     
                   : medicineList.isNotEmpty
-                      ? GridView.builder(
+                      ? 
+                       GridView.builder(
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2),

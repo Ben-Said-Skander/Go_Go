@@ -135,7 +135,7 @@ class _HelpBlogState extends State<HelpBlog> {
             ),
             //Questions about a drug
             Container(
-                height: 560,
+                height: 600,
                 padding: EdgeInsets.only(top: 10),
                 child: FutureBuilder<List<Blog>>(
                     future: blogController.fetchArticles(),
@@ -173,10 +173,12 @@ class _HelpBlogState extends State<HelpBlog> {
                                     ));
                               }));
                         } else {
-                          return Text("No data to show",style: TextStyle(
-                                      color: AppColor.mainColor,
-                                      fontSize: 18,
-                                      fontFamily: "Poppins"));
+                          return Center(
+                            child: Text("No data to show",style: TextStyle(
+                                        color: AppColor.mainColor,
+                                        fontSize: 18,
+                                        fontFamily: "Poppins")),
+                          );
                         }
                       } else if (snapshot.hasError) {
                         return Text("Error loading data");

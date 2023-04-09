@@ -1,21 +1,15 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
 
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/controllers/blog_controller.dart';
-import 'package:pfa_application_1/controllers/medicine_controller.dart';
-import 'package:pfa_application_1/controllers/register_controller.dart';
+
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
 import 'package:pfa_application_1/models/blog.dart';
-import 'package:pfa_application_1/models/image.dart';
-import 'package:pfa_application_1/models/medicine.dart';
+
 import 'package:pfa_application_1/view/widgets/component/blog_card.dart';
 import 'package:pfa_application_1/view/widgets/component/popular_card.dart';
-import 'package:pfa_application_1/view/widgets/component/reminder_med_card.dart';
-import 'package:pfa_application_1/view/widgets/curve_clipper.dart';
-import 'package:proste_bezier_curve/proste_bezier_curve.dart';
 
 class ImageScreen extends StatefulWidget {
   const ImageScreen({super.key});

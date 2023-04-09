@@ -108,7 +108,7 @@ class _UserArticleState extends State<UserArticle> {
                       width: 22,
                     ),
                     Text(
-                      "See All",
+                      "User articles",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 19,
@@ -152,7 +152,7 @@ class _UserArticleState extends State<UserArticle> {
             ),
 
             Container(
-                height: 560,
+                height: 600,
                 padding: EdgeInsets.only(top: 10),
                 child: FutureBuilder<List<Blog>>(
                     future: blogController.fetchArticles(),
@@ -184,16 +184,32 @@ class _UserArticleState extends State<UserArticle> {
                                             'imageId': '${imageId}'
                                           });
                                     },
-                                    child: BlogCard(
+                                    child: UserBlogCard(
                                       blogTitle: "${filteredData[index].title}",
                                       blogPicture: "assets/image/hand2.jpg",
                                     ));
                               }));
                         } else {
-                          return Text("No data to show");
+                          return Center(
+                            child: Text(
+                              "No data to show",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: AppColor.mainColor,
+                                  fontFamily: "Poppins"),
+                            ),
+                          );
                         }
                       } else if (snapshot.hasError) {
-                        return Text("Error loading data");
+                        return Center(
+                          child: Text(
+                            "Error loading data" "No Articles available",
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: AppColor.mainColor,
+                                fontFamily: "Poppins"),
+                          ),
+                        );
                       } else {
                         return Center(child: CircularProgressIndicator());
                       }

@@ -126,7 +126,7 @@ class BlogController extends GetxController {
   request.files.add(await http.MultipartFile.fromPath('image', image.path));
   var response = await request.send();
   if (response.statusCode == 201) {
-  var jsonStr = await response.stream.bytesToString();
+
   //var article = Blog.fromJson(json.decode(jsonStr));
   //print(article);
   return true;

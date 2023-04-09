@@ -180,7 +180,7 @@ class _BlogPageState extends State<BlogPage> {
                                     child: BlogCard(
                                         blogTitle:
                                             "${snapshot.data![index].title}",
-                                        blogPicture: "assets/image/blog1.jpg"));
+                                        blogPicture: "assets/image/logo.png"));
                               }),
                             )),
                         Padding(
@@ -198,7 +198,7 @@ class _BlogPageState extends State<BlogPage> {
                           height: 200,
                           child: ListView.builder(
                               reverse: true,
-                              itemCount: 3,
+                              itemCount: 2,
                               itemBuilder: ((context, index) {
                                 return GestureDetector(
                                     onTap: () {
@@ -215,7 +215,7 @@ class _BlogPageState extends State<BlogPage> {
                                     child: PopularCard(
                                         blogTitle:
                                             "${snapshot.data![index].title}",
-                                        blogPicture: "assets/image/hand2.jpg",
+                                        blogPicture: "assets/image/logo.png",
                                         route: "/blog/details"));
                               })),
                         )

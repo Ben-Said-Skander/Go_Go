@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_local_variable
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_local_variable, override_on_non_overriding_member, deprecated_member_use
 
 import 'dart:math';
 
@@ -31,6 +31,8 @@ class _SearchPageState extends State<SearchPage> {
   late TextEditingController searchController;
   late LocationPermission permission;
   late Position currentPosition;
+  double currentLatitude = 0;
+  double currentLongitude = 0;
   late GoogleMapController mapController;
   CameraPosition initialLocation = CameraPosition(target: LatLng(0.0, 0.0));
   int isMedAvailable = 1;
@@ -44,7 +46,13 @@ class _SearchPageState extends State<SearchPage> {
         .then((Position position) async {
       setState(() {
         currentPosition = position;
-        print('Current Position :${currentPosition}');
+        currentLatitude = position.latitude;
+        currentLongitude = position.longitude;
+
+        print("***************************************");
+        print(currentLatitude);
+        print(currentLongitude);
+        print("***************************************");
       });
       mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
           target: LatLng(position.latitude, position.longitude), zoom: 40.0)));
@@ -120,7 +128,6 @@ class _SearchPageState extends State<SearchPage> {
     super.initState();
   }
 
-
   PharmacyController pharmController = Get.find();
 
   List<String> pharmacyName = [];
@@ -167,15 +174,13 @@ class _SearchPageState extends State<SearchPage> {
   List trueIndex = [];
   bool isLoading = false;
   late List<Pharmacy> pharmList = [];
-    @override
- 
+  @override
   Future<void> refreshData() async {
     setState(() {
       isLoading = true;
     });
     try {
-      final List<Pharmacy> pharm =
-          await pharmacyController.getAllPharmacies();
+      final List<Pharmacy> pharm = await pharmacyController.getAllPharmacies();
       setState(() {
         pharmList = pharm;
         isLoading = false;
@@ -192,189 +197,205 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: RefreshIndicator(
-          onRefresh: refreshData,
-          child:ListView(
-      children: [
-        SafeArea(
-          child: Stack(
-            children: [
-              Container(
-                  padding: EdgeInsets.only(top: 0),
-                  height: 800,
-                  child: GoogleMap(
-                    markers: createMarkers(
-                        34.8443519, 10.7567297, 39.8443519, 16.7567297),
-                    polylines: Set<Polyline>.of(polylines.values),
-                    initialCameraPosition: initialLocation,
-                    myLocationEnabled: true,
-                    myLocationButtonEnabled: true,
-                    mapType: MapType.normal,
-                    zoomGesturesEnabled: true,
-                    zoomControlsEnabled: true,
-                    onMapCreated: (GoogleMapController controller) {
-                      mapController = controller;
-                    },
-                  )),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 30, left: 25),
-                    child: Text("Locate your medicines",
-                        style: TextStyle(
-                            color: AppColor.mainColor,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "Poppins")),
+            onRefresh: refreshData,
+            child: ListView(
+              children: [
+                SafeArea(
+                  child: Stack(
+                    children: [
+                      Container(
+                          padding: EdgeInsets.only(top: 0),
+                          height: 800,
+                          child: GoogleMap(
+                            markers: createMarkers(
+                                34.8443519, 10.7567297, 39.8443519, 16.7567297),
+                            polylines: Set<Polyline>.of(polylines.values),
+                            initialCameraPosition: initialLocation,
+                            myLocationEnabled: true,
+                            myLocationButtonEnabled: true,
+                            mapType: MapType.normal,
+                            zoomGesturesEnabled: true,
+                            zoomControlsEnabled: true,
+                            onMapCreated: (GoogleMapController controller) {
+                              mapController = controller;
+                            },
+                          )),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 30, left: 25),
+                            child: Text("Locate your medicines",
+                                style: TextStyle(
+                                    color: AppColor.mainColor,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "Poppins")),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(top: 25, left: 20),
+                            width: 400,
+                            child: TextFormField(
+                              onChanged: (string) {
+                                filteredPharmacy = pharmacies
+                                    .where((pharmacy) => pharmacy.longitude
+                                        .toString()
+                                        .toLowerCase()
+                                        .contains(string.toLowerCase()))
+                                    .toList();
+                              },
+                              keyboardType: TextInputType.emailAddress,
+                              decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                filled: true,
+                                hintText: "Locate your medicines",
+                                hintStyle: TextStyle(color: Colors.black),
+                                prefixIcon: Icon(
+                                    FontAwesomeIcons.magnifyingGlass,
+                                    color: Colors.black),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                    borderRadius: BorderRadius.circular(30)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                    borderRadius: BorderRadius.circular(30)),
+                              ),
+                              controller: searchController,
+                              cursorColor: Color.fromARGB(255, 16, 152, 170),
+                            ),
+                          ),
+                          FutureBuilder<List<Pharmacy>>(
+                              future: pharmacyController.getAllPharmacies(),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return CircularProgressIndicator();
+                                } else if (snapshot.hasError) {
+                                  return Text('Error: ${snapshot.error}');
+                                } else {
+                                  var pharmacy = snapshot.data!;
+
+                                  for (int i = 0; i < pharmacy.length; i++) {
+                                    pharmacyName.add(pharmacy[i].name!);
+                                    pharmacyLat.add(pharmacy[i].latitude!);
+                                    pharmacyLong.add(pharmacy[i].longitude!);
+                                    final pharmDist = calculateDistance(
+                                        currentLatitude,
+                                        currentLongitude,
+                                        pharmacyLat[i],
+                                        pharmacyLong[i]);
+                                    pharmacyDistances.add(pharmDist);
+                                  }
+
+                                  List pharmIndex =
+                                      pharmacyIndexes(pharmacyDistances);
+                                  count++;
+
+                                  return Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          140, 20, 20, 0),
+                                      child: Container(
+                                          height: 50,
+                                          width: 130,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                            color: Color.fromARGB(
+                                                255, 16, 152, 170),
+                                          ),
+                                          child: MaterialButton(
+                                              child: Text(
+                                                "Show Route",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontFamily: "Poppins"),
+                                              ),
+                                              onPressed: () {
+                                                try {
+                                                  for (int i = 0;
+                                                      i < pharmacy.length;
+                                                      i++) {
+                                                    if (pharmacy[i].drugs![
+                                                            searchController
+                                                                .text] ==
+                                                        true) {
+                                                      trueIndex.add(i);
+                                                    }
+                                                  }
+                                                  print(
+                                                      "**********************************");
+                                                  print(trueIndex);
+                                                  print(pharmIndex);
+
+                                                  int index = pharmIndex
+                                                      .indexWhere((element) =>
+                                                          trueIndex.contains(
+                                                              element));
+                                                  index = (index == -1)
+                                                      ? index
+                                                      : pharmIndex.indexOf(
+                                                          pharmIndex.firstWhere(
+                                                              (element) => trueIndex
+                                                                  .contains(
+                                                                      element)));
+
+                                                  print(index);
+                                                  print(
+                                                      "**********************************");
+                                                  pharmacyIndex =
+                                                      pharmIndex[index];
+
+                                                  if (index != -1) {
+                                                    openGoogleMaps(
+                                                      pharmacyLat[
+                                                          pharmacyIndex],
+                                                      pharmacyLong[
+                                                          pharmacyIndex],
+                                                    );
+                                                    trueIndex = [];
+                                                  } else {
+                                                    AwesomeDialog(
+                                                      context: context,
+                                                      dialogType:
+                                                          DialogType.error,
+                                                      animType:
+                                                          AnimType.rightSlide,
+                                                      headerAnimationLoop:
+                                                          false,
+                                                      title: 'Not Available',
+                                                      desc:
+                                                          'There is no Account for this email',
+                                                      btnOkOnPress: () {},
+                                                      btnOkIcon: Icons.cancel,
+                                                      btnOkColor: Colors.red,
+                                                    ).show();
+                                                  }
+                                                } catch (error) {
+                                                  AwesomeDialog(
+                                                    context: context,
+                                                    dialogType:
+                                                        DialogType.error,
+                                                    animType:
+                                                        AnimType.rightSlide,
+                                                    headerAnimationLoop: false,
+                                                    title: 'Not Available',
+                                                    desc:
+                                                        'The drug you are looking for is not available at any pharmacy .',
+                                                    btnOkOnPress: () {},
+                                                    btnOkIcon: Icons.cancel,
+                                                    btnOkColor: Colors.red,
+                                                  ).show();
+                                                }
+                                              })));
+                                }
+                              })
+                        ],
+                      )
+                    ],
                   ),
-                  Container(
-                    padding: EdgeInsets.only(top: 25, left: 20),
-                    width: 400,
-                    child: TextFormField(
-                      onChanged: (string) {
-                        filteredPharmacy = pharmacies
-                            .where((pharmacy) => pharmacy.longitude
-                                .toString()
-                                .toLowerCase()
-                                .contains(string.toLowerCase()))
-                            .toList();
-                      },
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        fillColor: Colors.white,
-                        filled: true,
-                        hintText: "Locate your medicines",
-                        hintStyle: TextStyle(color: Colors.black),
-                        prefixIcon: Icon(FontAwesomeIcons.magnifyingGlass,
-                            color: Colors.black),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                            borderRadius: BorderRadius.circular(30)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                            borderRadius: BorderRadius.circular(30)),
-                      ),
-                      controller: searchController,
-                      cursorColor: Color.fromARGB(255, 16, 152, 170),
-                    ),
-                  ),
-                  FutureBuilder<List<Pharmacy>>(
-                      future: pharmacyController.getAllPharmacies(),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return CircularProgressIndicator();
-                        } else if (snapshot.hasError) {
-                          return Text('Error: ${snapshot.error}');
-                        } else {
-                          var pharmacy = snapshot.data!;
-
-                          for (int i = 0; i < pharmacy.length; i++) {
-                            pharmacyName.add(pharmacy[i].name!);
-                            pharmacyLat.add(pharmacy[i].latitude!);
-                            pharmacyLong.add(pharmacy[i].longitude!);
-                            final pharmDist = calculateDistance(34.8443519,
-                                10.7567297, pharmacyLat[i], pharmacyLong[i]);
-                            pharmacyDistances.add(pharmDist);
-                          }
-                          
-                            List pharmIndex =
-                                pharmacyIndexes(pharmacyDistances);
-                            count++;
-
-                            return Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(140, 20, 20, 0),
-                                child: Container(
-                                    height: 50,
-                                    width: 130,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30),
-                                      color: Color.fromARGB(255, 16, 152, 170),
-                                    ),
-                                    child: MaterialButton(
-                                        child: Text(
-                                          "Show Route",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Poppins"),
-                                        ),
-                                        onPressed: () {
-                                          try{
-                                          for (int i = 0;
-                                              i < pharmacy.length;
-                                              i++) {
-                                            if (pharmacy[i].drugs![
-                                                    searchController.text] ==
-                                                true) {
-                                              trueIndex.add(i);
-                                            }
-                                          }
-                                          print(
-                                              "**********************************");
-                                          print(trueIndex);
-                                          print(pharmIndex);
-
-                                          int index = pharmIndex.indexWhere(
-                                              (element) =>
-                                                  trueIndex.contains(element));
-                                          index = (index == -1)
-                                              ? index
-                                              : pharmIndex.indexOf(
-                                                  pharmIndex.firstWhere(
-                                                      (element) => trueIndex
-                                                          .contains(element)));
-
-                                          print(index);
-                                          print(
-                                              "**********************************");
-                                          pharmacyIndex = pharmIndex[index];
-
-                                          if (index != -1) {
-                                            openGoogleMaps(
-                                              pharmacyLat[pharmacyIndex],
-                                              pharmacyLong[pharmacyIndex],
-                                            );
-                                            trueIndex = [];
-                                          } else {
-                                            AwesomeDialog(
-                                              context: context,
-                                              dialogType: DialogType.error,
-                                              animType: AnimType.rightSlide,
-                                              headerAnimationLoop: false,
-                                              title: 'Not Available',
-                                              desc:
-                                                  'There is no Account for this email',
-                                              btnOkOnPress: () {},
-                                              btnOkIcon: Icons.cancel,
-                                              btnOkColor: Colors.red,
-                                            ).show();
-                                          }}catch(error){
-                                             AwesomeDialog(
-                                              context: context,
-                                              dialogType: DialogType.error,
-                                              animType: AnimType.rightSlide,
-                                              headerAnimationLoop: false,
-                                              title: 'Not Available',
-                                              desc:
-                                                  'The drug you are looking for is not available at any pharmacy .',
-                                              btnOkOnPress: () {},
-                                              btnOkIcon: Icons.cancel,
-                                              btnOkColor: Colors.red,
-                                            ).show();
-                                          }
-                                    
-                                        })));
-                         
-                        }
-                      })
-                ],
-              )
-            ],
-          ),
-        ),
-      ],
-    )));
+                ),
+              ],
+            )));
   }
 }
 //Current Position :Latitude: 34.8443519, Longitude: 10.7567297

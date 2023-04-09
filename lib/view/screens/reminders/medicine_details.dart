@@ -187,7 +187,7 @@ class MidSectionInfo extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(15, 10, 15, 15),
             child: Text(
-              start_time,
+              "${start_time}",
               style: TextStyle(fontSize: 18),
             ),
           ),
@@ -213,7 +213,7 @@ class MedicineInfo extends StatelessWidget {
     return Row(
       children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(8, 0, 30, 0),
+          padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
           child: Container(
             decoration: BoxDecoration(
                 color: Colors.white,
@@ -240,6 +240,8 @@ class MedicineInfo extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: Text(
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
                 "Medicine Name",
                 style: TextStyle(
                   color: AppColor.mainColor,

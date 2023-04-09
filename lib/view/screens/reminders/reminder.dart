@@ -8,6 +8,7 @@ import 'package:pfa_application_1/models/medicine.dart';
 import 'package:pfa_application_1/view/widgets/component/reminder_med_card.dart';
 
 import 'package:pfa_application_1/view/widgets/curve_clipper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Reminders extends StatefulWidget {
   const Reminders({super.key});
@@ -22,11 +23,18 @@ class _RemindersState extends State<Reminders> {
   late List<Medicine> medicineList = [];
   String medTypeImage = "pills.jpg";
   bool isLoading = false;
+  late String? userId;
+  bool isDifferentUser = true;
 
   @override
   void initState() {
     super.initState();
     refreshData();
+    getUserId().then((value) {
+      setState(() {
+        userId = value;
+      });
+    });
   }
 
   Future<void> refreshData() async {
@@ -46,6 +54,15 @@ class _RemindersState extends State<Reminders> {
       });
       print('Error fetching data: $e');
     }
+  }
+
+  Future<String?> getUserId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var userId = await prefs.getString('userID');
+    print("****************************************");
+    print(userId);
+    print("****************************************");
+    return userId;
   }
 
   @override
@@ -101,49 +118,68 @@ class _RemindersState extends State<Reminders> {
               ),
             ),
             Container(
-              height: 500,
-              child: isLoading
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                    
-                  : medicineList.isNotEmpty
-                      ? 
-                       GridView.builder(
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2),
-                          itemCount: medicineList.length,
-                          itemBuilder: ((context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                var id = "${medicineList[index].id}";
-                                Get.toNamed(
-                                  AppRoute.details,
-                                  arguments: id,
+                height: 500,
+                child: FutureBuilder<List<Medicine>>(
+                    future: medicineController.fetchMedicines(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        if (medicineList.isNotEmpty) {
+                          for (int i = 0; i < snapshot.data!.length; i++) {
+                            if (snapshot.data![i].medicineId == userId) {
+                              isDifferentUser = false;
+                              print("*****************************");
+                              print(isDifferentUser);
+
+                              break;
+                            }
+                          }
+                          if (isDifferentUser == false) {
+                            print(userId);
+                            return GridView.builder(
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2),
+                              itemCount: medicineList.length,
+                              itemBuilder: ((context, index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    var id = "${medicineList[index].id}";
+                                    Get.toNamed(
+                                      AppRoute.details,
+                                      arguments: id,
+                                    );
+                                  },
+                                  child: ReminderMedCard(
+                                    med_name: "${medicineList[index].name}",
+                                    med_pic:
+                                        "assets/image/${medicineList[index].type}.jpg",
+                                    med_interval:
+                                        "${medicineList[index].interval}",
+                                  ),
                                 );
-                              },
-                              child: ReminderMedCard(
-                                med_name: "${medicineList[index].name}",
-                                med_pic:
-                                    "assets/image/${medicineList[index].type}.jpg",
-                                med_interval: "${medicineList[index].interval}",
-                              ),
+                              }),
                             );
-                          }),
-                        )
-                      : Center(
-                          child: Text(
-                            "No reminders found.",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: AppColor.mainColor,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: "Poppins",
-                            ),
-                          ),
-                        ),
-            ),
+                          } else {
+                            return Center(
+                                child: Text("No Data to show",
+                                    style: TextStyle(
+                                        color: AppColor.mainColor,
+                                        fontSize: 18)));
+                          }
+                        } else {
+                          return Center(
+                              child: Text("No Data to show",
+                                  style: TextStyle(
+                                      color: AppColor.mainColor,
+                                      fontSize: 18)));
+                        }
+                      } else {
+                        return Center(
+                            child: Text("No Data to show",
+                                style: TextStyle(
+                                    color: AppColor.mainColor, fontSize: 18)));
+                      }
+                    })),
           ],
         ),
       ),

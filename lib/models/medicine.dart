@@ -9,6 +9,7 @@ class Medicine {
   final String? type;
   final String? interval;
   final String? start_time;
+  final String? medicineId;
 //Constructeur
   Medicine({
     this.id,
@@ -17,6 +18,7 @@ class Medicine {
     this.type,
     this.interval,
     this.start_time,
+    this.medicineId,
   });
 
   // Transform attributs to JSON Map format (we send data with JSON format)
@@ -40,6 +42,7 @@ class Medicine {
         interval: parsedJson["interval"],
         start_time: parsedJson["start_time"],
         id : parsedJson['_id'],
+        medicineId : parsedJson['medicineId'],
     );
   }
 }

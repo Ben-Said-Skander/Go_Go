@@ -174,9 +174,9 @@ class _UserArticleState extends State<UserArticle> {
                                 return GestureDetector(
                                     onTap: () {
                                       var articleId =
-                                          "${snapshot.data![index].id}";
+                                          "${filteredData[index].id}";
                                       var imageId =
-                                          "${snapshot.data![index].imageId}";
+                                          "${filteredData[index].imageId}";
                                       Get.toNamed(
                                           AppRoute.personalArticleDetails,
                                           arguments: {

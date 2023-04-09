@@ -147,7 +147,9 @@ class _BlogDetailsState extends State<BlogDetails> {
                                     return Text(
                                       snapshot.data!.fullname!,
                                       style: TextStyle(
-                                          fontSize: 16, fontFamily: "Poppins"),
+                                          fontSize: 16,
+                                          fontFamily: "Poppins",
+                                          fontWeight: FontWeight.bold),
                                     );
                                   } else {
                                     return CircularProgressIndicator();

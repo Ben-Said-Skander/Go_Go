@@ -232,6 +232,7 @@ class _AddBlogState extends State<AddBlog> {
             child: Padding(
               padding: EdgeInsets.fromLTRB(20, 15, 20, 0),
               child: TextFormField(
+                
                 controller: bodyController,
                 minLines: null,
                 maxLines: 20,

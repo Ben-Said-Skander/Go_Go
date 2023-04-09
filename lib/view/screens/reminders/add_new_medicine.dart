@@ -43,7 +43,7 @@ class _AddMedicineState extends State<AddMedicine> {
   ];
   late String? userId;
   int selectedIndex = 0;
-   Future<String?> getUserId() async {
+  Future<String?> getUserId() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var userId = await prefs.getString('userID');
     print("****************************************");
@@ -65,7 +65,7 @@ class _AddMedicineState extends State<AddMedicine> {
     med_nameController = TextEditingController();
     med_dosageController = TextEditingController();
     starting_timeController = TextEditingController();
-     getUserId().then((value) {
+    getUserId().then((value) {
       setState(() {
         userId = value;
       });
@@ -122,9 +122,9 @@ class _AddMedicineState extends State<AddMedicine> {
           padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
           width: 350,
           child: TextFormField(
-            maxLength: 15,
+            maxLength: 16,
             validator: (value) {
-              if (value!.isEmpty ) {
+              if (value!.isEmpty) {
                 return "Enter Something";
               } else {
                 return null;
@@ -141,8 +141,8 @@ class _AddMedicineState extends State<AddMedicine> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.fromLTRB(20, 25, 20, 0),
-          child: Titles(title: "Dosage in mg"),
+          padding: EdgeInsets.fromLTRB(20, 5, 20, 0),
+          child: Titles(title: "Dosage"),
         ),
         Container(
           padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
@@ -167,7 +167,7 @@ class _AddMedicineState extends State<AddMedicine> {
           ),
         ),
         Padding(
-            padding: EdgeInsets.fromLTRB(30, 50, 20, 0),
+            padding: EdgeInsets.fromLTRB(30, 40, 20, 0),
             child: Text("Medicine Type",
                 style: TextStyle(
                     color: AppColor.mainColor,
@@ -311,7 +311,7 @@ class _AddMedicineState extends State<AddMedicine> {
                 padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                 width: 200,
                 child: TextFormField(
-                  maxLength: 2,
+                  maxLength: 20,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Enter Something";
@@ -325,7 +325,7 @@ class _AddMedicineState extends State<AddMedicine> {
                       focusedBorder: UnderlineInputBorder(
                           borderSide:
                               BorderSide(color: AppColor.secondryColor)),
-                      hintText: "16:05:00"),
+                      hintText: "16:05"),
                   cursorColor: Color.fromARGB(255, 16, 152, 170),
                 ),
               ),
@@ -333,7 +333,7 @@ class _AddMedicineState extends State<AddMedicine> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(20, 60, 20, 0),
+          padding: const EdgeInsets.fromLTRB(20, 40, 20, 0),
           child: Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
@@ -343,13 +343,12 @@ class _AddMedicineState extends State<AddMedicine> {
                   final form = _formKey.currentState;
                   if (form != null && form.validate()) {
                     medicineController.addMedicine(
-                      med_nameController.text,
-                      med_dosageController.text,
-                      chooseType(typeIndex),
-                      dropdownvalue,
-                      starting_timeController.text,
-                      userId!
-                    );
+                        med_nameController.text,
+                        med_dosageController.text,
+                        chooseType(typeIndex),
+                        dropdownvalue,
+                        starting_timeController.text,
+                        userId!);
 
                     Get.back();
                   }

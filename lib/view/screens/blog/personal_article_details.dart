@@ -50,7 +50,7 @@ class _PersonalArticleDetailsState extends State<PersonalArticleDetails> {
                                 width: double.infinity,
                               );
                             } else {
-                               return Center(child: CircularProgressIndicator());
+                              return Center(child: CircularProgressIndicator());
                             }
                           })),
                       Padding(
@@ -72,72 +72,65 @@ class _PersonalArticleDetailsState extends State<PersonalArticleDetails> {
                             color: Color.fromARGB(255, 240, 240, 240),
                             borderRadius: BorderRadius.circular(40),
                           ),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: 12,
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(22, 10, 0, 10),
-                                  child: Text("${snapshot.data!.title}",
-                                      style: TextStyle(
-                                          color: AppColor.mainColor,
-                                          fontFamily: "Poppins",
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold)),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 20, top: 40),
-                                  child: Text("${snapshot.data!.body}",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                      )),
-                                ),
-                                Padding(
-                                    padding: EdgeInsets.only(
-                                        left: 120, right: 20, top: 350),
-                                    child: Container(
-                                      width: 170,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          color: AppColor.mainColor),
-                                      child: MaterialButton(
-                                        onPressed: () {
-                                          AwesomeDialog(
-                                            context: context,
-                                            dialogType: DialogType.warning,
-                                            headerAnimationLoop: false,
-                                            animType: AnimType.topSlide,
-                                            showCloseIcon: true,
-                                            closeIcon: const Icon(Icons
-                                                .close_fullscreen_outlined),
-                                            title: 'Warning',
-                                            desc:
-                                                'Are you sure you want to delete the article',
-                                            btnCancelOnPress: () {
-                                              Get.back();
-                                            },
-                                            onDismissCallback: (type) {
-                                              debugPrint(
-                                                  'Dialog Dismiss from callback $type');
-                                            },
-                                            btnOkOnPress: () {
-                                              blogController
-                                                  .deleteArticle(articleId);
-                                              Get.back(result: true);
-                                            },
-                                          ).show();
+                          child: ListView(children: [
+                            SizedBox(
+                              height: 12,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(22, 10, 0, 10),
+                              child: Text("${snapshot.data!.title}",
+                                  style: TextStyle(
+                                      color: AppColor.mainColor,
+                                      fontFamily: "Poppins",
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold)),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 20, top: 40),
+                              child: Text("${snapshot.data!.body}",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  )),
+                            ),
+                            Padding(
+                                padding: EdgeInsets.only(
+                                    left: 80, right: 80, top: 150, bottom: 20),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: AppColor.mainColor),
+                                  child: MaterialButton(
+                                    onPressed: () {
+                                      AwesomeDialog(
+                                        context: context,
+                                        dialogType: DialogType.warning,
+                                        headerAnimationLoop: false,
+                                        animType: AnimType.topSlide,
+                                        showCloseIcon: true,
+                                        closeIcon: const Icon(
+                                            Icons.close_fullscreen_outlined),
+                                        title: 'Warning',
+                                        desc:
+                                            'Are you sure you want to delete the article',
+                                        btnCancelOnPress: () {
+                                          Get.back();
                                         },
-                                        child: Text("Delete",
-                                            style:
-                                                TextStyle(color: Colors.white)),
-                                      ),
-                                    ))
-                              ]),
+                                        onDismissCallback: (type) {
+                                          debugPrint(
+                                              'Dialog Dismiss from callback $type');
+                                        },
+                                        btnOkOnPress: () {
+                                          blogController
+                                              .deleteArticle(articleId);
+                                          Get.back(result: true);
+                                        },
+                                      ).show();
+                                    },
+                                    child: Text("Delete",
+                                        style: TextStyle(color: Colors.white)),
+                                  ),
+                                ))
+                          ]),
                         ),
                       ),
                     ],

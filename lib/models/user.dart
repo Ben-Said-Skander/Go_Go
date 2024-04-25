@@ -5,8 +5,20 @@ class User {
   final String? email;
   final String? password;
 
+  final String? isAvailable;
+  final String? carModel;
+  final String? destination;
+
   //Constructeur
-  User({this.fullname, this.email, this.password, this.phoneNumber, this.id});
+  User(
+      {this.fullname,
+      this.email,
+      this.password,
+      this.phoneNumber,
+      this.isAvailable,
+      this.carModel,
+      this.destination,
+      this.id});
 
   // Transform attributs to Json Format
 
@@ -16,6 +28,9 @@ class User {
       "email": email,
       "password": password,
       "phoneNumber": phoneNumber,
+      "isAvailable": isAvailable,
+      "carModel": carModel,
+      "destination": destination,
     };
   }
 
@@ -25,6 +40,9 @@ class User {
         email: parsedJson["email"],
         password: parsedJson["password"],
         phoneNumber: parsedJson["phoneNumber"],
+        isAvailable: parsedJson["isAvailable"],
+        carModel: parsedJson["carModel"],
+        destination: parsedJson["destination"],
         id: parsedJson['_id']);
   }
 }

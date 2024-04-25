@@ -80,4 +80,36 @@ class UserController extends GetxController {
       throw Exception('Failed to send verification code');
     }
   }
+
+  Future<bool> updateAvailable(String id, String isAvailable) async {
+    final response = await http.put(
+        Uri.parse('${LinkApi.updateAvailable}/${id}'),
+        body: <String, String>{'isAvailable': isAvailable});
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      throw Exception('User update failed');
+    }
+  }
+
+  Future<bool> updateDestination(String id, String destination) async {
+    final response = await http.put(
+        Uri.parse('${LinkApi.updateDestination}/${id}'),
+        body: <String, String>{'destination': destination});
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      throw Exception('User update failed');
+    }
+  }
+
+  Future<bool> updateCar(String id, String carModel) async {
+    final response = await http.put(Uri.parse('${LinkApi.updateCar}/${id}'),
+        body: <String, String>{'carModel': carModel});
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      throw Exception('User update failed');
+    }
+  }
 }

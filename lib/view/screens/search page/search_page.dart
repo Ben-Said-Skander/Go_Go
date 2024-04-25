@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:pfa_application_1/controllers/pharmacyController.dart';
+
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
-import 'package:pfa_application_1/models/pharmacy.dart';
+
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -26,8 +26,8 @@ class _SearchPageState extends State<SearchPage> {
   late PolylinePoints polylinePoints;
   List<LatLng> polylineCoordinates = [];
   Map<PolylineId, Polyline> polylines = {};
-  List<Pharmacy> pharmacies = [];
-  List<Pharmacy> filteredPharmacy = [];
+  //List<Pharmacy> pharmacies = [];
+ // List<Pharmacy> filteredPharmacy = [];
   late TextEditingController searchController;
   late LocationPermission permission;
   late Position currentPosition;
@@ -37,9 +37,10 @@ class _SearchPageState extends State<SearchPage> {
   CameraPosition initialLocation = CameraPosition(target: LatLng(0.0, 0.0));
   int isMedAvailable = 1;
 
+/*
   PharmacyController pharmacyController = Get.find();
   late final Future<List<Pharmacy>> futureLocations =
-      pharmacyController.getAllPharmacies();
+      pharmacyController.getAllPharmacies();*/
 
   getCurrentLocation() async {
     await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
@@ -117,18 +118,19 @@ class _SearchPageState extends State<SearchPage> {
     refreshData();
 
     createPolylines(34.8443519, 10.7567297, 39.8443519, 16.7567297);
+    /*
     pharmacyController.getAllPharmacies().then((pharmacyFromServer) {
       setState(() {
         pharmacies = pharmacyFromServer;
         filteredPharmacy = pharmacies;
       });
-    });
+    });*/
     getCurrentLocation();
     searchController = TextEditingController();
     super.initState();
   }
 
-  PharmacyController pharmController = Get.find();
+  //PharmacyController pharmController = Get.find();
 
   List<String> pharmacyName = [];
   List<double> pharmacyLat = [];
@@ -173,13 +175,17 @@ class _SearchPageState extends State<SearchPage> {
   int index = -1;
   List trueIndex = [];
   bool isLoading = false;
-  late List<Pharmacy> pharmList = [];
+  //late List<Pharmacy> pharmList = [];
+  
+  
   @override
   Future<void> refreshData() async {
+    /*
     setState(() {
       isLoading = true;
     });
     try {
+      
       final List<Pharmacy> pharm = await pharmacyController.getAllPharmacies();
       setState(() {
         pharmList = pharm;
@@ -190,7 +196,7 @@ class _SearchPageState extends State<SearchPage> {
         isLoading = false;
       });
       print('Error fetching data: $e');
-    }
+    }*/
   }
 
   @override
@@ -225,7 +231,7 @@ class _SearchPageState extends State<SearchPage> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(top: 30, left: 25),
-                            child: Text("Locate your medicines",
+                            child: Text("Where do you want to go ?",
                                 style: TextStyle(
                                     color: AppColor.mainColor,
                                     fontSize: 20,
@@ -237,18 +243,19 @@ class _SearchPageState extends State<SearchPage> {
                             width: 400,
                             child: TextFormField(
                               onChanged: (string) {
+                                /*
                                 filteredPharmacy = pharmacies
                                     .where((pharmacy) => pharmacy.longitude
                                         .toString()
                                         .toLowerCase()
                                         .contains(string.toLowerCase()))
-                                    .toList();
+                                    .toList();  */
                               },
                               keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
                                 fillColor: Colors.white,
                                 filled: true,
-                                hintText: "Locate your medicines",
+                                hintText: "Where do you want to go ?",
                                 hintStyle: TextStyle(color: Colors.black),
                                 prefixIcon: Icon(
                                     FontAwesomeIcons.magnifyingGlass,
@@ -264,6 +271,7 @@ class _SearchPageState extends State<SearchPage> {
                               cursorColor: Color.fromARGB(255, 16, 152, 170),
                             ),
                           ),
+                          /*
                           FutureBuilder<List<Pharmacy>>(
                               future: pharmacyController.getAllPharmacies(),
                               builder: (context, snapshot) {
@@ -388,7 +396,7 @@ class _SearchPageState extends State<SearchPage> {
                                                 }
                                               })));
                                 }
-                              })
+                              })*/
                         ],
                       )
                     ],

@@ -2,6 +2,7 @@
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/controllers/register_controller.dart';
 
@@ -9,14 +10,14 @@ import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';
 import 'package:proste_bezier_curve/proste_bezier_curve.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+class DriverSignUp extends StatefulWidget {
+  const DriverSignUp({super.key});
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<DriverSignUp> createState() => _DriverSignUpState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _DriverSignUpState extends State<DriverSignUp> {
   RegisterController registerController = Get.find();
   final _formKey = GlobalKey<FormState>();
 
@@ -24,6 +25,11 @@ class _SignUpState extends State<SignUp> {
   late TextEditingController passwordController;
   late TextEditingController phoneController;
   late TextEditingController nameController;
+
+  late TextEditingController isAvailableController;
+  late TextEditingController carModelController;
+  late TextEditingController destinationController;
+
   bool registrationSuccessful = false;
   @override
   void dispose() {
@@ -31,6 +37,10 @@ class _SignUpState extends State<SignUp> {
     passwordController.dispose();
     phoneController.dispose();
     nameController.dispose();
+
+    isAvailableController.dispose();
+    carModelController.dispose();
+    destinationController.dispose();
 
     super.dispose();
   }
@@ -41,6 +51,10 @@ class _SignUpState extends State<SignUp> {
     phoneController = TextEditingController();
     nameController = TextEditingController();
     passwordController = TextEditingController();
+
+    isAvailableController = TextEditingController();
+    carModelController = TextEditingController();
+    destinationController = TextEditingController();
 
     super.initState();
   }
@@ -68,10 +82,10 @@ class _SignUpState extends State<SignUp> {
               padding: const EdgeInsets.only(bottom: 48.0),
               child: Center(
                   child: Text(
-                "Sign Up as a Passenger",
+                "Sign Up as a driver",
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 21,
+                    fontSize: 23,
                     fontWeight: FontWeight.w700,
                     fontFamily: "Poppins"),
               )),
@@ -79,7 +93,7 @@ class _SignUpState extends State<SignUp> {
           ),
         ),
         Container(
-            height: 700,
+            height: 1080,
             child: Form(
               key: _formKey,
               child: Column(
@@ -173,6 +187,57 @@ class _SignUpState extends State<SignUp> {
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
+                      child: Text("Car Model",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 9, 2, 107),
+                              fontFamily: "Poppins")),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
+                      width: 400,
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Enter Something";
+                          } else {
+                            return null;
+                          }
+                        },
+                        decoration: InputDecoration(
+                            hintText: "Car Model",
+                            prefixIcon: Icon(FontAwesomeIcons.car)),
+                        controller: carModelController,
+                        cursorColor: Color.fromARGB(255, 9, 2, 107),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
+                      child: Text("Destination",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 9, 2, 107),
+                              fontFamily: "Poppins")),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      width: 400,
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Enter Something";
+                          } else {
+                            return null;
+                          }
+                        },
+                        decoration: InputDecoration(
+                            hintText: "Destination",
+                            prefixIcon: Icon(FontAwesomeIcons.locationDot)),
+                        controller: destinationController,
+                        cursorColor: Color.fromARGB(255, 9, 2, 107),
+                        obscureText: true,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
                       child: Text("Password",
                           style: TextStyle(
                               color: Color.fromARGB(255, 9, 2, 107),
@@ -209,12 +274,12 @@ class _SignUpState extends State<SignUp> {
                               final form = _formKey.currentState;
                               if (form != null && form.validate()) {
                                 if (await registerController.register(
-                                    "",
-                                    "",
-                                    "",
                                     nameController.text,
                                     emailController.text,
                                     passwordController.text,
+                                    "true",
+                                    carModelController.text,
+                                    destinationController.text,
                                     phoneController.text)) {
                                   // registration was successful
                                   AwesomeDialog(

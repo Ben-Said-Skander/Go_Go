@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    Timer(Duration(seconds: 4), () => Get.offAndToNamed(AppRoute.onBoarding));
+    Timer(Duration(seconds: 4), () => Get.offAndToNamed(AppRoute.home));
     Future.delayed(Duration(seconds: 0), () {
       setState(() {
         _opacity = 1;
@@ -40,16 +40,19 @@ class _SplashScreenState extends State<SplashScreen> {
         body: ListView(children: [
       Center(
         child: Padding(
-        padding: const EdgeInsets.only(top: 160.0),
-        child: AnimatedOpacity(
-          opacity: imageOpacity,
-          duration: Duration(milliseconds:1500), // Set the duration of the fade animation
-          child:Image.asset(
-            "assets/image/logo.png",
-            width: 200,
-            height: 200,
+          padding: const EdgeInsets.only(top: 160.0),
+          child: AnimatedOpacity(
+            opacity: imageOpacity,
+            duration: Duration(
+                milliseconds: 1500), // Set the duration of the fade animation
+            child: Image.asset(
+              "assets/image/logo.png",
+              width: 200,
+              height: 200,
+            ),
           ),
-        ),),),
+        ),
+      ),
       Center(
         child: Padding(
           padding: const EdgeInsets.only(top: 300.0),
@@ -62,16 +65,16 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       ),
       Center(
-          child: AnimatedOpacity(
-          opacity: _opacity,
-          duration: Duration(milliseconds:1500), // Set the duration of the fade animation
-          child: Text(" Ben Said Skander",
-              style: TextStyle(
-                  fontSize: 18,
-                  fontFamily: "Poppins",
-                  fontWeight: FontWeight.bold))),
-    
-      
-    )]));
+        child: AnimatedOpacity(
+            opacity: _opacity,
+            duration: Duration(
+                milliseconds: 1500), // Set the duration of the fade animation
+            child: Text(" Ben Said Skander",
+                style: TextStyle(
+                    fontSize: 18,
+                    fontFamily: "Poppins",
+                    fontWeight: FontWeight.bold))),
+      )
+    ]));
   }
 }

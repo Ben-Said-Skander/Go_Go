@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/functions/alertExit.dart';
-import 'package:pfa_application_1/view/screens/blog/blog.dart';
-import 'package:pfa_application_1/view/screens/medicine%20description/medicine_description.dart';
+import 'package:pfa_application_1/view/screens/chat/chat.dart';
+
+import 'package:pfa_application_1/view/screens/search%20drivers/search_drivers.dart';
 //import 'package:pfa_application_1/view/screens/medicine%20description/medicine_description.dart';
-import 'package:pfa_application_1/view/screens/reminders/reminder.dart';
+import 'package:pfa_application_1/view/screens/carpool%20request/carpool_request.dart';
 import 'package:pfa_application_1/view/screens/search%20page/search_page.dart';
+import 'package:pfa_application_1/view/screens/settings.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -33,19 +35,23 @@ class _HomeState extends State<Home> {
               buttonBackgroundColor: Color(0x46A569),
               items: [
                 Icon(
-                  FontAwesomeIcons.bell,
+                  FontAwesomeIcons.car,
                   size: 20,
                 ),
                 Icon(
                   FontAwesomeIcons.locationDot,
                   size: 20,
                 ),
-                  Icon(
-                  FontAwesomeIcons.magnifyingGlass,
+                Icon(
+                  FontAwesomeIcons.peopleGroup,
                   size: 20,
                 ),
                 Icon(
-                  FontAwesomeIcons.book,
+                  FontAwesomeIcons.comment,
+                  size: 20,
+                ),
+                Icon(
+                  FontAwesomeIcons.user,
                   size: 20,
                 ),
               ],
@@ -62,10 +68,11 @@ class _HomeState extends State<Home> {
         ),
         body: WillPopScope(
             child: IndexedStack(index: selectedIndex, children: [
-              Reminders(),
+              CarpoolRequest(),
               SearchPage(),
-              MedicineDescriptionPage(),
-              BlogPage(),
+              SearchDriversPage(),
+              Chat(),
+              Settings()
             ]),
             onWillPop: alertExit));
   }

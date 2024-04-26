@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:pfa_application_1/core/constants/link_api.dart';
 
 class AuthController extends GetxController {
+  
   Future<bool> login(String email, String password) async {
   try {
     final response = await http.post(

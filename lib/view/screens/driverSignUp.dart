@@ -232,8 +232,7 @@ class _DriverSignUpState extends State<DriverSignUp> {
                             hintText: "Destination",
                             prefixIcon: Icon(FontAwesomeIcons.locationDot)),
                         controller: destinationController,
-                        cursorColor: Color.fromARGB(255, 9, 2, 107),
-                        obscureText: true,
+                        cursorColor: Color.fromARGB(255, 9, 2, 107)
                       ),
                     ),
                     Padding(

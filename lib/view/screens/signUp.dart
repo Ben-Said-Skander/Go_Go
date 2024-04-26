@@ -209,12 +209,12 @@ class _SignUpState extends State<SignUp> {
                               final form = _formKey.currentState;
                               if (form != null && form.validate()) {
                                 if (await registerController.register(
-                                    "",
-                                    "",
-                                    "",
                                     nameController.text,
                                     emailController.text,
                                     passwordController.text,
+                                    "false",
+                                    "",
+                                    "",
                                     phoneController.text)) {
                                   // registration was successful
                                   AwesomeDialog(

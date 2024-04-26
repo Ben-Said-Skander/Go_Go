@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, camel_case_types, avoid_unnecessary_containers
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -44,7 +45,7 @@ class _SearchDriversState extends State<SearchDriversPage> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-        body: ListView(children: [
+        body: Column(children: [
       Container(
           height: 150,
           width: double.infinity,
@@ -111,133 +112,114 @@ class _SearchDriversState extends State<SearchDriversPage> {
         future: userController.getAllUsers(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return ListView.builder(
-              itemCount: 2,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(left: 10.0, top: 40),
-                  child: Padding(
+            return SizedBox(
+              height: MediaQuery.of(context).size.height *
+                  0.6, // Adjust height as needed
+              child: ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
+                  if (snapshot.data![index].isAvailable == true) {
+                    return Padding(
                       padding: const EdgeInsets.only(left: 10.0, top: 40),
-                      child: Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 198, 198, 198),
-                              borderRadius: BorderRadius.circular(18),
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 1,
-                                  spreadRadius: 1,
-                                  color: Color.fromARGB(255, 169, 169, 169),
-                                )
-                              ],
-                            ),
-                            width: 600,
-                            height: 150,
-                            margin: const EdgeInsets.only(
-                                top: 20, left: 10, right: 20),
-                            child: Container(
-                              padding: const EdgeInsets.only(
-                                  top: 20,
-                                  right: 40,
-                                  left: 20), // Adjusted padding here
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  buildRichText('Driver:',
-                                      "${snapshot.data![index].fullname}"),
-                                  buildRichText('Car model:',
-                                      "${snapshot.data![index].carModel}"),
-                                  buildRichText('Destination:',
-                                      "${snapshot.data![index].destination}"),
-                                  SizedBox(height: 20),
-                                  Center(
-                                    child: Container(
-                                      width: 40,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: AppColor.mainColor,
-                                      ),
-                                      child: IconButton(
-                                        onPressed: () {
-                                          postController.createPost(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10.0, top: 40),
+                        child: Column(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 198, 198, 198),
+                                borderRadius: BorderRadius.circular(18),
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 1,
+                                    spreadRadius: 1,
+                                    color: Color.fromARGB(255, 169, 169, 169),
+                                  )
+                                ],
+                              ),
+                              width: 600,
+                              height: 150,
+                              margin: const EdgeInsets.only(
+                                  top: 20, left: 10, right: 20),
+                              child: Container(
+                                padding: const EdgeInsets.only(
+                                    top: 20, right: 40, left: 20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    buildRichText('Driver:',
+                                        "${snapshot.data![index].fullname}"),
+                                    buildRichText('Car model:',
+                                        "${snapshot.data![index].carModel}"),
+                                    buildRichText('Destination:',
+                                        "${snapshot.data![index].destination}"),
+                                    SizedBox(height: 20),
+                                    Center(
+                                      child: Container(
+                                        width: 40,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: AppColor.mainColor,
+                                        ),
+                                        child: IconButton(
+                                          onPressed: () {
+                                            postController.createPost(
                                               "${snapshot.data![index].fullname}",
                                               "${snapshot.data![index].carModel}",
-                                              "${snapshot.data![index].destination}");
-                                        },
-                                        icon: Icon(
-                                          FontAwesomeIcons.add,
-                                          color: Colors.white,
+                                              "${snapshot.data![index].destination}",
+                                            );
+                                            AwesomeDialog(
+                                              context: context,
+                                              animType: AnimType.leftSlide,
+                                              headerAnimationLoop: false,
+                                              dialogType: DialogType.success,
+                                              showCloseIcon: true,
+                                              title: 'Succes',
+                                              desc:
+                                                  'A carpool request is sucessfully added',
+                                              btnOkOnPress: () {
+                                                print("Sucessfull request");
+                                              },
+                                              btnOkIcon: Icons.check_circle,
+                                              onDismissCallback: (type) {
+                                                debugPrint(
+                                                    'Dialog Dissmiss from callback $type');
+                                              },
+                                            ).show();
+                                          },
+                                          icon: Icon(
+                                            FontAwesomeIcons.add,
+                                            color: Colors.white,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      )),
-                );
-              },
-            );
-          }
-
-          return Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 198, 198, 198),
-                  borderRadius: BorderRadius.circular(18),
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 1,
-                      spreadRadius: 1,
-                      color: Color.fromARGB(255, 169, 169, 169),
-                    )
-                  ],
-                ),
-                width: 600,
-                height: 150,
-                margin: const EdgeInsets.only(top: 20, left: 10, right: 20),
-                child: Container(
-                  padding: const EdgeInsets.only(
-                      top: 20, right: 40, left: 20), // Adjusted padding here
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      buildRichText('Driver:', "driverName"),
-                      buildRichText('Car model:', "carModel"),
-                      buildRichText('Destination:', "destination"),
-                      SizedBox(height: 20),
-                      Center(
-                        child: Container(
-                          width: 40,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColor.mainColor,
-                          ),
-                          child: IconButton(
-                            onPressed: () {
-                              /*
-                              postController.createPost(
-                                  "driver", "car model", "destination");*/
-                            },
-                            icon: Icon(
-                              FontAwesomeIcons.add,
-                              color: Colors.white,
-                            ),
-                          ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
+                    );
+                  } else {
+                    Center(
+                      child: Text(
+                        "There is no available drivers",
+                        style: TextStyle(
+                          fontFamily: "Poppins",
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
+                      ),
+                    );
+                  }
+                },
               ),
-            ],
-          );
+            );
+          }
+          return Text("This doesn't work", style: TextStyle(fontSize: 15));
         },
       ),
       SizedBox(

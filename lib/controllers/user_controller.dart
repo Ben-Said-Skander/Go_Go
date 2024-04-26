@@ -5,6 +5,7 @@ import 'package:pfa_application_1/core/constants/link_api.dart';
 import '../models/user.dart';
 
 class UserController extends GetxController {
+  
   Future<List<User>> getAllUsers() async {
     final response = await http.get(Uri.parse("${LinkApi.user}"));
     if (response.statusCode == 200) {

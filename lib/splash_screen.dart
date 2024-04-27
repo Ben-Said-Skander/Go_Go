@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    Timer(Duration(seconds: 4), () => Get.offAndToNamed(AppRoute.home));
+    Timer(Duration(seconds: 4), () => Get.offAndToNamed(AppRoute.onBoarding));
     Future.delayed(Duration(seconds: 0), () {
       setState(() {
         _opacity = 1;
@@ -46,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
             duration: Duration(
                 milliseconds: 1500), // Set the duration of the fade animation
             child: Image.asset(
-              "assets/image/logo.png",
+              "assets/image/go.png",
               width: 200,
               height: 200,
             ),
@@ -69,7 +69,7 @@ class _SplashScreenState extends State<SplashScreen> {
             opacity: _opacity,
             duration: Duration(
                 milliseconds: 1500), // Set the duration of the fade animation
-            child: Text(" Ben Said Skander",
+            child: Text(" Win & Go",
                 style: TextStyle(
                     fontSize: 18,
                     fontFamily: "Poppins",

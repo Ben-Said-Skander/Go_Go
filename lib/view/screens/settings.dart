@@ -40,7 +40,7 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(children: [
+        body: ListView(children: [
       Padding(
         padding: const EdgeInsets.fromLTRB(15, 40, 0, 40),
         child: Row(
@@ -93,6 +93,15 @@ class _SettingsState extends State<Settings> {
                     "${snapshot.data!.id}", "Email"),
                 settingFormField("${snapshot.data!.phoneNumber}",
                     "Phone Number", "${snapshot.data!.id}", "Phone"),
+                settingFormField(
+                    "${snapshot.data!.isAvailable}",
+                    "Are you a driver",
+                    "${snapshot.data!.isAvailable}",
+                    "Driver"),
+                settingFormField("${snapshot.data!.carModel}", "Car Model",
+                    "${snapshot.data!.carModel}", "Car"),
+                settingFormField("${snapshot.data!.destination}", "Destination",
+                    "${snapshot.data!.destination}", "Destination"),
               ]);
             } else {
               return CircularProgressIndicator();
@@ -146,6 +155,12 @@ settingFormField(String title, String fieldData, String id, String route) {
                     Get.toNamed(AppRoute.updateEmail, arguments: id);
                   } else if (route == "Phone") {
                     Get.toNamed(AppRoute.updatePhone, arguments: id);
+                  } else if (route == "Available") {
+                    Get.toNamed(AppRoute.updateAvailable, arguments: id);
+                  } else if (route == "Destination") {
+                    Get.toNamed(AppRoute.updateDestination, arguments: id);
+                  } else if (route == "Car") {
+                    Get.toNamed(AppRoute.updateCar, arguments: id);
                   }
                 },
                 icon: Icon(Icons.edit),

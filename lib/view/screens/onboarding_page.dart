@@ -29,11 +29,10 @@ class _OnBoardingState extends State<OnBoarding> {
         Container(
           height: 250,
           decoration: BoxDecoration(
-              color: Color.fromARGB(255, 16, 152, 170),
-              borderRadius: BorderRadius.only()),
+              color: AppColor.mainColor, borderRadius: BorderRadius.only()),
           child: Center(
               child: Image.asset(
-            "assets/image/logo.png",
+            "assets/image/go.png",
             width: 200,
             height: 230,
           )),
@@ -54,174 +53,6 @@ class _OnBoardingState extends State<OnBoarding> {
                     scrollDirection: Axis.horizontal,
                     children: [
                       Container(
-                        height: 700,
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 180,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 23, right: 15),
-                              child: Text(
-                                "Locate the drug you need  ",
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: "Poppins"),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 60, right: 15),
-                              child: Text(
-                                "You no longer have to search for the nearest pharmacy that carries the drug you are looking for , simply locate it now.",
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w300,
-                                    color: Color.fromARGB(255, 130, 130, 130),
-                                    fontFamily: "Poppins"),
-                              ),
-                            ),
-                            Image.asset(
-                              "assets/image/dot1.jpg",
-                              width: 160,
-                              height: 100,
-                            ),
-                            SizedBox(
-                              height: 60,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: AppColor.mainColor),
-                              child: MaterialButton(
-                                onPressed: () {
-                                  Get.toNamed(AppRoute.signup);
-                                },
-                                child: Text("Get Started",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Poppins")),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: 600,
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 180,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 50, right: 15),
-                              child: Text(
-                                "You dont have to worry about remembering your medicines ",
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: "Poppins"),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 50, right: 15),
-                              child: Text(
-                                "Introducing a pill reminder system that ensures you never miss taking your medication.",
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w300,
-                                    fontFamily: "Poppins",
-                                    color: Color.fromARGB(255, 130, 130, 130)),
-                              ),
-                            ),
-                            Image.asset(
-                              "assets/image/dot2.jpg",
-                              width: 180,
-                              height: 100,
-                            ),
-                            SizedBox(
-                              height: 60,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: AppColor.mainColor),
-                              child: MaterialButton(
-                                onPressed: () {
-                                  Get.toNamed(AppRoute.signup);
-                                },
-                                child: Text("Get Started",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Poppins")),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: 700,
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 180,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 40, right: 15),
-                              child: Text(
-                                "Learn more about your medicine  ",
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: "Poppins"),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 30, right: 15),
-                              child: Text(
-                                "Search for your medicine and learn how to use it properly",
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w300,
-                                    color: Color.fromARGB(255, 130, 130, 130),
-                                    fontFamily: "Poppins"),
-                              ),
-                            ),
-                            Image.asset(
-                              "assets/image/dot3.jpg",
-                              width: 160,
-                              height: 100,
-                            ),
-                            SizedBox(
-                              height: 60,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: AppColor.mainColor),
-                              child: MaterialButton(
-                                onPressed: () {
-                                  Get.toNamed(AppRoute.signup);
-                                },
-                                child: Text("Get Started",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Poppins")),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
                         height: 600,
                         child: Column(
                           children: [
@@ -231,7 +62,7 @@ class _OnBoardingState extends State<OnBoarding> {
                             Padding(
                               padding: EdgeInsets.only(left: 45, right: 15),
                               child: Text(
-                                "A community to help you when you are in need",
+                                "Go & Gp: Your Carpool Companion",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w700,
@@ -244,7 +75,7 @@ class _OnBoardingState extends State<OnBoarding> {
                             Padding(
                               padding: EdgeInsets.only(left: 40, right: 15),
                               child: Text(
-                                "A place where you can discuss your health issues and where you can find help",
+                                "Go & Go simplifies your travels by connecting you with other users to share your rides. Economical, eco-friendly, and sociable, easily find carpoolers for your daily or occasional trips.",
                                 style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w300,
@@ -266,7 +97,7 @@ class _OnBoardingState extends State<OnBoarding> {
                                   color: AppColor.mainColor),
                               child: MaterialButton(
                                 onPressed: () {
-                                  Get.toNamed(AppRoute.signup);
+                                  Get.toNamed(AppRoute.userType);
                                 },
                                 child: Text("Get Started",
                                     style: TextStyle(

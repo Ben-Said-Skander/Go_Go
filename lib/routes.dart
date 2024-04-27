@@ -21,6 +21,9 @@ import 'package:pfa_application_1/view/screens/reset%20password/reset_password.d
 import 'package:pfa_application_1/view/screens/reset%20password/verify_code.dart';
 
 import 'package:pfa_application_1/view/screens/search%20page/search_page.dart';
+import 'package:pfa_application_1/view/screens/update%20profile/updateAvailable.dart';
+import 'package:pfa_application_1/view/screens/update%20profile/updateCar.dart';
+import 'package:pfa_application_1/view/screens/update%20profile/updateDestination.dart';
 
 import 'package:pfa_application_1/view/screens/update%20profile/updateEmail.dart';
 import 'package:pfa_application_1/view/screens/update%20profile/updateName.dart';
@@ -36,9 +39,10 @@ import 'view/screens/userType.dart';
 
 List<GetPage<dynamic>>? routes = [
   GetPage(name: AppRoute.onBoarding, page: () => const OnBoarding()),
-  GetPage(name: AppRoute.home, page: () => const Home(), bindings: [
-    PostBindings(),UserBindings()
-  ]),
+  GetPage(
+      name: AppRoute.home,
+      page: () => const Home(),
+      bindings: [PostBindings(), UserBindings()]),
   GetPage(
     name: AppRoute.splash,
     page: () => const SplashScreen(),
@@ -94,5 +98,17 @@ List<GetPage<dynamic>>? routes = [
   GetPage(
       name: AppRoute.updatePhone,
       page: () => const UpdatePhone(),
+      binding: UserBindings()),
+  GetPage(
+      name: AppRoute.updateAvailable,
+      page: () => const UpdateAvailable(),
+      binding: UserBindings()),
+  GetPage(
+      name: AppRoute.updateCar,
+      page: () => const UpdateCar(),
+      binding: UserBindings()),
+  GetPage(
+      name: AppRoute.updateDestination,
+      page: () => const UpdateDestination(),
       binding: UserBindings()),
 ];

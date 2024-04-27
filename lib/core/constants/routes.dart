@@ -1,5 +1,4 @@
 class AppRoute {
-
   static const String splash = "/splash";
   static const String home = "/home";
   static const String signup = "/signup";
@@ -8,7 +7,6 @@ class AppRoute {
 
   static const String settings = "/settings";
 
-  
   static const String searchPage = "/searchPage";
   static const String onBoarding = "/onBoarding";
   static const String test = "/test";
@@ -24,4 +22,8 @@ class AppRoute {
   static const String updateName = "/updateName";
   static const String updateEmail = "/updateEmail";
   static const String updatePhone = "/updatePhone";
+
+  static const String updateAvailable = "/updateAvailable";
+  static const String updateCar = "/updateCar";
+  static const String updateDestination = "/updateDestination";
 }

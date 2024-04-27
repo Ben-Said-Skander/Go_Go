@@ -1,10 +1,10 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
 
-import 'package:awesome_dialog/awesome_dialog.dart';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:pfa_application_1/controllers/register_controller.dart';
+
 
 import 'package:pfa_application_1/core/constants/colors.dart';
 import 'package:pfa_application_1/core/constants/routes.dart';

@@ -88,7 +88,7 @@ class _UpdateNameState extends State<UpdateName> {
                   decoration: InputDecoration(
                       hintText: "Fullname", prefixIcon: Icon(Icons.person)),
                   controller: nameController,
-                  cursorColor: Color.fromARGB(255, 16, 152, 170),
+                  cursorColor: AppColor.mainColor,
                 ),
               ),
               Padding(
@@ -96,7 +96,7 @@ class _UpdateNameState extends State<UpdateName> {
                 child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
-                      color: Color.fromARGB(255, 16, 152, 170),
+                      color: AppColor.mainColor,
                     ),
                     child: TextButton(
                       onPressed: () async {

@@ -89,7 +89,7 @@ class _UpdatePhoneState extends State<UpdatePhone> {
                   decoration: InputDecoration(
                       hintText: "Phone number", prefixIcon: Icon(Icons.phone)),
                   controller: phoneController,
-                  cursorColor: Color.fromARGB(255, 16, 152, 170),
+                  cursorColor: AppColor.mainColor,
                 ),
              
               ),
@@ -98,7 +98,7 @@ class _UpdatePhoneState extends State<UpdatePhone> {
                 child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
-                      color: Color.fromARGB(255, 16, 152, 170),
+                      color: AppColor.mainColor,
                     ),
                     child: TextButton(
                       onPressed: () async {

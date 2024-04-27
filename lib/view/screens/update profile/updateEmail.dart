@@ -91,7 +91,7 @@ class _UpdateEmailState extends State<UpdateEmail> {
                   decoration: InputDecoration(
                       hintText: "Email", prefixIcon: Icon(Icons.mail)),
                   controller: emailController,
-                  cursorColor: Color.fromARGB(255, 16, 152, 170),
+                  cursorColor: AppColor.mainColor,
                 ),
              
               ),
@@ -100,7 +100,7 @@ class _UpdateEmailState extends State<UpdateEmail> {
                 child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
-                      color: Color.fromARGB(255, 16, 152, 170),
+                      color: AppColor.mainColor,
                     ),
                     child: TextButton(
                       onPressed: () async {

@@ -5,16 +5,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:pfa_application_1/controllers/post_controller.dart';
 import 'package:pfa_application_1/core/constants/colors.dart';
-import 'package:pfa_application_1/core/constants/routes.dart';
+
 import 'package:pfa_application_1/models/post.dart';
 
-import 'package:pfa_application_1/models/user.dart';
-import 'package:pfa_application_1/view/widgets/component/passengersCard.dart';
 
 import 'package:pfa_application_1/view/widgets/curve_clipper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../controllers/user_controller.dart';
+
 
 class CarpoolRequest extends StatefulWidget {
   const CarpoolRequest({Key? key}) : super(key: key);

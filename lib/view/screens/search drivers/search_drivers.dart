@@ -12,7 +12,6 @@ import 'package:pfa_application_1/models/user.dart';
 
 import 'package:proste_bezier_curve/proste_bezier_curve.dart';
 
-import 'package:pfa_application_1/view/widgets/component/driverCard.dart';
 
 class SearchDriversPage extends StatefulWidget {
   const SearchDriversPage({super.key});
